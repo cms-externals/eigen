@@ -131,7 +131,7 @@ void test_eigensolver_generic()
   {
      MatrixXd A(1,1);
      A(0,0) = std::sqrt(-1.); // is Not-a-Number
-     Eigen::EigenSolver<MatrixXd> solver(A);
+     Eigen_tf::EigenSolver<MatrixXd> solver(A);
      VERIFY_IS_EQUAL(solver.info(), NumericalIssue);
   }
   );
@@ -143,7 +143,7 @@ void test_eigensolver_generic()
     a << 0,  0,  1,
         1,  1, 1,
         1, 1e+200,  1;
-    Eigen::EigenSolver<MatrixXd> eig(a);
+    Eigen_tf::EigenSolver<MatrixXd> eig(a);
     double scale = 1e-200; // scale to avoid overflow during the comparisons
     VERIFY_IS_APPROX(a * eig.pseudoEigenvectors()*scale, eig.pseudoEigenvectors() * eig.pseudoEigenvalueMatrix()*scale);
     VERIFY_IS_APPROX(a * eig.eigenvectors()*scale, eig.eigenvectors() * eig.eigenvalues().asDiagonal()*scale);
@@ -153,7 +153,7 @@ void test_eigensolver_generic()
     MatrixXd a(2,2);
     a << 1,  1,
         -1, -1;
-    Eigen::EigenSolver<MatrixXd> eig(a);
+    Eigen_tf::EigenSolver<MatrixXd> eig(a);
     VERIFY_IS_APPROX(eig.pseudoEigenvectors().squaredNorm(), 2.);
     VERIFY_IS_APPROX((a * eig.pseudoEigenvectors()).norm()+1., 1.);
     VERIFY_IS_APPROX((eig.pseudoEigenvectors() * eig.pseudoEigenvalueMatrix()).norm()+1., 1.);

@@ -20,7 +20,7 @@
 #include <cstdint>
 #endif
 
-namespace Eigen {
+namespace Eigen_tf {
 
 typedef EIGEN_DEFAULT_DENSE_INDEX_TYPE DenseIndex;
 
@@ -285,7 +285,7 @@ protected:
 
 /** \internal
   * Provides access to the number of elements in the object of as a compile-time constant expression.
-  * It "returns" Eigen::Dynamic if the size cannot be resolved at compile-time (default).
+  * It "returns" Eigen_tf::Dynamic if the size cannot be resolved at compile-time (default).
   *
   * Similar to std::tuple_size, but more general.
   *
@@ -545,6 +545,6 @@ T div_ceil(const T &a, const T &b)
 
 } // end namespace numext
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_META_H

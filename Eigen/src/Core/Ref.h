@@ -10,7 +10,7 @@
 #ifndef EIGEN_REF_H
 #define EIGEN_REF_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -185,7 +185,7 @@ protected:
   * \endcode
   *
   * See also the following stackoverflow questions for further references:
-  *  - <a href="http://stackoverflow.com/questions/21132538/correct-usage-of-the-eigenref-class">Correct usage of the Eigen::Ref<> class</a>
+  *  - <a href="http://stackoverflow.com/questions/21132538/correct-usage-of-the-eigenref-class">Correct usage of the Eigen_tf::Ref<> class</a>
   *
   * \sa PlainObjectBase::Map(), \ref TopicStorageOrders
   */
@@ -278,6 +278,6 @@ template<typename TPlainObjectType, int Options, typename StrideType> class Ref<
     TPlainObjectType m_object;
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_REF_H

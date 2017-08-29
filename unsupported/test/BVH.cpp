@@ -12,7 +12,7 @@
 #include <Eigen/Geometry>
 #include <unsupported/Eigen/BVH>
 
-namespace Eigen {
+namespace Eigen_tf {
 
 template<typename Scalar, int Dim> AlignedBox<Scalar, Dim> bounding_box(const Matrix<Scalar, Dim, 1> &v) { return AlignedBox<Scalar, Dim>(v); }
 

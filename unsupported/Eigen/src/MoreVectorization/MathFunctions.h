@@ -11,7 +11,7 @@
 #ifndef EIGEN_MOREVECTORIZATION_MATHFUNCTIONS_H
 #define EIGEN_MOREVECTORIZATION_MATHFUNCTIONS_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -90,6 +90,6 @@ template<> EIGEN_DONT_INLINE Packet4f pasin(Packet4f x)
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_MOREVECTORIZATION_MATHFUNCTIONS_H

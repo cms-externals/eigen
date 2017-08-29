@@ -17,7 +17,7 @@
   #define EIGEN_INTERNAL_TENSOR_STORAGE_CTOR_PLUGIN
 #endif
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \internal
   *
@@ -141,6 +141,6 @@ class TensorStorage<T, DSizes<IndexType, NumIndices_>, Options_>
   Dimensions m_dimensions;
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSORSTORAGE_H

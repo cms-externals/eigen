@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_CHIPPING_H
 #define EIGEN_CXX11_TENSOR_TENSOR_CHIPPING_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorKChippingReshaping
   * \ingroup CXX11_Tensor_Module
@@ -35,7 +35,7 @@ struct traits<TensorChippingOp<DimId, XprType> > : public traits<XprType>
 };
 
 template<DenseIndex DimId, typename XprType>
-struct eval<TensorChippingOp<DimId, XprType>, Eigen::Dense>
+struct eval<TensorChippingOp<DimId, XprType>, Eigen_tf::Dense>
 {
   typedef const TensorChippingOp<DimId, XprType>& type;
 };
@@ -79,12 +79,12 @@ template<DenseIndex DimId, typename XprType>
 class TensorChippingOp : public TensorBase<TensorChippingOp<DimId, XprType> >
 {
   public:
-  typedef typename Eigen::internal::traits<TensorChippingOp>::Scalar Scalar;
-  typedef typename Eigen::NumTraits<Scalar>::Real RealScalar;
+  typedef typename Eigen_tf::internal::traits<TensorChippingOp>::Scalar Scalar;
+  typedef typename Eigen_tf::NumTraits<Scalar>::Real RealScalar;
   typedef typename XprType::CoeffReturnType CoeffReturnType;
-  typedef typename Eigen::internal::nested<TensorChippingOp>::type Nested;
-  typedef typename Eigen::internal::traits<TensorChippingOp>::StorageKind StorageKind;
-  typedef typename Eigen::internal::traits<TensorChippingOp>::Index Index;
+  typedef typename Eigen_tf::internal::nested<TensorChippingOp>::type Nested;
+  typedef typename Eigen_tf::internal::traits<TensorChippingOp>::StorageKind StorageKind;
+  typedef typename Eigen_tf::internal::traits<TensorChippingOp>::Index Index;
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorChippingOp(const XprType& expr, const Index offset, const Index dim)
       : m_xpr(expr), m_offset(offset), m_dim(dim) {
@@ -395,6 +395,6 @@ struct TensorEvaluator<TensorChippingOp<DimId, ArgType>, Device>
 };
 
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_CHIPPING_H

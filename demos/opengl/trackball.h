@@ -26,14 +26,14 @@ class Trackball
 
     void setCamera(Camera* pCam) { mpCamera = pCam; }
 
-    void track(const Eigen::Vector2i& newPoint2D);
+    void track(const Eigen_tf::Vector2i& newPoint2D);
 
   protected:
 
-    bool mapToSphere( const Eigen::Vector2i& p2, Eigen::Vector3f& v3);
+    bool mapToSphere( const Eigen_tf::Vector2i& p2, Eigen_tf::Vector3f& v3);
 
     Camera* mpCamera;
-    Eigen::Vector3f mLastPoint3D;
+    Eigen_tf::Vector3f mLastPoint3D;
     Mode mMode;
     bool mLastPointOk;
 

@@ -14,7 +14,7 @@
 #include <vector>
 #include <list>
 
-namespace Eigen {  
+namespace Eigen_tf {  
 /** 
   * \brief Modified Incomplete Cholesky with dual threshold
   *
@@ -395,6 +395,6 @@ inline void IncompleteCholesky<Scalar,_UpLo, OrderingType>::updateList(Ref<const
   }
 }
 
-} // end namespace Eigen 
+} // end namespace Eigen_tf 
 
 #endif

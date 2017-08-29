@@ -33,7 +33,7 @@
 #ifndef EIGEN_GENERAL_MATRIX_MATRIX_TRIANGULAR_BLAS_H
 #define EIGEN_GENERAL_MATRIX_MATRIX_TRIANGULAR_BLAS_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -136,6 +136,6 @@ EIGEN_BLAS_RANKUPDATE_R(float,  float,  ssyrk_)
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_GENERAL_MATRIX_MATRIX_TRIANGULAR_BLAS_H

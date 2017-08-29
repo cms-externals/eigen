@@ -15,7 +15,7 @@
 #ifndef EIGEN_MATH_FUNCTIONS_SSE_H
 #define EIGEN_MATH_FUNCTIONS_SSE_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -557,6 +557,6 @@ double sqrt(const double &x)
 
 } // end namespace numex
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_MATH_FUNCTIONS_SSE_H

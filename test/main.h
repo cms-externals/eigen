@@ -122,7 +122,7 @@ inline void on_temporary_creation(long int size) {
 
 #define DEFAULT_REPEAT 10
 
-namespace Eigen
+namespace Eigen_tf
 {
   static std::vector<std::string> g_test_stack;
   // level == 0 <=> abort if test fail
@@ -147,7 +147,7 @@ namespace Eigen
 
 #ifndef EIGEN_NO_ASSERTION_CHECKING
 
-  namespace Eigen
+  namespace Eigen_tf
   {
     static const bool should_raise_an_assert = false;
 
@@ -160,7 +160,7 @@ namespace Eigen
     struct eigen_assert_exception
     {
       eigen_assert_exception(void) {}
-      ~eigen_assert_exception() { Eigen::no_more_assert = false; }
+      ~eigen_assert_exception() { Eigen_tf::no_more_assert = false; }
     };
   }
   // If EIGEN_DEBUG_ASSERTS is defined and if no assertion is triggered while
@@ -172,7 +172,7 @@ namespace Eigen
   // some memory errors.
   #ifdef EIGEN_DEBUG_ASSERTS
 
-    namespace Eigen
+    namespace Eigen_tf
     {
       namespace internal
       {
@@ -185,10 +185,10 @@ namespace Eigen
       { \
         if(report_on_cerr_on_assert_failure) \
           std::cerr <<  #a << " " __FILE__ << "(" << __LINE__ << ")\n"; \
-        Eigen::no_more_assert = true;       \
-        EIGEN_THROW_X(Eigen::eigen_assert_exception()); \
+        Eigen_tf::no_more_assert = true;       \
+        EIGEN_THROW_X(Eigen_tf::eigen_assert_exception()); \
       }                                     \
-      else if (Eigen::internal::push_assert)       \
+      else if (Eigen_tf::internal::push_assert)       \
       {                                     \
         eigen_assert_list.push_back(std::string(EI_PP_MAKE_STRING(__FILE__) " (" EI_PP_MAKE_STRING(__LINE__) ") : " #a) ); \
       }
@@ -196,45 +196,45 @@ namespace Eigen
     #ifdef EIGEN_EXCEPTIONS
     #define VERIFY_RAISES_ASSERT(a)                                                   \
       {                                                                               \
-        Eigen::no_more_assert = false;                                                \
-        Eigen::eigen_assert_list.clear();                                             \
-        Eigen::internal::push_assert = true;                                          \
-        Eigen::report_on_cerr_on_assert_failure = false;                              \
+        Eigen_tf::no_more_assert = false;                                                \
+        Eigen_tf::eigen_assert_list.clear();                                             \
+        Eigen_tf::internal::push_assert = true;                                          \
+        Eigen_tf::report_on_cerr_on_assert_failure = false;                              \
         try {                                                                         \
           a;                                                                          \
           std::cerr << "One of the following asserts should have been triggered:\n";  \
           for (uint ai=0 ; ai<eigen_assert_list.size() ; ++ai)                        \
             std::cerr << "  " << eigen_assert_list[ai] << "\n";                       \
-          VERIFY(Eigen::should_raise_an_assert && # a);                               \
-        } catch (Eigen::eigen_assert_exception) {                                     \
-          Eigen::internal::push_assert = false; VERIFY(true);                         \
+          VERIFY(Eigen_tf::should_raise_an_assert && # a);                               \
+        } catch (Eigen_tf::eigen_assert_exception) {                                     \
+          Eigen_tf::internal::push_assert = false; VERIFY(true);                         \
         }                                                                             \
-        Eigen::report_on_cerr_on_assert_failure = true;                               \
-        Eigen::internal::push_assert = false;                                         \
+        Eigen_tf::report_on_cerr_on_assert_failure = true;                               \
+        Eigen_tf::internal::push_assert = false;                                         \
       }
     #endif //EIGEN_EXCEPTIONS
 
   #elif !defined(__CUDACC__) // EIGEN_DEBUG_ASSERTS
     // see bug 89. The copy_bool here is working around a bug in gcc <= 4.3
     #define eigen_assert(a) \
-      if( (!Eigen::internal::copy_bool(a)) && (!no_more_assert) )\
+      if( (!Eigen_tf::internal::copy_bool(a)) && (!no_more_assert) )\
       {                                       \
-        Eigen::no_more_assert = true;         \
+        Eigen_tf::no_more_assert = true;         \
         if(report_on_cerr_on_assert_failure)  \
           eigen_plain_assert(a);              \
         else                                  \
-          EIGEN_THROW_X(Eigen::eigen_assert_exception()); \
+          EIGEN_THROW_X(Eigen_tf::eigen_assert_exception()); \
       }
     #ifdef EIGEN_EXCEPTIONS
       #define VERIFY_RAISES_ASSERT(a) {                           \
-        Eigen::no_more_assert = false;                            \
-        Eigen::report_on_cerr_on_assert_failure = false;          \
+        Eigen_tf::no_more_assert = false;                            \
+        Eigen_tf::report_on_cerr_on_assert_failure = false;          \
         try {                                                     \
           a;                                                      \
-          VERIFY(Eigen::should_raise_an_assert && # a);           \
+          VERIFY(Eigen_tf::should_raise_an_assert && # a);           \
         }                                                         \
-        catch (Eigen::eigen_assert_exception&) { VERIFY(true); }  \
-        Eigen::report_on_cerr_on_assert_failure = true;           \
+        catch (Eigen_tf::eigen_assert_exception&) { VERIFY(true); }  \
+        Eigen_tf::report_on_cerr_on_assert_failure = true;           \
       }
     #endif //EIGEN_EXCEPTIONS
   #endif // EIGEN_DEBUG_ASSERTS
@@ -262,16 +262,16 @@ inline void verify_impl(bool condition, const char *testname, const char *file, 
 {
   if (!condition)
   {
-    if(Eigen::g_test_level>0)
+    if(Eigen_tf::g_test_level>0)
       std::cerr << "WARNING: ";
     std::cerr << "Test " << testname << " failed in " << file << " (" << line << ")"
       << std::endl << "    " << condition_as_string << std::endl;
     std::cerr << "Stack:\n";
-    const int test_stack_size = static_cast<int>(Eigen::g_test_stack.size());
+    const int test_stack_size = static_cast<int>(Eigen_tf::g_test_stack.size());
     for(int i=test_stack_size-1; i>=0; --i)
-      std::cerr << "  - " << Eigen::g_test_stack[i] << "\n";
+      std::cerr << "  - " << Eigen_tf::g_test_stack[i] << "\n";
     std::cerr << "\n";
-    if(Eigen::g_test_level==0)
+    if(Eigen_tf::g_test_level==0)
       abort();
   }
 }
@@ -300,7 +300,7 @@ inline void verify_impl(bool condition, const char *testname, const char *file, 
   } while (0)
 
 
-namespace Eigen {
+namespace Eigen_tf {
 
 template<typename T> inline typename NumTraits<T>::Real test_precision() { return NumTraits<T>::dummy_precision(); }
 template<> inline float test_precision<float>() { return 1e-3f; }
@@ -613,7 +613,7 @@ template<typename T> bool isMinusInf(const T& x)
   return x < NumTraits<T>::lowest();
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 template<typename T> struct GetDifferentType;
 
@@ -637,7 +637,7 @@ template<> std::string type_name<std::complex<int> >()          { return "comple
 // forward declaration of the main test function
 void EIGEN_CAT(test_,EIGEN_TEST_FUNC)();
 
-using namespace Eigen;
+using namespace Eigen_tf;
 
 inline void set_repeat_from_string(const char *str)
 {
@@ -723,7 +723,7 @@ int main(int argc, char *argv[])
     srand(g_seed);
     std::cout << "Repeating each test " << g_repeat << " times" << std::endl;
 
-    Eigen::g_test_stack.push_back(std::string(EI_PP_MAKE_STRING(EIGEN_TEST_FUNC)));
+    Eigen_tf::g_test_stack.push_back(std::string(EI_PP_MAKE_STRING(EIGEN_TEST_FUNC)));
 
     EIGEN_CAT(test_,EIGEN_TEST_FUNC)();
     return 0;

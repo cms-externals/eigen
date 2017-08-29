@@ -11,7 +11,7 @@
 #ifndef EIGEN_SPARSE_QR_H
 #define EIGEN_SPARSE_QR_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 template<typename MatrixType, typename OrderingType> class SparseQR;
 template<typename SparseQRType> struct SparseQRMatrixQReturnType;
@@ -734,6 +734,6 @@ struct Assignment<DstXprType, SparseQRMatrixQReturnType<SparseQRType>, internal:
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif

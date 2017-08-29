@@ -31,7 +31,7 @@
 #ifndef EIGEN_SPARSELU_MEMORY
 #define EIGEN_SPARSELU_MEMORY
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace internal {
   
 enum { LUNoMarker = 3 };
@@ -222,5 +222,5 @@ Index SparseLUImpl<Scalar,StorageIndex>::memXpand(VectorType& vec, Index& maxlen
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 #endif // EIGEN_SPARSELU_MEMORY

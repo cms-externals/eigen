@@ -11,7 +11,7 @@
 #ifndef EIGEN_DIAGONAL_H
 #define EIGEN_DIAGONAL_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 /** \class Diagonal
   * \ingroup Core_Module
@@ -254,6 +254,6 @@ MatrixBase<Derived>::diagonal() const
   return typename ConstDiagonalIndexReturnType<Index_>::Type(derived());
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_DIAGONAL_H

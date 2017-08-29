@@ -11,7 +11,7 @@
 #ifndef EIGEN_MATRIX_LOGARITHM
 #define EIGEN_MATRIX_LOGARITHM
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal { 
 
@@ -368,6 +368,6 @@ const MatrixLogarithmReturnValue<Derived> MatrixBase<Derived>::log() const
   return MatrixLogarithmReturnValue<Derived>(derived());
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_MATRIX_LOGARITHM

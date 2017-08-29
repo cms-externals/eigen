@@ -10,7 +10,7 @@
 #ifndef EIGEN_GENERAL_MATRIX_VECTOR_H
 #define EIGEN_GENERAL_MATRIX_VECTOR_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -400,6 +400,6 @@ EIGEN_DONT_INLINE void general_matrix_vector_product<Index,LhsScalar,LhsMapper,R
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_GENERAL_MATRIX_VECTOR_H

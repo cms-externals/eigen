@@ -10,7 +10,7 @@
 #ifndef EIGEN_PACKET_MATH_AVX512_H
 #define EIGEN_PACKET_MATH_AVX512_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -1281,6 +1281,6 @@ EIGEN_STRONG_INLINE Packet8d pblend(const Selector<8>& /*ifPacket*/,
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_PACKET_MATH_AVX512_H

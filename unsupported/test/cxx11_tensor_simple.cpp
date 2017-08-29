@@ -11,8 +11,8 @@
 
 #include <Eigen/CXX11/Tensor>
 
-using Eigen::Tensor;
-using Eigen::RowMajor;
+using Eigen_tf::Tensor;
+using Eigen_tf::RowMajor;
 
 static void test_0d()
 {
@@ -195,7 +195,7 @@ static void test_3d()
   VERIFY_IS_EQUAL((epsilon(0,2,1)), -1);
   VERIFY_IS_EQUAL((epsilon(1,0,2)), -1);
 
-  array<Eigen::DenseIndex, 3> dims;
+  array<Eigen_tf::DenseIndex, 3> dims;
   dims[0] = 2;
   dims[1] = 3;
   dims[2] = 4;

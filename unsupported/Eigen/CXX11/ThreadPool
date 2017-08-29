@@ -60,7 +60,7 @@
 
 
 // Use the more efficient NonBlockingThreadPool by default.
-namespace Eigen {
+namespace Eigen_tf {
 #ifndef EIGEN_USE_SIMPLE_THREAD_POOL
 template <typename Env> using ThreadPoolTempl = NonBlockingThreadPoolTempl<Env>;
 typedef NonBlockingThreadPool ThreadPool;
@@ -68,7 +68,7 @@ typedef NonBlockingThreadPool ThreadPool;
 template <typename Env> using ThreadPoolTempl = SimpleThreadPoolTempl<Env>;
 typedef SimpleThreadPool ThreadPool;
 #endif
-}  // namespace Eigen
+}  // namespace Eigen_tf
 
 #endif
 

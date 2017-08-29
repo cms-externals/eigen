@@ -71,7 +71,7 @@
 namespace mp = boost::multiprecision;
 typedef mp::number<mp::cpp_dec_float<100>, mp::et_on> Real;
 
-namespace Eigen {
+namespace Eigen_tf {
   template<> struct NumTraits<Real> : GenericNumTraits<Real> {
     static inline Real dummy_precision() { return 1e-50; }
   };
@@ -131,13 +131,13 @@ namespace multiprecision {
   }
 
   Real test_relative_error(const Real &a, const Real &b) {
-    using Eigen::numext::abs2;
-    return sqrt(abs2<Real>(a-b)/Eigen::numext::mini<Real>(abs2(a),abs2(b)));
+    using Eigen_tf::numext::abs2;
+    return sqrt(abs2<Real>(a-b)/Eigen_tf::numext::mini<Real>(abs2(a),abs2(b)));
   }
 }
 }
 
-namespace Eigen {
+namespace Eigen_tf {
 
 }
 

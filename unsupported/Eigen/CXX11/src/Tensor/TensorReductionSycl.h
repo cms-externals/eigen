@@ -22,12 +22,12 @@
 #ifndef UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSOR_REDUCTION_SYCL_HPP
 #define UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSOR_REDUCTION_SYCL_HPP
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace internal {
 
 template<typename OP, typename CoeffReturnType> struct syclGenericBufferReducer{
 template<typename BufferTOut, typename BufferTIn>
-static void run(OP op, BufferTOut& bufOut, ptrdiff_t out_offset, BufferTIn& bufI, const Eigen::SyclDevice& dev, size_t length, size_t local){
+static void run(OP op, BufferTOut& bufOut, ptrdiff_t out_offset, BufferTIn& bufI, const Eigen_tf::SyclDevice& dev, size_t length, size_t local){
   do {
           auto f = [length, local, op, out_offset, &bufOut, &bufI](cl::sycl::handler& h) mutable {
             cl::sycl::nd_range<1> r{cl::sycl::range<1>{std::max(length, local)},
@@ -58,10 +58,10 @@ static void run(OP op, BufferTOut& bufOut, ptrdiff_t out_offset, BufferTIn& bufI
 
 };
 
-template<typename CoeffReturnType> struct syclGenericBufferReducer<Eigen::internal::MeanReducer<CoeffReturnType>, CoeffReturnType>{
+template<typename CoeffReturnType> struct syclGenericBufferReducer<Eigen_tf::internal::MeanReducer<CoeffReturnType>, CoeffReturnType>{
 template<typename BufferTOut, typename BufferTIn>
-static void run(Eigen::internal::MeanReducer<CoeffReturnType>, BufferTOut& bufOut,ptrdiff_t out_offset, BufferTIn& bufI, const Eigen::SyclDevice& dev, size_t length, size_t local){
-   syclGenericBufferReducer<Eigen::internal::SumReducer<CoeffReturnType>, CoeffReturnType>::run(Eigen::internal::SumReducer<CoeffReturnType>(),
+static void run(Eigen_tf::internal::MeanReducer<CoeffReturnType>, BufferTOut& bufOut,ptrdiff_t out_offset, BufferTIn& bufI, const Eigen_tf::SyclDevice& dev, size_t length, size_t local){
+   syclGenericBufferReducer<Eigen_tf::internal::SumReducer<CoeffReturnType>, CoeffReturnType>::run(Eigen_tf::internal::SumReducer<CoeffReturnType>(),
     bufOut, out_offset, bufI, dev, length, local);
 }
 };
@@ -72,14 +72,14 @@ static void run(Eigen::internal::MeanReducer<CoeffReturnType>, BufferTOut& bufOu
 // a leafNode.
 
 template <typename Self, typename Op, bool Vectorizable>
-struct FullReducer<Self, Op, const Eigen::SyclDevice, Vectorizable> {
+struct FullReducer<Self, Op, const Eigen_tf::SyclDevice, Vectorizable> {
 
   typedef typename Self::CoeffReturnType CoeffReturnType;
   static const bool HasOptimizedImplementation = false;
 
-  static void run(const Self& self, Op& reducer, const Eigen::SyclDevice& dev, CoeffReturnType* output) {
+  static void run(const Self& self, Op& reducer, const Eigen_tf::SyclDevice& dev, CoeffReturnType* output) {
     typedef const typename Self::ChildType HostExpr; /// this is the child of reduction
-    typedef Eigen::TensorSycl::internal::FunctorExtractor<TensorEvaluator<HostExpr, const Eigen::SyclDevice> > FunctorExpr;
+    typedef Eigen_tf::TensorSycl::internal::FunctorExtractor<TensorEvaluator<HostExpr, const Eigen_tf::SyclDevice> > FunctorExpr;
     FunctorExpr functors = TensorSycl::internal::extractFunctors(self.impl());
     int red_factor =256; /// initial reduction. If the size is less than red_factor we only creates one thread.
     size_t inputSize =self.impl().dimensions().TotalSize();
@@ -109,7 +109,7 @@ struct FullReducer<Self, Op, const Eigen::SyclDevice, Vectorizable> {
     /// This one is used to collect all the reduced value of shared memory as we dont have global barrier on GPU. Once it is saved we can
     /// recursively apply reduction on it in order to reduce the whole.
     auto temp_global_buffer =cl::sycl::buffer<CoeffReturnType, 1>(cl::sycl::range<1>(GRange));
-    typedef typename Eigen::internal::remove_all<decltype(self.xprDims())>::type Dims;
+    typedef typename Eigen_tf::internal::remove_all<decltype(self.xprDims())>::type Dims;
   //  Dims dims= self.xprDims();
     //Op functor = reducer;
     dev.sycl_queue().submit([&](cl::sycl::handler &cgh) {
@@ -136,17 +136,17 @@ struct FullReducer<Self, Op, const Eigen::SyclDevice, Vectorizable> {
 
 
 template <typename Self, typename Op>
-struct InnerReducer<Self, Op, const Eigen::SyclDevice> {
+struct InnerReducer<Self, Op, const Eigen_tf::SyclDevice> {
 
   typedef typename Self::CoeffReturnType CoeffReturnType;
   static const bool HasOptimizedImplementation = false;
 
-  static bool run(const Self& self, Op& reducer, const Eigen::SyclDevice& dev, CoeffReturnType* output, typename Self::Index num_values_to_reduce, typename Self::Index num_coeffs_to_preserve) {
+  static bool run(const Self& self, Op& reducer, const Eigen_tf::SyclDevice& dev, CoeffReturnType* output, typename Self::Index num_values_to_reduce, typename Self::Index num_coeffs_to_preserve) {
     typedef const typename Self::ChildType HostExpr; /// this is the child of reduction
-    typedef Eigen::TensorSycl::internal::FunctorExtractor<TensorEvaluator<HostExpr, const Eigen::SyclDevice> > FunctorExpr;
+    typedef Eigen_tf::TensorSycl::internal::FunctorExtractor<TensorEvaluator<HostExpr, const Eigen_tf::SyclDevice> > FunctorExpr;
     FunctorExpr functors = TensorSycl::internal::extractFunctors(self.impl());
     typename Self::Index range, GRange, tileSize;
-    typedef typename Eigen::internal::remove_all<decltype(self.xprDims())>::type Dims;
+    typedef typename Eigen_tf::internal::remove_all<decltype(self.xprDims())>::type Dims;
 
     // getting final out buffer at the moment the created buffer is true because there is no need for assign
     /// creating the shared memory for calculating reduction.
@@ -172,6 +172,6 @@ struct InnerReducer<Self, Op, const Eigen::SyclDevice> {
 };
 
 }  // end namespace internal
-}  // namespace Eigen
+}  // namespace Eigen_tf
 
 #endif  // UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSOR_REDUCTION_SYCL_HPP

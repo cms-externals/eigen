@@ -10,7 +10,7 @@
 #ifndef EIGEN_SKYLINEINPLACELU_H
 #define EIGEN_SKYLINEINPLACELU_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 /** \ingroup Skyline_Module
  *
@@ -35,7 +35,7 @@ public:
      * flags \a flags. */
     SkylineInplaceLU(MatrixType& matrix, int flags = 0)
     : /*m_matrix(matrix.rows(), matrix.cols()),*/ m_flags(flags), m_status(0), m_lu(matrix) {
-        m_precision = RealScalar(0.1) * Eigen::dummy_precision<RealScalar > ();
+        m_precision = RealScalar(0.1) * Eigen_tf::dummy_precision<RealScalar > ();
         m_lu.IsRowMajor ? computeRowMajor() : compute();
     }
 
@@ -347,6 +347,6 @@ bool SkylineInplaceLU<MatrixType>::solve(const MatrixBase<BDerived> &b, MatrixBa
     return true;
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SKYLINELU_H

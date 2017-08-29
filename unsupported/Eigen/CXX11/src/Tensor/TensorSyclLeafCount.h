@@ -22,7 +22,7 @@
 #ifndef UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_LEAF_COUNT_HPP
 #define UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_LEAF_COUNT_HPP
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace TensorSycl {
 namespace internal {
 /// \brief LeafCount used to counting terminal nodes. The total number of
@@ -208,6 +208,6 @@ TENSORVOLUMEPATCHOPLEAFCOUNT()
 
 } /// namespace TensorSycl
 } /// namespace internal
-} /// namespace Eigen
+} /// namespace Eigen_tf
 
 #endif  // UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_LEAF_COUNT_HPP

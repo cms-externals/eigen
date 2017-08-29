@@ -14,7 +14,7 @@
 
 using namespace std;
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace internal {
 template<int Size>
 struct increment_if_fixed_size

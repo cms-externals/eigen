@@ -11,8 +11,8 @@
 
 #include <Eigen/CXX11/Tensor>
 
-using Eigen::Tensor;
-using Eigen::RowMajor;
+using Eigen_tf::Tensor;
+using Eigen_tf::RowMajor;
 
 static void test_tanh()
 {

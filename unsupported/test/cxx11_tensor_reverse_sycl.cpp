@@ -22,7 +22,7 @@
 
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_simple_reverse(const Eigen::SyclDevice&  sycl_device) {
+static void test_simple_reverse(const Eigen_tf::SyclDevice&  sycl_device) {
 
   IndexType dim1 = 2;
   IndexType dim2 = 3;
@@ -101,7 +101,7 @@ static void test_simple_reverse(const Eigen::SyclDevice&  sycl_device) {
 
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_expr_reverse(const Eigen::SyclDevice&  sycl_device, bool LValue)
+static void test_expr_reverse(const Eigen_tf::SyclDevice&  sycl_device, bool LValue)
 {
   IndexType dim1 = 2;
   IndexType dim2 = 3;
@@ -206,7 +206,7 @@ static void test_expr_reverse(const Eigen::SyclDevice&  sycl_device, bool LValue
 template<typename DataType> void sycl_reverse_test_per_device(const cl::sycl::device& d){
   std::cout << "Running on " << d.template get_info<cl::sycl::info::device::name>() << std::endl;
   QueueInterface queueInterface(d);
-  auto sycl_device = Eigen::SyclDevice(&queueInterface);
+  auto sycl_device = Eigen_tf::SyclDevice(&queueInterface);
   test_simple_reverse<DataType, RowMajor, int64_t>(sycl_device);
   test_simple_reverse<DataType, ColMajor, int64_t>(sycl_device);
   test_expr_reverse<DataType, RowMajor, int64_t>(sycl_device, false);
@@ -215,7 +215,7 @@ template<typename DataType> void sycl_reverse_test_per_device(const cl::sycl::de
   test_expr_reverse<DataType, ColMajor, int64_t>(sycl_device, true);
 }
 void test_cxx11_tensor_reverse_sycl() {
-  for (const auto& device :Eigen::get_sycl_supported_devices()) {
+  for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
     CALL_SUBTEST(sycl_reverse_test_per_device<float>(device));
   }
 }

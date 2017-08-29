@@ -11,7 +11,7 @@
 #ifndef EIGEN_TRIANGULARMATRIX_H
 #define EIGEN_TRIANGULARMATRIX_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
   
@@ -979,6 +979,6 @@ struct Assignment<DstXprType, Product<Lhs,Rhs,DefaultProduct>, internal::sub_ass
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_TRIANGULARMATRIX_H

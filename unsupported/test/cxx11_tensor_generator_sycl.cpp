@@ -21,17 +21,17 @@ static const float error_threshold =1e-8f;
 #include "main.h"
 #include <unsupported/Eigen/CXX11/Tensor>
 
-using Eigen::Tensor;
+using Eigen_tf::Tensor;
 struct Generator1D {
   Generator1D() { }
 
-  float operator()(const array<Eigen::DenseIndex, 1>& coordinates) const {
+  float operator()(const array<Eigen_tf::DenseIndex, 1>& coordinates) const {
     return coordinates[0];
   }
 };
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_1D_sycl(const Eigen::SyclDevice& sycl_device)
+static void test_1D_sycl(const Eigen_tf::SyclDevice& sycl_device)
 {
 
   IndexType sizeDim1 = 6;
@@ -59,13 +59,13 @@ static void test_1D_sycl(const Eigen::SyclDevice& sycl_device)
 struct Generator2D {
   Generator2D() { }
 
-  float operator()(const array<Eigen::DenseIndex, 2>& coordinates) const {
+  float operator()(const array<Eigen_tf::DenseIndex, 2>& coordinates) const {
     return 3 * coordinates[0] + 11 * coordinates[1];
   }
 };
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_2D_sycl(const Eigen::SyclDevice& sycl_device)
+static void test_2D_sycl(const Eigen_tf::SyclDevice& sycl_device)
 {
   IndexType sizeDim1 = 5;
   IndexType sizeDim2 = 7;
@@ -92,7 +92,7 @@ static void test_2D_sycl(const Eigen::SyclDevice& sycl_device)
 }
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_gaussian_sycl(const Eigen::SyclDevice& sycl_device)
+static void test_gaussian_sycl(const Eigen_tf::SyclDevice& sycl_device)
 {
   IndexType rows = 32;
   IndexType cols = 48;
@@ -102,7 +102,7 @@ static void test_gaussian_sycl(const Eigen::SyclDevice& sycl_device)
   array<DataType, 2> std_devs;
   std_devs[0] = 3.14f;
   std_devs[1] = 2.7f;
-  internal::GaussianGenerator<DataType, Eigen::DenseIndex, 2> gaussian_gen(means, std_devs);
+  internal::GaussianGenerator<DataType, Eigen_tf::DenseIndex, 2> gaussian_gen(means, std_devs);
 
   array<IndexType, 2> tensorRange = {{rows, cols}};
   Tensor<DataType, 2, DataLayout,IndexType> matrix(tensorRange);
@@ -124,14 +124,14 @@ static void test_gaussian_sycl(const Eigen::SyclDevice& sycl_device)
       DataType g_rows = powf(rows/2.0f - i, 2) / (3.14f * 3.14f) * 0.5f;
       DataType g_cols = powf(cols/2.0f - j, 2) / (2.7f * 2.7f) * 0.5f;
       DataType gaussian = expf(-g_rows - g_cols);
-      Eigen::internal::isApprox(result(i, j), gaussian, error_threshold);
+      Eigen_tf::internal::isApprox(result(i, j), gaussian, error_threshold);
     }
   }
 }
 
 template<typename DataType, typename dev_Selector> void sycl_generator_test_per_device(dev_Selector s){
   QueueInterface queueInterface(s);
-  auto sycl_device = Eigen::SyclDevice(&queueInterface);
+  auto sycl_device = Eigen_tf::SyclDevice(&queueInterface);
   test_1D_sycl<DataType, RowMajor, int64_t>(sycl_device);
   test_1D_sycl<DataType, ColMajor, int64_t>(sycl_device);
   test_2D_sycl<DataType, RowMajor, int64_t>(sycl_device);
@@ -141,7 +141,7 @@ template<typename DataType, typename dev_Selector> void sycl_generator_test_per_
 }
 void test_cxx11_tensor_generator_sycl()
 {
-  for (const auto& device :Eigen::get_sycl_supported_devices()) {
+  for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
     CALL_SUBTEST(sycl_generator_test_per_device<float>(device));
   }
 }

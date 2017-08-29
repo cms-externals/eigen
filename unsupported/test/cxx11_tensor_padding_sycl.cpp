@@ -23,14 +23,14 @@
 #include "main.h"
 #include <unsupported/Eigen/CXX11/Tensor>
 
-using Eigen::array;
-using Eigen::SyclDevice;
-using Eigen::Tensor;
-using Eigen::TensorMap;
+using Eigen_tf::array;
+using Eigen_tf::SyclDevice;
+using Eigen_tf::Tensor;
+using Eigen_tf::TensorMap;
 
 
 template<typename DataType, int DataLayout, typename IndexType>
-static void test_simple_padding(const Eigen::SyclDevice& sycl_device)
+static void test_simple_padding(const Eigen_tf::SyclDevice& sycl_device)
 {
 
   IndexType sizeDim1 = 2;
@@ -87,7 +87,7 @@ static void test_simple_padding(const Eigen::SyclDevice& sycl_device)
 }
 
 template<typename DataType, int DataLayout, typename IndexType>
-static void test_padded_expr(const Eigen::SyclDevice& sycl_device)
+static void test_padded_expr(const Eigen_tf::SyclDevice& sycl_device)
 {
   IndexType sizeDim1 = 2;
   IndexType sizeDim2 = 3;
@@ -104,7 +104,7 @@ static void test_padded_expr(const Eigen::SyclDevice& sycl_device)
   paddings[2] = std::make_pair(3, 4);
   paddings[3] = std::make_pair(0, 0);
 
-  Eigen::DSizes<IndexType, 2> reshape_dims;
+  Eigen_tf::DSizes<IndexType, 2> reshape_dims;
   reshape_dims[0] = 12;
   reshape_dims[1] = 84;
 
@@ -142,7 +142,7 @@ static void test_padded_expr(const Eigen::SyclDevice& sycl_device)
 
 template<typename DataType, typename dev_Selector> void sycl_padding_test_per_device(dev_Selector s){
   QueueInterface queueInterface(s);
-  auto sycl_device = Eigen::SyclDevice(&queueInterface);
+  auto sycl_device = Eigen_tf::SyclDevice(&queueInterface);
   test_simple_padding<DataType, RowMajor, int64_t>(sycl_device);
   test_simple_padding<DataType, ColMajor, int64_t>(sycl_device);
   test_padded_expr<DataType, RowMajor, int64_t>(sycl_device);
@@ -151,7 +151,7 @@ template<typename DataType, typename dev_Selector> void sycl_padding_test_per_de
 }
 void test_cxx11_tensor_padding_sycl()
 {
-  for (const auto& device :Eigen::get_sycl_supported_devices()) {
+  for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
     CALL_SUBTEST(sycl_padding_test_per_device<float>(device));
   }
 }

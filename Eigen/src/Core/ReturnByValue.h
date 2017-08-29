@@ -11,7 +11,7 @@
 #ifndef EIGEN_RETURNBYVALUE_H
 #define EIGEN_RETURNBYVALUE_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -112,6 +112,6 @@ protected:
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_RETURNBYVALUE_H

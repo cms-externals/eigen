@@ -22,7 +22,7 @@
 #include <vector>
 #include "btl.hh"
 
-using namespace Eigen;
+using namespace Eigen_tf;
 
 template<class real, int SIZE=Dynamic>
 class eigen3_interface
@@ -37,8 +37,8 @@ public :
   typedef std::vector<real> stl_vector;
   typedef std::vector<stl_vector> stl_matrix;
 
-  typedef Eigen::Matrix<real,SIZE,SIZE> gene_matrix;
-  typedef Eigen::Matrix<real,SIZE,1> gene_vector;
+  typedef Eigen_tf::Matrix<real,SIZE,SIZE> gene_matrix;
+  typedef Eigen_tf::Matrix<real,SIZE,1> gene_vector;
 
   static inline std::string name( void )
   {

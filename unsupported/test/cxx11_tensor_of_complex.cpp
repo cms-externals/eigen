@@ -11,8 +11,8 @@
 
 #include <Eigen/CXX11/Tensor>
 
-using Eigen::Tensor;
-using Eigen::TensorMap;
+using Eigen_tf::Tensor;
+using Eigen_tf::TensorMap;
 
 
 
@@ -83,7 +83,7 @@ static void test_contractions()
 
   // This contraction should be equivalent to a regular matrix multiplication
   typedef Tensor<float, 1>::DimensionPair DimPair;
-  Eigen::array<DimPair, 2> dims;
+  Eigen_tf::array<DimPair, 2> dims;
   dims[0] = DimPair(2, 0);
   dims[1] = DimPair(3, 1);
   t_result = t_left.contract(t_right, dims);

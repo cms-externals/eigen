@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_DEVICE_H
 #define EIGEN_CXX11_TENSOR_TENSOR_DEVICE_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorDevice
   * \ingroup CXX11_Tensor_Module
@@ -63,6 +63,6 @@ template <typename ExpressionType, typename DeviceType> class TensorDevice {
     ExpressionType& m_expression;
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_DEVICE_H

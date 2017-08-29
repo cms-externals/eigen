@@ -11,7 +11,7 @@
 #ifndef EIGEN_MATHFUNCTIONSIMPL_H
 #define EIGEN_MATHFUNCTIONSIMPL_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -68,6 +68,6 @@ T generic_fast_tanh_float(const T& a_x)
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_MATHFUNCTIONSIMPL_H

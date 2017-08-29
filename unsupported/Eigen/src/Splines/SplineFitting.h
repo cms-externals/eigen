@@ -20,7 +20,7 @@
 #include <Eigen/LU>
 #include <Eigen/QR>
 
-namespace Eigen
+namespace Eigen_tf
 {
   /**
    * \brief Computes knot averages.

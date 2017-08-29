@@ -13,7 +13,7 @@
 // evaluator for thread pool device
 #ifdef EIGEN_USE_THREADS
 
-namespace Eigen {
+namespace Eigen_tf {
 
 #ifdef EIGEN_USE_SIMPLE_THREAD_POOL
 namespace internal {
@@ -1246,7 +1246,7 @@ struct TensorEvaluator<const TensorContractionOp<Indices, LeftArgType, RightArgT
 
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif  // EIGEN_USE_THREADS
 #endif // EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_THREAD_POOL_H

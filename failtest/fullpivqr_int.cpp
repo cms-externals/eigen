@@ -6,7 +6,7 @@
 #define SCALAR float
 #endif
 
-using namespace Eigen;
+using namespace Eigen_tf;
 
 int main()
 {

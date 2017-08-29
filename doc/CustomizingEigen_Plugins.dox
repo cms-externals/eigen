@@ -1,4 +1,4 @@
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \page TopicCustomizing_Plugins Extending MatrixBase (and other classes)
 

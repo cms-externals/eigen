@@ -10,7 +10,7 @@
 #ifndef THIRD_PARTY_EIGEN3_EIGEN_SRC_CORE_ARCH_AVX512_MATHFUNCTIONS_H_
 #define THIRD_PARTY_EIGEN3_EIGEN_SRC_CORE_ARCH_AVX512_MATHFUNCTIONS_H_
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -391,6 +391,6 @@ EIGEN_STRONG_INLINE Packet16f prsqrt<Packet16f>(const Packet16f& x) {
 
 }  // end namespace internal
 
-}  // end namespace Eigen
+}  // end namespace Eigen_tf
 
 #endif  // THIRD_PARTY_EIGEN3_EIGEN_SRC_CORE_ARCH_AVX512_MATHFUNCTIONS_H_

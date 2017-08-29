@@ -14,7 +14,7 @@
  * Julien Pommier's sse math library: http://gruntthepeon.free.fr/ssemath/
  */
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -434,6 +434,6 @@ Packet4d prsqrt<Packet4d>(const Packet4d& x) {
 
 }  // end namespace internal
 
-}  // end namespace Eigen
+}  // end namespace Eigen_tf
 
 #endif  // EIGEN_MATH_FUNCTIONS_AVX_H

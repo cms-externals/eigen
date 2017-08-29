@@ -1,7 +1,7 @@
 
 // This file strutures pages and modules into a convenient hierarchical structure.
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \page UserManual_CustomizingEigen Extending/Customizing Eigen
   %Eigen can be extended in several ways, for instance, by defining global methods, by inserting custom methods within main %Eigen's classes through the \ref TopicCustomizing_Plugins "plugin" mechanism, by adding support to \ref TopicCustomizing_CustomScalar "custom scalar types" etc. See below for the respective sub-topics.

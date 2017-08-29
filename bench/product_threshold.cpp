@@ -3,7 +3,7 @@
 #include <Eigen/Core>
 #include <bench/BenchTimer.h>
 
-using namespace Eigen;
+using namespace Eigen_tf;
 using namespace std;
 
 #define END 9

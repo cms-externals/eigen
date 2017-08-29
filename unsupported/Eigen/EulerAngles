@@ -16,7 +16,7 @@
 
 #include "Eigen/src/Core/util/DisableStupidWarnings.h"
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /**
   * \defgroup EulerAngles_Module EulerAngles module

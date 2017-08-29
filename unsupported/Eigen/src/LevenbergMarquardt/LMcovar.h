@@ -12,7 +12,7 @@
 #ifndef EIGEN_LMCOVAR_H
 #define EIGEN_LMCOVAR_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -79,6 +79,6 @@ void covar(
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_LMCOVAR_H

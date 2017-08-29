@@ -15,7 +15,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_CONVOLUTION_SYCL_H
 #define EIGEN_CXX11_TENSOR_TENSOR_CONVOLUTION_SYCL_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorConvolution
   * \ingroup CXX11_Tensor_Module
@@ -28,7 +28,7 @@ template <typename CoeffReturnType, typename KernelType, typename HostExpr, type
 typename InputDims, typename Kernel_accessor, typename Buffer_accessor, typename Local_accessor, typename TupleType>
 struct EigenConvolutionKernel1D{
 typedef  typename TensorSycl::internal::createPlaceHolderExpression<HostExpr>::Type PlaceHolderExpr;
-internal::IndexMapper<Index, InputDims, 1, Eigen::internal::traits<HostExpr>::Layout> indexMapper;
+internal::IndexMapper<Index, InputDims, 1, Eigen_tf::internal::traits<HostExpr>::Layout> indexMapper;
 Kernel_accessor kernel_filter;
 const size_t kernelSize, range_x, range_y;
 Buffer_accessor buffer_acc;
@@ -36,7 +36,7 @@ ptrdiff_t out_offset;
 Local_accessor local_acc;
 FunctorExpr functors;
 TupleType tuple_of_accessors;
-EigenConvolutionKernel1D(internal::IndexMapper<Index, InputDims, 1, Eigen::internal::traits<HostExpr>::Layout> indexMapper_,
+EigenConvolutionKernel1D(internal::IndexMapper<Index, InputDims, 1, Eigen_tf::internal::traits<HostExpr>::Layout> indexMapper_,
   Kernel_accessor kernel_filter_,  const size_t kernelSize_, const size_t range_x_, const size_t range_y_,
   Buffer_accessor buffer_acc_, ptrdiff_t out_offset_, Local_accessor local_acc_, FunctorExpr functors_, TupleType tuple_of_accessors_)
   :indexMapper(indexMapper_), kernel_filter(kernel_filter_), kernelSize(kernelSize_), range_x(range_x_), range_y(range_y_),
@@ -45,7 +45,7 @@ EigenConvolutionKernel1D(internal::IndexMapper<Index, InputDims, 1, Eigen::inter
   void operator()(cl::sycl::nd_item<2> itemID) {
     typedef typename TensorSycl::internal::ConvertToDeviceExpression<HostExpr>::Type DevExpr;
     auto device_expr =TensorSycl::internal::createDeviceExpression<DevExpr, PlaceHolderExpr>(functors, tuple_of_accessors);
-    auto device_evaluator = Eigen::TensorEvaluator<DevExpr, Eigen::SyclKernelDevice>(device_expr.expr, Eigen::SyclKernelDevice());
+    auto device_evaluator = Eigen_tf::TensorEvaluator<DevExpr, Eigen_tf::SyclKernelDevice>(device_expr.expr, Eigen_tf::SyclKernelDevice());
 
     auto buffer_ptr = ConvertToActualTypeSycl(CoeffReturnType, buffer_acc);
     auto kernel_ptr = ConvertToActualTypeSycl(KernelType, kernel_filter);
@@ -86,7 +86,7 @@ template <typename CoeffReturnType, typename KernelType, typename HostExpr, type
 typename InputDims, typename Kernel_accessor, typename Buffer_accessor, typename Local_accessor, typename TupleType>
 struct EigenConvolutionKernel2D{
 typedef  typename TensorSycl::internal::createPlaceHolderExpression<HostExpr>::Type PlaceHolderExpr;
-internal::IndexMapper<Index, InputDims, 2, Eigen::internal::traits<HostExpr>::Layout> indexMapper;
+internal::IndexMapper<Index, InputDims, 2, Eigen_tf::internal::traits<HostExpr>::Layout> indexMapper;
 Kernel_accessor kernel_filter;
 const size_t kernelSize_x, kernelSize_y, range_x, range_y , range_z;
 Buffer_accessor buffer_acc;
@@ -94,7 +94,7 @@ ptrdiff_t out_offset;
 Local_accessor local_acc;
 FunctorExpr functors;
 TupleType tuple_of_accessors;
-EigenConvolutionKernel2D(internal::IndexMapper<Index, InputDims, 2, Eigen::internal::traits<HostExpr>::Layout> indexMapper_,
+EigenConvolutionKernel2D(internal::IndexMapper<Index, InputDims, 2, Eigen_tf::internal::traits<HostExpr>::Layout> indexMapper_,
   Kernel_accessor kernel_filter_,  const size_t kernelSize_x_, const size_t kernelSize_y_ ,const size_t range_x_, const size_t range_y_, const size_t range_z_,
   Buffer_accessor buffer_acc_, ptrdiff_t out_offset_, Local_accessor local_acc_, FunctorExpr functors_, TupleType tuple_of_accessors_)
   :indexMapper(indexMapper_), kernel_filter(kernel_filter_), kernelSize_x(kernelSize_x_), kernelSize_y(kernelSize_y_), range_x(range_x_), range_y(range_y_), range_z(range_z_),
@@ -103,7 +103,7 @@ EigenConvolutionKernel2D(internal::IndexMapper<Index, InputDims, 2, Eigen::inter
   void operator()(cl::sycl::nd_item<3> itemID) {
     typedef typename TensorSycl::internal::ConvertToDeviceExpression<HostExpr>::Type DevExpr;
     auto device_expr =TensorSycl::internal::createDeviceExpression<DevExpr, PlaceHolderExpr>(functors, tuple_of_accessors);
-    auto device_evaluator = Eigen::TensorEvaluator<DevExpr, Eigen::SyclKernelDevice>(device_expr.expr, Eigen::SyclKernelDevice());
+    auto device_evaluator = Eigen_tf::TensorEvaluator<DevExpr, Eigen_tf::SyclKernelDevice>(device_expr.expr, Eigen_tf::SyclKernelDevice());
 
     auto buffer_ptr = ConvertToActualTypeSycl(CoeffReturnType, buffer_acc);
     auto kernel_ptr = ConvertToActualTypeSycl(KernelType, kernel_filter);
@@ -154,7 +154,7 @@ template <typename CoeffReturnType, typename KernelType, typename HostExpr, type
 typename InputDims, typename Kernel_accessor, typename Buffer_accessor, typename Local_accessor, typename TupleType>
 struct EigenConvolutionKernel3D{
 typedef  typename TensorSycl::internal::createPlaceHolderExpression<HostExpr>::Type PlaceHolderExpr;
-internal::IndexMapper<Index, InputDims, 3, Eigen::internal::traits<HostExpr>::Layout> indexMapper;
+internal::IndexMapper<Index, InputDims, 3, Eigen_tf::internal::traits<HostExpr>::Layout> indexMapper;
 Kernel_accessor kernel_filter;
 const size_t kernelSize_x, kernelSize_y, kernelSize_z, range_x, range_y , range_z, numP;
 Buffer_accessor buffer_acc;
@@ -162,7 +162,7 @@ ptrdiff_t out_offset;
 Local_accessor local_acc;
 FunctorExpr functors;
 TupleType tuple_of_accessors;
-EigenConvolutionKernel3D(internal::IndexMapper<Index, InputDims, 3, Eigen::internal::traits<HostExpr>::Layout> indexMapper_,
+EigenConvolutionKernel3D(internal::IndexMapper<Index, InputDims, 3, Eigen_tf::internal::traits<HostExpr>::Layout> indexMapper_,
   Kernel_accessor kernel_filter_,  const size_t kernelSize_x_, const size_t kernelSize_y_ , const size_t kernelSize_z_ ,
   const size_t range_x_, const size_t range_y_, const size_t range_z_, const size_t numP_,
   Buffer_accessor buffer_acc_, ptrdiff_t out_offset_, Local_accessor local_acc_, FunctorExpr functors_, TupleType tuple_of_accessors_)
@@ -173,7 +173,7 @@ EigenConvolutionKernel3D(internal::IndexMapper<Index, InputDims, 3, Eigen::inter
   void operator()(cl::sycl::nd_item<3> itemID) {
     typedef typename TensorSycl::internal::ConvertToDeviceExpression<HostExpr>::Type DevExpr;
     auto device_expr =TensorSycl::internal::createDeviceExpression<DevExpr, PlaceHolderExpr>(functors, tuple_of_accessors);
-    auto device_evaluator = Eigen::TensorEvaluator<DevExpr, Eigen::SyclKernelDevice>(device_expr.expr, Eigen::SyclKernelDevice());
+    auto device_evaluator = Eigen_tf::TensorEvaluator<DevExpr, Eigen_tf::SyclKernelDevice>(device_expr.expr, Eigen_tf::SyclKernelDevice());
 
     auto buffer_ptr = ConvertToActualTypeSycl(CoeffReturnType, buffer_acc);
     auto kernel_ptr = ConvertToActualTypeSycl(KernelType, kernel_filter);
@@ -228,32 +228,32 @@ EigenConvolutionKernel3D(internal::IndexMapper<Index, InputDims, 3, Eigen::inter
 
 
 template<typename Indices, typename InputArgType, typename KernelArgType>
-struct TensorEvaluator<const TensorConvolutionOp<Indices, InputArgType, KernelArgType>, const Eigen::SyclDevice>
+struct TensorEvaluator<const TensorConvolutionOp<Indices, InputArgType, KernelArgType>, const Eigen_tf::SyclDevice>
 {
   typedef TensorConvolutionOp<Indices, InputArgType, KernelArgType> XprType;
 
-  static const int NumDims =  internal::array_size<typename TensorEvaluator<InputArgType, const Eigen::SyclDevice>::Dimensions>::value;
+  static const int NumDims =  internal::array_size<typename TensorEvaluator<InputArgType, const Eigen_tf::SyclDevice>::Dimensions>::value;
   static const int NumKernelDims = internal::array_size<Indices>::value;
   typedef typename XprType::Index Index;
   typedef DSizes<Index, NumDims> Dimensions;
-  typedef typename TensorEvaluator<KernelArgType, const Eigen::SyclDevice>::Dimensions KernelDimensions;
-  typedef const Eigen::SyclDevice Device;
+  typedef typename TensorEvaluator<KernelArgType, const Eigen_tf::SyclDevice>::Dimensions KernelDimensions;
+  typedef const Eigen_tf::SyclDevice Device;
 
   enum {
-    IsAligned = TensorEvaluator<InputArgType, const Eigen::SyclDevice>::IsAligned & TensorEvaluator<KernelArgType, const Eigen::SyclDevice>::IsAligned,
+    IsAligned = TensorEvaluator<InputArgType, const Eigen_tf::SyclDevice>::IsAligned & TensorEvaluator<KernelArgType, const Eigen_tf::SyclDevice>::IsAligned,
     PacketAccess = false,
-    Layout = TensorEvaluator<InputArgType, const Eigen::SyclDevice>::Layout,
+    Layout = TensorEvaluator<InputArgType, const Eigen_tf::SyclDevice>::Layout,
     CoordAccess = false,  // to be implemented
     RawAccess = false
   };
 
-  EIGEN_DEVICE_FUNC TensorEvaluator(const XprType& op, const Eigen::SyclDevice& device)
+  EIGEN_DEVICE_FUNC TensorEvaluator(const XprType& op, const Eigen_tf::SyclDevice& device)
       : m_inputImpl(op.inputExpression(), device), m_kernelArg(op.kernelExpression()), m_kernelImpl(op.kernelExpression(), device), m_indices(op.indices()), m_buf(NULL), m_kernel(NULL), m_local_kernel(false), m_device(device)
   {
-    EIGEN_STATIC_ASSERT((static_cast<int>(TensorEvaluator<InputArgType, const Eigen::SyclDevice>::Layout) == static_cast<int>(TensorEvaluator<KernelArgType, const Eigen::SyclDevice>::Layout)), YOU_MADE_A_PROGRAMMING_MISTAKE);
+    EIGEN_STATIC_ASSERT((static_cast<int>(TensorEvaluator<InputArgType, const Eigen_tf::SyclDevice>::Layout) == static_cast<int>(TensorEvaluator<KernelArgType, const Eigen_tf::SyclDevice>::Layout)), YOU_MADE_A_PROGRAMMING_MISTAKE);
 
-    const typename TensorEvaluator<InputArgType, const Eigen::SyclDevice>::Dimensions& input_dims = m_inputImpl.dimensions();
-    const typename TensorEvaluator<KernelArgType, const Eigen::SyclDevice>::Dimensions& kernel_dims = m_kernelImpl.dimensions();
+    const typename TensorEvaluator<InputArgType, const Eigen_tf::SyclDevice>::Dimensions& input_dims = m_inputImpl.dimensions();
+    const typename TensorEvaluator<KernelArgType, const Eigen_tf::SyclDevice>::Dimensions& kernel_dims = m_kernelImpl.dimensions();
 
     m_dimensions = m_inputImpl.dimensions();
     for (int i = 0; i < NumKernelDims; ++i) {
@@ -266,7 +266,7 @@ struct TensorEvaluator<const TensorConvolutionOp<Indices, InputArgType, KernelAr
   }
 
   typedef typename XprType::CoeffReturnType CoeffReturnType;
-  typedef typename PacketType<CoeffReturnType, const Eigen::SyclDevice>::type PacketReturnType;
+  typedef typename PacketType<CoeffReturnType, const Eigen_tf::SyclDevice>::type PacketReturnType;
   typedef typename InputArgType::Scalar Scalar;
   static const int PacketSize = internal::unpacket_traits<PacketReturnType>::size;
 
@@ -314,20 +314,20 @@ struct TensorEvaluator<const TensorConvolutionOp<Indices, InputArgType, KernelAr
       Scalar* local = (Scalar*)m_device.allocate(kernel_sz);
       typedef TensorEvalToOp<const KernelArgType> EvalTo;
       EvalTo evalToTmp(local, m_kernelArg);
-      const bool PacketAccess = internal::IsVectorizable<const Eigen::SyclDevice, KernelArgType>::value;
-      internal::TensorExecutor<const EvalTo, const Eigen::SyclDevice, PacketAccess>::run(evalToTmp, m_device);
+      const bool PacketAccess = internal::IsVectorizable<const Eigen_tf::SyclDevice, KernelArgType>::value;
+      internal::TensorExecutor<const EvalTo, const Eigen_tf::SyclDevice, PacketAccess>::run(evalToTmp, m_device);
       m_kernel = local;
       m_local_kernel = true;
     }
   }
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE  void executeEval(Scalar* data) const {
-    typedef TensorEvaluator<InputArgType, const Eigen::SyclDevice> InputEvaluator;
+    typedef TensorEvaluator<InputArgType, const Eigen_tf::SyclDevice> InputEvaluator;
     typedef typename InputEvaluator::Dimensions InputDims;
 
-    typedef Eigen::TensorSycl::internal::FunctorExtractor<InputEvaluator> InputFunctorExpr;
+    typedef Eigen_tf::TensorSycl::internal::FunctorExtractor<InputEvaluator> InputFunctorExpr;
     // extract input functor list
-    InputFunctorExpr input_functors = Eigen::TensorSycl::internal::extractFunctors(m_inputImpl);
+    InputFunctorExpr input_functors = Eigen_tf::TensorSycl::internal::extractFunctors(m_inputImpl);
     ptrdiff_t out_offset = m_device.get_offset(data);
 
 
@@ -335,9 +335,9 @@ struct TensorEvaluator<const TensorConvolutionOp<Indices, InputArgType, KernelAr
 
       typedef cl::sycl::accessor<CoeffReturnType, 1, cl::sycl::access::mode::read_write, cl::sycl::access::target::local> InputLocalAcc;
       /// work-around for gcc 4.8 auto bug
-      typedef decltype(Eigen::TensorSycl::internal::createTupleOfAccessors<InputEvaluator>(cgh, m_inputImpl)) InputTupleType;
+      typedef decltype(Eigen_tf::TensorSycl::internal::createTupleOfAccessors<InputEvaluator>(cgh, m_inputImpl)) InputTupleType;
       // create input tuple of accessors
-      InputTupleType tuple_of_accessors = Eigen::TensorSycl::internal::createTupleOfAccessors<InputEvaluator>(cgh, m_inputImpl);
+      InputTupleType tuple_of_accessors = Eigen_tf::TensorSycl::internal::createTupleOfAccessors<InputEvaluator>(cgh, m_inputImpl);
 
       typedef cl::sycl::accessor<uint8_t, 1, cl::sycl::access::mode::write, cl::sycl::access::target::global_buffer> OutputAccessorType;
       OutputAccessorType out_res= m_device. template get_sycl_accessor<cl::sycl::access::mode::write>(cgh, data);
@@ -465,17 +465,17 @@ struct TensorEvaluator<const TensorConvolutionOp<Indices, InputArgType, KernelAr
  private:
   // No assignment (copies are needed by the kernels)
   TensorEvaluator& operator = (const TensorEvaluator&);
-  TensorEvaluator<InputArgType, const Eigen::SyclDevice> m_inputImpl;
+  TensorEvaluator<InputArgType, const Eigen_tf::SyclDevice> m_inputImpl;
   KernelArgType m_kernelArg;
-  TensorEvaluator<KernelArgType, const Eigen::SyclDevice> m_kernelImpl;
+  TensorEvaluator<KernelArgType, const Eigen_tf::SyclDevice> m_kernelImpl;
   Indices m_indices;
   Dimensions m_dimensions;
   Scalar* m_buf;
   const Scalar* m_kernel;
   bool m_local_kernel;
-  const Eigen::SyclDevice& m_device;
+  const Eigen_tf::SyclDevice& m_device;
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_CONVOLUTION_H

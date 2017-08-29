@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_CONVOLUTION_H
 #define EIGEN_CXX11_TENSOR_TENSOR_CONVOLUTION_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorConvolution
   * \ingroup CXX11_Tensor_Module
@@ -238,7 +238,7 @@ struct traits<TensorConvolutionOp<Dimensions, InputXprType, KernelXprType> >
 };
 
 template<typename Dimensions, typename InputXprType, typename KernelXprType>
-struct eval<TensorConvolutionOp<Dimensions, InputXprType, KernelXprType>, Eigen::Dense>
+struct eval<TensorConvolutionOp<Dimensions, InputXprType, KernelXprType>, Eigen_tf::Dense>
 {
   typedef const TensorConvolutionOp<Dimensions, InputXprType, KernelXprType>& type;
 };
@@ -257,13 +257,13 @@ template<typename Indices, typename InputXprType, typename KernelXprType>
 class TensorConvolutionOp : public TensorBase<TensorConvolutionOp<Indices, InputXprType, KernelXprType>, ReadOnlyAccessors>
 {
   public:
-  typedef typename Eigen::internal::traits<TensorConvolutionOp>::Scalar Scalar;
-  typedef typename Eigen::NumTraits<Scalar>::Real RealScalar;
+  typedef typename Eigen_tf::internal::traits<TensorConvolutionOp>::Scalar Scalar;
+  typedef typename Eigen_tf::NumTraits<Scalar>::Real RealScalar;
   typedef typename internal::promote_storage_type<typename InputXprType::CoeffReturnType,
                                                   typename KernelXprType::CoeffReturnType>::ret CoeffReturnType;
-  typedef typename Eigen::internal::nested<TensorConvolutionOp>::type Nested;
-  typedef typename Eigen::internal::traits<TensorConvolutionOp>::StorageKind StorageKind;
-  typedef typename Eigen::internal::traits<TensorConvolutionOp>::Index Index;
+  typedef typename Eigen_tf::internal::nested<TensorConvolutionOp>::type Nested;
+  typedef typename Eigen_tf::internal::traits<TensorConvolutionOp>::StorageKind StorageKind;
+  typedef typename Eigen_tf::internal::traits<TensorConvolutionOp>::Index Index;
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorConvolutionOp(const InputXprType& input, const KernelXprType& kernel, const Indices& dims)
       : m_input_xpr(input), m_kernel_xpr(kernel), m_indices(dims) {}
@@ -1099,6 +1099,6 @@ struct TensorEvaluator<const TensorConvolutionOp<Indices, InputArgType, KernelAr
 #endif
 
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_CONVOLUTION_H

@@ -10,7 +10,7 @@
 #ifndef EIGEN_CUDA_SPECIALFUNCTIONS_H
 #define EIGEN_CUDA_SPECIALFUNCTIONS_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -160,6 +160,6 @@ double2 pbetainc<double2>(const double2& a, const double2& b, const double2& x)
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CUDA_SPECIALFUNCTIONS_H

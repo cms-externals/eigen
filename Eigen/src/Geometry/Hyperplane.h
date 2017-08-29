@@ -11,7 +11,7 @@
 #ifndef EIGEN_HYPERPLANE_H
 #define EIGEN_HYPERPLANE_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 /** \geometry_module \ingroup Geometry_Module
   *
@@ -41,7 +41,7 @@ public:
   };
   typedef _Scalar Scalar;
   typedef typename NumTraits<Scalar>::Real RealScalar;
-  typedef Eigen::Index Index; ///< \deprecated since Eigen 3.3
+  typedef Eigen_tf::Index Index; ///< \deprecated since Eigen 3.3
   typedef Matrix<Scalar,AmbientDimAtCompileTime,1> VectorType;
   typedef Matrix<Scalar,Index(AmbientDimAtCompileTime)==Dynamic
                         ? Dynamic
@@ -277,6 +277,6 @@ protected:
   Coefficients m_coeffs;
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_HYPERPLANE_H

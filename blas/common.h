@@ -70,7 +70,7 @@ inline bool check_uplo(const char* uplo)
 }
 
 
-namespace Eigen {
+namespace Eigen_tf {
 #include "BandTriangularSolver.h"
 #include "GeneralRank1Update.h"
 #include "PackedSelfadjointProduct.h"
@@ -79,7 +79,7 @@ namespace Eigen {
 #include "Rank2Update.h"
 }
 
-using namespace Eigen;
+using namespace Eigen_tf;
 
 typedef SCALAR Scalar;
 typedef NumTraits<Scalar>::Real RealScalar;
@@ -87,7 +87,7 @@ typedef std::complex<RealScalar> Complex;
 
 enum
 {
-  IsComplex = Eigen::NumTraits<SCALAR>::IsComplex,
+  IsComplex = Eigen_tf::NumTraits<SCALAR>::IsComplex,
   Conj = IsComplex
 };
 
@@ -141,7 +141,7 @@ T* get_compact_vector(T* x, int n, int incx)
   if(incx==1)
     return x;
 
-  typename Eigen::internal::remove_const<T>::type* ret = new Scalar[n];
+  typename Eigen_tf::internal::remove_const<T>::type* ret = new Scalar[n];
   if(incx<0) make_vector(ret,n) = make_vector(x,n,-incx).reverse();
   else       make_vector(ret,n) = make_vector(x,n, incx);
   return ret;

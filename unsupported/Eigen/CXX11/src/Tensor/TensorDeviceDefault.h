@@ -11,7 +11,7 @@
 #define EIGEN_CXX11_TENSOR_TENSOR_DEVICE_DEFAULT_H
 
 
-namespace Eigen {
+namespace Eigen_tf {
 
 // Default device for the machine (typically a single cpu core)
 struct DefaultDevice {
@@ -76,6 +76,6 @@ struct DefaultDevice {
   }
 };
 
-}  // namespace Eigen
+}  // namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_DEVICE_DEFAULT_H

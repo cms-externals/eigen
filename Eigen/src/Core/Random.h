@@ -10,7 +10,7 @@
 #ifndef EIGEN_RANDOM_H
 #define EIGEN_RANDOM_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -177,6 +177,6 @@ PlainObjectBase<Derived>::setRandom(Index rows, Index cols)
   return setRandom();
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_RANDOM_H

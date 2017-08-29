@@ -1,5 +1,5 @@
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \page TopicWritingEfficientProductExpression Writing efficient matrix product expressions
 

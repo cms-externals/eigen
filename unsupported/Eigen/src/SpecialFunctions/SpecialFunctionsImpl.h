@@ -10,7 +10,7 @@
 #ifndef EIGEN_SPECIAL_FUNCTIONS_H
 #define EIGEN_SPECIAL_FUNCTIONS_H
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace internal {
 
 //  Parts of this code are based on the Cephes Math Library.
@@ -1560,6 +1560,6 @@ EIGEN_DEVICE_FUNC inline EIGEN_MATHFUNC_RETVAL(betainc, Scalar)
 }  // end namespace numext
 
 
-}  // end namespace Eigen
+}  // end namespace Eigen_tf
 
 #endif  // EIGEN_SPECIAL_FUNCTIONS_H

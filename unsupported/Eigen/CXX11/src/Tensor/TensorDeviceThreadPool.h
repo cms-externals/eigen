@@ -10,7 +10,7 @@
 #if defined(EIGEN_USE_THREADS) && !defined(EIGEN_CXX11_TENSOR_TENSOR_DEVICE_THREAD_POOL_H)
 #define EIGEN_CXX11_TENSOR_TENSOR_DEVICE_THREAD_POOL_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 // Barrier is an object that allows one or more threads to wait until
 // Notify has been called a specified number of times.
@@ -263,6 +263,6 @@ struct ThreadPoolDevice {
 };
 
 
-}  // end namespace Eigen
+}  // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_DEVICE_THREAD_POOL_H

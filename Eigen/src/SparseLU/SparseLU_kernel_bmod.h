@@ -11,7 +11,7 @@
 #ifndef SPARSELU_KERNEL_BMOD_H
 #define SPARSELU_KERNEL_BMOD_H
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace internal {
   
 template <int SegSizeAtCompileTime> struct LU_kernel_bmod
@@ -126,5 +126,5 @@ EIGEN_DONT_INLINE void LU_kernel_bmod<1>::run(const Index /*segsize*/, BlockScal
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 #endif // SPARSELU_KERNEL_BMOD_H

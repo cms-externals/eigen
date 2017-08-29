@@ -10,7 +10,7 @@
 #ifndef EIGEN_TRIANGULAR_MATRIX_MATRIX_H
 #define EIGEN_TRIANGULAR_MATRIX_MATRIX_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -436,6 +436,6 @@ struct triangular_product_impl<Mode,LhsIsTriangular,Lhs,false,Rhs,false>
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_TRIANGULAR_MATRIX_MATRIX_H

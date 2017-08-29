@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_PATCH_H
 #define EIGEN_CXX11_TENSOR_TENSOR_PATCH_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorPatch
   * \ingroup CXX11_Tensor_Module
@@ -34,7 +34,7 @@ struct traits<TensorPatchOp<PatchDim, XprType> > : public traits<XprType>
 };
 
 template<typename PatchDim, typename XprType>
-struct eval<TensorPatchOp<PatchDim, XprType>, Eigen::Dense>
+struct eval<TensorPatchOp<PatchDim, XprType>, Eigen_tf::Dense>
 {
   typedef const TensorPatchOp<PatchDim, XprType>& type;
 };
@@ -53,12 +53,12 @@ template<typename PatchDim, typename XprType>
 class TensorPatchOp : public TensorBase<TensorPatchOp<PatchDim, XprType>, ReadOnlyAccessors>
 {
   public:
-  typedef typename Eigen::internal::traits<TensorPatchOp>::Scalar Scalar;
-  typedef typename Eigen::NumTraits<Scalar>::Real RealScalar;
+  typedef typename Eigen_tf::internal::traits<TensorPatchOp>::Scalar Scalar;
+  typedef typename Eigen_tf::NumTraits<Scalar>::Real RealScalar;
   typedef typename XprType::CoeffReturnType CoeffReturnType;
-  typedef typename Eigen::internal::nested<TensorPatchOp>::type Nested;
-  typedef typename Eigen::internal::traits<TensorPatchOp>::StorageKind StorageKind;
-  typedef typename Eigen::internal::traits<TensorPatchOp>::Index Index;
+  typedef typename Eigen_tf::internal::nested<TensorPatchOp>::type Nested;
+  typedef typename Eigen_tf::internal::traits<TensorPatchOp>::StorageKind StorageKind;
+  typedef typename Eigen_tf::internal::traits<TensorPatchOp>::Index Index;
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorPatchOp(const XprType& expr, const PatchDim& patch_dims)
       : m_xpr(expr), m_patch_dims(patch_dims) {}
@@ -276,6 +276,6 @@ struct TensorEvaluator<const TensorPatchOp<PatchDim, ArgType>, Device>
 #endif
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_PATCH_H

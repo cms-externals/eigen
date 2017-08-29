@@ -1,4 +1,4 @@
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \page TopicFunctionTakingEigenTypes Writing Functions Taking %Eigen Types as Parameters
 

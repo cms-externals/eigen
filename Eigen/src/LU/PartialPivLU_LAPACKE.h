@@ -33,7 +33,7 @@
 #ifndef EIGEN_PARTIALLU_LAPACK_H
 #define EIGEN_PARTIALLU_LAPACK_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -78,6 +78,6 @@ EIGEN_LAPACKE_LU_PARTPIV(scomplex, lapack_complex_float,  c)
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_PARTIALLU_LAPACK_H

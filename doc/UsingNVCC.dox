@@ -1,5 +1,5 @@
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \page TopicCUDA Using Eigen in CUDA kernels
 

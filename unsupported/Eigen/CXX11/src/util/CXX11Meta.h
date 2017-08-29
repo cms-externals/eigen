@@ -20,7 +20,7 @@
 
 #include "CXX11Workarounds.h"
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -535,7 +535,7 @@ InstType instantiate_by_c_array(ArrType* arr)
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #else // Non C++11, fallback to emulation mode
 

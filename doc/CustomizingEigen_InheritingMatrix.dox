@@ -1,4 +1,4 @@
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \page TopicCustomizing_InheritingMatrix Inheriting from Matrix
 
@@ -22,11 +22,11 @@ Output: \verbinclude CustomizingEigen_Inheritance.out
 
 This is the kind of error you can get if you don't provide those methods
 \verbatim
-error: no match for ‘operator=’ in ‘v = Eigen::operator*(
-const Eigen::MatrixBase<Eigen::Matrix<double, -0x000000001, 1, 0, -0x000000001, 1> >::Scalar&, 
-const Eigen::MatrixBase<Eigen::Matrix<double, -0x000000001, 1> >::StorageBaseType&)
-(((const Eigen::MatrixBase<Eigen::Matrix<double, -0x000000001, 1> >::StorageBaseType&)
-((const Eigen::MatrixBase<Eigen::Matrix<double, -0x000000001, 1> >::StorageBaseType*)(& v))))’
+error: no match for ‘operator=’ in ‘v = Eigen_tf::operator*(
+const Eigen_tf::MatrixBase<Eigen_tf::Matrix<double, -0x000000001, 1, 0, -0x000000001, 1> >::Scalar&, 
+const Eigen_tf::MatrixBase<Eigen_tf::Matrix<double, -0x000000001, 1> >::StorageBaseType&)
+(((const Eigen_tf::MatrixBase<Eigen_tf::Matrix<double, -0x000000001, 1> >::StorageBaseType&)
+((const Eigen_tf::MatrixBase<Eigen_tf::Matrix<double, -0x000000001, 1> >::StorageBaseType*)(& v))))’
 \endverbatim
 
 */

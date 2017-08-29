@@ -11,16 +11,16 @@
 
 #include <Eigen/src/Core/arch/CUDA/Half.h>
 
-// Make sure it's possible to forward declare Eigen::half
-namespace Eigen {
+// Make sure it's possible to forward declare Eigen_tf::half
+namespace Eigen_tf {
 struct half;
 }
 
-using Eigen::half;
+using Eigen_tf::half;
 
 void test_conversion()
 {
-  using Eigen::half_impl::__half;
+  using Eigen_tf::half_impl::__half;
 
   // Conversion from float.
   VERIFY_IS_EQUAL(half(1.0f).x, 0x3c00);

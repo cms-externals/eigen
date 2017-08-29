@@ -56,8 +56,8 @@ template<int Size> struct ConstFixedSegmentReturnType { typedef const VectorBloc
 ///
 /// \newin{3.4}:
 ///
-/// The number of rows \a blockRows and columns \a blockCols can also be specified at compile-time by passing Eigen::fix<N>,
-/// or Eigen::fix<N>(n) as arguments. In the later case, \c n plays the role of a runtime fallback value in case \c N equals Eigen::Dynamic.
+/// The number of rows \a blockRows and columns \a blockCols can also be specified at compile-time by passing Eigen_tf::fix<N>,
+/// or Eigen_tf::fix<N>(n) as arguments. In the later case, \c n plays the role of a runtime fallback value in case \c N equals Eigen_tf::Dynamic.
 /// Here is an example with a fixed number of rows \c NRows and dynamic number of columns \c cols:
 /// \code
 /// mat.block(i,j,fix<NRows>,cols)
@@ -117,8 +117,8 @@ block(Index startRow, Index startCol, NRowsType blockRows, NColsType blockCols) 
 /// Example with dynamic sizes: \include MatrixBase_topRightCorner_int_int.cpp
 /// Output: \verbinclude MatrixBase_topRightCorner_int_int.out
 ///
-/// The number of rows \a blockRows and columns \a blockCols can also be specified at compile-time by passing Eigen::fix<N>,
-/// or Eigen::fix<N>(n) as arguments. See \link block(Index,Index,NRowsType,NColsType) block() \endlink for the details.
+/// The number of rows \a blockRows and columns \a blockCols can also be specified at compile-time by passing Eigen_tf::fix<N>,
+/// or Eigen_tf::fix<N>(n) as arguments. See \link block(Index,Index,NRowsType,NColsType) block() \endlink for the details.
 ///
 EIGEN_DOC_BLOCK_ADDONS_NOT_INNER_PANEL
 ///
@@ -222,8 +222,8 @@ inline const typename ConstFixedBlockXpr<CRows,CCols>::Type topRightCorner(Index
 /// Example: \include MatrixBase_topLeftCorner_int_int.cpp
 /// Output: \verbinclude MatrixBase_topLeftCorner_int_int.out
 ///
-/// The number of rows \a blockRows and columns \a blockCols can also be specified at compile-time by passing Eigen::fix<N>,
-/// or Eigen::fix<N>(n) as arguments. See \link block(Index,Index,NRowsType,NColsType) block() \endlink for the details.
+/// The number of rows \a blockRows and columns \a blockCols can also be specified at compile-time by passing Eigen_tf::fix<N>,
+/// or Eigen_tf::fix<N>(n) as arguments. See \link block(Index,Index,NRowsType,NColsType) block() \endlink for the details.
 ///
 EIGEN_DOC_BLOCK_ADDONS_NOT_INNER_PANEL
 ///
@@ -326,8 +326,8 @@ inline const typename ConstFixedBlockXpr<CRows,CCols>::Type topLeftCorner(Index 
 /// Example: \include MatrixBase_bottomRightCorner_int_int.cpp
 /// Output: \verbinclude MatrixBase_bottomRightCorner_int_int.out
 ///
-/// The number of rows \a blockRows and columns \a blockCols can also be specified at compile-time by passing Eigen::fix<N>,
-/// or Eigen::fix<N>(n) as arguments. See \link block(Index,Index,NRowsType,NColsType) block() \endlink for the details.
+/// The number of rows \a blockRows and columns \a blockCols can also be specified at compile-time by passing Eigen_tf::fix<N>,
+/// or Eigen_tf::fix<N>(n) as arguments. See \link block(Index,Index,NRowsType,NColsType) block() \endlink for the details.
 ///
 EIGEN_DOC_BLOCK_ADDONS_NOT_INNER_PANEL
 ///
@@ -432,8 +432,8 @@ inline const typename ConstFixedBlockXpr<CRows,CCols>::Type bottomRightCorner(In
 /// Example: \include MatrixBase_bottomLeftCorner_int_int.cpp
 /// Output: \verbinclude MatrixBase_bottomLeftCorner_int_int.out
 ///
-/// The number of rows \a blockRows and columns \a blockCols can also be specified at compile-time by passing Eigen::fix<N>,
-/// or Eigen::fix<N>(n) as arguments. See \link block(Index,Index,NRowsType,NColsType) block() \endlink for the details.
+/// The number of rows \a blockRows and columns \a blockCols can also be specified at compile-time by passing Eigen_tf::fix<N>,
+/// or Eigen_tf::fix<N>(n) as arguments. See \link block(Index,Index,NRowsType,NColsType) block() \endlink for the details.
 ///
 EIGEN_DOC_BLOCK_ADDONS_NOT_INNER_PANEL
 ///
@@ -536,8 +536,8 @@ inline const typename ConstFixedBlockXpr<CRows,CCols>::Type bottomLeftCorner(Ind
 /// Example: \include MatrixBase_topRows_int.cpp
 /// Output: \verbinclude MatrixBase_topRows_int.out
 ///
-/// The number of rows \a n can also be specified at compile-time by passing Eigen::fix<N>,
-/// or Eigen::fix<N>(n) as arguments.
+/// The number of rows \a n can also be specified at compile-time by passing Eigen_tf::fix<N>,
+/// or Eigen_tf::fix<N>(n) as arguments.
 /// See \link block(Index,Index,NRowsType,NColsType) block() \endlink for the details.
 ///
 EIGEN_DOC_BLOCK_ADDONS_INNER_PANEL_IF(row-major)
@@ -611,8 +611,8 @@ inline typename ConstNRowsBlockXpr<N>::Type topRows(Index n = N) const
 /// Example: \include MatrixBase_bottomRows_int.cpp
 /// Output: \verbinclude MatrixBase_bottomRows_int.out
 ///
-/// The number of rows \a n can also be specified at compile-time by passing Eigen::fix<N>,
-/// or Eigen::fix<N>(n) as arguments.
+/// The number of rows \a n can also be specified at compile-time by passing Eigen_tf::fix<N>,
+/// or Eigen_tf::fix<N>(n) as arguments.
 /// See \link block(Index,Index,NRowsType,NColsType) block() \endlink for the details.
 ///
 EIGEN_DOC_BLOCK_ADDONS_INNER_PANEL_IF(row-major)
@@ -687,8 +687,8 @@ inline typename ConstNRowsBlockXpr<N>::Type bottomRows(Index n = N) const
 /// Example: \include DenseBase_middleRows_int.cpp
 /// Output: \verbinclude DenseBase_middleRows_int.out
 ///
-/// The number of rows \a n can also be specified at compile-time by passing Eigen::fix<N>,
-/// or Eigen::fix<N>(n) as arguments.
+/// The number of rows \a n can also be specified at compile-time by passing Eigen_tf::fix<N>,
+/// or Eigen_tf::fix<N>(n) as arguments.
 /// See \link block(Index,Index,NRowsType,NColsType) block() \endlink for the details.
 ///
 EIGEN_DOC_BLOCK_ADDONS_INNER_PANEL_IF(row-major)
@@ -763,8 +763,8 @@ inline typename ConstNRowsBlockXpr<N>::Type middleRows(Index startRow, Index n =
 /// Example: \include MatrixBase_leftCols_int.cpp
 /// Output: \verbinclude MatrixBase_leftCols_int.out
 ///
-/// The number of columns \a n can also be specified at compile-time by passing Eigen::fix<N>,
-/// or Eigen::fix<N>(n) as arguments.
+/// The number of columns \a n can also be specified at compile-time by passing Eigen_tf::fix<N>,
+/// or Eigen_tf::fix<N>(n) as arguments.
 /// See \link block(Index,Index,NRowsType,NColsType) block() \endlink for the details.
 ///
 EIGEN_DOC_BLOCK_ADDONS_INNER_PANEL_IF(column-major)
@@ -838,8 +838,8 @@ inline typename ConstNColsBlockXpr<N>::Type leftCols(Index n = N) const
 /// Example: \include MatrixBase_rightCols_int.cpp
 /// Output: \verbinclude MatrixBase_rightCols_int.out
 ///
-/// The number of columns \a n can also be specified at compile-time by passing Eigen::fix<N>,
-/// or Eigen::fix<N>(n) as arguments.
+/// The number of columns \a n can also be specified at compile-time by passing Eigen_tf::fix<N>,
+/// or Eigen_tf::fix<N>(n) as arguments.
 /// See \link block(Index,Index,NRowsType,NColsType) block() \endlink for the details.
 ///
 EIGEN_DOC_BLOCK_ADDONS_INNER_PANEL_IF(column-major)
@@ -914,8 +914,8 @@ inline typename ConstNColsBlockXpr<N>::Type rightCols(Index n = N) const
 /// Example: \include DenseBase_middleCols_int.cpp
 /// Output: \verbinclude DenseBase_middleCols_int.out
 ///
-/// The number of columns \a n can also be specified at compile-time by passing Eigen::fix<N>,
-/// or Eigen::fix<N>(n) as arguments.
+/// The number of columns \a n can also be specified at compile-time by passing Eigen_tf::fix<N>,
+/// or Eigen_tf::fix<N>(n) as arguments.
 /// See \link block(Index,Index,NRowsType,NColsType) block() \endlink for the details.
 ///
 EIGEN_DOC_BLOCK_ADDONS_INNER_PANEL_IF(column-major)
@@ -1120,8 +1120,8 @@ inline ConstRowXpr row(Index i) const
 /// Example: \include MatrixBase_segment_int_int.cpp
 /// Output: \verbinclude MatrixBase_segment_int_int.out
 ///
-/// The number of coefficients \a n can also be specified at compile-time by passing Eigen::fix<N>,
-/// or Eigen::fix<N>(n) as arguments.
+/// The number of coefficients \a n can also be specified at compile-time by passing Eigen_tf::fix<N>,
+/// or Eigen_tf::fix<N>(n) as arguments.
 /// See \link block(Index,Index,NRowsType,NColsType) block() \endlink for the details.
 ///
 /// \note Even in the case that the returned expression has dynamic size, in the case
@@ -1170,8 +1170,8 @@ segment(Index start, NType n) const
 /// Example: \include MatrixBase_start_int.cpp
 /// Output: \verbinclude MatrixBase_start_int.out
 ///
-/// The number of coefficients \a n can also be specified at compile-time by passing Eigen::fix<N>,
-/// or Eigen::fix<N>(n) as arguments.
+/// The number of coefficients \a n can also be specified at compile-time by passing Eigen_tf::fix<N>,
+/// or Eigen_tf::fix<N>(n) as arguments.
 /// See \link block(Index,Index,NRowsType,NColsType) block() \endlink for the details.
 ///
 /// \note Even in the case that the returned expression has dynamic size, in the case
@@ -1219,8 +1219,8 @@ head(NType n) const
 /// Example: \include MatrixBase_end_int.cpp
 /// Output: \verbinclude MatrixBase_end_int.out
 ///
-/// The number of coefficients \a n can also be specified at compile-time by passing Eigen::fix<N>,
-/// or Eigen::fix<N>(n) as arguments.
+/// The number of coefficients \a n can also be specified at compile-time by passing Eigen_tf::fix<N>,
+/// or Eigen_tf::fix<N>(n) as arguments.
 /// See \link block(Index,Index,NRowsType,NColsType) block() \endlink for the details.
 ///
 /// \note Even in the case that the returned expression has dynamic size, in the case

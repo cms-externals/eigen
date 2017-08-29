@@ -15,14 +15,14 @@
 #include <Eigen/LU> // required for MatrixBase::determinant
 #include <Eigen/SVD> // required for SVD
 
-using namespace Eigen;
+using namespace Eigen_tf;
 
 //  Constructs a random matrix from the unitary group U(size).
 template <typename T>
-Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> randMatrixUnitary(int size)
+Eigen_tf::Matrix<T, Eigen_tf::Dynamic, Eigen_tf::Dynamic> randMatrixUnitary(int size)
 {
   typedef T Scalar;
-  typedef Eigen::Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic> MatrixType;
+  typedef Eigen_tf::Matrix<Scalar, Eigen_tf::Dynamic, Eigen_tf::Dynamic> MatrixType;
 
   MatrixType Q;
 
@@ -72,11 +72,11 @@ Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> randMatrixUnitary(int size)
 
 //  Constructs a random matrix from the special unitary group SU(size).
 template <typename T>
-Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> randMatrixSpecialUnitary(int size)
+Eigen_tf::Matrix<T, Eigen_tf::Dynamic, Eigen_tf::Dynamic> randMatrixSpecialUnitary(int size)
 {
   typedef T Scalar;
 
-  typedef Eigen::Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic> MatrixType;
+  typedef Eigen_tf::Matrix<Scalar, Eigen_tf::Dynamic, Eigen_tf::Dynamic> MatrixType;
 
   // initialize unitary matrix
   MatrixType Q = randMatrixUnitary<Scalar>(size);
@@ -92,8 +92,8 @@ void run_test(int dim, int num_elements)
 {
   using std::abs;
   typedef typename internal::traits<MatrixType>::Scalar Scalar;
-  typedef Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic> MatrixX;
-  typedef Matrix<Scalar, Eigen::Dynamic, 1> VectorX;
+  typedef Matrix<Scalar, Eigen_tf::Dynamic, Eigen_tf::Dynamic> MatrixX;
+  typedef Matrix<Scalar, Eigen_tf::Dynamic, 1> VectorX;
 
   // MUST be positive because in any other case det(cR_t) may become negative for
   // odd dimensions!

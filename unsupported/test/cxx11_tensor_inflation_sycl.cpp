@@ -20,7 +20,7 @@
 #include "main.h"
 #include <unsupported/Eigen/CXX11/Tensor>
 
-using Eigen::Tensor;
+using Eigen_tf::Tensor;
 
 // Inflation Defenition for each dimention the inflated val would be
 //((dim-1)*strid[dim] +1)
@@ -30,7 +30,7 @@ using Eigen::Tensor;
 // (4, 0, 0, 4, 0, 0, 4).
 
 template <typename DataType, int DataLayout, typename IndexType>
-void test_simple_inflation_sycl(const Eigen::SyclDevice &sycl_device) {
+void test_simple_inflation_sycl(const Eigen_tf::SyclDevice &sycl_device) {
 
 
   IndexType sizeDim1 = 2;
@@ -124,13 +124,13 @@ void test_simple_inflation_sycl(const Eigen::SyclDevice &sycl_device) {
 
 template<typename DataType, typename dev_Selector> void sycl_inflation_test_per_device(dev_Selector s){
   QueueInterface queueInterface(s);
-  auto sycl_device = Eigen::SyclDevice(&queueInterface);
+  auto sycl_device = Eigen_tf::SyclDevice(&queueInterface);
   test_simple_inflation_sycl<DataType, RowMajor, int64_t>(sycl_device);
   test_simple_inflation_sycl<DataType, ColMajor, int64_t>(sycl_device);
 }
 void test_cxx11_tensor_inflation_sycl()
 {
-  for (const auto& device :Eigen::get_sycl_supported_devices()) {
+  for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
     CALL_SUBTEST(sycl_inflation_test_per_device<float>(device));
   }
 }

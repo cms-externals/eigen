@@ -12,7 +12,7 @@
 #ifndef EIGEN_ASSIGN_H
 #define EIGEN_ASSIGN_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 template<typename Derived>
 template<typename OtherDerived>
@@ -85,6 +85,6 @@ EIGEN_STRONG_INLINE Derived& MatrixBase<Derived>::operator=(const ReturnByValue<
   return derived();
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_ASSIGN_H

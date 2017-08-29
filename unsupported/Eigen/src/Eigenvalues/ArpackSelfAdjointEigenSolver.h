@@ -27,7 +27,7 @@
 
 #include <Eigen/Dense>
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
   template<typename Scalar, typename RealScalar> struct arpack_wrapper;
@@ -799,7 +799,7 @@ struct OP<MatrixSolver, MatrixType, Scalar, false>
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_ARPACKSELFADJOINTEIGENSOLVER_H
 

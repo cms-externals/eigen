@@ -22,13 +22,13 @@
 #include "main.h"
 #include <unsupported/Eigen/CXX11/Tensor>
 
-using Eigen::array;
-using Eigen::SyclDevice;
-using Eigen::Tensor;
-using Eigen::TensorMap;
+using Eigen_tf::array;
+using Eigen_tf::SyclDevice;
+using Eigen_tf::Tensor;
+using Eigen_tf::TensorMap;
 
 template <typename DataType, int DataLayout, typename IndexType>
-void test_sycl_mem_transfers(const Eigen::SyclDevice &sycl_device) {
+void test_sycl_mem_transfers(const Eigen_tf::SyclDevice &sycl_device) {
   IndexType sizeDim1 = 100;
   IndexType sizeDim2 = 10;
   IndexType sizeDim3 = 20;
@@ -66,7 +66,7 @@ void test_sycl_mem_transfers(const Eigen::SyclDevice &sycl_device) {
 }
 
 template <typename DataType, int DataLayout, typename IndexType>
-void test_sycl_mem_sync(const Eigen::SyclDevice &sycl_device) {
+void test_sycl_mem_sync(const Eigen_tf::SyclDevice &sycl_device) {
   IndexType size = 20;
   array<IndexType, 1> tensorRange = {{size}};
   Tensor<DataType, 1, DataLayout, IndexType> in1(tensorRange);
@@ -94,7 +94,7 @@ void test_sycl_mem_sync(const Eigen::SyclDevice &sycl_device) {
 }
 
 template <typename DataType, int DataLayout, typename IndexType>
-void test_sycl_computations(const Eigen::SyclDevice &sycl_device) {
+void test_sycl_computations(const Eigen_tf::SyclDevice &sycl_device) {
 
   IndexType sizeDim1 = 100;
   IndexType sizeDim2 = 10;
@@ -230,7 +230,7 @@ void test_sycl_computations(const Eigen::SyclDevice &sycl_device) {
   sycl_device.deallocate(gpu_out_data);
 }
 template<typename Scalar1, typename Scalar2,  int DataLayout, typename IndexType>
-static void test_sycl_cast(const Eigen::SyclDevice& sycl_device){
+static void test_sycl_cast(const Eigen_tf::SyclDevice& sycl_device){
     IndexType size = 20;
     array<IndexType, 1> tensorRange = {{size}};
     Tensor<Scalar1, 1, DataLayout, IndexType> in(tensorRange);
@@ -258,7 +258,7 @@ static void test_sycl_cast(const Eigen::SyclDevice& sycl_device){
 }
 template<typename DataType, typename dev_Selector> void sycl_computing_test_per_device(dev_Selector s){
   QueueInterface queueInterface(s);
-  auto sycl_device = Eigen::SyclDevice(&queueInterface);
+  auto sycl_device = Eigen_tf::SyclDevice(&queueInterface);
   test_sycl_mem_transfers<DataType, RowMajor, int64_t>(sycl_device);
   test_sycl_computations<DataType, RowMajor, int64_t>(sycl_device);
   test_sycl_mem_sync<DataType, RowMajor, int64_t>(sycl_device);
@@ -270,7 +270,7 @@ template<typename DataType, typename dev_Selector> void sycl_computing_test_per_
 }
 
 void test_cxx11_tensor_sycl() {
-  for (const auto& device :Eigen::get_sycl_supported_devices()) {
+  for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
     CALL_SUBTEST(sycl_computing_test_per_device<float>(device));
   }
 }

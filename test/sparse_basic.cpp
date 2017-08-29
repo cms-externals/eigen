@@ -644,8 +644,8 @@ void big_sparse_triplet(Index rows, Index cols, double density) {
 void test_sparse_basic()
 {
   for(int i = 0; i < g_repeat; i++) {
-    int r = Eigen::internal::random<int>(1,200), c = Eigen::internal::random<int>(1,200);
-    if(Eigen::internal::random<int>(0,4) == 0) {
+    int r = Eigen_tf::internal::random<int>(1,200), c = Eigen_tf::internal::random<int>(1,200);
+    if(Eigen_tf::internal::random<int>(0,4) == 0) {
       r = c; // check square matrices in 25% of tries
     }
     EIGEN_UNUSED_VARIABLE(r+c);
@@ -657,9 +657,9 @@ void test_sparse_basic()
     CALL_SUBTEST_5(( sparse_basic(SparseMatrix<double,ColMajor,long int>(r, c)) ));
     CALL_SUBTEST_5(( sparse_basic(SparseMatrix<double,RowMajor,long int>(r, c)) ));
     
-    r = Eigen::internal::random<int>(1,100);
-    c = Eigen::internal::random<int>(1,100);
-    if(Eigen::internal::random<int>(0,4) == 0) {
+    r = Eigen_tf::internal::random<int>(1,100);
+    c = Eigen_tf::internal::random<int>(1,100);
+    if(Eigen_tf::internal::random<int>(0,4) == 0) {
       r = c; // check square matrices in 25% of tries
     }
     
@@ -674,7 +674,7 @@ void test_sparse_basic()
   // Regression test for bug 1105
 #ifdef EIGEN_TEST_PART_7
   {
-    int n = Eigen::internal::random<int>(200,600);
+    int n = Eigen_tf::internal::random<int>(200,600);
     SparseMatrix<std::complex<double>,0, long> mat(n, n);
     std::complex<double> val;
 

@@ -11,7 +11,7 @@
 #ifndef EIGEN_JACOBISVD_H
 #define EIGEN_JACOBISVD_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 // forward declaration (needed by ICC)
@@ -799,6 +799,6 @@ MatrixBase<Derived>::jacobiSvd(unsigned int computationOptions) const
   return JacobiSVD<PlainObject>(*this, computationOptions);
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_JACOBISVD_H

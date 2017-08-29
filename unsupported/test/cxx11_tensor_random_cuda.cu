@@ -30,10 +30,10 @@ void test_cuda_random_uniform()
   float* d_out;
   cudaMalloc((void**)(&d_out), out_bytes);
 
-  Eigen::CudaStreamDevice stream;
-  Eigen::GpuDevice gpu_device(&stream);
+  Eigen_tf::CudaStreamDevice stream;
+  Eigen_tf::GpuDevice gpu_device(&stream);
 
-  Eigen::TensorMap<Eigen::Tensor<float, 2> > gpu_out(d_out, 72,97);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<float, 2> > gpu_out(d_out, 72,97);
 
   gpu_out.device(gpu_device) = gpu_out.random();
 
@@ -55,12 +55,12 @@ void test_cuda_random_normal()
   float* d_out;
   cudaMalloc((void**)(&d_out), out_bytes);
 
-  Eigen::CudaStreamDevice stream;
-  Eigen::GpuDevice gpu_device(&stream);
+  Eigen_tf::CudaStreamDevice stream;
+  Eigen_tf::GpuDevice gpu_device(&stream);
 
-  Eigen::TensorMap<Eigen::Tensor<float, 2> > gpu_out(d_out, 72,97);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<float, 2> > gpu_out(d_out, 72,97);
 
-  Eigen::internal::NormalRandomGenerator<float> gen(true);
+  Eigen_tf::internal::NormalRandomGenerator<float> gen(true);
   gpu_out.device(gpu_device) = gpu_out.random(gen);
 
   assert(cudaMemcpyAsync(out.data(), d_out, out_bytes, cudaMemcpyDeviceToHost, gpu_device.stream()) == cudaSuccess);

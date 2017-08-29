@@ -10,7 +10,7 @@
 #ifndef EIGEN_CHOLMODSUPPORT_H
 #define EIGEN_CHOLMODSUPPORT_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -677,6 +677,6 @@ class CholmodDecomposition : public CholmodBase<_MatrixType, _UpLo, CholmodDecom
     }
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CHOLMODSUPPORT_H

@@ -1,7 +1,7 @@
 #include <Eigen/Dense>
 #include <iostream>
 
-using namespace Eigen;
+using namespace Eigen_tf;
 
 void copyUpperTriangularPart(MatrixXf& dst, const MatrixXf& src)
 {

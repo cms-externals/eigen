@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_THREADPOOL_THREAD_POOL_INTERFACE_H
 #define EIGEN_CXX11_THREADPOOL_THREAD_POOL_INTERFACE_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 // This defines an interface that ThreadPoolDevice can take to use
 // custom thread pools underneath.
@@ -34,6 +34,6 @@ class ThreadPoolInterface {
   virtual ~ThreadPoolInterface() {}
 };
 
-}  // namespace Eigen
+}  // namespace Eigen_tf
 
 #endif  // EIGEN_CXX11_THREADPOOL_THREAD_POOL_INTERFACE_H

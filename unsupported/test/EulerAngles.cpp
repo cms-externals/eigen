@@ -11,11 +11,11 @@
 
 #include <unsupported/Eigen/EulerAngles>
 
-using namespace Eigen;
+using namespace Eigen_tf;
 
 // Unfortunately, we need to specialize it in order to work. (We could add it in main.h test framework)
 template <typename Scalar, class System>
-bool verifyIsApprox(const Eigen::EulerAngles<Scalar, System>& a, const Eigen::EulerAngles<Scalar, System>& b)
+bool verifyIsApprox(const Eigen_tf::EulerAngles<Scalar, System>& a, const Eigen_tf::EulerAngles<Scalar, System>& b)
 {
   return verifyIsApprox(a.angles(), b.angles());
 }
@@ -213,9 +213,9 @@ template<typename Scalar> void eulerangles_manual()
   check_singular_cases(-PI);
   
   // non-singular cases
-  VectorXd alpha = VectorXd::LinSpaced(Eigen::Sequential, 20, Scalar(-0.99) * PI, PI);
-  VectorXd beta = VectorXd::LinSpaced(Eigen::Sequential, 20, Scalar(-0.49) * PI, Scalar(0.49) * PI);
-  VectorXd gamma = VectorXd::LinSpaced(Eigen::Sequential, 20, Scalar(-0.99) * PI, PI);
+  VectorXd alpha = VectorXd::LinSpaced(Eigen_tf::Sequential, 20, Scalar(-0.99) * PI, PI);
+  VectorXd beta = VectorXd::LinSpaced(Eigen_tf::Sequential, 20, Scalar(-0.49) * PI, Scalar(0.49) * PI);
+  VectorXd gamma = VectorXd::LinSpaced(Eigen_tf::Sequential, 20, Scalar(-0.99) * PI, PI);
   for (int i = 0; i < alpha.size(); ++i) {
     for (int j = 0; j < beta.size(); ++j) {
       for (int k = 0; k < gamma.size(); ++k) {

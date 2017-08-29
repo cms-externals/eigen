@@ -10,7 +10,7 @@
 #ifndef EIGEN_ARITHMETIC_SEQUENCE_H
 #define EIGEN_ARITHMETIC_SEQUENCE_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -94,7 +94,7 @@ seqN(FirstType first, SizeType size, IncrType incr);
   * its \em first value \f$ a_0 \f$, its \em size (aka length) \em n, and the \em increment (aka stride)
   * that is equal to \f$ a_{i+1}-a_{i}\f$ for any \em i.
   *
-  * It is internally used as the return type of the Eigen::seq and Eigen::seqN functions, and as the input arguments
+  * It is internally used as the return type of the Eigen_tf::seq and Eigen_tf::seqN functions, and as the input arguments
   * of DenseBase::operator()(const RowIndices&, const ColIndices&), and most of the time this is the
   * only way it is used.
   *
@@ -104,7 +104,7 @@ seqN(FirstType first, SizeType size, IncrType incr);
   *                  or a compile time integral constant. Internally, it can also be a symbolic expression
   * \tparam IncrType type of the increment, can be a runtime Index, or a compile time integral constant (default is compile-time 1)
   *
-  * \sa Eigen::seq, Eigen::seqN, DenseBase::operator()(const RowIndices&, const ColIndices&), class IndexedView
+  * \sa Eigen_tf::seq, Eigen_tf::seqN, DenseBase::operator()(const RowIndices&, const ColIndices&), class IndexedView
   */
 template<typename FirstType,typename SizeType,typename IncrType>
 class ArithmeticSequence
@@ -139,7 +139,7 @@ protected:
 public:
 
 #if EIGEN_HAS_CXX11 && ((!EIGEN_COMP_GNUC) || EIGEN_COMP_GNUC>=48)
-  auto reverse() const -> decltype(Eigen::seqN(m_first+(m_size+fix<-1>())*m_incr,m_size,-m_incr)) {
+  auto reverse() const -> decltype(Eigen_tf::seqN(m_first+(m_size+fix<-1>())*m_incr,m_size,-m_incr)) {
     return seqN(m_first+(m_size+fix<-1>())*m_incr,m_size,-m_incr);
   }
 #else
@@ -345,6 +345,6 @@ struct get_compile_time_incr<ArithmeticSequence<FirstType,SizeType,IncrType> > {
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_ARITHMETIC_SEQUENCE_H

@@ -69,13 +69,13 @@ template<typename ArrayType> void array_special_functions()
       ArrayType zero = ArrayType::Zero(rows, cols);
       ArrayType one = ArrayType::Constant(rows, cols, Scalar(1.0));
       ArrayType a_m1 = a - one;
-      ArrayType Gamma_a_x = Eigen::igammac(a, x) * a.lgamma().exp();
-      ArrayType Gamma_a_m1_x = Eigen::igammac(a_m1, x) * a_m1.lgamma().exp();
-      ArrayType gamma_a_x = Eigen::igamma(a, x) * a.lgamma().exp();
-      ArrayType gamma_a_m1_x = Eigen::igamma(a_m1, x) * a_m1.lgamma().exp();
+      ArrayType Gamma_a_x = Eigen_tf::igammac(a, x) * a.lgamma().exp();
+      ArrayType Gamma_a_m1_x = Eigen_tf::igammac(a_m1, x) * a_m1.lgamma().exp();
+      ArrayType gamma_a_x = Eigen_tf::igamma(a, x) * a.lgamma().exp();
+      ArrayType gamma_a_m1_x = Eigen_tf::igamma(a_m1, x) * a_m1.lgamma().exp();
 
       // Gamma(a, 0) == Gamma(a)
-      VERIFY_IS_APPROX(Eigen::igammac(a, zero), one);
+      VERIFY_IS_APPROX(Eigen_tf::igammac(a, zero), one);
 
       // Gamma(a, x) + gamma(a, x) == Gamma(a)
       VERIFY_IS_APPROX(Gamma_a_x + gamma_a_x, a.lgamma().exp());

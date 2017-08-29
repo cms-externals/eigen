@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_SCAN_H
 #define EIGEN_CXX11_TENSOR_TENSOR_SCAN_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -27,7 +27,7 @@ struct traits<TensorScanOp<Op, XprType> >
 };
 
 template<typename Op, typename XprType>
-struct eval<TensorScanOp<Op, XprType>, Eigen::Dense>
+struct eval<TensorScanOp<Op, XprType>, Eigen_tf::Dense>
 {
   typedef const TensorScanOp<Op, XprType>& type;
 };
@@ -49,12 +49,12 @@ template <typename Op, typename XprType>
 class TensorScanOp
     : public TensorBase<TensorScanOp<Op, XprType>, ReadOnlyAccessors> {
 public:
-  typedef typename Eigen::internal::traits<TensorScanOp>::Scalar Scalar;
-  typedef typename Eigen::NumTraits<Scalar>::Real RealScalar;
+  typedef typename Eigen_tf::internal::traits<TensorScanOp>::Scalar Scalar;
+  typedef typename Eigen_tf::NumTraits<Scalar>::Real RealScalar;
   typedef typename XprType::CoeffReturnType CoeffReturnType;
-  typedef typename Eigen::internal::nested<TensorScanOp>::type Nested;
-  typedef typename Eigen::internal::traits<TensorScanOp>::StorageKind StorageKind;
-  typedef typename Eigen::internal::traits<TensorScanOp>::Index Index;
+  typedef typename Eigen_tf::internal::nested<TensorScanOp>::type Nested;
+  typedef typename Eigen_tf::internal::traits<TensorScanOp>::StorageKind StorageKind;
+  typedef typename Eigen_tf::internal::traits<TensorScanOp>::Index Index;
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorScanOp(
       const XprType& expr, const Index& axis, bool exclusive = false, const Op& op = Op())
@@ -282,6 +282,6 @@ struct ScanLauncher<Self, Reducer, GpuDevice> {
 };
 #endif  // EIGEN_USE_GPU && __CUDACC__
 
-}  // end namespace Eigen
+}  // end namespace Eigen_tf
 
 #endif  // EIGEN_CXX11_TENSOR_TENSOR_SCAN_H

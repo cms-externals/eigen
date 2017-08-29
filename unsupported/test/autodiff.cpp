@@ -257,9 +257,9 @@ template <int>
 void test_autodiff_hessian()
 {
   typedef AutoDiffScalar<VectorXd> AD;
-  typedef Matrix<AD,Eigen::Dynamic,1> VectorAD;
+  typedef Matrix<AD,Eigen_tf::Dynamic,1> VectorAD;
   typedef AutoDiffScalar<VectorAD> ADD;
-  typedef Matrix<ADD,Eigen::Dynamic,1> VectorADD;
+  typedef Matrix<ADD,Eigen_tf::Dynamic,1> VectorADD;
   VectorADD x(2);
   double s1 = internal::random<double>(), s2 = internal::random<double>(), s3 = internal::random<double>(), s4 = internal::random<double>();
   x(0).value()=s1;
@@ -298,7 +298,7 @@ void test_autodiff_hessian()
 }
 
 double bug_1222() {
-  typedef Eigen::AutoDiffScalar<Eigen::Vector3d> AD;
+  typedef Eigen_tf::AutoDiffScalar<Eigen_tf::Vector3d> AD;
   const double _cv1_3 = 1.0;
   const AD chi_3 = 1.0;
   // this line did not work, because operator+ returns ADS<DerType&>, which then cannot be converted to ADS<DerType>
@@ -308,7 +308,7 @@ double bug_1222() {
 
 double bug_1223() {
   using std::min;
-  typedef Eigen::AutoDiffScalar<Eigen::Vector3d> AD;
+  typedef Eigen_tf::AutoDiffScalar<Eigen_tf::Vector3d> AD;
 
   const double _cv1_3 = 1.0;
   const AD chi_3 = 1.0;

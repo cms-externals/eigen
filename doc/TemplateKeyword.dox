@@ -1,4 +1,4 @@
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \page TopicTemplateKeyword The template and typename keywords in C++
 

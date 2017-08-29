@@ -1,4 +1,4 @@
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \page TopicCustomizing_NullaryExpr Matrix manipulation via nullary-expressions
 

@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_THREADPOOL_THREAD_ENVIRONMENT_H
 #define EIGEN_CXX11_THREADPOOL_THREAD_ENVIRONMENT_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 struct StlThreadEnvironment {
   struct Task {
@@ -35,6 +35,6 @@ struct StlThreadEnvironment {
   void ExecuteTask(const Task& t) { t.f(); }
 };
 
-}  // namespace Eigen
+}  // namespace Eigen_tf
 
 #endif  // EIGEN_CXX11_THREADPOOL_THREAD_ENVIRONMENT_H

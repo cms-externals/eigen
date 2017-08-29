@@ -10,7 +10,7 @@
 #ifndef EIGEN_SPARSEREDUX_H
 #define EIGEN_SPARSEREDUX_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 template<typename Derived>
 typename internal::traits<Derived>::Scalar
@@ -44,6 +44,6 @@ SparseVector<_Scalar,_Options,_Index>::sum() const
   return Matrix<Scalar,1,Dynamic>::Map(m_data.valuePtr(), m_data.size()).sum();
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SPARSEREDUX_H

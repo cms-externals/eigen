@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_IMAGE_PATCH_H
 #define EIGEN_CXX11_TENSOR_TENSOR_IMAGE_PATCH_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorImagePatch
   * \ingroup CXX11_Tensor_Module
@@ -41,7 +41,7 @@ struct traits<TensorImagePatchOp<Rows, Cols, XprType> > : public traits<XprType>
 };
 
 template<DenseIndex Rows, DenseIndex Cols, typename XprType>
-struct eval<TensorImagePatchOp<Rows, Cols, XprType>, Eigen::Dense>
+struct eval<TensorImagePatchOp<Rows, Cols, XprType>, Eigen_tf::Dense>
 {
   typedef const TensorImagePatchOp<Rows, Cols, XprType>& type;
 };
@@ -58,12 +58,12 @@ template<DenseIndex Rows, DenseIndex Cols, typename XprType>
 class TensorImagePatchOp : public TensorBase<TensorImagePatchOp<Rows, Cols, XprType>, ReadOnlyAccessors>
 {
   public:
-  typedef typename Eigen::internal::traits<TensorImagePatchOp>::Scalar Scalar;
-  typedef typename Eigen::NumTraits<Scalar>::Real RealScalar;
+  typedef typename Eigen_tf::internal::traits<TensorImagePatchOp>::Scalar Scalar;
+  typedef typename Eigen_tf::NumTraits<Scalar>::Real RealScalar;
   typedef typename XprType::CoeffReturnType CoeffReturnType;
-  typedef typename Eigen::internal::nested<TensorImagePatchOp>::type Nested;
-  typedef typename Eigen::internal::traits<TensorImagePatchOp>::StorageKind StorageKind;
-  typedef typename Eigen::internal::traits<TensorImagePatchOp>::Index Index;
+  typedef typename Eigen_tf::internal::nested<TensorImagePatchOp>::type Nested;
+  typedef typename Eigen_tf::internal::traits<TensorImagePatchOp>::StorageKind StorageKind;
+  typedef typename Eigen_tf::internal::traits<TensorImagePatchOp>::Index Index;
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorImagePatchOp(const XprType& expr, DenseIndex patch_rows, DenseIndex patch_cols,
                                                            DenseIndex row_strides, DenseIndex col_strides,
@@ -517,6 +517,6 @@ struct TensorEvaluator<const TensorImagePatchOp<Rows, Cols, ArgType>, Device>
 };
 
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_IMAGE_PATCH_H

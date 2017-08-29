@@ -1,4 +1,4 @@
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -295,4 +295,4 @@ void lmpar2(
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf

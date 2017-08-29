@@ -44,9 +44,9 @@ template<typename MatrixType> void real_qz(const MatrixType& m)
 
   RealQZ<MatrixType> qz(dim);
   // TODO enable full-prealocation of required memory, this probably requires an in-place mode for HessenbergDecomposition
-  //Eigen::internal::set_is_malloc_allowed(false);
+  //Eigen_tf::internal::set_is_malloc_allowed(false);
   qz.compute(A,B);
-  //Eigen::internal::set_is_malloc_allowed(true);
+  //Eigen_tf::internal::set_is_malloc_allowed(true);
   
   VERIFY_IS_EQUAL(qz.info(), Success);
   // check for zeros

@@ -13,7 +13,7 @@
 #include <Eigen/Core>
 #include <Eigen/Cholesky>
 #include <bench/BenchUtil.h>
-using namespace Eigen;
+using namespace Eigen_tf;
 
 #ifndef REPEAT
 #define REPEAT 10000

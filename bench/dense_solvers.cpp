@@ -5,7 +5,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
-using namespace Eigen;
+using namespace Eigen_tf;
 
 std::map<std::string,Array<float,1,8,DontAlign|RowMajor> > results;
 std::vector<std::string> labels;

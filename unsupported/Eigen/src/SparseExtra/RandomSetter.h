@@ -10,7 +10,7 @@
 #ifndef EIGEN_RANDOMSETTER_H
 #define EIGEN_RANDOMSETTER_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 /** Represents a std::map
   *
@@ -322,6 +322,6 @@ class RandomSetter
     unsigned char m_keyBitsOffset;
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_RANDOMSETTER_H

@@ -6,7 +6,7 @@
 #define CV_QUALIFIER
 #endif
 
-using namespace Eigen;
+using namespace Eigen_tf;
 
 void foo(){
     Matrix3f m;

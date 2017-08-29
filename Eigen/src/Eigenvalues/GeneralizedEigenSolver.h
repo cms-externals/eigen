@@ -14,7 +14,7 @@
 
 #include "./RealQZ.h"
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 /** \eigenvalues_module \ingroup Eigenvalues_Module
   *
@@ -73,7 +73,7 @@ template<typename _MatrixType> class GeneralizedEigenSolver
     /** \brief Scalar type for matrices of type #MatrixType. */
     typedef typename MatrixType::Scalar Scalar;
     typedef typename NumTraits<Scalar>::Real RealScalar;
-    typedef Eigen::Index Index; ///< \deprecated since Eigen 3.3
+    typedef Eigen_tf::Index Index; ///< \deprecated since Eigen 3.3
 
     /** \brief Complex scalar type for #MatrixType. 
       *
@@ -414,6 +414,6 @@ GeneralizedEigenSolver<MatrixType>::compute(const MatrixType& A, const MatrixTyp
   return *this;
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_GENERALIZEDEIGENSOLVER_H

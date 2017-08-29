@@ -12,7 +12,7 @@
 #ifndef EIGEN_REVERSE_H
 #define EIGEN_REVERSE_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -206,6 +206,6 @@ EIGEN_DEVICE_FUNC void VectorwiseOp<ExpressionType,Direction>::reverseInPlace()
   internal::vectorwise_reverse_inplace_impl<Direction>::run(_expression().const_cast_derived());
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_REVERSE_H

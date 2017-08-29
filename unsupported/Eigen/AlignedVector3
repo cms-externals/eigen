@@ -12,7 +12,7 @@
 
 #include <Eigen/Geometry>
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /**
   * \defgroup AlignedVector3_Module Aligned vector3 module

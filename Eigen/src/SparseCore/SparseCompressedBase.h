@@ -10,7 +10,7 @@
 #ifndef EIGEN_SPARSE_COMPRESSED_BASE_H
 #define EIGEN_SPARSE_COMPRESSED_BASE_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 template<typename Derived> class SparseCompressedBase;
   
@@ -47,8 +47,8 @@ class SparseCompressedBase
     
   protected:
     typedef typename Base::IndexVector IndexVector;
-    Eigen::Map<IndexVector> innerNonZeros() { return Eigen::Map<IndexVector>(innerNonZeroPtr(), isCompressed()?0:derived().outerSize()); }
-    const  Eigen::Map<const IndexVector> innerNonZeros() const { return Eigen::Map<const IndexVector>(innerNonZeroPtr(), isCompressed()?0:derived().outerSize()); }
+    Eigen_tf::Map<IndexVector> innerNonZeros() { return Eigen_tf::Map<IndexVector>(innerNonZeroPtr(), isCompressed()?0:derived().outerSize()); }
+    const  Eigen_tf::Map<const IndexVector> innerNonZeros() const { return Eigen_tf::Map<const IndexVector>(innerNonZeroPtr(), isCompressed()?0:derived().outerSize()); }
         
   public:
     
@@ -352,6 +352,6 @@ protected:
 
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SPARSE_COMPRESSED_BASE_H

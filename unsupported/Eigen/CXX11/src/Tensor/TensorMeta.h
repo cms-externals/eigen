@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_META_H
 #define EIGEN_CXX11_TENSOR_TENSOR_META_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 template<bool cond> struct Cond {};
 
@@ -216,6 +216,6 @@ namespace internal {
 
 
 
-}  // namespace Eigen
+}  // namespace Eigen_tf
 
 #endif  // EIGEN_CXX11_TENSOR_TENSOR_META_H

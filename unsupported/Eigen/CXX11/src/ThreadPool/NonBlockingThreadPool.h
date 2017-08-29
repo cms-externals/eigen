@@ -11,10 +11,10 @@
 #define EIGEN_CXX11_THREADPOOL_NONBLOCKING_THREAD_POOL_H
 
 
-namespace Eigen {
+namespace Eigen_tf {
 
 template <typename Environment>
-class NonBlockingThreadPoolTempl : public Eigen::ThreadPoolInterface {
+class NonBlockingThreadPoolTempl : public Eigen_tf::ThreadPoolInterface {
  public:
   typedef typename Environment::Task Task;
   typedef RunQueue<Task, 1024> Queue;
@@ -339,6 +339,6 @@ class NonBlockingThreadPoolTempl : public Eigen::ThreadPoolInterface {
 
 typedef NonBlockingThreadPoolTempl<StlThreadEnvironment> NonBlockingThreadPool;
 
-}  // namespace Eigen
+}  // namespace Eigen_tf
 
 #endif  // EIGEN_CXX11_THREADPOOL_NONBLOCKING_THREAD_POOL_H

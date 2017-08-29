@@ -10,7 +10,7 @@
 #ifndef EIGEN_PARALLELIZER_H
 #define EIGEN_PARALLELIZER_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -123,7 +123,7 @@ void parallelize_gemm(const Functor& func, Index rows, Index cols, Index depth, 
   if((!Condition) || (threads==1) || (omp_get_num_threads()>1))
     return func(0,rows, 0,cols);
 
-  Eigen::initParallel();
+  Eigen_tf::initParallel();
   func.initParallelSession(threads);
 
   if(transpose)
@@ -158,6 +158,6 @@ void parallelize_gemm(const Functor& func, Index rows, Index cols, Index depth, 
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_PARALLELIZER_H

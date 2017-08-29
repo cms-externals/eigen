@@ -10,7 +10,7 @@
 #ifndef EIGEN_ARRAY_H
 #define EIGEN_ARRAY_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 template<typename _Scalar, int _Rows, int _Cols, int _Options, int _MaxRows, int _MaxCols>
@@ -303,9 +303,9 @@ EIGEN_MAKE_ARRAY_TYPEDEFS_ALL_SIZES(std::complex<double>, cd)
 #undef EIGEN_MAKE_ARRAY_TYPEDEFS_LARGE
 
 #define EIGEN_USING_ARRAY_TYPEDEFS_FOR_TYPE_AND_SIZE(TypeSuffix, SizeSuffix) \
-using Eigen::Matrix##SizeSuffix##TypeSuffix; \
-using Eigen::Vector##SizeSuffix##TypeSuffix; \
-using Eigen::RowVector##SizeSuffix##TypeSuffix;
+using Eigen_tf::Matrix##SizeSuffix##TypeSuffix; \
+using Eigen_tf::Vector##SizeSuffix##TypeSuffix; \
+using Eigen_tf::RowVector##SizeSuffix##TypeSuffix;
 
 #define EIGEN_USING_ARRAY_TYPEDEFS_FOR_TYPE(TypeSuffix) \
 EIGEN_USING_ARRAY_TYPEDEFS_FOR_TYPE_AND_SIZE(TypeSuffix, 2) \
@@ -320,6 +320,6 @@ EIGEN_USING_ARRAY_TYPEDEFS_FOR_TYPE(d) \
 EIGEN_USING_ARRAY_TYPEDEFS_FOR_TYPE(cf) \
 EIGEN_USING_ARRAY_TYPEDEFS_FOR_TYPE(cd)
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_ARRAY_H

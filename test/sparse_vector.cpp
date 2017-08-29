@@ -148,8 +148,8 @@ template<typename Scalar,typename StorageIndex> void sparse_vector(int rows, int
 void test_sparse_vector()
 {
   for(int i = 0; i < g_repeat; i++) {
-    int r = Eigen::internal::random<int>(1,500), c = Eigen::internal::random<int>(1,500);
-    if(Eigen::internal::random<int>(0,4) == 0) {
+    int r = Eigen_tf::internal::random<int>(1,500), c = Eigen_tf::internal::random<int>(1,500);
+    if(Eigen_tf::internal::random<int>(0,4) == 0) {
       r = c; // check square matrices in 25% of tries
     }
     EIGEN_UNUSED_VARIABLE(r+c);

@@ -10,7 +10,7 @@
 #ifndef EIGEN_ROTATIONBASE_H
 #define EIGEN_ROTATIONBASE_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 // forward declaration
 namespace internal {
@@ -201,6 +201,6 @@ EIGEN_DEVICE_FUNC static inline const MatrixBase<OtherDerived>& toRotationMatrix
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_ROTATIONBASE_H

@@ -2,10 +2,10 @@
 #include <unsupported/Eigen/BVH>
 #include <iostream>
 
-using namespace Eigen;
+using namespace Eigen_tf;
 typedef AlignedBox<double, 2> Box2d;
 
-namespace Eigen {
+namespace Eigen_tf {
   Box2d bounding_box(const Vector2d &v) { return Box2d(v, v); } //compute the bounding box of a single point
 }
 

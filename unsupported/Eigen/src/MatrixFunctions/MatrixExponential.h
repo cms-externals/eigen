@@ -13,7 +13,7 @@
 
 #include "StemFunction.h"
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace internal {
 
 /** \brief Scaling operator.
@@ -371,7 +371,7 @@ void matrix_exp_compute(const ArgType& arg, ResultType &result)
     result *= result;   // undo scaling by repeated squaring
 }
 
-} // end namespace Eigen::internal
+} // end namespace Eigen_tf::internal
 
 /** \ingroup MatrixFunctions_Module
   *
@@ -427,6 +427,6 @@ const MatrixExponentialReturnValue<Derived> MatrixBase<Derived>::exp() const
   return MatrixExponentialReturnValue<Derived>(derived());
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_MATRIX_EXPONENTIAL

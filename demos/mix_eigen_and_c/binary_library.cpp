@@ -14,7 +14,7 @@
 
 #include <Eigen/Core>
 
-using namespace Eigen;
+using namespace Eigen_tf;
 
 /************************* pointer conversion methods **********************************************/
 

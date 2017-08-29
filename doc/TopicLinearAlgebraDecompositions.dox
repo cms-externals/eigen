@@ -1,4 +1,4 @@
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \eigenManualPage TopicLinearAlgebraDecompositions Catalogue of dense decompositions
 

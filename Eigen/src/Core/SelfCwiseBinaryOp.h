@@ -10,7 +10,7 @@
 #ifndef EIGEN_SELFCWISEBINARYOP_H
 #define EIGEN_SELFCWISEBINARYOP_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 // TODO generalize the scalar type of 'other'
 
@@ -46,6 +46,6 @@ EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Derived& DenseBase<Derived>::operator/=(co
   return derived();
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SELFCWISEBINARYOP_H

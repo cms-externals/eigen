@@ -4,7 +4,7 @@
 #include <string>
 #include "eigen_src/Eigen/Core"
 #include "../BenchTimer.h"
-using namespace Eigen;
+using namespace Eigen_tf;
 
 #ifndef SCALAR
 #error SCALAR must be defined

@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_PADDING_H
 #define EIGEN_CXX11_TENSOR_TENSOR_PADDING_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorPadding
   * \ingroup CXX11_Tensor_Module
@@ -34,7 +34,7 @@ struct traits<TensorPaddingOp<PaddingDimensions, XprType> > : public traits<XprT
 };
 
 template<typename PaddingDimensions, typename XprType>
-struct eval<TensorPaddingOp<PaddingDimensions, XprType>, Eigen::Dense>
+struct eval<TensorPaddingOp<PaddingDimensions, XprType>, Eigen_tf::Dense>
 {
   typedef const TensorPaddingOp<PaddingDimensions, XprType>& type;
 };
@@ -53,12 +53,12 @@ template<typename PaddingDimensions, typename XprType>
 class TensorPaddingOp : public TensorBase<TensorPaddingOp<PaddingDimensions, XprType>, ReadOnlyAccessors>
 {
   public:
-  typedef typename Eigen::internal::traits<TensorPaddingOp>::Scalar Scalar;
-  typedef typename Eigen::NumTraits<Scalar>::Real RealScalar;
+  typedef typename Eigen_tf::internal::traits<TensorPaddingOp>::Scalar Scalar;
+  typedef typename Eigen_tf::NumTraits<Scalar>::Real RealScalar;
   typedef typename XprType::CoeffReturnType CoeffReturnType;
-  typedef typename Eigen::internal::nested<TensorPaddingOp>::type Nested;
-  typedef typename Eigen::internal::traits<TensorPaddingOp>::StorageKind StorageKind;
-  typedef typename Eigen::internal::traits<TensorPaddingOp>::Index Index;
+  typedef typename Eigen_tf::internal::nested<TensorPaddingOp>::type Nested;
+  typedef typename Eigen_tf::internal::traits<TensorPaddingOp>::StorageKind StorageKind;
+  typedef typename Eigen_tf::internal::traits<TensorPaddingOp>::Index Index;
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorPaddingOp(const XprType& expr, const PaddingDimensions& padding_dims, const Scalar padding_value)
       : m_xpr(expr), m_padding_dims(padding_dims), m_padding_value(padding_value) {}
@@ -399,6 +399,6 @@ struct TensorEvaluator<const TensorPaddingOp<PaddingDimensions, ArgType>, Device
 
 
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_PADDING_H

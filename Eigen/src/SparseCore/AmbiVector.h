@@ -10,7 +10,7 @@
 #ifndef EIGEN_AMBIVECTOR_H
 #define EIGEN_AMBIVECTOR_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -372,6 +372,6 @@ class AmbiVector<_Scalar,_StorageIndex>::Iterator
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_AMBIVECTOR_H

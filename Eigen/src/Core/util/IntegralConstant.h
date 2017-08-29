@@ -11,7 +11,7 @@
 #ifndef EIGEN_INTEGRAL_CONSTANT_H
 #define EIGEN_INTEGRAL_CONSTANT_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -30,7 +30,7 @@ template<int N> class VariableAndFixedInt;
   *  - c++98/14 compatibility with fix<N> and fix<N>() syntax to define integral constants.
   *
   * It is strongly discouraged to directly deal with this class FixedInt. Instances are expcected to
-  * be created by the user using Eigen::fix<N> or Eigen::fix<N>(). In C++98-11, the former syntax does
+  * be created by the user using Eigen_tf::fix<N> or Eigen_tf::fix<N>(). In C++98-11, the former syntax does
   * not create a FixedInt<N> instance but rather a point to function that needs to be \em cleaned-up
   * using the generic helper:
   * \code
@@ -95,10 +95,10 @@ public:
   * This class embeds both a compile-time integer \c N and a runtime integer.
   * Both values are supposed to be equal unless the compile-time value \c N has a special
   * value meaning that the runtime-value should be used. Depending on the context, this special
-  * value can be either Eigen::Dynamic (for positive quantities) or Eigen::DynamicIndex (for
+  * value can be either Eigen_tf::Dynamic (for positive quantities) or Eigen_tf::DynamicIndex (for
   * quantities that can be negative).
   *
-  * It is the return-type of the function Eigen::fix<N>(int), and most of the time this is the only
+  * It is the return-type of the function Eigen_tf::fix<N>(int), and most of the time this is the only
   * way it is used. It is strongly discouraged to directly deal with instances of VariableAndFixedInt.
   * Indeed, in order to write generic code, it is the responsibility of the callee to properly convert
   * it to either a true compile-time quantity (i.e. a FixedInt<N>), or to a runtime quantity (e.g., an Index)
@@ -161,7 +161,7 @@ template<int N> EIGEN_DEVICE_FUNC Index get_runtime_value(FixedInt<N> (*)()) { r
 // By default, no cleanup:
 template<typename T, int DynamicKey=Dynamic, typename EnableIf=void> struct cleanup_index_type { typedef T type; };
 
-// Convert any integral type (e.g., short, int, unsigned int, etc.) to Eigen::Index
+// Convert any integral type (e.g., short, int, unsigned int, etc.) to Eigen_tf::Index
 template<typename T, int DynamicKey> struct cleanup_index_type<T,DynamicKey,typename internal::enable_if<internal::is_integral<T>::value>::type> { typedef Index type; };
 
 #if !EIGEN_HAS_CXX14
@@ -204,7 +204,7 @@ inline internal::VariableAndFixedInt<N> fix(T val) { return internal::VariableAn
   *
   * \tparam N the compile-time integer value
   *
-  * It is typically used in conjunction with the Eigen::seq and Eigen::seqN functions to pass compile-time values to them:
+  * It is typically used in conjunction with the Eigen_tf::seq and Eigen_tf::seqN functions to pass compile-time values to them:
   * \code
   * seqN(10,fix<4>,fix<-3>)   // <=> [10 7 4 1]
   * \endcode
@@ -242,8 +242,8 @@ static const auto fix();
   *
   * This function is a more general version of the \ref fix identifier/function that can be used in template code
   * where the compile-time value could turn out to actually mean "undefined at compile-time". For positive integers
-  * such as a size or a dimension, this case is identified by Eigen::Dynamic, whereas runtime signed integers
-  * (e.g., an increment/stride) are identified as Eigen::DynamicIndex. In such a case, the runtime value \a val
+  * such as a size or a dimension, this case is identified by Eigen_tf::Dynamic, whereas runtime signed integers
+  * (e.g., an increment/stride) are identified as Eigen_tf::DynamicIndex. In such a case, the runtime value \a val
   * will be used as a fallback.
   *
   * A typical use case would be:
@@ -254,8 +254,8 @@ static const auto fix();
   *   ... mat( seqN(0,fix<N>(n) ) ...;
   * }
   * \endcode
-  * In this example, the function Eigen::seqN knows that the second argument is expected to be a size.
-  * If the passed compile-time value N equals Eigen::Dynamic, then the proxy object returned by fix will be dissmissed, and converted to an Eigen::Index of value \c n.
+  * In this example, the function Eigen_tf::seqN knows that the second argument is expected to be a size.
+  * If the passed compile-time value N equals Eigen_tf::Dynamic, then the proxy object returned by fix will be dissmissed, and converted to an Eigen_tf::Index of value \c n.
   * Otherwise, the runtime-value \c n will be dissmissed, and the returned ArithmeticSequence will be of the exact same type as <tt> seqN(0,fix<N>) </tt>.
   *
   * \sa fix, seqN, class ArithmeticSequence
@@ -265,6 +265,6 @@ static const auto fix(int val);
 
 #endif // EIGEN_PARSED_BY_DOXYGEN
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_INTEGRAL_CONSTANT_H

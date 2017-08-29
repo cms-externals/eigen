@@ -22,7 +22,7 @@
 
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_full_reductions_mean_sycl(const Eigen::SyclDevice&  sycl_device) {
+static void test_full_reductions_mean_sycl(const Eigen_tf::SyclDevice&  sycl_device) {
 
   const IndexType num_rows = 452;
   const IndexType num_cols = 765;
@@ -53,7 +53,7 @@ static void test_full_reductions_mean_sycl(const Eigen::SyclDevice&  sycl_device
 
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_full_reductions_min_sycl(const Eigen::SyclDevice&  sycl_device) {
+static void test_full_reductions_min_sycl(const Eigen_tf::SyclDevice&  sycl_device) {
 
   const IndexType num_rows = 876;
   const IndexType num_cols = 953;
@@ -84,14 +84,14 @@ static void test_full_reductions_min_sycl(const Eigen::SyclDevice&  sycl_device)
 
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_first_dim_reductions_max_sycl(const Eigen::SyclDevice& sycl_device) {
+static void test_first_dim_reductions_max_sycl(const Eigen_tf::SyclDevice& sycl_device) {
 
   IndexType dim_x = 145;
   IndexType dim_y = 1;
   IndexType dim_z = 67;
 
   array<IndexType, 3> tensorRange = {{dim_x, dim_y, dim_z}};
-  Eigen::array<IndexType, 1> red_axis;
+  Eigen_tf::array<IndexType, 1> red_axis;
   red_axis[0] = 0;
   array<IndexType, 2> reduced_tensorRange = {{dim_y, dim_z}};
 
@@ -123,14 +123,14 @@ static void test_first_dim_reductions_max_sycl(const Eigen::SyclDevice& sycl_dev
 }
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_last_dim_reductions_sum_sycl(const Eigen::SyclDevice &sycl_device) {
+static void test_last_dim_reductions_sum_sycl(const Eigen_tf::SyclDevice &sycl_device) {
 
   IndexType dim_x = 567;
   IndexType dim_y = 1;
   IndexType dim_z = 47;
 
   array<IndexType, 3> tensorRange = {{dim_x, dim_y, dim_z}};
-  Eigen::array<IndexType, 1> red_axis;
+  Eigen_tf::array<IndexType, 1> red_axis;
   red_axis[0] = 2;
   array<IndexType, 2> reduced_tensorRange = {{dim_x, dim_y}};
 
@@ -163,7 +163,7 @@ static void test_last_dim_reductions_sum_sycl(const Eigen::SyclDevice &sycl_devi
 template<typename DataType> void sycl_reduction_test_per_device(const cl::sycl::device& d){
   std::cout << "Running on " << d.template get_info<cl::sycl::info::device::name>() << std::endl;
   QueueInterface queueInterface(d);
-  auto sycl_device = Eigen::SyclDevice(&queueInterface);
+  auto sycl_device = Eigen_tf::SyclDevice(&queueInterface);
 
   test_full_reductions_mean_sycl<DataType, RowMajor, int64_t>(sycl_device);
   test_full_reductions_min_sycl<DataType, RowMajor, int64_t>(sycl_device);
@@ -175,7 +175,7 @@ template<typename DataType> void sycl_reduction_test_per_device(const cl::sycl::
   test_last_dim_reductions_sum_sycl<DataType, ColMajor, int64_t>(sycl_device);
 }
 void test_cxx11_tensor_reduction_sycl() {
-  for (const auto& device :Eigen::get_sycl_supported_devices()) {
+  for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
     CALL_SUBTEST(sycl_reduction_test_per_device<float>(device));
   }
 }

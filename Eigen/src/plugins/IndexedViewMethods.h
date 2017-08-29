@@ -225,8 +225,8 @@ operator()(const IndicesT (&indices)[IndicesN]) EIGEN_INDEXED_VIEW_METHOD_CONST
   *
   * Each parameter must either be:
   *  - An integer indexing a single row or column
-  *  - Eigen::all indexing the full set of respective rows or columns in increasing order
-  *  - An ArithmeticSequence as returned by the Eigen::seq and Eigen::seqN functions
+  *  - Eigen_tf::all indexing the full set of respective rows or columns in increasing order
+  *  - An ArithmeticSequence as returned by the Eigen_tf::seq and Eigen_tf::seqN functions
   *  - Any %Eigen's vector/array of integers or expressions
   *  - Plain C arrays: \c int[N]
   *  - And more generally any type exposing the following two member functions:
@@ -234,7 +234,7 @@ operator()(const IndicesT (&indices)[IndicesN]) EIGEN_INDEXED_VIEW_METHOD_CONST
   * <integral type> operator[](<integral type>) const;
   * <integral type> size() const;
   * \endcode
-  * where \c <integral \c type>  stands for any integer type compatible with Eigen::Index (i.e. \c std::ptrdiff_t).
+  * where \c <integral \c type>  stands for any integer type compatible with Eigen_tf::Index (i.e. \c std::ptrdiff_t).
   *
   * The last statement implies compatibility with \c std::vector, \c std::valarray, \c std::array, many of the Range-v3's ranges, etc.
   *
@@ -242,8 +242,8 @@ operator()(const IndicesT (&indices)[IndicesN]) EIGEN_INDEXED_VIEW_METHOD_CONST
   * method will returns a Block object after extraction of the relevant information from the passed arguments. This is the case
   * when all arguments are either:
   *  - An integer
-  *  - Eigen::all
-  *  - An ArithmeticSequence with compile-time increment strictly equal to 1, as returned by Eigen::seq(a,b), and Eigen::seqN(a,N).
+  *  - Eigen_tf::all
+  *  - An ArithmeticSequence with compile-time increment strictly equal to 1, as returned by Eigen_tf::seq(a,b), and Eigen_tf::seqN(a,N).
   *
   * Otherwise a more general IndexedView<Derived,RowIndices',ColIndices'> object will be returned, after conversion of the inputs
   * to more suitable types \c RowIndices' and \c ColIndices'.

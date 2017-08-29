@@ -30,7 +30,7 @@
  ********************************************************************************
 */
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \page TopicUsingIntelMKL Using Intel® MKL from %Eigen
 

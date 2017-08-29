@@ -19,10 +19,10 @@
 
 #ifndef UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSOR_ARGMAX_SYCL_HPP
 #define UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSOR_ARGMAX_SYCL_HPP
-namespace Eigen {
+namespace Eigen_tf {
 namespace internal {
   template<typename Dims, typename XprType>
-  struct eval<TensorTupleReducerDeviceOp<Dims, XprType>, Eigen::Dense>
+  struct eval<TensorTupleReducerDeviceOp<Dims, XprType>, Eigen_tf::Dense>
   {
     typedef const TensorTupleReducerDeviceOp<Dims, XprType>& type;
   };
@@ -53,11 +53,11 @@ template<typename StrideDims, typename XprType>
 class TensorTupleReducerDeviceOp : public TensorBase<TensorTupleReducerDeviceOp<StrideDims, XprType>, ReadOnlyAccessors>
 {
   public:
-  typedef typename Eigen::internal::traits<TensorTupleReducerDeviceOp>::Scalar Scalar;
-  typedef typename Eigen::NumTraits<Scalar>::Real RealScalar;
-  typedef typename Eigen::internal::nested<TensorTupleReducerDeviceOp>::type Nested;
-  typedef typename Eigen::internal::traits<TensorTupleReducerDeviceOp>::StorageKind StorageKind;
-  typedef typename Eigen::internal::traits<TensorTupleReducerDeviceOp>::Index Index;
+  typedef typename Eigen_tf::internal::traits<TensorTupleReducerDeviceOp>::Scalar Scalar;
+  typedef typename Eigen_tf::NumTraits<Scalar>::Real RealScalar;
+  typedef typename Eigen_tf::internal::nested<TensorTupleReducerDeviceOp>::type Nested;
+  typedef typename Eigen_tf::internal::traits<TensorTupleReducerDeviceOp>::StorageKind StorageKind;
+  typedef typename Eigen_tf::internal::traits<TensorTupleReducerDeviceOp>::Index Index;
   typedef typename XprType::CoeffReturnType CoeffReturnType;
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorTupleReducerDeviceOp(XprType expr,
@@ -83,7 +83,7 @@ class TensorTupleReducerDeviceOp : public TensorBase<TensorTupleReducerDeviceOp<
   const Index& stride_div() const { return m_stride_div; }
 
   protected:
-    typename Eigen::internal::remove_all<typename
+    typename Eigen_tf::internal::remove_all<typename
     XprType::Nested
     >::type m_xpr;
     const Index m_return_dim;
@@ -142,5 +142,5 @@ protected:
  const Index m_stride_mod;
  const Index m_stride_div;
 };
-} // end namespace Eigen
+} // end namespace Eigen_tf
 #endif //UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSOR_ARGMAX_SYCL_HPP

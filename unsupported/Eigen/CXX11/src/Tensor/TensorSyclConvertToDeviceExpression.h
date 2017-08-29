@@ -22,7 +22,7 @@
 #ifndef UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_CONVERT_TO_DEVICE_EXPRESSION_HPP
 #define UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_CONVERT_TO_DEVICE_EXPRESSION_HPP
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace TensorSycl {
 namespace internal {
 
@@ -200,6 +200,6 @@ KERNELBROKERCONVERTVOLUMEPATCHOP()
 
 }  // namespace internal
 }  // namespace TensorSycl
-}  // namespace Eigen
+}  // namespace Eigen_tf
 
 #endif  // UNSUPPORTED_EIGEN_CXX1

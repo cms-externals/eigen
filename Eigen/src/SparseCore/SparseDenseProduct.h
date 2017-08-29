@@ -10,7 +10,7 @@
 #ifndef EIGEN_SPARSEDENSEPRODUCT_H
 #define EIGEN_SPARSEDENSEPRODUCT_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -37,8 +37,8 @@ struct sparse_time_dense_product_impl<SparseLhsType,DenseRhsType,DenseResType, t
     
     Index n = lhs.outerSize();
 #ifdef EIGEN_HAS_OPENMP
-    Eigen::initParallel();
-    Index threads = Eigen::nbThreads();
+    Eigen_tf::initParallel();
+    Index threads = Eigen_tf::nbThreads();
 #endif
     
     for(Index c=0; c<rhs.cols(); ++c)
@@ -315,6 +315,6 @@ struct product_evaluator<Product<Lhs, Rhs, DefaultProduct>, OuterProduct, DenseS
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SPARSEDENSEPRODUCT_H

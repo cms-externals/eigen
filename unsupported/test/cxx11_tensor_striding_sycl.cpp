@@ -24,18 +24,18 @@
 #include "main.h"
 #include <unsupported/Eigen/CXX11/Tensor>
 
-using Eigen::array;
-using Eigen::SyclDevice;
-using Eigen::Tensor;
-using Eigen::TensorMap;
+using Eigen_tf::array;
+using Eigen_tf::SyclDevice;
+using Eigen_tf::Tensor;
+using Eigen_tf::TensorMap;
 
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_simple_striding(const Eigen::SyclDevice& sycl_device)
+static void test_simple_striding(const Eigen_tf::SyclDevice& sycl_device)
 {
 
-  Eigen::array<IndexType, 4> tensor_dims = {{2,3,5,7}};
-  Eigen::array<IndexType, 4> stride_dims = {{1,1,3,3}};
+  Eigen_tf::array<IndexType, 4> tensor_dims = {{2,3,5,7}};
+  Eigen_tf::array<IndexType, 4> stride_dims = {{1,1,3,3}};
 
 
   Tensor<DataType, 4, DataLayout, IndexType> tensor(tensor_dims);
@@ -50,9 +50,9 @@ static void test_simple_striding(const Eigen::SyclDevice& sycl_device)
   DataType * d_no_stride = static_cast<DataType*>(sycl_device.allocate(no_stride_bytes));
   DataType * d_stride = static_cast<DataType*>(sycl_device.allocate(stride_bytes));
 
-  Eigen::TensorMap<Eigen::Tensor<DataType, 4, DataLayout, IndexType> > gpu_tensor(d_tensor, tensor_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 4, DataLayout, IndexType> > gpu_no_stride(d_no_stride, tensor_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 4, DataLayout, IndexType> > gpu_stride(d_stride, stride_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 4, DataLayout, IndexType> > gpu_tensor(d_tensor, tensor_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 4, DataLayout, IndexType> > gpu_no_stride(d_no_stride, tensor_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 4, DataLayout, IndexType> > gpu_stride(d_stride, stride_dims);
 
 
   tensor.setRandom();
@@ -113,11 +113,11 @@ static void test_simple_striding(const Eigen::SyclDevice& sycl_device)
 }
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_striding_as_lvalue(const Eigen::SyclDevice& sycl_device)
+static void test_striding_as_lvalue(const Eigen_tf::SyclDevice& sycl_device)
 {
 
-  Eigen::array<IndexType, 4> tensor_dims = {{2,3,5,7}};
-  Eigen::array<IndexType, 4> stride_dims = {{3,12,10,21}};
+  Eigen_tf::array<IndexType, 4> tensor_dims = {{2,3,5,7}};
+  Eigen_tf::array<IndexType, 4> stride_dims = {{3,12,10,21}};
 
 
   Tensor<DataType, 4, DataLayout, IndexType> tensor(tensor_dims);
@@ -133,9 +133,9 @@ static void test_striding_as_lvalue(const Eigen::SyclDevice& sycl_device)
   DataType * d_no_stride = static_cast<DataType*>(sycl_device.allocate(no_stride_bytes));
   DataType * d_stride = static_cast<DataType*>(sycl_device.allocate(stride_bytes));
 
-  Eigen::TensorMap<Eigen::Tensor<DataType, 4, DataLayout, IndexType> > gpu_tensor(d_tensor, tensor_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 4, DataLayout, IndexType> > gpu_no_stride(d_no_stride, stride_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 4, DataLayout, IndexType> > gpu_stride(d_stride, stride_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 4, DataLayout, IndexType> > gpu_tensor(d_tensor, tensor_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 4, DataLayout, IndexType> > gpu_no_stride(d_no_stride, stride_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 4, DataLayout, IndexType> > gpu_stride(d_stride, stride_dims);
 
   //Tensor<float, 4, DataLayout> tensor(2,3,5,7);
   tensor.setRandom();
@@ -189,7 +189,7 @@ static void test_striding_as_lvalue(const Eigen::SyclDevice& sycl_device)
 
 template <typename Dev_selector> void tensorStridingPerDevice(Dev_selector& s){
   QueueInterface queueInterface(s);
-  auto sycl_device=Eigen::SyclDevice(&queueInterface);
+  auto sycl_device=Eigen_tf::SyclDevice(&queueInterface);
   test_simple_striding<float, ColMajor, int64_t>(sycl_device);
   test_simple_striding<float, RowMajor, int64_t>(sycl_device);
   test_striding_as_lvalue<float, ColMajor, int64_t>(sycl_device);
@@ -197,7 +197,7 @@ template <typename Dev_selector> void tensorStridingPerDevice(Dev_selector& s){
 }
 
 void test_cxx11_tensor_striding_sycl() {
-  for (const auto& device :Eigen::get_sycl_supported_devices()) {
+  for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
     CALL_SUBTEST(tensorStridingPerDevice(device));
   }
 }

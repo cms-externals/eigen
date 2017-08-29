@@ -10,7 +10,7 @@
 #ifndef EIGEN_BVALGORITHMS_H
 #define EIGEN_BVALGORITHMS_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -288,6 +288,6 @@ typename Minimizer::Scalar BVMinimize(const BVH1 &tree1, const BVH2 &tree2, Mini
   return minimum;
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_BVALGORITHMS_H

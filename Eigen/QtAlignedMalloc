@@ -16,19 +16,19 @@
 
 void *qMalloc(std::size_t size)
 {
-  return Eigen::internal::aligned_malloc(size);
+  return Eigen_tf::internal::aligned_malloc(size);
 }
 
 void qFree(void *ptr)
 {
-  Eigen::internal::aligned_free(ptr);
+  Eigen_tf::internal::aligned_free(ptr);
 }
 
 void *qRealloc(void *ptr, std::size_t size)
 {
-  void* newPtr = Eigen::internal::aligned_malloc(size);
+  void* newPtr = Eigen_tf::internal::aligned_malloc(size);
   memcpy(newPtr, ptr, size);
-  Eigen::internal::aligned_free(ptr);
+  Eigen_tf::internal::aligned_free(ptr);
   return newPtr;
 }
 

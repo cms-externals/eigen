@@ -11,7 +11,7 @@
 #ifndef EIGEN_CWISE_BINARY_OP_H
 #define EIGEN_CWISE_BINARY_OP_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 template<typename BinaryOp, typename Lhs, typename Rhs>
@@ -178,6 +178,6 @@ MatrixBase<Derived>::operator+=(const MatrixBase<OtherDerived>& other)
   return derived();
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CWISE_BINARY_OP_H

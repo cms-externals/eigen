@@ -6,7 +6,7 @@
 #define CV_QUALIFIER
 #endif
 
-using namespace Eigen;
+using namespace Eigen_tf;
 
 void foo(CV_QUALIFIER Matrix3d &m){
     Block<Matrix3d> b(m,0,0,3,3);

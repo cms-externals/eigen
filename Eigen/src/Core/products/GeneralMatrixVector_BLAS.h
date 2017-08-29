@@ -33,7 +33,7 @@
 #ifndef EIGEN_GENERAL_MATRIX_VECTOR_BLAS_H
 #define EIGEN_GENERAL_MATRIX_VECTOR_BLAS_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -124,6 +124,6 @@ EIGEN_BLAS_GEMV_SPECIALIZATION(scomplex, float,  c)
 
 } // end namespase internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_GENERAL_MATRIX_VECTOR_BLAS_H

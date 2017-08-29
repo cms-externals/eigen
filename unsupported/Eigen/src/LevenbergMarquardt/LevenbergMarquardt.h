@@ -20,7 +20,7 @@
 #define EIGEN_LEVENBERGMARQUARDT_H
 
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace LevenbergMarquardtSpace {
     enum Status {
         NotStarted = -2,
@@ -391,6 +391,6 @@ LevenbergMarquardt<FunctorType>::lmdif1(
     return info;
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_LEVENBERGMARQUARDT_H

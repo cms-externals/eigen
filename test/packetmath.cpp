@@ -14,7 +14,7 @@
 #if defined __GNUC__ && __GNUC__>=6
   #pragma GCC diagnostic ignored "-Wignored-attributes"
 #endif
-// using namespace Eigen;
+// using namespace Eigen_tf;
 
 #ifdef EIGEN_VECTORIZE_SSE
 const bool g_vectorize_sse = true;
@@ -22,7 +22,7 @@ const bool g_vectorize_sse = true;
 const bool g_vectorize_sse = false;
 #endif
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace internal {
 template<typename T> T negate(const T& x) { return -x; }
 }

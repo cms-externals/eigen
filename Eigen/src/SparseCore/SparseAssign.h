@@ -10,7 +10,7 @@
 #ifndef EIGEN_SPARSEASSIGN_H
 #define EIGEN_SPARSEASSIGN_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 template<typename Derived>    
 template<typename OtherDerived>
@@ -211,6 +211,6 @@ struct Assignment<DstXprType, SrcXprType, Functor, Diagonal2Sparse>
 };
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SPARSEASSIGN_H

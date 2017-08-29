@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_FORWARD_DECLARATIONS_H
 #define EIGEN_CXX11_TENSOR_TENSOR_FORWARD_DECLARATIONS_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 // MakePointer class is used as a container of the adress space of the pointer
 // on the host and on the device. From the host side it generates the T* pointer
@@ -116,6 +116,6 @@ class TensorExecutor;
 
 }  // end namespace internal
 
-}  // end namespace Eigen
+}  // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_FORWARD_DECLARATIONS_H

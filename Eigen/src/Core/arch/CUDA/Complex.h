@@ -12,7 +12,7 @@
 
 // clang-format off
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -98,6 +98,6 @@ template<typename T> struct scalar_quotient_op<std::complex<T>, std::complex<T> 
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_COMPLEX_CUDA_H

@@ -54,9 +54,9 @@ template<typename MatrixType> void generalized_eigensolver_real(const MatrixType
   {
     GeneralizedEigenSolver<MatrixType> eig(rows);
     // TODO enable full-prealocation of required memory, this probably requires an in-place mode for HessenbergDecomposition
-    //Eigen::internal::set_is_malloc_allowed(false);
+    //Eigen_tf::internal::set_is_malloc_allowed(false);
     eig.compute(a,b);
-    //Eigen::internal::set_is_malloc_allowed(true);
+    //Eigen_tf::internal::set_is_malloc_allowed(true);
     for(Index k=0; k<cols; ++k)
     {
       Matrix<ComplexScalar,Dynamic,Dynamic> tmp = (eig.betas()(k)*a).template cast<ComplexScalar>() - eig.alphas()(k)*b;

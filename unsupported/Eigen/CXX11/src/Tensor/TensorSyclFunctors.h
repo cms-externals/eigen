@@ -14,7 +14,7 @@
 #ifndef UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCLFUNCTORS_H
 #define UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCLFUNCTORS_H
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace TensorSycl {
 namespace internal {
 
@@ -82,17 +82,17 @@ template < typename HostExpr, typename FunctorExpr, typename Tuple_of_Acc, typen
     /// reduction cannot be captured automatically through our device conversion recursion. The reason is that reduction has two behaviour
     /// the first behaviour is when it is used as a root to lauch the sub-kernel. The second one is when it is treated as a leafnode to pass the
     /// calculated result to its parent kernel. While the latter is automatically detected through our device expression generator. The former is created here.
-    const auto device_self_expr= Eigen::TensorReductionOp<Op, Dims, decltype(device_expr.expr) ,MakeGlobalPointer>(device_expr.expr, dims, functor);
+    const auto device_self_expr= Eigen_tf::TensorReductionOp<Op, Dims, decltype(device_expr.expr) ,MakeGlobalPointer>(device_expr.expr, dims, functor);
     /// This is the evaluator for device_self_expr. This is exactly similar to the self which has been passed to run function. The difference is
     /// the device_evaluator is detectable and recognisable on the device.
-    typedef Eigen::TensorEvaluator<decltype(device_self_expr), Eigen::SyclKernelDevice> DeviceSelf;
-    auto device_self_evaluator = Eigen::TensorEvaluator<decltype(device_self_expr), Eigen::SyclKernelDevice>(device_self_expr, Eigen::SyclKernelDevice());
+    typedef Eigen_tf::TensorEvaluator<decltype(device_self_expr), Eigen_tf::SyclKernelDevice> DeviceSelf;
+    auto device_self_evaluator = Eigen_tf::TensorEvaluator<decltype(device_self_expr), Eigen_tf::SyclKernelDevice>(device_self_expr, Eigen_tf::SyclKernelDevice());
     auto output_accessor_ptr =ConvertToActualTypeSycl(typename DeviceSelf::CoeffReturnType, output_accessor);
     /// const cast added as a naive solution to solve the qualifier drop error
     auto globalid=static_cast<Index>(itemID.get_global_linear_id());
     if (globalid< range) {
       typename DeviceSelf::CoeffReturnType accum = functor.initialize();
-      Eigen::internal::GenericDimReducer<DeviceSelf::NumReducedDims-1, DeviceSelf, Op>::reduce(device_self_evaluator, device_self_evaluator.firstInput(static_cast<typename DevExpr::Index>(globalid)),const_cast<Op&>(functor), &accum);
+      Eigen_tf::internal::GenericDimReducer<DeviceSelf::NumReducedDims-1, DeviceSelf, Op>::reduce(device_self_evaluator, device_self_evaluator.firstInput(static_cast<typename DevExpr::Index>(globalid)),const_cast<Op&>(functor), &accum);
       functor.finalize(accum);
       output_accessor_ptr[globalid + ConvertToActualSyclOffset(typename DeviceSelf::CoeffReturnType, out_offset)]= accum;
     }
@@ -108,13 +108,13 @@ template < typename HostExpr, typename FunctorExpr, typename Tuple_of_Acc, typen
 };
 
 template < typename HostExpr, typename FunctorExpr, typename Tuple_of_Acc, typename Dims, typename Index>
-class ReductionFunctor<HostExpr, FunctorExpr, Tuple_of_Acc, Dims, Eigen::internal::MeanReducer<typename HostExpr::CoeffReturnType>, Index> {
+class ReductionFunctor<HostExpr, FunctorExpr, Tuple_of_Acc, Dims, Eigen_tf::internal::MeanReducer<typename HostExpr::CoeffReturnType>, Index> {
  public:
   typedef  typename TensorSycl::internal::createPlaceHolderExpression<HostExpr>::Type PlaceHolderExpr;
   typedef cl::sycl::accessor<uint8_t, 1, cl::sycl::access::mode::write, cl::sycl::access::target::global_buffer> write_accessor;
-  typedef Eigen::internal::SumReducer<typename HostExpr::CoeffReturnType> Op;
+  typedef Eigen_tf::internal::SumReducer<typename HostExpr::CoeffReturnType> Op;
   ReductionFunctor(write_accessor output_accessor_, ptrdiff_t out_offset_, FunctorExpr functors_, Tuple_of_Acc tuple_of_accessors_,Dims dims_,
-    Eigen::internal::MeanReducer<typename HostExpr::CoeffReturnType>,  Index range_, Index num_values_to_reduce_)
+    Eigen_tf::internal::MeanReducer<typename HostExpr::CoeffReturnType>,  Index range_, Index num_values_to_reduce_)
   :output_accessor(output_accessor_),  out_offset(out_offset_), functors(functors_), tuple_of_accessors(tuple_of_accessors_), dims(dims_), functor(Op()), range(range_), num_values_to_reduce(num_values_to_reduce_) {}
   void operator()(cl::sycl::nd_item<1> itemID) {
 
@@ -123,17 +123,17 @@ class ReductionFunctor<HostExpr, FunctorExpr, Tuple_of_Acc, Dims, Eigen::interna
     /// reduction cannot be captured automatically through our device conversion recursion. The reason is that reduction has two behaviour
     /// the first behaviour is when it is used as a root to lauch the sub-kernel. The second one is when it is treated as a leafnode to pass the
     /// calculated result to its parent kernel. While the latter is automatically detected through our device expression generator. The former is created here.
-    const auto device_self_expr= Eigen::TensorReductionOp<Op, Dims, decltype(device_expr.expr) ,MakeGlobalPointer>(device_expr.expr, dims, functor);
+    const auto device_self_expr= Eigen_tf::TensorReductionOp<Op, Dims, decltype(device_expr.expr) ,MakeGlobalPointer>(device_expr.expr, dims, functor);
     /// This is the evaluator for device_self_expr. This is exactly similar to the self which has been passed to run function. The difference is
     /// the device_evaluator is detectable and recognisable on the device.
-    typedef Eigen::TensorEvaluator<decltype(device_self_expr), Eigen::SyclKernelDevice> DeviceSelf;
-    auto device_self_evaluator = Eigen::TensorEvaluator<decltype(device_self_expr), Eigen::SyclKernelDevice>(device_self_expr, Eigen::SyclKernelDevice());
+    typedef Eigen_tf::TensorEvaluator<decltype(device_self_expr), Eigen_tf::SyclKernelDevice> DeviceSelf;
+    auto device_self_evaluator = Eigen_tf::TensorEvaluator<decltype(device_self_expr), Eigen_tf::SyclKernelDevice>(device_self_expr, Eigen_tf::SyclKernelDevice());
     auto output_accessor_ptr =ConvertToActualTypeSycl(typename DeviceSelf::CoeffReturnType, output_accessor);
     /// const cast added as a naive solution to solve the qualifier drop error
     auto globalid=static_cast<Index>(itemID.get_global_linear_id());
     if (globalid< range) {
       typename DeviceSelf::CoeffReturnType accum = functor.initialize();
-      Eigen::internal::GenericDimReducer<DeviceSelf::NumReducedDims-1, DeviceSelf, Op>::reduce(device_self_evaluator, device_self_evaluator.firstInput(static_cast<typename DevExpr::Index>(globalid)),const_cast<Op&>(functor), &accum);
+      Eigen_tf::internal::GenericDimReducer<DeviceSelf::NumReducedDims-1, DeviceSelf, Op>::reduce(device_self_evaluator, device_self_evaluator.firstInput(static_cast<typename DevExpr::Index>(globalid)),const_cast<Op&>(functor), &accum);
       functor.finalize(accum);
       output_accessor_ptr[globalid+ ConvertToActualSyclOffset(typename DeviceSelf::CoeffReturnType, out_offset)]= accum/num_values_to_reduce;
     }
@@ -170,19 +170,19 @@ public:
     /// reduction cannot be captured automatically through our device conversion recursion. The reason is that reduction has two behaviour
     /// the first behaviour is when it is used as a root to lauch the sub-kernel. The second one is when it is treated as a leafnode to pass the
     /// calculated result to its parent kernel. While the latter is automatically detected through our device expression generator. The former is created here.
-    const auto device_self_expr= Eigen::TensorReductionOp<Op, Dims, decltype(device_expr.expr) ,MakeGlobalPointer>(device_expr.expr, dims, op);
+    const auto device_self_expr= Eigen_tf::TensorReductionOp<Op, Dims, decltype(device_expr.expr) ,MakeGlobalPointer>(device_expr.expr, dims, op);
     /// This is the evaluator for device_self_expr. This is exactly similar to the self which has been passed to run function. The difference is
     /// the device_evaluator is detectable and recognisable on the device.
-    auto device_self_evaluator = Eigen::TensorEvaluator<decltype(device_self_expr), Eigen::SyclKernelDevice>(device_self_expr, Eigen::SyclKernelDevice());
+    auto device_self_evaluator = Eigen_tf::TensorEvaluator<decltype(device_self_expr), Eigen_tf::SyclKernelDevice>(device_self_expr, Eigen_tf::SyclKernelDevice());
     /// const cast added as a naive solution to solve the qualifier drop error
     auto globalid=itemID.get_global_linear_id();
 
-    tmp_global_accessor.get_pointer()[globalid]=(globalid<rng) ? Eigen::internal::InnerMostDimReducer<decltype(device_self_evaluator), Op, false>::reduce(device_self_evaluator, static_cast<typename DevExpr::Index>(red_factor*globalid), red_factor, const_cast<Op&>(op))
+    tmp_global_accessor.get_pointer()[globalid]=(globalid<rng) ? Eigen_tf::internal::InnerMostDimReducer<decltype(device_self_evaluator), Op, false>::reduce(device_self_evaluator, static_cast<typename DevExpr::Index>(red_factor*globalid), red_factor, const_cast<Op&>(op))
     : static_cast<CoeffReturnType>(op.initialize());
 
     if(remaining!=0 && globalid==0 ){
       // this will add the rest of input buffer when the input size is not devidable to red_factor.
-      auto remaining_reduce =Eigen::internal::InnerMostDimReducer<decltype(device_self_evaluator), Op, false>::
+      auto remaining_reduce =Eigen_tf::internal::InnerMostDimReducer<decltype(device_self_evaluator), Op, false>::
       reduce(device_self_evaluator, static_cast<typename DevExpr::Index>(red_factor*(rng)), static_cast<typename DevExpr::Index>(remaining), const_cast<Op&>(op));
       auto accum = op.initialize();
       op.reduce(tmp_global_accessor.get_pointer()[0], &accum);
@@ -195,10 +195,10 @@ public:
 };
 
 template<typename CoeffReturnType ,typename OutAccessor, typename HostExpr, typename FunctorExpr,  typename Dims, typename Index, typename TupleType>
-class FullReductionKernelFunctor<CoeffReturnType, OutAccessor, HostExpr, FunctorExpr, Eigen::internal::MeanReducer<CoeffReturnType>, Dims, Index, TupleType>{
+class FullReductionKernelFunctor<CoeffReturnType, OutAccessor, HostExpr, FunctorExpr, Eigen_tf::internal::MeanReducer<CoeffReturnType>, Dims, Index, TupleType>{
 public:
   typedef  typename TensorSycl::internal::createPlaceHolderExpression<HostExpr>::Type PlaceHolderExpr;
-  typedef Eigen::internal::SumReducer<CoeffReturnType> Op;
+  typedef Eigen_tf::internal::SumReducer<CoeffReturnType> Op;
 
   OutAccessor tmp_global_accessor;
   Index rng , remaining, red_factor;
@@ -207,7 +207,7 @@ public:
   FunctorExpr functors;
   TupleType tuple_of_accessors;
 
-  FullReductionKernelFunctor(OutAccessor acc,   Index rng_, Index remaining_, Index red_factor_, Eigen::internal::MeanReducer<CoeffReturnType>, Dims dims_, FunctorExpr functors_, TupleType t_acc)
+  FullReductionKernelFunctor(OutAccessor acc,   Index rng_, Index remaining_, Index red_factor_, Eigen_tf::internal::MeanReducer<CoeffReturnType>, Dims dims_, FunctorExpr functors_, TupleType t_acc)
   :tmp_global_accessor(acc), rng(rng_), remaining(remaining_), red_factor(red_factor_),op(Op()), dims(dims_), functors(functors_), tuple_of_accessors(t_acc){}
 
   void operator()(cl::sycl::nd_item<1> itemID) {
@@ -217,20 +217,20 @@ public:
     /// reduction cannot be captured automatically through our device conversion recursion. The reason is that reduction has two behaviour
     /// the first behaviour is when it is used as a root to lauch the sub-kernel. The second one is when it is treated as a leafnode to pass the
     /// calculated result to its parent kernel. While the latter is automatically detected through our device expression generator. The former is created here.
-    const auto device_self_expr= Eigen::TensorReductionOp<Op, Dims, decltype(device_expr.expr) ,MakeGlobalPointer>(device_expr.expr, dims, op);
+    const auto device_self_expr= Eigen_tf::TensorReductionOp<Op, Dims, decltype(device_expr.expr) ,MakeGlobalPointer>(device_expr.expr, dims, op);
     /// This is the evaluator for device_self_expr. This is exactly similar to the self which has been passed to run function. The difference is
     /// the device_evaluator is detectable and recognisable on the device.
-    auto device_self_evaluator = Eigen::TensorEvaluator<decltype(device_self_expr), Eigen::SyclKernelDevice>(device_self_expr, Eigen::SyclKernelDevice());
+    auto device_self_evaluator = Eigen_tf::TensorEvaluator<decltype(device_self_expr), Eigen_tf::SyclKernelDevice>(device_self_expr, Eigen_tf::SyclKernelDevice());
     /// const cast added as a naive solution to solve the qualifier drop error
     auto globalid=itemID.get_global_linear_id();
     auto scale = (rng*red_factor) + remaining;
 
-    tmp_global_accessor.get_pointer()[globalid]= (globalid<rng)? ((Eigen::internal::InnerMostDimReducer<decltype(device_self_evaluator), Op, false>::reduce(device_self_evaluator, static_cast<typename DevExpr::Index>(red_factor*globalid), red_factor, const_cast<Op&>(op)))/scale)
+    tmp_global_accessor.get_pointer()[globalid]= (globalid<rng)? ((Eigen_tf::internal::InnerMostDimReducer<decltype(device_self_evaluator), Op, false>::reduce(device_self_evaluator, static_cast<typename DevExpr::Index>(red_factor*globalid), red_factor, const_cast<Op&>(op)))/scale)
     :static_cast<CoeffReturnType>(op.initialize())/scale;
 
     if(remaining!=0 && globalid==0 ){
       // this will add the rest of input buffer when the input size is not devidable to red_factor.
-      auto remaining_reduce =Eigen::internal::InnerMostDimReducer<decltype(device_self_evaluator), Op, false>::reduce(device_self_evaluator, static_cast<typename DevExpr::Index>(red_factor*(rng)), static_cast<typename DevExpr::Index>(remaining), const_cast<Op&>(op));
+      auto remaining_reduce =Eigen_tf::internal::InnerMostDimReducer<decltype(device_self_evaluator), Op, false>::reduce(device_self_evaluator, static_cast<typename DevExpr::Index>(red_factor*(rng)), static_cast<typename DevExpr::Index>(remaining), const_cast<Op&>(op));
       auto accum = op.initialize();
       tmp_global_accessor.get_pointer()[0]= tmp_global_accessor.get_pointer()[0]*scale;
       op.reduce(tmp_global_accessor.get_pointer()[0], &accum);

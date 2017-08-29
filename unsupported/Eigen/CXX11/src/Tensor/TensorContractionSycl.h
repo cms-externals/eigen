@@ -20,14 +20,14 @@
 
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_SYCL_H
 #define EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_SYCL_H
-namespace Eigen {
+namespace Eigen_tf {
 
 template <typename Index, typename LhsScalar, typename RhsScalar,bool lhs_inner_dim_contiguous, bool rhs_inner_dim_contiguous, bool rhs_inner_dim_reordered> struct LaunchSyclKernels;
 template<typename Indices, typename LeftArgType, typename RightArgType>
-struct TensorEvaluator<const TensorContractionOp<Indices, LeftArgType, RightArgType>, const Eigen::SyclDevice> :
-    public TensorContractionEvaluatorBase<TensorEvaluator<const TensorContractionOp<Indices, LeftArgType, RightArgType>, const Eigen::SyclDevice> > {
+struct TensorEvaluator<const TensorContractionOp<Indices, LeftArgType, RightArgType>, const Eigen_tf::SyclDevice> :
+    public TensorContractionEvaluatorBase<TensorEvaluator<const TensorContractionOp<Indices, LeftArgType, RightArgType>, const Eigen_tf::SyclDevice> > {
 
-  typedef const Eigen::SyclDevice Device;
+  typedef const Eigen_tf::SyclDevice Device;
 
   typedef TensorEvaluator<const TensorContractionOp<Indices, LeftArgType, RightArgType>, Device> Self;
   typedef TensorContractionEvaluatorBase<Self> Base;
@@ -93,7 +93,7 @@ struct TensorEvaluator<const TensorContractionOp<Indices, LeftArgType, RightArgT
       return true;
     }
   }
-  const Eigen::SyclDevice& device() const {return this->m_device;}
+  const Eigen_tf::SyclDevice& device() const {return this->m_device;}
   void evalTo(Scalar* buffer) const {
     // Here is the result
     if (this->m_lhs_inner_dim_contiguous) {
@@ -164,10 +164,10 @@ template <typename HostExpr, typename OutScalar, typename LhsScalar, typename Rh
 typename RightNocontractT, bool lhs_inner_dim_contiguous, bool rhs_inner_dim_contiguous, bool rhs_inner_dim_reordered,
 typename HostExpr::Index TileSizeDimM, typename HostExpr::Index TileSizeDimN,typename HostExpr::Index TileSizeDimK, typename HostExpr::Index WorkLoadPerThreadM,typename HostExpr::Index WorkLoadPerThreadN,
 typename HostExpr::Index LocalThreadSizeM, typename HostExpr::Index LocalThreadSizeN, typename HostExpr::Index LoadPerThreadLhs, typename HostExpr::Index LoadPerThreadRhs, typename LHSTupleType, typename RHSTupleType, typename Device> struct KernelConstructor{
-  typedef typename Eigen::internal::traits<HostExpr>::_LhsNested LHSHostExpr;
-  typedef typename Eigen::internal::traits<HostExpr>::_RhsNested RHSHostExpr;
-  typedef typename Eigen::TensorSycl::internal::createPlaceHolderExpression<LHSHostExpr>::Type LHSPlaceHolderExpr;
-  typedef typename Eigen::TensorSycl::internal::createPlaceHolderExpression<RHSHostExpr>::Type RHSPlaceHolderExpr;
+  typedef typename Eigen_tf::internal::traits<HostExpr>::_LhsNested LHSHostExpr;
+  typedef typename Eigen_tf::internal::traits<HostExpr>::_RhsNested RHSHostExpr;
+  typedef typename Eigen_tf::TensorSycl::internal::createPlaceHolderExpression<LHSHostExpr>::Type LHSPlaceHolderExpr;
+  typedef typename Eigen_tf::TensorSycl::internal::createPlaceHolderExpression<RHSHostExpr>::Type RHSPlaceHolderExpr;
   LHSFunctorExpr lhs_functors;
   RHSFunctorExpr rhs_functors;
   LhsLocalAcc localLhs;
@@ -196,15 +196,15 @@ typename HostExpr::Index LocalThreadSizeM, typename HostExpr::Index LocalThreadS
     left_tuple_of_accessors(left_tuple_of_accessors_), right_tuple_of_accessors(right_tuple_of_accessors_), dev(dev_){}
 
     void operator()(cl::sycl::nd_item<1> itemID) {
-      typedef typename Eigen::TensorSycl::internal::ConvertToDeviceExpression<HostExpr>::Type DevExpr;
-      typedef typename Eigen::TensorSycl::internal::ConvertToDeviceExpression<LHSHostExpr>::Type LHSDevExpr;
-      typedef typename Eigen::TensorSycl::internal::ConvertToDeviceExpression<RHSHostExpr>::Type RHSDevExpr;
-      auto lhs_dev_expr = Eigen::TensorSycl::internal::createDeviceExpression<LHSDevExpr, LHSPlaceHolderExpr>(lhs_functors, left_tuple_of_accessors);
-      auto rhs_dev_expr = Eigen::TensorSycl::internal::createDeviceExpression<RHSDevExpr, RHSPlaceHolderExpr>(rhs_functors, right_tuple_of_accessors);
+      typedef typename Eigen_tf::TensorSycl::internal::ConvertToDeviceExpression<HostExpr>::Type DevExpr;
+      typedef typename Eigen_tf::TensorSycl::internal::ConvertToDeviceExpression<LHSHostExpr>::Type LHSDevExpr;
+      typedef typename Eigen_tf::TensorSycl::internal::ConvertToDeviceExpression<RHSHostExpr>::Type RHSDevExpr;
+      auto lhs_dev_expr = Eigen_tf::TensorSycl::internal::createDeviceExpression<LHSDevExpr, LHSPlaceHolderExpr>(lhs_functors, left_tuple_of_accessors);
+      auto rhs_dev_expr = Eigen_tf::TensorSycl::internal::createDeviceExpression<RHSDevExpr, RHSPlaceHolderExpr>(rhs_functors, right_tuple_of_accessors);
       typedef decltype(lhs_dev_expr.expr) LeftArgType;
       typedef decltype(rhs_dev_expr.expr) RightArgType;
-      typedef typename internal::conditional<static_cast<int>(Eigen::internal::traits<DevExpr>::Layout) == static_cast<int>(ColMajor), LeftArgType, RightArgType>::type EvalLeftArgType;
-      typedef typename internal::conditional<static_cast<int>(Eigen::internal::traits<DevExpr>::Layout) == static_cast<int>(ColMajor), RightArgType, LeftArgType>::type EvalRightArgType;
+      typedef typename internal::conditional<static_cast<int>(Eigen_tf::internal::traits<DevExpr>::Layout) == static_cast<int>(ColMajor), LeftArgType, RightArgType>::type EvalLeftArgType;
+      typedef typename internal::conditional<static_cast<int>(Eigen_tf::internal::traits<DevExpr>::Layout) == static_cast<int>(ColMajor), RightArgType, LeftArgType>::type EvalRightArgType;
       typedef TensorEvaluator<EvalLeftArgType, Device> LeftEvaluator;
       typedef TensorEvaluator<EvalRightArgType, Device> RightEvaluator;
       typedef internal::TensorContractionInputMapper<LhsScalar, Index, internal::Lhs,
@@ -219,9 +219,9 @@ typename HostExpr::Index LocalThreadSizeM, typename HostExpr::Index LocalThreadS
                                                      rhs_inner_dim_contiguous,
                                                      rhs_inner_dim_reordered, Unaligned, MakeGlobalPointer> RhsMapper;
       // initialize data mappers must happen inside the kernel for device eval
-      LhsMapper lhs(LeftEvaluator(choose(Cond<static_cast<int>(Eigen::internal::traits<DevExpr>::Layout) == static_cast<int>(ColMajor)>(),
+      LhsMapper lhs(LeftEvaluator(choose(Cond<static_cast<int>(Eigen_tf::internal::traits<DevExpr>::Layout) == static_cast<int>(ColMajor)>(),
                     lhs_dev_expr.expr, rhs_dev_expr.expr), dev), m_left_nocontract_strides, m_i_strides, m_left_contracting_strides, m_k_strides);
-      RhsMapper rhs(RightEvaluator(choose(Cond<static_cast<int>(Eigen::internal::traits<DevExpr>::Layout) == static_cast<int>(ColMajor)>(),
+      RhsMapper rhs(RightEvaluator(choose(Cond<static_cast<int>(Eigen_tf::internal::traits<DevExpr>::Layout) == static_cast<int>(ColMajor)>(),
                     rhs_dev_expr.expr, lhs_dev_expr.expr),dev), m_right_nocontract_strides, m_j_strides, m_right_contracting_strides, m_k_strides);
       auto out_ptr = ConvertToActualTypeSycl(OutScalar, out_res);
       // Matmul Kernel
@@ -349,16 +349,16 @@ template< typename Self, typename OutScalar, typename ContractT, typename LeftNo
     LeftNocontractT m_i_strides, RightNocontractT m_j_strides, LeftNocontractT m_left_nocontract_strides, RightNocontractT m_right_nocontract_strides){
 
     typedef typename Self::XprType HostExpr;
-    typedef typename Eigen::internal::traits<HostExpr>::_LhsNested LHSHostExpr;
-    typedef typename Eigen::internal::traits<HostExpr>::_RhsNested RHSHostExpr;
-    typedef TensorEvaluator<LHSHostExpr, const Eigen::SyclDevice> OrigLHSExpr;
-    typedef TensorEvaluator<RHSHostExpr, const Eigen::SyclDevice> OrigRHSExpr;
-    typedef Eigen::TensorSycl::internal::FunctorExtractor<OrigLHSExpr> LHSFunctorExpr;
-    typedef Eigen::TensorSycl::internal::FunctorExtractor<OrigRHSExpr> RHSFunctorExpr;
+    typedef typename Eigen_tf::internal::traits<HostExpr>::_LhsNested LHSHostExpr;
+    typedef typename Eigen_tf::internal::traits<HostExpr>::_RhsNested RHSHostExpr;
+    typedef TensorEvaluator<LHSHostExpr, const Eigen_tf::SyclDevice> OrigLHSExpr;
+    typedef TensorEvaluator<RHSHostExpr, const Eigen_tf::SyclDevice> OrigRHSExpr;
+    typedef Eigen_tf::TensorSycl::internal::FunctorExtractor<OrigLHSExpr> LHSFunctorExpr;
+    typedef Eigen_tf::TensorSycl::internal::FunctorExtractor<OrigRHSExpr> RHSFunctorExpr;
     // extract lhs functor list
-    LHSFunctorExpr lhs_functors = Eigen::TensorSycl::internal::extractFunctors(self.left_impl());
+    LHSFunctorExpr lhs_functors = Eigen_tf::TensorSycl::internal::extractFunctors(self.left_impl());
     // extract rhs functor list
-    RHSFunctorExpr rhs_functors = Eigen::TensorSycl::internal::extractFunctors(self.right_impl());
+    RHSFunctorExpr rhs_functors = Eigen_tf::TensorSycl::internal::extractFunctors(self.right_impl());
 
     Index roundUpK = RoundUp(K, TileSizeDimK);
     Index roundUpM = RoundUp(M, TileSizeDimM);
@@ -366,13 +366,13 @@ template< typename Self, typename OutScalar, typename ContractT, typename LeftNo
     ptrdiff_t out_offset = self.device().get_offset(buffer);
     self.device().sycl_queue().submit([&](cl::sycl::handler &cgh) {
       /// work-around for gcc bug
-      typedef decltype(Eigen::TensorSycl::internal::createTupleOfAccessors<OrigLHSExpr>(cgh, self.left_impl())) LHSTupleType;
+      typedef decltype(Eigen_tf::TensorSycl::internal::createTupleOfAccessors<OrigLHSExpr>(cgh, self.left_impl())) LHSTupleType;
       /// work-around for gcc bug
-      typedef decltype(Eigen::TensorSycl::internal::createTupleOfAccessors<OrigRHSExpr>(cgh, self.right_impl())) RHSTupleType;
+      typedef decltype(Eigen_tf::TensorSycl::internal::createTupleOfAccessors<OrigRHSExpr>(cgh, self.right_impl())) RHSTupleType;
       // create lhs tuple of accessors
-      LHSTupleType left_tuple_of_accessors = Eigen::TensorSycl::internal::createTupleOfAccessors<OrigLHSExpr>(cgh, self.left_impl());
+      LHSTupleType left_tuple_of_accessors = Eigen_tf::TensorSycl::internal::createTupleOfAccessors<OrigLHSExpr>(cgh, self.left_impl());
       // create rhs tuple of accessors
-      RHSTupleType right_tuple_of_accessors = Eigen::TensorSycl::internal::createTupleOfAccessors<OrigRHSExpr>(cgh, self.right_impl());
+      RHSTupleType right_tuple_of_accessors = Eigen_tf::TensorSycl::internal::createTupleOfAccessors<OrigRHSExpr>(cgh, self.right_impl());
 
       // Local memory for elements of Lhs
       typedef cl::sycl::accessor<LhsScalar, 1, cl::sycl::access::mode::read_write, cl::sycl::access::target::local> LhsLocalAcc;
@@ -389,13 +389,13 @@ template< typename Self, typename OutScalar, typename ContractT, typename LeftNo
       cl::sycl::range<2>(LocalThreadSizeM, LocalThreadSizeN)),
        KernelConstructor<HostExpr, OutScalar, LhsScalar, RhsScalar, LHSFunctorExpr, RHSFunctorExpr, LhsLocalAcc, RhsLocalAcc, OutAccessor, Index, ContractT, LeftNocontractT,
        RightNocontractT, lhs_inner_dim_contiguous, rhs_inner_dim_contiguous, rhs_inner_dim_reordered, TileSizeDimM, TileSizeDimN, TileSizeDimK,
-       WorkLoadPerThreadM, WorkLoadPerThreadN, LocalThreadSizeM, LocalThreadSizeN, LoadPerThreadLhs, LoadPerThreadRhs, LHSTupleType, RHSTupleType, Eigen::SyclKernelDevice>(lhs_functors, rhs_functors,
+       WorkLoadPerThreadM, WorkLoadPerThreadN, LocalThreadSizeM, LocalThreadSizeN, LoadPerThreadLhs, LoadPerThreadRhs, LHSTupleType, RHSTupleType, Eigen_tf::SyclKernelDevice>(lhs_functors, rhs_functors,
           localLhs, localRhs, out_res, out_offset, roundUpK, M, N, K, m_k_strides, m_left_contracting_strides, m_right_contracting_strides,m_i_strides, m_j_strides,
-          m_left_nocontract_strides,m_right_nocontract_strides, left_tuple_of_accessors, right_tuple_of_accessors, Eigen::SyclKernelDevice()));
+          m_left_nocontract_strides,m_right_nocontract_strides, left_tuple_of_accessors, right_tuple_of_accessors, Eigen_tf::SyclKernelDevice()));
     });
     self.device().asynchronousExec();
   }
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 #endif // EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_SYCL_H

@@ -4,8 +4,8 @@
 #include <set>
 
 using namespace std;
-using namespace Eigen;
-using namespace Eigen;
+using namespace Eigen_tf;
+using namespace Eigen_tf;
 
 #ifndef SIZE
 #define SIZE 1024

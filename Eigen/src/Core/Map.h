@@ -11,7 +11,7 @@
 #ifndef EIGEN_MAP_H
 #define EIGEN_MAP_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 template<typename PlainObjectType, int MapOptions, typename StrideType>
@@ -159,6 +159,6 @@ template<typename PlainObjectType, int MapOptions, typename StrideType> class Ma
 };
 
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_MAP_H

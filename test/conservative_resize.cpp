@@ -11,12 +11,12 @@
 
 #include <Eigen/Core>
 
-using namespace Eigen;
+using namespace Eigen_tf;
 
 template <typename Scalar, int Storage>
 void run_matrix_tests()
 {
-  typedef Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic, Storage> MatrixType;
+  typedef Matrix<Scalar, Eigen_tf::Dynamic, Eigen_tf::Dynamic, Storage> MatrixType;
   typedef typename MatrixType::Index Index;
 
   MatrixType m, n;
@@ -60,7 +60,7 @@ void run_matrix_tests()
 template <typename Scalar>
 void run_vector_tests()
 {
-  typedef Matrix<Scalar, 1, Eigen::Dynamic> VectorType;
+  typedef Matrix<Scalar, 1, Eigen_tf::Dynamic> VectorType;
 
   VectorType m, n;
 
@@ -114,16 +114,16 @@ void test_conservative_resize()
 {
   for(int i=0; i<g_repeat; ++i)
   {
-    CALL_SUBTEST_1((run_matrix_tests<int, Eigen::RowMajor>()));
-    CALL_SUBTEST_1((run_matrix_tests<int, Eigen::ColMajor>()));
-    CALL_SUBTEST_2((run_matrix_tests<float, Eigen::RowMajor>()));
-    CALL_SUBTEST_2((run_matrix_tests<float, Eigen::ColMajor>()));
-    CALL_SUBTEST_3((run_matrix_tests<double, Eigen::RowMajor>()));
-    CALL_SUBTEST_3((run_matrix_tests<double, Eigen::ColMajor>()));
-    CALL_SUBTEST_4((run_matrix_tests<std::complex<float>, Eigen::RowMajor>()));
-    CALL_SUBTEST_4((run_matrix_tests<std::complex<float>, Eigen::ColMajor>()));
-    CALL_SUBTEST_5((run_matrix_tests<std::complex<double>, Eigen::RowMajor>()));
-    CALL_SUBTEST_6((run_matrix_tests<std::complex<double>, Eigen::ColMajor>()));
+    CALL_SUBTEST_1((run_matrix_tests<int, Eigen_tf::RowMajor>()));
+    CALL_SUBTEST_1((run_matrix_tests<int, Eigen_tf::ColMajor>()));
+    CALL_SUBTEST_2((run_matrix_tests<float, Eigen_tf::RowMajor>()));
+    CALL_SUBTEST_2((run_matrix_tests<float, Eigen_tf::ColMajor>()));
+    CALL_SUBTEST_3((run_matrix_tests<double, Eigen_tf::RowMajor>()));
+    CALL_SUBTEST_3((run_matrix_tests<double, Eigen_tf::ColMajor>()));
+    CALL_SUBTEST_4((run_matrix_tests<std::complex<float>, Eigen_tf::RowMajor>()));
+    CALL_SUBTEST_4((run_matrix_tests<std::complex<float>, Eigen_tf::ColMajor>()));
+    CALL_SUBTEST_5((run_matrix_tests<std::complex<double>, Eigen_tf::RowMajor>()));
+    CALL_SUBTEST_6((run_matrix_tests<std::complex<double>, Eigen_tf::ColMajor>()));
 
     CALL_SUBTEST_1((run_vector_tests<int>()));
     CALL_SUBTEST_2((run_vector_tests<float>()));

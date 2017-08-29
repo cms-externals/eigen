@@ -9,7 +9,7 @@
 #endif
 
 using namespace std;
-using namespace Eigen;
+using namespace Eigen_tf;
 
 #ifndef REPEAT
 #define REPEAT 40000000

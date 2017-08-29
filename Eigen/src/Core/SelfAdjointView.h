@@ -10,7 +10,7 @@
 #ifndef EIGEN_SELFADJOINTMATRIX_H
 #define EIGEN_SELFADJOINTMATRIX_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 /** \class SelfAdjointView
   * \ingroup Core_Module
@@ -345,6 +345,6 @@ MatrixBase<Derived>::selfadjointView()
   return typename SelfAdjointViewReturnType<UpLo>::Type(derived());
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SELFADJOINTMATRIX_H

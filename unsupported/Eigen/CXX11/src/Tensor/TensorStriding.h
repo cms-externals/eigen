@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_STRIDING_H
 #define EIGEN_CXX11_TENSOR_TENSOR_STRIDING_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorStriding
   * \ingroup CXX11_Tensor_Module
@@ -34,7 +34,7 @@ struct traits<TensorStridingOp<Strides, XprType> > : public traits<XprType>
 };
 
 template<typename Strides, typename XprType>
-struct eval<TensorStridingOp<Strides, XprType>, Eigen::Dense>
+struct eval<TensorStridingOp<Strides, XprType>, Eigen_tf::Dense>
 {
   typedef const TensorStridingOp<Strides, XprType>& type;
 };
@@ -53,12 +53,12 @@ template<typename Strides, typename XprType>
 class TensorStridingOp : public TensorBase<TensorStridingOp<Strides, XprType> >
 {
   public:
-  typedef typename Eigen::internal::traits<TensorStridingOp>::Scalar Scalar;
-  typedef typename Eigen::NumTraits<Scalar>::Real RealScalar;
+  typedef typename Eigen_tf::internal::traits<TensorStridingOp>::Scalar Scalar;
+  typedef typename Eigen_tf::NumTraits<Scalar>::Real RealScalar;
   typedef typename XprType::CoeffReturnType CoeffReturnType;
-  typedef typename Eigen::internal::nested<TensorStridingOp>::type Nested;
-  typedef typename Eigen::internal::traits<TensorStridingOp>::StorageKind StorageKind;
-  typedef typename Eigen::internal::traits<TensorStridingOp>::Index Index;
+  typedef typename Eigen_tf::internal::nested<TensorStridingOp>::type Nested;
+  typedef typename Eigen_tf::internal::traits<TensorStridingOp>::StorageKind StorageKind;
+  typedef typename Eigen_tf::internal::traits<TensorStridingOp>::Index Index;
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorStridingOp(const XprType& expr, const Strides& dims)
       : m_xpr(expr), m_dims(dims) {}
@@ -121,7 +121,7 @@ struct TensorEvaluator<const TensorStridingOp<Strides, ArgType>, Device>
   {
     m_dimensions = m_impl.dimensions();
     for (int i = 0; i < NumDims; ++i) {
-      m_dimensions[i] =Eigen::numext::ceil(static_cast<float>(m_dimensions[i]) / op.strides()[i]);
+      m_dimensions[i] =Eigen_tf::numext::ceil(static_cast<float>(m_dimensions[i]) / op.strides()[i]);
     }
 
     const typename TensorEvaluator<ArgType, Device>::Dimensions& input_dims = m_impl.dimensions();
@@ -343,6 +343,6 @@ struct TensorEvaluator<TensorStridingOp<Strides, ArgType>, Device>
 };
 
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_STRIDING_H

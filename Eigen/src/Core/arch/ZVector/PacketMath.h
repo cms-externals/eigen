@@ -12,7 +12,7 @@
 
 #include <stdint.h>
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -940,6 +940,6 @@ template<> EIGEN_STRONG_INLINE Packet2d pblend(const Selector<2>& ifPacket, cons
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_PACKET_MATH_ZVECTOR_H

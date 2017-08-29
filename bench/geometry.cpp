@@ -4,7 +4,7 @@
 #include <bench/BenchTimer.h>
 
 using namespace std;
-using namespace Eigen;
+using namespace Eigen_tf;
 
 #ifndef SCALAR
 #define SCALAR float

@@ -39,11 +39,11 @@ void test_incomplete_cholesky()
     // regression for bug 1150
   for(int N = 1; N<20; ++N)
   {
-    Eigen::MatrixXd b( N, N );
+    Eigen_tf::MatrixXd b( N, N );
     b.setOnes();
 
-    Eigen::SparseMatrix<double> m( N, N );
-    m.reserve(Eigen::VectorXi::Constant(N,4));
+    Eigen_tf::SparseMatrix<double> m( N, N );
+    m.reserve(Eigen_tf::VectorXi::Constant(N,4));
     for( int i = 0; i < N; ++i )
     {
         m.insert( i, i ) = 1;
@@ -52,14 +52,14 @@ void test_incomplete_cholesky()
         m.coeffRef( i, i / 4 ) = 2;
     }
 
-    Eigen::SparseMatrix<double> A;
+    Eigen_tf::SparseMatrix<double> A;
     A = m * m.transpose();
 
-    Eigen::ConjugateGradient<Eigen::SparseMatrix<double>,
-        Eigen::Lower | Eigen::Upper,
-        Eigen::IncompleteCholesky<double> > solver( A );
-    VERIFY(solver.preconditioner().info() == Eigen::Success);
-    VERIFY(solver.info() == Eigen::Success);
+    Eigen_tf::ConjugateGradient<Eigen_tf::SparseMatrix<double>,
+        Eigen_tf::Lower | Eigen_tf::Upper,
+        Eigen_tf::IncompleteCholesky<double> > solver( A );
+    VERIFY(solver.preconditioner().info() == Eigen_tf::Success);
+    VERIFY(solver.info() == Eigen_tf::Success);
   }
 #endif
 }

@@ -22,7 +22,7 @@
 #endif
 
 
-namespace Eigen {
+namespace Eigen_tf {
 
 
 /** \class TensorReduction
@@ -53,7 +53,7 @@ namespace internal {
 };
 
 template<typename Op, typename Dims, typename XprType, template <class> class MakePointer_>
-struct eval<TensorReductionOp<Op, Dims, XprType, MakePointer_>, Eigen::Dense>
+struct eval<TensorReductionOp<Op, Dims, XprType, MakePointer_>, Eigen_tf::Dense>
 {
   typedef const TensorReductionOp<Op, Dims, XprType, MakePointer_>& type;
 };
@@ -361,12 +361,12 @@ __global__ void OuterReductionKernel(R, const S, I, I, typename S::CoeffReturnTy
 template <typename Op, typename Dims, typename XprType,  template <class> class MakePointer_>
 class TensorReductionOp : public TensorBase<TensorReductionOp<Op, Dims, XprType, MakePointer_>, ReadOnlyAccessors> {
   public:
-    typedef typename Eigen::internal::traits<TensorReductionOp>::Scalar Scalar;
-    typedef typename Eigen::NumTraits<Scalar>::Real RealScalar;
+    typedef typename Eigen_tf::internal::traits<TensorReductionOp>::Scalar Scalar;
+    typedef typename Eigen_tf::NumTraits<Scalar>::Real RealScalar;
     typedef typename internal::remove_const<typename XprType::CoeffReturnType>::type CoeffReturnType;
-    typedef typename Eigen::internal::nested<TensorReductionOp>::type Nested;
-    typedef typename Eigen::internal::traits<TensorReductionOp>::StorageKind StorageKind;
-    typedef typename Eigen::internal::traits<TensorReductionOp>::Index Index;
+    typedef typename Eigen_tf::internal::nested<TensorReductionOp>::type Nested;
+    typedef typename Eigen_tf::internal::traits<TensorReductionOp>::StorageKind StorageKind;
+    typedef typename Eigen_tf::internal::traits<TensorReductionOp>::Index Index;
 
     EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
     TensorReductionOp(const XprType& expr, const Dims& dims) : m_expr(expr), m_dims(dims)
@@ -781,10 +781,10 @@ struct TensorEvaluator<const TensorReductionOp<Op, Dims, ArgType, MakePointer_>,
 
   // For full reductions
 #if defined(EIGEN_USE_GPU) && defined(__CUDACC__)
-  static const bool RunningOnGPU = internal::is_same<Device, Eigen::GpuDevice>::value;
+  static const bool RunningOnGPU = internal::is_same<Device, Eigen_tf::GpuDevice>::value;
   static const bool RunningOnSycl = false;
 #elif defined(EIGEN_USE_SYCL)
-static const bool RunningOnSycl = internal::is_same<typename internal::remove_all<Device>::type, Eigen::SyclDevice>::value;
+static const bool RunningOnSycl = internal::is_same<typename internal::remove_all<Device>::type, Eigen_tf::SyclDevice>::value;
 static const bool RunningOnGPU = false;
 #else
   static const bool RunningOnGPU = false;
@@ -799,6 +799,6 @@ static const bool RunningOnGPU = false;
 #endif
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_REDUCTION_H

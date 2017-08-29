@@ -1,4 +1,4 @@
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \eigenManualPage TutorialReductionsVisitorsBroadcasting Reductions, visitors and broadcasting
 
@@ -90,7 +90,7 @@ Array.
 
 The arguments passed to a visitor are pointers to the variables where the
 row and column position are to be stored. These variables should be of type
-\link Eigen::Index Index \endlink, as shown below:
+\link Eigen_tf::Index Index \endlink, as shown below:
 
 <table class="example">
 <tr><th>Example:</th><th>Output:</th></tr>

@@ -10,7 +10,7 @@
 #ifndef EIGEN_SPARSEVECTOR_H
 #define EIGEN_SPARSEVECTOR_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 /** \ingroup SparseCore_Module
   * \class SparseVector
@@ -473,6 +473,6 @@ struct sparse_vector_assign_selector<Dest,Src,SVA_RuntimeSwitch> {
 
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SPARSEVECTOR_H

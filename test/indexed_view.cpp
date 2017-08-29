@@ -79,9 +79,9 @@ is_same_seq_type(const T1& a, const T2& b)
 
 void check_indexed_view()
 {
-  using Eigen::placeholders::all;
-  using Eigen::placeholders::last;
-  using Eigen::placeholders::end;
+  using Eigen_tf::placeholders::all;
+  using Eigen_tf::placeholders::last;
+  using Eigen_tf::placeholders::end;
 
   Index n = 10;
 

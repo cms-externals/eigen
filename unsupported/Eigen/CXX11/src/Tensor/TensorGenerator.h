@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_GENERATOR_H
 #define EIGEN_CXX11_TENSOR_TENSOR_GENERATOR_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorGenerator
   * \ingroup CXX11_Tensor_Module
@@ -34,7 +34,7 @@ struct traits<TensorGeneratorOp<Generator, XprType> > : public traits<XprType>
 };
 
 template<typename Generator, typename XprType>
-struct eval<TensorGeneratorOp<Generator, XprType>, Eigen::Dense>
+struct eval<TensorGeneratorOp<Generator, XprType>, Eigen_tf::Dense>
 {
   typedef const TensorGeneratorOp<Generator, XprType>& type;
 };
@@ -53,12 +53,12 @@ template<typename Generator, typename XprType>
 class TensorGeneratorOp : public TensorBase<TensorGeneratorOp<Generator, XprType>, ReadOnlyAccessors>
 {
   public:
-  typedef typename Eigen::internal::traits<TensorGeneratorOp>::Scalar Scalar;
-  typedef typename Eigen::NumTraits<Scalar>::Real RealScalar;
+  typedef typename Eigen_tf::internal::traits<TensorGeneratorOp>::Scalar Scalar;
+  typedef typename Eigen_tf::NumTraits<Scalar>::Real RealScalar;
   typedef typename XprType::CoeffReturnType CoeffReturnType;
-  typedef typename Eigen::internal::nested<TensorGeneratorOp>::type Nested;
-  typedef typename Eigen::internal::traits<TensorGeneratorOp>::StorageKind StorageKind;
-  typedef typename Eigen::internal::traits<TensorGeneratorOp>::Index Index;
+  typedef typename Eigen_tf::internal::nested<TensorGeneratorOp>::type Nested;
+  typedef typename Eigen_tf::internal::traits<TensorGeneratorOp>::StorageKind StorageKind;
+  typedef typename Eigen_tf::internal::traits<TensorGeneratorOp>::Index Index;
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorGeneratorOp(const XprType& expr, const Generator& generator)
       : m_xpr(expr), m_generator(generator) {}
@@ -191,6 +191,6 @@ struct TensorEvaluator<const TensorGeneratorOp<Generator, ArgType>, Device>
 #endif
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_GENERATOR_H

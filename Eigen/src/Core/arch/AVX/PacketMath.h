@@ -10,7 +10,7 @@
 #ifndef EIGEN_PACKET_MATH_AVX_H
 #define EIGEN_PACKET_MATH_AVX_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -638,6 +638,6 @@ template<> EIGEN_STRONG_INLINE Packet4d pinsertlast(const Packet4d& a, double b)
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_PACKET_MATH_AVX_H

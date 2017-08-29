@@ -11,7 +11,7 @@
 #ifndef EIGEN_PERMUTATIONMATRIX_H
 #define EIGEN_PERMUTATIONMATRIX_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -628,6 +628,6 @@ template<> struct AssignmentKind<DenseShape,PermutationShape> { typedef EigenBas
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_PERMUTATIONMATRIX_H

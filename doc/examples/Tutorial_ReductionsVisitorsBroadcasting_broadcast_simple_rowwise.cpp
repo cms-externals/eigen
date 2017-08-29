@@ -4,8 +4,8 @@
 using namespace std;
 int main()
 {
-  Eigen::MatrixXf mat(2,4);
-  Eigen::VectorXf v(4);
+  Eigen_tf::MatrixXf mat(2,4);
+  Eigen_tf::VectorXf v(4);
   
   mat << 1, 2, 6, 9,
          3, 1, 7, 2;

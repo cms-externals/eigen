@@ -2,12 +2,12 @@
 #include <Eigen/Dense>
 
 using namespace std;
-using namespace Eigen;
+using namespace Eigen_tf;
 
 int main()
 {
-  Eigen::MatrixXf m(2,4);
-  Eigen::VectorXf v(2);
+  Eigen_tf::MatrixXf m(2,4);
+  Eigen_tf::VectorXf v(2);
   
   m << 1, 23, 6, 9,
        3, 11, 7, 2;

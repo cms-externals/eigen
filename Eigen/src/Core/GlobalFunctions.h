@@ -21,16 +21,16 @@
     \sa <a href="group__CoeffwiseMathFunctions.html#cwisetable_##NAME">Math functions</a>, class CwiseUnaryOp
     */ \
   template<typename Derived> \
-  inline const Eigen::CwiseUnaryOp<Eigen::internal::FUNCTOR<typename Derived::Scalar>, const Derived> \
-  NAME(const Eigen::ArrayBase<Derived>& x);
+  inline const Eigen_tf::CwiseUnaryOp<Eigen_tf::internal::FUNCTOR<typename Derived::Scalar>, const Derived> \
+  NAME(const Eigen_tf::ArrayBase<Derived>& x);
 
 #else
 
 #define EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(NAME,FUNCTOR,DOC_OP,DOC_DETAILS) \
   template<typename Derived> \
-  inline const Eigen::CwiseUnaryOp<Eigen::internal::FUNCTOR<typename Derived::Scalar>, const Derived> \
-  (NAME)(const Eigen::ArrayBase<Derived>& x) { \
-    return Eigen::CwiseUnaryOp<Eigen::internal::FUNCTOR<typename Derived::Scalar>, const Derived>(x.derived()); \
+  inline const Eigen_tf::CwiseUnaryOp<Eigen_tf::internal::FUNCTOR<typename Derived::Scalar>, const Derived> \
+  (NAME)(const Eigen_tf::ArrayBase<Derived>& x) { \
+    return Eigen_tf::CwiseUnaryOp<Eigen_tf::internal::FUNCTOR<typename Derived::Scalar>, const Derived>(x.derived()); \
   }
 
 #endif // EIGEN_PARSED_BY_DOXYGEN
@@ -40,18 +40,18 @@
   template<typename Derived> \
   struct NAME##_retval<ArrayBase<Derived> > \
   { \
-    typedef const Eigen::CwiseUnaryOp<Eigen::internal::FUNCTOR<typename Derived::Scalar>, const Derived> type; \
+    typedef const Eigen_tf::CwiseUnaryOp<Eigen_tf::internal::FUNCTOR<typename Derived::Scalar>, const Derived> type; \
   }; \
   template<typename Derived> \
   struct NAME##_impl<ArrayBase<Derived> > \
   { \
-    static inline typename NAME##_retval<ArrayBase<Derived> >::type run(const Eigen::ArrayBase<Derived>& x) \
+    static inline typename NAME##_retval<ArrayBase<Derived> >::type run(const Eigen_tf::ArrayBase<Derived>& x) \
     { \
       return typename NAME##_retval<ArrayBase<Derived> >::type(x.derived()); \
     } \
   };
 
-namespace Eigen
+namespace Eigen_tf
 {
   EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(real,scalar_real_op,real part,\sa ArrayBase::real)
   EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(imag,scalar_imag_op,imaginary part,\sa ArrayBase::imag)
@@ -72,22 +72,22 @@ namespace Eigen
   EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(erfc,scalar_erfc_op,complement error function,\sa ArrayBase::erfc)
   EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(exp,scalar_exp_op,exponential,\sa ArrayBase::exp)
   EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(expm1,scalar_expm1_op,exponential of a value minus 1,\sa ArrayBase::expm1)
-  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(log,scalar_log_op,natural logarithm,\sa Eigen::log10 DOXCOMMA ArrayBase::log)
+  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(log,scalar_log_op,natural logarithm,\sa Eigen_tf::log10 DOXCOMMA ArrayBase::log)
   EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(log1p,scalar_log1p_op,natural logarithm of 1 plus the value,\sa ArrayBase::log1p)
-  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(log10,scalar_log10_op,base 10 logarithm,\sa Eigen::log DOXCOMMA ArrayBase::log)
+  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(log10,scalar_log10_op,base 10 logarithm,\sa Eigen_tf::log DOXCOMMA ArrayBase::log)
   EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(abs,scalar_abs_op,absolute value,\sa ArrayBase::abs DOXCOMMA MatrixBase::cwiseAbs)
   EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(abs2,scalar_abs2_op,squared absolute value,\sa ArrayBase::abs2 DOXCOMMA MatrixBase::cwiseAbs2)
   EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(arg,scalar_arg_op,complex argument,\sa ArrayBase::arg)
   EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(sqrt,scalar_sqrt_op,square root,\sa ArrayBase::sqrt DOXCOMMA MatrixBase::cwiseSqrt)
   EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(rsqrt,scalar_rsqrt_op,reciprocal square root,\sa ArrayBase::rsqrt)
-  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(square,scalar_square_op,square (power 2),\sa Eigen::abs2 DOXCOMMA Eigen::pow DOXCOMMA ArrayBase::square)
-  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(cube,scalar_cube_op,cube (power 3),\sa Eigen::pow DOXCOMMA ArrayBase::cube)
-  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(round,scalar_round_op,nearest integer,\sa Eigen::floor DOXCOMMA Eigen::ceil DOXCOMMA ArrayBase::round)
-  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(floor,scalar_floor_op,nearest integer not greater than the giben value,\sa Eigen::ceil DOXCOMMA ArrayBase::floor)
-  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(ceil,scalar_ceil_op,nearest integer not less than the giben value,\sa Eigen::floor DOXCOMMA ArrayBase::ceil)
-  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(isnan,scalar_isnan_op,not-a-number test,\sa Eigen::isinf DOXCOMMA Eigen::isfinite DOXCOMMA ArrayBase::isnan)
-  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(isinf,scalar_isinf_op,infinite value test,\sa Eigen::isnan DOXCOMMA Eigen::isfinite DOXCOMMA ArrayBase::isinf)
-  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(isfinite,scalar_isfinite_op,finite value test,\sa Eigen::isinf DOXCOMMA Eigen::isnan DOXCOMMA ArrayBase::isfinite)
+  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(square,scalar_square_op,square (power 2),\sa Eigen_tf::abs2 DOXCOMMA Eigen_tf::pow DOXCOMMA ArrayBase::square)
+  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(cube,scalar_cube_op,cube (power 3),\sa Eigen_tf::pow DOXCOMMA ArrayBase::cube)
+  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(round,scalar_round_op,nearest integer,\sa Eigen_tf::floor DOXCOMMA Eigen_tf::ceil DOXCOMMA ArrayBase::round)
+  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(floor,scalar_floor_op,nearest integer not greater than the giben value,\sa Eigen_tf::ceil DOXCOMMA ArrayBase::floor)
+  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(ceil,scalar_ceil_op,nearest integer not less than the giben value,\sa Eigen_tf::floor DOXCOMMA ArrayBase::ceil)
+  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(isnan,scalar_isnan_op,not-a-number test,\sa Eigen_tf::isinf DOXCOMMA Eigen_tf::isfinite DOXCOMMA ArrayBase::isnan)
+  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(isinf,scalar_isinf_op,infinite value test,\sa Eigen_tf::isnan DOXCOMMA Eigen_tf::isfinite DOXCOMMA ArrayBase::isinf)
+  EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(isfinite,scalar_isfinite_op,finite value test,\sa Eigen_tf::isinf DOXCOMMA Eigen_tf::isnan DOXCOMMA ArrayBase::isfinite)
   EIGEN_ARRAY_DECLARE_GLOBAL_UNARY(sign,scalar_sign_op,sign (or 0),\sa ArrayBase::sign)
   
   /** \returns an expression of the coefficient-wise power of \a x to the given constant \a exponent.
@@ -101,18 +101,18 @@ namespace Eigen
 #ifdef EIGEN_PARSED_BY_DOXYGEN
   template<typename Derived,typename ScalarExponent>
   inline const CwiseBinaryOp<internal::scalar_pow_op<Derived::Scalar,ScalarExponent>,Derived,Constant<ScalarExponent> >
-  pow(const Eigen::ArrayBase<Derived>& x, const ScalarExponent& exponent);
+  pow(const Eigen_tf::ArrayBase<Derived>& x, const ScalarExponent& exponent);
 #else
   template<typename Derived,typename ScalarExponent>
   inline typename internal::enable_if<   !(internal::is_same<typename Derived::Scalar,ScalarExponent>::value) && EIGEN_SCALAR_BINARY_SUPPORTED(pow,typename Derived::Scalar,ScalarExponent),
           const EIGEN_EXPR_BINARYOP_SCALAR_RETURN_TYPE(Derived,ScalarExponent,pow) >::type
-  pow(const Eigen::ArrayBase<Derived>& x, const ScalarExponent& exponent) {
+  pow(const Eigen_tf::ArrayBase<Derived>& x, const ScalarExponent& exponent) {
     return x.derived().pow(exponent);
   }
 
   template<typename Derived>
   inline const EIGEN_EXPR_BINARYOP_SCALAR_RETURN_TYPE(Derived,typename Derived::Scalar,pow)
-  pow(const Eigen::ArrayBase<Derived>& x, const typename Derived::Scalar& exponent) {
+  pow(const Eigen_tf::ArrayBase<Derived>& x, const typename Derived::Scalar& exponent) {
     return x.derived().pow(exponent);
   }
 #endif
@@ -129,10 +129,10 @@ namespace Eigen
     * \relates ArrayBase
     */
   template<typename Derived,typename ExponentDerived>
-  inline const Eigen::CwiseBinaryOp<Eigen::internal::scalar_pow_op<typename Derived::Scalar, typename ExponentDerived::Scalar>, const Derived, const ExponentDerived>
-  pow(const Eigen::ArrayBase<Derived>& x, const Eigen::ArrayBase<ExponentDerived>& exponents) 
+  inline const Eigen_tf::CwiseBinaryOp<Eigen_tf::internal::scalar_pow_op<typename Derived::Scalar, typename ExponentDerived::Scalar>, const Derived, const ExponentDerived>
+  pow(const Eigen_tf::ArrayBase<Derived>& x, const Eigen_tf::ArrayBase<ExponentDerived>& exponents) 
   {
-    return Eigen::CwiseBinaryOp<Eigen::internal::scalar_pow_op<typename Derived::Scalar, typename ExponentDerived::Scalar>, const Derived, const ExponentDerived>(
+    return Eigen_tf::CwiseBinaryOp<Eigen_tf::internal::scalar_pow_op<typename Derived::Scalar, typename ExponentDerived::Scalar>, const Derived, const ExponentDerived>(
       x.derived(),
       exponents.derived()
     );
@@ -154,12 +154,12 @@ namespace Eigen
 #ifdef EIGEN_PARSED_BY_DOXYGEN
   template<typename Scalar,typename Derived>
   inline const CwiseBinaryOp<internal::scalar_pow_op<Scalar,Derived::Scalar>,Constant<Scalar>,Derived>
-  pow(const Scalar& x,const Eigen::ArrayBase<Derived>& x);
+  pow(const Scalar& x,const Eigen_tf::ArrayBase<Derived>& x);
 #else
   template<typename Scalar, typename Derived>
   inline typename internal::enable_if<   !(internal::is_same<typename Derived::Scalar,Scalar>::value) && EIGEN_SCALAR_BINARY_SUPPORTED(pow,Scalar,typename Derived::Scalar),
           const EIGEN_SCALAR_BINARYOP_EXPR_RETURN_TYPE(Scalar,Derived,pow) >::type
-  pow(const Scalar& x, const Eigen::ArrayBase<Derived>& exponents)
+  pow(const Scalar& x, const Eigen_tf::ArrayBase<Derived>& exponents)
   {
     return EIGEN_SCALAR_BINARYOP_EXPR_RETURN_TYPE(Scalar,Derived,pow)(
             typename internal::plain_constant_type<Derived,Scalar>::type(exponents.rows(), exponents.cols(), x), exponents.derived() );
@@ -167,7 +167,7 @@ namespace Eigen
 
   template<typename Derived>
   inline const EIGEN_SCALAR_BINARYOP_EXPR_RETURN_TYPE(typename Derived::Scalar,Derived,pow)
-  pow(const typename Derived::Scalar& x, const Eigen::ArrayBase<Derived>& exponents)
+  pow(const typename Derived::Scalar& x, const Eigen_tf::ArrayBase<Derived>& exponents)
   {
     return EIGEN_SCALAR_BINARYOP_EXPR_RETURN_TYPE(typename Derived::Scalar,Derived,pow)(
       typename internal::plain_constant_type<Derived,typename Derived::Scalar>::type(exponents.rows(), exponents.cols(), x), exponents.derived() );

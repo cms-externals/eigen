@@ -2,7 +2,7 @@
 #include <iostream>
 #include <random>
 
-using namespace Eigen;
+using namespace Eigen_tf;
 
 int main() {
   std::default_random_engine generator;

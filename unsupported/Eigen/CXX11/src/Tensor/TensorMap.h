@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_MAP_H
 #define EIGEN_CXX11_TENSOR_TENSOR_MAP_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorMap
   * \ingroup CXX11_Tensor_Module
@@ -29,7 +29,7 @@ template<typename PlainObjectType, int Options_, template <class> class MakePoin
   public:
     typedef TensorMap<PlainObjectType, Options_, MakePointer_> Self;
     typedef typename PlainObjectType::Base Base;
-    typedef typename Eigen::internal::nested<Self>::type Nested;
+    typedef typename Eigen_tf::internal::nested<Self>::type Nested;
     typedef typename internal::traits<PlainObjectType>::StorageKind StorageKind;
     typedef typename internal::traits<PlainObjectType>::Index Index;
     typedef typename internal::traits<PlainObjectType>::Scalar Scalar;
@@ -316,6 +316,6 @@ template<typename PlainObjectType, int Options_, template <class> class MakePoin
     Dimensions m_dimensions;
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_MAP_H

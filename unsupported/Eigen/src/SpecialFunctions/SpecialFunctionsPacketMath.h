@@ -10,7 +10,7 @@
 #ifndef EIGEN_SPECIALFUNCTIONS_PACKETMATH_H
 #define EIGEN_SPECIALFUNCTIONS_PACKETMATH_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -52,7 +52,7 @@ Packet pbetainc(const Packet& a, const Packet& b,const Packet& x) { using numext
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SPECIALFUNCTIONS_PACKETMATH_H
 

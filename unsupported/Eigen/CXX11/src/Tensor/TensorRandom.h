@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_RANDOM_H
 #define EIGEN_CXX11_TENSOR_TENSOR_RANDOM_H
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace internal {
 
 namespace {
@@ -80,15 +80,15 @@ T RandomToTypeUniform(uint64_t* state) {
 
 
 template <> EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
-Eigen::half RandomToTypeUniform<Eigen::half>(uint64_t* state) {
-  Eigen::half result;
+Eigen_tf::half RandomToTypeUniform<Eigen_tf::half>(uint64_t* state) {
+  Eigen_tf::half result;
   // Generate 10 random bits for the mantissa
   unsigned rnd = PCG_XSH_RS_generator(state);
   result.x = static_cast<uint16_t>(rnd & 0x3ffu);
   // Set the exponent
   result.x |= (static_cast<uint16_t>(15) << 10);
   // Return the final result
-  return result - Eigen::half(1.0f);
+  return result - Eigen_tf::half(1.0f);
 }
 
 
@@ -271,6 +271,6 @@ struct functor_traits<NormalRandomGenerator<Scalar> > {
 
 
 } // end namespace internal
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_RANDOM_H

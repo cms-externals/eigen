@@ -10,7 +10,7 @@
 #ifndef EIGEN_TYPE_CASTING_SSE_H
 #define EIGEN_TYPE_CASTING_SSE_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -72,6 +72,6 @@ template<> EIGEN_STRONG_INLINE Packet2d pcast<Packet4f, Packet2d>(const Packet4f
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_TYPE_CASTING_SSE_H

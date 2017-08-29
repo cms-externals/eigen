@@ -118,7 +118,7 @@ template<typename SparseMatrixType> void sparse_extra(const SparseMatrixType& re
     DenseMatrix refM1 = DenseMatrix::Zero(rows, rows);
     initSparse<Scalar>(density, refM1, m1);
     {
-      Eigen::RandomSetter<SparseMatrixType > setter(m2);
+      Eigen_tf::RandomSetter<SparseMatrixType > setter(m2);
       for (int j=0; j<m1.outerSize(); ++j)
         for (typename SparseMatrixType::InnerIterator i(m1,j); i; ++i)
           setter(i.index(), j) = i.value();
@@ -145,7 +145,7 @@ void check_marketio()
 void test_sparse_extra()
 {
   for(int i = 0; i < g_repeat; i++) {
-    int s = Eigen::internal::random<int>(1,50);
+    int s = Eigen_tf::internal::random<int>(1,50);
     CALL_SUBTEST_1( sparse_extra(SparseMatrix<double>(8, 8)) );
     CALL_SUBTEST_2( sparse_extra(SparseMatrix<std::complex<double> >(s, s)) );
     CALL_SUBTEST_1( sparse_extra(SparseMatrix<double>(s, s)) );

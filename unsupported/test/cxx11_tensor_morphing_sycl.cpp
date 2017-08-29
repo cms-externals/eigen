@@ -23,13 +23,13 @@
 #include "main.h"
 #include <unsupported/Eigen/CXX11/Tensor>
 
-using Eigen::array;
-using Eigen::SyclDevice;
-using Eigen::Tensor;
-using Eigen::TensorMap;
+using Eigen_tf::array;
+using Eigen_tf::SyclDevice;
+using Eigen_tf::Tensor;
+using Eigen_tf::TensorMap;
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_simple_reshape(const Eigen::SyclDevice& sycl_device)
+static void test_simple_reshape(const Eigen_tf::SyclDevice& sycl_device)
 {
   typename Tensor<DataType, 5 ,DataLayout, IndexType>::Dimensions dim1(2,3,1,7,1);
   typename Tensor<DataType, 3 ,DataLayout, IndexType>::Dimensions dim2(2,3,7);
@@ -87,7 +87,7 @@ static void test_simple_reshape(const Eigen::SyclDevice& sycl_device)
 
 
 template<typename DataType, int DataLayout, typename IndexType>
-static void test_reshape_as_lvalue(const Eigen::SyclDevice& sycl_device)
+static void test_reshape_as_lvalue(const Eigen_tf::SyclDevice& sycl_device)
 {
   typename Tensor<DataType, 3, DataLayout, IndexType>::Dimensions dim1(2,3,7);
   typename Tensor<DataType, 2, DataLayout, IndexType>::Dimensions dim2(6,7);
@@ -135,7 +135,7 @@ static void test_reshape_as_lvalue(const Eigen::SyclDevice& sycl_device)
 
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_simple_slice(const Eigen::SyclDevice &sycl_device)
+static void test_simple_slice(const Eigen_tf::SyclDevice &sycl_device)
 {
   IndexType sizeDim1 = 2;
   IndexType sizeDim2 = 3;
@@ -152,8 +152,8 @@ static void test_simple_slice(const Eigen::SyclDevice &sycl_device)
   DataType* gpu_data2  = static_cast<DataType*>(sycl_device.allocate(slice1.size()*sizeof(DataType)));
   TensorMap<Tensor<DataType, 5,DataLayout, IndexType>> gpu1(gpu_data1, tensorRange);
   TensorMap<Tensor<DataType, 5,DataLayout, IndexType>> gpu2(gpu_data2, slice1_range);
-  Eigen::DSizes<IndexType, 5> indices(1,2,3,4,5);
-  Eigen::DSizes<IndexType, 5> sizes(1,1,1,1,1);
+  Eigen_tf::DSizes<IndexType, 5> indices(1,2,3,4,5);
+  Eigen_tf::DSizes<IndexType, 5> sizes(1,1,1,1,1);
   sycl_device.memcpyHostToDevice(gpu_data1, tensor.data(),(tensor.size())*sizeof(DataType));
   gpu2.device(sycl_device)=gpu1.slice(indices, sizes);
   sycl_device.memcpyDeviceToHost(slice1.data(), gpu_data2,(slice1.size())*sizeof(DataType));
@@ -164,8 +164,8 @@ static void test_simple_slice(const Eigen::SyclDevice &sycl_device)
   Tensor<DataType, 5,DataLayout, IndexType> slice2(slice2_range);
   DataType* gpu_data3  = static_cast<DataType*>(sycl_device.allocate(slice2.size()*sizeof(DataType)));
   TensorMap<Tensor<DataType, 5,DataLayout, IndexType>> gpu3(gpu_data3, slice2_range);
-  Eigen::DSizes<IndexType, 5> indices2(1,1,3,4,5);
-  Eigen::DSizes<IndexType, 5> sizes2(1,1,2,2,3);
+  Eigen_tf::DSizes<IndexType, 5> indices2(1,1,3,4,5);
+  Eigen_tf::DSizes<IndexType, 5> sizes2(1,1,2,2,3);
   gpu3.device(sycl_device)=gpu1.slice(indices2, sizes2);
   sycl_device.memcpyDeviceToHost(slice2.data(), gpu_data3,(slice2.size())*sizeof(DataType));
   for (IndexType i = 0; i < 2; ++i) {
@@ -181,10 +181,10 @@ static void test_simple_slice(const Eigen::SyclDevice &sycl_device)
 }
 
 template<typename DataType, int DataLayout, typename IndexType>
-static void test_strided_slice_write_sycl(const Eigen::SyclDevice& sycl_device)
+static void test_strided_slice_write_sycl(const Eigen_tf::SyclDevice& sycl_device)
 {
   typedef Tensor<DataType, 2, DataLayout, IndexType> Tensor2f;
-  typedef Eigen::DSizes<IndexType, 2> Index2;
+  typedef Eigen_tf::DSizes<IndexType, 2> Index2;
   IndexType sizeDim1 = 7L;
   IndexType sizeDim2 = 11L;
   array<IndexType, 2> tensorRange = {{sizeDim1, sizeDim2}};
@@ -230,7 +230,7 @@ static void test_strided_slice_write_sycl(const Eigen::SyclDevice& sycl_device)
 
 template<typename DataType, typename dev_Selector> void sycl_morphing_test_per_device(dev_Selector s){
   QueueInterface queueInterface(s);
-  auto sycl_device = Eigen::SyclDevice(&queueInterface);
+  auto sycl_device = Eigen_tf::SyclDevice(&queueInterface);
   test_simple_slice<DataType, RowMajor, int64_t>(sycl_device);
   test_simple_slice<DataType, ColMajor, int64_t>(sycl_device);
   test_simple_reshape<DataType, RowMajor, int64_t>(sycl_device);
@@ -242,7 +242,7 @@ template<typename DataType, typename dev_Selector> void sycl_morphing_test_per_d
 }
 void test_cxx11_tensor_morphing_sycl()
 {
-  for (const auto& device :Eigen::get_sycl_supported_devices()) {
+  for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
     CALL_SUBTEST(sycl_morphing_test_per_device<float>(device));
   }
 }

@@ -1,7 +1,7 @@
 #include <Eigen/Core>
 #include <iostream>
 
-using namespace Eigen;
+using namespace Eigen_tf;
 
 // [functor]
 template<class ArgType, class RowIndexType, class ColIndexType>
@@ -30,7 +30,7 @@ public:
 // [function]
 template <class ArgType, class RowIndexType, class ColIndexType>
 CwiseNullaryOp<indexing_functor<ArgType,RowIndexType,ColIndexType>, typename indexing_functor<ArgType,RowIndexType,ColIndexType>::MatrixType>
-indexing(const Eigen::MatrixBase<ArgType>& arg, const RowIndexType& row_indices, const ColIndexType& col_indices)
+indexing(const Eigen_tf::MatrixBase<ArgType>& arg, const RowIndexType& row_indices, const ColIndexType& col_indices)
 {
   typedef indexing_functor<ArgType,RowIndexType,ColIndexType> Func;
   typedef typename Func::MatrixType MatrixType;
@@ -42,10 +42,10 @@ indexing(const Eigen::MatrixBase<ArgType>& arg, const RowIndexType& row_indices,
 int main()
 {
   std::cout << "[main1]\n";
-  Eigen::MatrixXi A = Eigen::MatrixXi::Random(4,4);
+  Eigen_tf::MatrixXi A = Eigen_tf::MatrixXi::Random(4,4);
   Array3i ri(1,2,1);
   ArrayXi ci(6); ci << 3,2,1,0,0,2;
-  Eigen::MatrixXi B = indexing(A, ri, ci);
+  Eigen_tf::MatrixXi B = indexing(A, ri, ci);
   std::cout << "A =" << std::endl;
   std::cout << A << std::endl << std::endl;
   std::cout << "A([" << ri.transpose() << "], [" << ci.transpose() << "]) =" << std::endl;

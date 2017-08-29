@@ -10,7 +10,7 @@
 #ifndef EIGEN_NULLARY_FUNCTORS_H
 #define EIGEN_NULLARY_FUNCTORS_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -184,6 +184,6 @@ struct has_binary_operator<scalar_random_op<Scalar>,IndexType> { enum { value = 
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_NULLARY_FUNCTORS_H

@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_ASSIGN_H
 #define EIGEN_CXX11_TENSOR_TENSOR_ASSIGN_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorAssign
   * \ingroup CXX11_Tensor_Module
@@ -41,7 +41,7 @@ struct traits<TensorAssignOp<LhsXprType, RhsXprType> >
 };
 
 template<typename LhsXprType, typename RhsXprType>
-struct eval<TensorAssignOp<LhsXprType, RhsXprType>, Eigen::Dense>
+struct eval<TensorAssignOp<LhsXprType, RhsXprType>, Eigen_tf::Dense>
 {
   typedef const TensorAssignOp<LhsXprType, RhsXprType>& type;
 };
@@ -60,12 +60,12 @@ template<typename LhsXprType, typename RhsXprType>
 class TensorAssignOp : public TensorBase<TensorAssignOp<LhsXprType, RhsXprType> >
 {
   public:
-  typedef typename Eigen::internal::traits<TensorAssignOp>::Scalar Scalar;
-  typedef typename Eigen::NumTraits<Scalar>::Real RealScalar;
+  typedef typename Eigen_tf::internal::traits<TensorAssignOp>::Scalar Scalar;
+  typedef typename Eigen_tf::NumTraits<Scalar>::Real RealScalar;
   typedef typename LhsXprType::CoeffReturnType CoeffReturnType;
-  typedef typename Eigen::internal::nested<TensorAssignOp>::type Nested;
-  typedef typename Eigen::internal::traits<TensorAssignOp>::StorageKind StorageKind;
-  typedef typename Eigen::internal::traits<TensorAssignOp>::Index Index;
+  typedef typename Eigen_tf::internal::nested<TensorAssignOp>::type Nested;
+  typedef typename Eigen_tf::internal::traits<TensorAssignOp>::StorageKind StorageKind;
+  typedef typename Eigen_tf::internal::traits<TensorAssignOp>::Index Index;
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorAssignOp(LhsXprType& lhs, const RhsXprType& rhs)
       : m_lhs_xpr(lhs), m_rhs_xpr(rhs) {}

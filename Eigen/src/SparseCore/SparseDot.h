@@ -10,7 +10,7 @@
 #ifndef EIGEN_SPARSE_DOT_H
 #define EIGEN_SPARSE_DOT_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 template<typename Derived>
 template<typename OtherDerived>
@@ -93,6 +93,6 @@ SparseMatrixBase<Derived>::blueNorm() const
 {
   return internal::blueNorm_impl(*this);
 }
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SPARSE_DOT_H

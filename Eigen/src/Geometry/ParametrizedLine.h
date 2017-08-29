@@ -11,7 +11,7 @@
 #ifndef EIGEN_PARAMETRIZEDLINE_H
 #define EIGEN_PARAMETRIZEDLINE_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 /** \geometry_module \ingroup Geometry_Module
   *
@@ -37,7 +37,7 @@ public:
   };
   typedef _Scalar Scalar;
   typedef typename NumTraits<Scalar>::Real RealScalar;
-  typedef Eigen::Index Index; ///< \deprecated since Eigen 3.3
+  typedef Eigen_tf::Index Index; ///< \deprecated since Eigen 3.3
   typedef Matrix<Scalar,AmbientDimAtCompileTime,1,Options> VectorType;
 
   /** Default constructor without initialization */
@@ -227,6 +227,6 @@ ParametrizedLine<_Scalar, _AmbientDim,_Options>::intersectionPoint(const Hyperpl
   return pointAt(intersectionParameter(hyperplane));
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_PARAMETRIZEDLINE_H

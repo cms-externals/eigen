@@ -20,13 +20,13 @@
 #include "main.h"
 #include <unsupported/Eigen/CXX11/Tensor>
 
-using Eigen::array;
-using Eigen::SyclDevice;
-using Eigen::Tensor;
-using Eigen::TensorMap;
+using Eigen_tf::array;
+using Eigen_tf::SyclDevice;
+using Eigen_tf::Tensor;
+using Eigen_tf::TensorMap;
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_broadcast_sycl_fixed(const Eigen::SyclDevice &sycl_device){
+static void test_broadcast_sycl_fixed(const Eigen_tf::SyclDevice &sycl_device){
 
   // BROADCAST test:
   IndexType inDim1=2;
@@ -77,7 +77,7 @@ static void test_broadcast_sycl_fixed(const Eigen::SyclDevice &sycl_device){
 }
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_broadcast_sycl(const Eigen::SyclDevice &sycl_device){
+static void test_broadcast_sycl(const Eigen_tf::SyclDevice &sycl_device){
 
   // BROADCAST test:
   IndexType inDim1=2;
@@ -130,7 +130,7 @@ static void test_broadcast_sycl(const Eigen::SyclDevice &sycl_device){
 template<typename DataType> void sycl_broadcast_test_per_device(const cl::sycl::device& d){
   std::cout << "Running on " << d.template get_info<cl::sycl::info::device::name>() << std::endl;
   QueueInterface queueInterface(d);
-  auto sycl_device = Eigen::SyclDevice(&queueInterface);
+  auto sycl_device = Eigen_tf::SyclDevice(&queueInterface);
   test_broadcast_sycl<DataType, RowMajor, int64_t>(sycl_device);
   test_broadcast_sycl<DataType, ColMajor, int64_t>(sycl_device);
   test_broadcast_sycl_fixed<DataType, RowMajor, int64_t>(sycl_device);
@@ -138,7 +138,7 @@ template<typename DataType> void sycl_broadcast_test_per_device(const cl::sycl::
 }
 
 void test_cxx11_tensor_broadcast_sycl() {
-  for (const auto& device :Eigen::get_sycl_supported_devices()) {
+  for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
     CALL_SUBTEST(sycl_broadcast_test_per_device<float>(device));
   }
 }

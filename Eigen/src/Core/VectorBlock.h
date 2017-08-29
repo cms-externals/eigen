@@ -11,7 +11,7 @@
 #ifndef EIGEN_VECTORBLOCK_H
 #define EIGEN_VECTORBLOCK_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 template<typename VectorType, int Size>
@@ -91,6 +91,6 @@ template<typename VectorType, int Size> class VectorBlock
 };
 
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_VECTORBLOCK_H

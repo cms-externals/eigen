@@ -23,13 +23,13 @@
 #include "main.h"
 #include <unsupported/Eigen/CXX11/Tensor>
 
-using Eigen::array;
-using Eigen::SyclDevice;
-using Eigen::Tensor;
-using Eigen::TensorMap;
+using Eigen_tf::array;
+using Eigen_tf::SyclDevice;
+using Eigen_tf::Tensor;
+using Eigen_tf::TensorMap;
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_simple_shuffling_sycl(const Eigen::SyclDevice& sycl_device)
+static void test_simple_shuffling_sycl(const Eigen_tf::SyclDevice& sycl_device)
 {
   IndexType sizeDim1 = 2;
   IndexType sizeDim2 = 3;
@@ -106,14 +106,14 @@ static void test_simple_shuffling_sycl(const Eigen::SyclDevice& sycl_device)
 
 template<typename DataType, typename dev_Selector> void sycl_shuffling_test_per_device(dev_Selector s){
   QueueInterface queueInterface(s);
-  auto sycl_device = Eigen::SyclDevice(&queueInterface);
+  auto sycl_device = Eigen_tf::SyclDevice(&queueInterface);
   test_simple_shuffling_sycl<DataType, RowMajor, int64_t>(sycl_device);
   test_simple_shuffling_sycl<DataType, ColMajor, int64_t>(sycl_device);
 
 }
 void test_cxx11_tensor_shuffling_sycl()
 {
-  for (const auto& device :Eigen::get_sycl_supported_devices()) {
+  for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
     CALL_SUBTEST(sycl_shuffling_test_per_device<float>(device));
   }
 }

@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_MAPPER_H
 #define EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_MAPPER_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -488,6 +488,6 @@ class TensorContractionInputMapper
 
 
 }  // end namespace internal
-}  // end namespace Eigen
+}  // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_MAPPER_H

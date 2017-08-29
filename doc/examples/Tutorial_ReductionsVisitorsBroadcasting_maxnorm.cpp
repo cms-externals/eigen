@@ -2,7 +2,7 @@
 #include <Eigen/Dense>
 
 using namespace std;
-using namespace Eigen;
+using namespace Eigen_tf;
 int main()
 {
   MatrixXf mat(2,4);

@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_SHUFFLING_H
 #define EIGEN_CXX11_TENSOR_TENSOR_SHUFFLING_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorShuffling
   * \ingroup CXX11_Tensor_Module
@@ -34,7 +34,7 @@ struct traits<TensorShufflingOp<Shuffle, XprType> > : public traits<XprType>
 };
 
 template<typename Shuffle, typename XprType>
-struct eval<TensorShufflingOp<Shuffle, XprType>, Eigen::Dense>
+struct eval<TensorShufflingOp<Shuffle, XprType>, Eigen_tf::Dense>
 {
   typedef const TensorShufflingOp<Shuffle, XprType>& type;
 };
@@ -53,12 +53,12 @@ template<typename Shuffle, typename XprType>
 class TensorShufflingOp : public TensorBase<TensorShufflingOp<Shuffle, XprType> >
 {
   public:
-  typedef typename Eigen::internal::traits<TensorShufflingOp>::Scalar Scalar;
-  typedef typename Eigen::NumTraits<Scalar>::Real RealScalar;
+  typedef typename Eigen_tf::internal::traits<TensorShufflingOp>::Scalar Scalar;
+  typedef typename Eigen_tf::NumTraits<Scalar>::Real RealScalar;
   typedef typename XprType::CoeffReturnType CoeffReturnType;
-  typedef typename Eigen::internal::nested<TensorShufflingOp>::type Nested;
-  typedef typename Eigen::internal::traits<TensorShufflingOp>::StorageKind StorageKind;
-  typedef typename Eigen::internal::traits<TensorShufflingOp>::Index Index;
+  typedef typename Eigen_tf::internal::nested<TensorShufflingOp>::type Nested;
+  typedef typename Eigen_tf::internal::traits<TensorShufflingOp>::StorageKind StorageKind;
+  typedef typename Eigen_tf::internal::traits<TensorShufflingOp>::Index Index;
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorShufflingOp(const XprType& expr, const Shuffle& shuffle)
       : m_xpr(expr), m_shuffle(shuffle) {}
@@ -265,6 +265,6 @@ struct TensorEvaluator<TensorShufflingOp<Shuffle, ArgType>, Device>
 };
 
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_SHUFFLING_H

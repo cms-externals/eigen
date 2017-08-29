@@ -12,7 +12,7 @@
 
 // clang-format off
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorBase
   * \ingroup CXX11_Tensor_Module
@@ -482,7 +482,7 @@ class TensorBase<Derived, ReadOnlyAccessors>
     }
 
     // Contractions.
-    typedef Eigen::IndexPair<Index> DimensionPair;
+    typedef Eigen_tf::IndexPair<Index> DimensionPair;
 
     template<typename OtherDerived, typename Dimensions> EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
     const TensorContractionOp<const Dimensions, const Derived, const OtherDerived>
@@ -1011,6 +1011,6 @@ class TensorBase : public TensorBase<Derived, ReadOnlyAccessors> {
     EIGEN_STRONG_INLINE const Derived& derived() const { return *static_cast<const Derived*>(this); }
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_BASE_H

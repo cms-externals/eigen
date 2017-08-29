@@ -1,22 +1,22 @@
 #include <Eigen/Core>
 #include <iostream>
 
-class MyVectorType : public Eigen::VectorXd
+class MyVectorType : public Eigen_tf::VectorXd
 {
 public:
-    MyVectorType(void):Eigen::VectorXd() {}
+    MyVectorType(void):Eigen_tf::VectorXd() {}
 
     // This constructor allows you to construct MyVectorType from Eigen expressions
     template<typename OtherDerived>
-    MyVectorType(const Eigen::MatrixBase<OtherDerived>& other)
-        : Eigen::VectorXd(other)
+    MyVectorType(const Eigen_tf::MatrixBase<OtherDerived>& other)
+        : Eigen_tf::VectorXd(other)
     { }
 
     // This method allows you to assign Eigen expressions to MyVectorType
     template<typename OtherDerived>
-    MyVectorType& operator=(const Eigen::MatrixBase <OtherDerived>& other)
+    MyVectorType& operator=(const Eigen_tf::MatrixBase <OtherDerived>& other)
     {
-        this->Eigen::VectorXd::operator=(other);
+        this->Eigen_tf::VectorXd::operator=(other);
         return *this;
     }
 };

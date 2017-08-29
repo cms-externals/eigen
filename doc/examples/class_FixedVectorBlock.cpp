@@ -1,20 +1,20 @@
 #include <Eigen/Core>
 #include <iostream>
-using namespace Eigen;
+using namespace Eigen_tf;
 using namespace std;
 
 template<typename Derived>
-Eigen::VectorBlock<Derived, 2>
+Eigen_tf::VectorBlock<Derived, 2>
 firstTwo(MatrixBase<Derived>& v)
 {
-  return Eigen::VectorBlock<Derived, 2>(v.derived(), 0);
+  return Eigen_tf::VectorBlock<Derived, 2>(v.derived(), 0);
 }
 
 template<typename Derived>
-const Eigen::VectorBlock<const Derived, 2>
+const Eigen_tf::VectorBlock<const Derived, 2>
 firstTwo(const MatrixBase<Derived>& v)
 {
-  return Eigen::VectorBlock<const Derived, 2>(v.derived(), 0);
+  return Eigen_tf::VectorBlock<const Derived, 2>(v.derived(), 0);
 }
 
 int main(int, char**)

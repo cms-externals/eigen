@@ -12,7 +12,7 @@
 #endif
 
 using namespace std;
-using namespace Eigen;
+using namespace Eigen_tf;
 
 int main(int argc, char **args)
 {

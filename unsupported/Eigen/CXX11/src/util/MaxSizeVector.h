@@ -10,7 +10,7 @@
 #ifndef EIGEN_FIXEDSIZEVECTOR_H
 #define EIGEN_FIXEDSIZEVECTOR_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class MaxSizeVector
   * \ingroup Core
@@ -136,6 +136,6 @@ class MaxSizeVector {
   T* data_;
 };
 
-}  // namespace Eigen
+}  // namespace Eigen_tf
 
 #endif  // EIGEN_FIXEDSIZEVECTOR_H

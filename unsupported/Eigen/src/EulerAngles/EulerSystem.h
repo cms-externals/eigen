@@ -10,7 +10,7 @@
 #ifndef EIGEN_EULERSYSTEM_H
 #define EIGEN_EULERSYSTEM_H
 
-namespace Eigen
+namespace Eigen_tf
 {
   // Forward declerations
   template <typename _Scalar, class _System>
@@ -274,7 +274,7 @@ namespace Eigen
     }
     
     template <typename _Scalar, class _System>
-    friend class Eigen::EulerAngles;
+    friend class Eigen_tf::EulerAngles;
     
     template<typename System,
             typename Other,

@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_THREADPOOL_SIMPLE_THREAD_POOL_H
 #define EIGEN_CXX11_THREADPOOL_SIMPLE_THREAD_POOL_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 // The implementation of the ThreadPool type ensures that the Schedule method
 // runs the functions it is provided in FIFO order when the scheduling is done
@@ -157,6 +157,6 @@ class SimpleThreadPoolTempl : public ThreadPoolInterface {
 
 typedef SimpleThreadPoolTempl<StlThreadEnvironment> SimpleThreadPool;
 
-}  // namespace Eigen
+}  // namespace Eigen_tf
 
 #endif  // EIGEN_CXX11_THREADPOOL_SIMPLE_THREAD_POOL_H

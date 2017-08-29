@@ -9,7 +9,7 @@
 #ifndef SPARSELU_IMPL_H
 #define SPARSELU_IMPL_H
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace internal {
   
 /** \ingroup SparseLU_Module
@@ -61,6 +61,6 @@ class SparseLUImpl
 }; 
 
 } // end namespace internal
-} // namespace Eigen
+} // namespace Eigen_tf
 
 #endif

@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_COST_MODEL_H
 #define EIGEN_CXX11_TENSOR_TENSOR_COST_MODEL_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorEvaluator
   * \ingroup CXX11_Tensor_Module
@@ -207,6 +207,6 @@ class TensorCostModel {
   }
 };
 
-}  // namespace Eigen
+}  // namespace Eigen_tf
 
 #endif  // EIGEN_CXX11_TENSOR_TENSOR_COST_MODEL_H

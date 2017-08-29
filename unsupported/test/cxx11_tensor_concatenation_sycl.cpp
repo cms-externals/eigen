@@ -20,24 +20,24 @@
 #include "main.h"
 #include <unsupported/Eigen/CXX11/Tensor>
 
-using Eigen::Tensor;
+using Eigen_tf::Tensor;
 
 template<typename DataType, int DataLayout, typename IndexType>
-static void test_simple_concatenation(const Eigen::SyclDevice& sycl_device)
+static void test_simple_concatenation(const Eigen_tf::SyclDevice& sycl_device)
 {
   IndexType leftDim1 = 2;
   IndexType leftDim2 = 3;
   IndexType leftDim3 = 1;
-  Eigen::array<IndexType, 3> leftRange = {{leftDim1, leftDim2, leftDim3}};
+  Eigen_tf::array<IndexType, 3> leftRange = {{leftDim1, leftDim2, leftDim3}};
   IndexType rightDim1 = 2;
   IndexType rightDim2 = 3;
   IndexType rightDim3 = 1;
-  Eigen::array<IndexType, 3> rightRange = {{rightDim1, rightDim2, rightDim3}};
+  Eigen_tf::array<IndexType, 3> rightRange = {{rightDim1, rightDim2, rightDim3}};
 
   //IndexType concatDim1 = 3;
 //	IndexType concatDim2 = 3;
 //	IndexType concatDim3 = 1;
-  //Eigen::array<IndexType, 3> concatRange = {{concatDim1, concatDim2, concatDim3}};
+  //Eigen_tf::array<IndexType, 3> concatRange = {{concatDim1, concatDim2, concatDim3}};
 
   Tensor<DataType, 3, DataLayout, IndexType> left(leftRange);
   Tensor<DataType, 3, DataLayout, IndexType> right(rightRange);
@@ -47,14 +47,14 @@ static void test_simple_concatenation(const Eigen::SyclDevice& sycl_device)
   DataType * gpu_in1_data  = static_cast<DataType*>(sycl_device.allocate(left.dimensions().TotalSize()*sizeof(DataType)));
   DataType * gpu_in2_data  = static_cast<DataType*>(sycl_device.allocate(right.dimensions().TotalSize()*sizeof(DataType)));
 
-  Eigen::TensorMap<Eigen::Tensor<DataType, 3, DataLayout, IndexType>> gpu_in1(gpu_in1_data, leftRange);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 3, DataLayout, IndexType>> gpu_in2(gpu_in2_data, rightRange);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType>> gpu_in1(gpu_in1_data, leftRange);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType>> gpu_in2(gpu_in2_data, rightRange);
   sycl_device.memcpyHostToDevice(gpu_in1_data, left.data(),(left.dimensions().TotalSize())*sizeof(DataType));
   sycl_device.memcpyHostToDevice(gpu_in2_data, right.data(),(right.dimensions().TotalSize())*sizeof(DataType));
   ///
   Tensor<DataType, 3, DataLayout, IndexType> concatenation1(leftDim1+rightDim1, leftDim2, leftDim3);
   DataType * gpu_out_data1 =  static_cast<DataType*>(sycl_device.allocate(concatenation1.dimensions().TotalSize()*sizeof(DataType)));
-  Eigen::TensorMap<Eigen::Tensor<DataType, 3, DataLayout, IndexType>> gpu_out1(gpu_out_data1, concatenation1.dimensions());
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType>> gpu_out1(gpu_out_data1, concatenation1.dimensions());
 
   //concatenation = left.concatenate(right, 0);
   gpu_out1.device(sycl_device) =gpu_in1.concatenate(gpu_in2, 0);
@@ -75,7 +75,7 @@ static void test_simple_concatenation(const Eigen::SyclDevice& sycl_device)
   sycl_device.deallocate(gpu_out_data1);
   Tensor<DataType, 3, DataLayout, IndexType> concatenation2(leftDim1, leftDim2 +rightDim2, leftDim3);
   DataType * gpu_out_data2 =  static_cast<DataType*>(sycl_device.allocate(concatenation2.dimensions().TotalSize()*sizeof(DataType)));
-  Eigen::TensorMap<Eigen::Tensor<DataType, 3, DataLayout, IndexType>> gpu_out2(gpu_out_data2, concatenation2.dimensions());
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType>> gpu_out2(gpu_out_data2, concatenation2.dimensions());
   gpu_out2.device(sycl_device) =gpu_in1.concatenate(gpu_in2, 1);
   sycl_device.memcpyDeviceToHost(concatenation2.data(), gpu_out_data2,(concatenation2.dimensions().TotalSize())*sizeof(DataType));
 
@@ -94,7 +94,7 @@ static void test_simple_concatenation(const Eigen::SyclDevice& sycl_device)
   sycl_device.deallocate(gpu_out_data2);
   Tensor<DataType, 3, DataLayout, IndexType> concatenation3(leftDim1, leftDim2, leftDim3+rightDim3);
   DataType * gpu_out_data3 =  static_cast<DataType*>(sycl_device.allocate(concatenation3.dimensions().TotalSize()*sizeof(DataType)));
-  Eigen::TensorMap<Eigen::Tensor<DataType, 3, DataLayout, IndexType>> gpu_out3(gpu_out_data3, concatenation3.dimensions());
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType>> gpu_out3(gpu_out_data3, concatenation3.dimensions());
   gpu_out3.device(sycl_device) =gpu_in1.concatenate(gpu_in2, 2);
   sycl_device.memcpyDeviceToHost(concatenation3.data(), gpu_out_data3,(concatenation3.dimensions().TotalSize())*sizeof(DataType));
 
@@ -113,20 +113,20 @@ static void test_simple_concatenation(const Eigen::SyclDevice& sycl_device)
   sycl_device.deallocate(gpu_in2_data);
 }
 template<typename DataType, int DataLayout, typename IndexType>
-static void test_concatenation_as_lvalue(const Eigen::SyclDevice& sycl_device)
+static void test_concatenation_as_lvalue(const Eigen_tf::SyclDevice& sycl_device)
 {
 
   IndexType leftDim1 = 2;
   IndexType leftDim2 = 3;
-  Eigen::array<IndexType, 2> leftRange = {{leftDim1, leftDim2}};
+  Eigen_tf::array<IndexType, 2> leftRange = {{leftDim1, leftDim2}};
 
   IndexType rightDim1 = 2;
   IndexType rightDim2 = 3;
-  Eigen::array<IndexType, 2> rightRange = {{rightDim1, rightDim2}};
+  Eigen_tf::array<IndexType, 2> rightRange = {{rightDim1, rightDim2}};
 
   IndexType concatDim1 = 4;
   IndexType concatDim2 = 3;
-  Eigen::array<IndexType, 2> resRange = {{concatDim1, concatDim2}};
+  Eigen_tf::array<IndexType, 2> resRange = {{concatDim1, concatDim2}};
 
   Tensor<DataType, 2, DataLayout, IndexType> left(leftRange);
   Tensor<DataType, 2, DataLayout, IndexType> right(rightRange);
@@ -141,9 +141,9 @@ static void test_concatenation_as_lvalue(const Eigen::SyclDevice& sycl_device)
   DataType * gpu_out_data =  static_cast<DataType*>(sycl_device.allocate(result.dimensions().TotalSize()*sizeof(DataType)));
 
 
-  Eigen::TensorMap<Eigen::Tensor<DataType, 2, DataLayout, IndexType>> gpu_in1(gpu_in1_data, leftRange);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 2, DataLayout, IndexType>> gpu_in2(gpu_in2_data, rightRange);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 2, DataLayout, IndexType>> gpu_out(gpu_out_data, resRange);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType>> gpu_in1(gpu_in1_data, leftRange);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType>> gpu_in2(gpu_in2_data, rightRange);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType>> gpu_out(gpu_out_data, resRange);
 
   sycl_device.memcpyHostToDevice(gpu_in1_data, left.data(),(left.dimensions().TotalSize())*sizeof(DataType));
   sycl_device.memcpyHostToDevice(gpu_in2_data, right.data(),(right.dimensions().TotalSize())*sizeof(DataType));
@@ -168,13 +168,13 @@ static void test_concatenation_as_lvalue(const Eigen::SyclDevice& sycl_device)
 
 template <typename DataType, typename Dev_selector> void tensorConcat_perDevice(Dev_selector s){
   QueueInterface queueInterface(s);
-  auto sycl_device = Eigen::SyclDevice(&queueInterface);
+  auto sycl_device = Eigen_tf::SyclDevice(&queueInterface);
   test_simple_concatenation<DataType, RowMajor, int64_t>(sycl_device);
   test_simple_concatenation<DataType, ColMajor, int64_t>(sycl_device);
   test_concatenation_as_lvalue<DataType, ColMajor, int64_t>(sycl_device);
 }
 void test_cxx11_tensor_concatenation_sycl() {
-  for (const auto& device :Eigen::get_sycl_supported_devices()) {
+  for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
     CALL_SUBTEST(tensorConcat_perDevice<float>(device));
   }
 }

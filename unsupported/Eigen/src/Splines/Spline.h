@@ -12,7 +12,7 @@
 
 #include "SplineFwd.h"
 
-namespace Eigen
+namespace Eigen_tf
 {
     /**
      * \ingroup Splines_Module

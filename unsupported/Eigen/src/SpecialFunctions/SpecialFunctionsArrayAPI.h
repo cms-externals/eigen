@@ -11,7 +11,7 @@
 #ifndef EIGEN_SPECIALFUNCTIONS_ARRAYAPI_H
 #define EIGEN_SPECIALFUNCTIONS_ARRAYAPI_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \cpp11 \returns an expression of the coefficient-wise igamma(\a a, \a x) to the given arrays.
   *
@@ -21,13 +21,13 @@ namespace Eigen {
   * or float/double in non c++11 mode, the user has to provide implementations of igammac(T,T) for any scalar
   * type T to be supported.
   *
-  * \sa Eigen::igammac(), Eigen::lgamma()
+  * \sa Eigen_tf::igammac(), Eigen_tf::lgamma()
   */
 template<typename Derived,typename ExponentDerived>
-inline const Eigen::CwiseBinaryOp<Eigen::internal::scalar_igamma_op<typename Derived::Scalar>, const Derived, const ExponentDerived>
-igamma(const Eigen::ArrayBase<Derived>& a, const Eigen::ArrayBase<ExponentDerived>& x)
+inline const Eigen_tf::CwiseBinaryOp<Eigen_tf::internal::scalar_igamma_op<typename Derived::Scalar>, const Derived, const ExponentDerived>
+igamma(const Eigen_tf::ArrayBase<Derived>& a, const Eigen_tf::ArrayBase<ExponentDerived>& x)
 {
-  return Eigen::CwiseBinaryOp<Eigen::internal::scalar_igamma_op<typename Derived::Scalar>, const Derived, const ExponentDerived>(
+  return Eigen_tf::CwiseBinaryOp<Eigen_tf::internal::scalar_igamma_op<typename Derived::Scalar>, const Derived, const ExponentDerived>(
     a.derived(),
     x.derived()
   );
@@ -41,13 +41,13 @@ igamma(const Eigen::ArrayBase<Derived>& a, const Eigen::ArrayBase<ExponentDerive
   * or float/double in non c++11 mode, the user has to provide implementations of igammac(T,T) for any scalar
   * type T to be supported.
   *
-  * \sa Eigen::igamma(), Eigen::lgamma()
+  * \sa Eigen_tf::igamma(), Eigen_tf::lgamma()
   */
 template<typename Derived,typename ExponentDerived>
-inline const Eigen::CwiseBinaryOp<Eigen::internal::scalar_igammac_op<typename Derived::Scalar>, const Derived, const ExponentDerived>
-igammac(const Eigen::ArrayBase<Derived>& a, const Eigen::ArrayBase<ExponentDerived>& x)
+inline const Eigen_tf::CwiseBinaryOp<Eigen_tf::internal::scalar_igammac_op<typename Derived::Scalar>, const Derived, const ExponentDerived>
+igammac(const Eigen_tf::ArrayBase<Derived>& a, const Eigen_tf::ArrayBase<ExponentDerived>& x)
 {
-  return Eigen::CwiseBinaryOp<Eigen::internal::scalar_igammac_op<typename Derived::Scalar>, const Derived, const ExponentDerived>(
+  return Eigen_tf::CwiseBinaryOp<Eigen_tf::internal::scalar_igammac_op<typename Derived::Scalar>, const Derived, const ExponentDerived>(
     a.derived(),
     x.derived()
   );
@@ -61,15 +61,15 @@ igammac(const Eigen::ArrayBase<Derived>& a, const Eigen::ArrayBase<ExponentDeriv
   * or float/double in non c++11 mode, the user has to provide implementations of polygamma(T,T) for any scalar
   * type T to be supported.
   *
-  * \sa Eigen::digamma()
+  * \sa Eigen_tf::digamma()
   */
 // * \warning Be careful with the order of the parameters: x.polygamma(n) is equivalent to polygamma(n,x)
 // * \sa ArrayBase::polygamma()
 template<typename DerivedN,typename DerivedX>
-inline const Eigen::CwiseBinaryOp<Eigen::internal::scalar_polygamma_op<typename DerivedX::Scalar>, const DerivedN, const DerivedX>
-polygamma(const Eigen::ArrayBase<DerivedN>& n, const Eigen::ArrayBase<DerivedX>& x)
+inline const Eigen_tf::CwiseBinaryOp<Eigen_tf::internal::scalar_polygamma_op<typename DerivedX::Scalar>, const DerivedN, const DerivedX>
+polygamma(const Eigen_tf::ArrayBase<DerivedN>& n, const Eigen_tf::ArrayBase<DerivedX>& x)
 {
-  return Eigen::CwiseBinaryOp<Eigen::internal::scalar_polygamma_op<typename DerivedX::Scalar>, const DerivedN, const DerivedX>(
+  return Eigen_tf::CwiseBinaryOp<Eigen_tf::internal::scalar_polygamma_op<typename DerivedX::Scalar>, const DerivedN, const DerivedX>(
     n.derived(),
     x.derived()
   );
@@ -83,13 +83,13 @@ polygamma(const Eigen::ArrayBase<DerivedN>& n, const Eigen::ArrayBase<DerivedX>&
   * or float/double in non c++11 mode, the user has to provide implementations of betainc(T,T,T) for any scalar
   * type T to be supported.
   *
-  * \sa Eigen::betainc(), Eigen::lgamma()
+  * \sa Eigen_tf::betainc(), Eigen_tf::lgamma()
   */
 template<typename ArgADerived, typename ArgBDerived, typename ArgXDerived>
-inline const Eigen::CwiseTernaryOp<Eigen::internal::scalar_betainc_op<typename ArgXDerived::Scalar>, const ArgADerived, const ArgBDerived, const ArgXDerived>
-betainc(const Eigen::ArrayBase<ArgADerived>& a, const Eigen::ArrayBase<ArgBDerived>& b, const Eigen::ArrayBase<ArgXDerived>& x)
+inline const Eigen_tf::CwiseTernaryOp<Eigen_tf::internal::scalar_betainc_op<typename ArgXDerived::Scalar>, const ArgADerived, const ArgBDerived, const ArgXDerived>
+betainc(const Eigen_tf::ArrayBase<ArgADerived>& a, const Eigen_tf::ArrayBase<ArgBDerived>& b, const Eigen_tf::ArrayBase<ArgXDerived>& x)
 {
-  return Eigen::CwiseTernaryOp<Eigen::internal::scalar_betainc_op<typename ArgXDerived::Scalar>, const ArgADerived, const ArgBDerived, const ArgXDerived>(
+  return Eigen_tf::CwiseTernaryOp<Eigen_tf::internal::scalar_betainc_op<typename ArgXDerived::Scalar>, const ArgADerived, const ArgBDerived, const ArgXDerived>(
     a.derived(),
     b.derived(),
     x.derived()
@@ -110,15 +110,15 @@ betainc(const Eigen::ArrayBase<ArgADerived>& a, const Eigen::ArrayBase<ArgBDeriv
   * \sa ArrayBase::zeta()
   */
 template<typename DerivedX,typename DerivedQ>
-inline const Eigen::CwiseBinaryOp<Eigen::internal::scalar_zeta_op<typename DerivedX::Scalar>, const DerivedX, const DerivedQ>
-zeta(const Eigen::ArrayBase<DerivedX>& x, const Eigen::ArrayBase<DerivedQ>& q)
+inline const Eigen_tf::CwiseBinaryOp<Eigen_tf::internal::scalar_zeta_op<typename DerivedX::Scalar>, const DerivedX, const DerivedQ>
+zeta(const Eigen_tf::ArrayBase<DerivedX>& x, const Eigen_tf::ArrayBase<DerivedQ>& q)
 {
-  return Eigen::CwiseBinaryOp<Eigen::internal::scalar_zeta_op<typename DerivedX::Scalar>, const DerivedX, const DerivedQ>(
+  return Eigen_tf::CwiseBinaryOp<Eigen_tf::internal::scalar_zeta_op<typename DerivedX::Scalar>, const DerivedX, const DerivedQ>(
     x.derived(),
     q.derived()
   );
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SPECIALFUNCTIONS_ARRAYAPI_H

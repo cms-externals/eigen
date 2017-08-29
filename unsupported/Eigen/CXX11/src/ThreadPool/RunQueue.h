@@ -11,7 +11,7 @@
 #define EIGEN_CXX11_THREADPOOL_RUNQUEUE_H_
 
 
-namespace Eigen {
+namespace Eigen_tf {
 
 // RunQueue is a fixed-size, partially non-blocking deque or Work items.
 // Operations on front of the queue must be done by a single thread (owner),
@@ -212,6 +212,6 @@ class RunQueue {
   void operator=(const RunQueue&) = delete;
 };
 
-}  // namespace Eigen
+}  // namespace Eigen_tf
 
 #endif  // EIGEN_CXX11_THREADPOOL_RUNQUEUE_H_

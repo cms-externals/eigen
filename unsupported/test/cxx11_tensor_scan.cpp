@@ -12,7 +12,7 @@
 #include <numeric>
 #include <Eigen/CXX11/Tensor>
 
-using Eigen::Tensor;
+using Eigen_tf::Tensor;
 
 template <int DataLayout, typename Type=float, bool Exclusive = false>
 static void test_1d_scan()

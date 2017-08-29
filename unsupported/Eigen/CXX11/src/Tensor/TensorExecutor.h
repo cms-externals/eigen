@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_EXECUTOR_H
 #define EIGEN_CXX11_TENSOR_TENSOR_EXECUTOR_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorExecutor
   * \ingroup CXX11_Tensor_Module
@@ -283,6 +283,6 @@ public:
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_EXECUTOR_H

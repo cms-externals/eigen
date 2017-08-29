@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_FUNCTORS_H
 #define EIGEN_CXX11_TENSOR_TENSOR_FUNCTORS_H
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace internal {
 
 
@@ -199,25 +199,25 @@ struct reducer_traits<MeanReducer<T>, Device> {
 template <typename T, bool IsMax = true, bool IsInteger = true>
 struct MinMaxBottomValue {
   EIGEN_DEVICE_FUNC static EIGEN_STRONG_INLINE T bottom_value() {
-    return Eigen::NumTraits<T>::lowest();
+    return Eigen_tf::NumTraits<T>::lowest();
   }
 };
 template <typename T>
 struct MinMaxBottomValue<T, true, false> {
   EIGEN_DEVICE_FUNC static EIGEN_STRONG_INLINE T bottom_value() {
-    return -Eigen::NumTraits<T>::infinity();
+    return -Eigen_tf::NumTraits<T>::infinity();
   }
 };
 template <typename T>
 struct MinMaxBottomValue<T, false, true> {
   EIGEN_DEVICE_FUNC static EIGEN_STRONG_INLINE T bottom_value() {
-    return Eigen::NumTraits<T>::highest();
+    return Eigen_tf::NumTraits<T>::highest();
   }
 };
 template <typename T>
 struct MinMaxBottomValue<T, false, false> {
   EIGEN_DEVICE_FUNC static EIGEN_STRONG_INLINE T bottom_value() {
-    return Eigen::NumTraits<T>::infinity();
+    return Eigen_tf::NumTraits<T>::infinity();
   }
 };
 
@@ -235,7 +235,7 @@ template <typename T> struct MaxReducer
     (*accum) = pmax<Packet>(*accum, p);
   }
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE T initialize() const {
-    return MinMaxBottomValue<T, true, Eigen::NumTraits<T>::IsInteger>::bottom_value();
+    return MinMaxBottomValue<T, true, Eigen_tf::NumTraits<T>::IsInteger>::bottom_value();
   }
   template <typename Packet>
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Packet initializePacket() const {
@@ -276,7 +276,7 @@ template <typename T> struct MinReducer
     (*accum) = pmin<Packet>(*accum, p);
   }
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE T initialize() const {
-    return MinMaxBottomValue<T, false, Eigen::NumTraits<T>::IsInteger>::bottom_value();
+    return MinMaxBottomValue<T, false, Eigen_tf::NumTraits<T>::IsInteger>::bottom_value();
   }
   template <typename Packet>
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Packet initializePacket() const {
@@ -488,6 +488,6 @@ struct functor_traits<GaussianGenerator<T, Index, NumDims> > {
 };
 
 } // end namespace internal
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_FUNCTORS_H

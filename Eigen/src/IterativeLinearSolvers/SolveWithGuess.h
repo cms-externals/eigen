@@ -10,7 +10,7 @@
 #ifndef EIGEN_SOLVEWITHGUESS_H
 #define EIGEN_SOLVEWITHGUESS_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 template<typename Decomposition, typename RhsType, typename GuessType> class SolveWithGuess;
   
@@ -110,6 +110,6 @@ struct Assignment<DstXprType, SolveWithGuess<DecType,RhsType,GuessType>, interna
 
 } // end namepsace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SOLVEWITHGUESS_H

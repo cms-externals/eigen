@@ -13,7 +13,7 @@
 #define EIGEN_MINRES_H_
 
 
-namespace Eigen {
+namespace Eigen_tf {
     
     namespace internal {
         
@@ -283,7 +283,7 @@ namespace Eigen {
         
     };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_MINRES_H
 

@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_THREADPOOL_EVENTCOUNT_H_
 #define EIGEN_CXX11_THREADPOOL_EVENTCOUNT_H_
 
-namespace Eigen {
+namespace Eigen_tf {
 
 // EventCount allows to wait for arbitrary predicates in non-blocking
 // algorithms. Think of condition variable, but wait predicate does not need to
@@ -228,6 +228,6 @@ class EventCount {
   void operator=(const EventCount&) = delete;
 };
 
-}  // namespace Eigen
+}  // namespace Eigen_tf
 
 #endif  // EIGEN_CXX11_THREADPOOL_EVENTCOUNT_H_

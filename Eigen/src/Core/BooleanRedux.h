@@ -10,7 +10,7 @@
 #ifndef EIGEN_ALLANDANY_H
 #define EIGEN_ALLANDANY_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -124,7 +124,7 @@ EIGEN_DEVICE_FUNC inline bool DenseBase<Derived>::any() const
   * \sa all(), any()
   */
 template<typename Derived>
-EIGEN_DEVICE_FUNC inline Eigen::Index DenseBase<Derived>::count() const
+EIGEN_DEVICE_FUNC inline Eigen_tf::Index DenseBase<Derived>::count() const
 {
   return derived().template cast<bool>().template cast<Index>().sum();
 }
@@ -157,6 +157,6 @@ inline bool DenseBase<Derived>::allFinite() const
 #endif
 }
     
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_ALLANDANY_H

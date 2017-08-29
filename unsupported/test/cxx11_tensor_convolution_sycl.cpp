@@ -25,15 +25,15 @@
 #include <unsupported/Eigen/CXX11/Tensor>
 #include <iomanip>
 
-using Eigen::array;
-using Eigen::SyclDevice;
-using Eigen::Tensor;
-using Eigen::TensorMap;
+using Eigen_tf::array;
+using Eigen_tf::SyclDevice;
+using Eigen_tf::Tensor;
+using Eigen_tf::TensorMap;
 static const float error_threshold =1e-4f;
 
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_larg_expr1D(const Eigen::SyclDevice& sycl_device)
+static void test_larg_expr1D(const Eigen_tf::SyclDevice& sycl_device)
 {
   IndexType indim0 =53;
   IndexType indim1= 55;
@@ -41,16 +41,16 @@ static void test_larg_expr1D(const Eigen::SyclDevice& sycl_device)
   IndexType outdim0=50;
   IndexType outdim1=55;
   IndexType outdim2=51;
-  Eigen::array<IndexType, 3> input_dims = {{indim0, indim1, indim2}};
-  Eigen::array<IndexType, 1> kernel_dims = {{4}};
-  Eigen::array<IndexType, 3> result_dims = {{outdim0, outdim1, outdim2}};
+  Eigen_tf::array<IndexType, 3> input_dims = {{indim0, indim1, indim2}};
+  Eigen_tf::array<IndexType, 1> kernel_dims = {{4}};
+  Eigen_tf::array<IndexType, 3> result_dims = {{outdim0, outdim1, outdim2}};
 
   Tensor<DataType, 3, DataLayout, IndexType> input(input_dims);
   Tensor<DataType, 1, DataLayout,IndexType> kernel(kernel_dims);
   Tensor<DataType, 3, DataLayout,IndexType> result(result_dims);
   Tensor<DataType, 3, DataLayout,IndexType> result_host(result_dims);
 
-  Eigen::array<IndexType, 1> dims3{{0}};
+  Eigen_tf::array<IndexType, 1> dims3{{0}};
 
   input.setRandom();
   kernel.setRandom();
@@ -65,9 +65,9 @@ static void test_larg_expr1D(const Eigen::SyclDevice& sycl_device)
   DataType * d_kernel  = static_cast<DataType*>(sycl_device.allocate(kernel_bytes));
   DataType * d_result =  static_cast<DataType*>(sycl_device.allocate(result_bytes));
 
-  Eigen::TensorMap<Eigen::Tensor<DataType, 3, DataLayout, IndexType> > gpu_input(d_input, input_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 1, DataLayout, IndexType> > gpu_kernel(d_kernel, kernel_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 3, DataLayout, IndexType> > gpu_result(d_result, result_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType> > gpu_input(d_input, input_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 1, DataLayout, IndexType> > gpu_kernel(d_kernel, kernel_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType> > gpu_result(d_result, result_dims);
   sycl_device.memcpyHostToDevice(d_input, input.data(), input_bytes);
   sycl_device.memcpyHostToDevice(d_kernel, kernel.data(), kernel_bytes);
 
@@ -79,7 +79,7 @@ static void test_larg_expr1D(const Eigen::SyclDevice& sycl_device)
 for(IndexType i=0; i< outdim0; i++ ){
   for(IndexType j=0; j< outdim1; j++ ){
     for(IndexType k=0; k< outdim2; k++ ){
-      if (!(Eigen::internal::isApprox(result(i,j,k), result_host(i,j,k), error_threshold))) {
+      if (!(Eigen_tf::internal::isApprox(result(i,j,k), result_host(i,j,k), error_threshold))) {
         std::cout <<std::setprecision(16)<< "mismatch detected at index  ( "<< i  << " , "  << j  << ", " << k << " ) " << " \t " << result(i,j,k) << " vs "<<  result_host(i,j,k) << std::endl;
         assert(false);
       }
@@ -94,7 +94,7 @@ for(IndexType i=0; i< outdim0; i++ ){
 
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_larg_expr2D(const Eigen::SyclDevice& sycl_device)
+static void test_larg_expr2D(const Eigen_tf::SyclDevice& sycl_device)
 {
   IndexType indim0 =53;
   IndexType indim1= 55;
@@ -102,16 +102,16 @@ static void test_larg_expr2D(const Eigen::SyclDevice& sycl_device)
   IndexType outdim0=50;
   IndexType outdim1=51;
   IndexType outdim2=51;
-  Eigen::array<IndexType, 3> input_dims = {{indim0, indim1, indim2}};
-  Eigen::array<IndexType, 2> kernel_dims = {{4,5}};
-  Eigen::array<IndexType, 3> result_dims = {{outdim0, outdim1, outdim2}};
+  Eigen_tf::array<IndexType, 3> input_dims = {{indim0, indim1, indim2}};
+  Eigen_tf::array<IndexType, 2> kernel_dims = {{4,5}};
+  Eigen_tf::array<IndexType, 3> result_dims = {{outdim0, outdim1, outdim2}};
 
   Tensor<DataType, 3, DataLayout, IndexType> input(input_dims);
   Tensor<DataType, 2, DataLayout,IndexType> kernel(kernel_dims);
   Tensor<DataType, 3, DataLayout,IndexType> result(result_dims);
   Tensor<DataType, 3, DataLayout,IndexType> result_host(result_dims);
 
-  Eigen::array<IndexType, 2> dims3{{0,1}};
+  Eigen_tf::array<IndexType, 2> dims3{{0,1}};
 
   input.setRandom();
   kernel.setRandom();
@@ -126,9 +126,9 @@ static void test_larg_expr2D(const Eigen::SyclDevice& sycl_device)
   DataType * d_kernel  = static_cast<DataType*>(sycl_device.allocate(kernel_bytes));
   DataType * d_result =  static_cast<DataType*>(sycl_device.allocate(result_bytes));
 
-  Eigen::TensorMap<Eigen::Tensor<DataType, 3, DataLayout, IndexType> > gpu_input(d_input, input_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 2, DataLayout, IndexType> > gpu_kernel(d_kernel, kernel_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 3, DataLayout, IndexType> > gpu_result(d_result, result_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType> > gpu_input(d_input, input_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType> > gpu_kernel(d_kernel, kernel_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType> > gpu_result(d_result, result_dims);
   sycl_device.memcpyHostToDevice(d_input, input.data(), input_bytes);
   sycl_device.memcpyHostToDevice(d_kernel, kernel.data(), kernel_bytes);
 
@@ -140,7 +140,7 @@ static void test_larg_expr2D(const Eigen::SyclDevice& sycl_device)
 for(IndexType i=0; i< outdim0; i++ ){
   for(IndexType j=0; j< outdim1; j++ ){
     for(IndexType k=0; k< outdim2; k++ ){
-      if (!(Eigen::internal::isApprox(result(i,j,k), result_host(i,j,k), error_threshold))) {
+      if (!(Eigen_tf::internal::isApprox(result(i,j,k), result_host(i,j,k), error_threshold))) {
         std::cout <<std::setprecision(16)<< "mismatch detected at index  ( "<< i  << " , "  << j  << ", " << k << " ) " << " \t " << result(i,j,k) << " vs "<<  result_host(i,j,k) << std::endl;
         assert(false);
       }
@@ -155,7 +155,7 @@ for(IndexType i=0; i< outdim0; i++ ){
 
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_larg_expr3D(const Eigen::SyclDevice& sycl_device)
+static void test_larg_expr3D(const Eigen_tf::SyclDevice& sycl_device)
 {
   IndexType indim0 =53;
   IndexType indim1= 55;
@@ -163,16 +163,16 @@ static void test_larg_expr3D(const Eigen::SyclDevice& sycl_device)
   IndexType outdim0=50;
   IndexType outdim1=51;
   IndexType outdim2=49;
-  Eigen::array<IndexType, 3> input_dims = {{indim0, indim1, indim2}};
-  Eigen::array<IndexType, 3> kernel_dims = {{4,5,3}};
-  Eigen::array<IndexType, 3> result_dims = {{outdim0, outdim1, outdim2}};
+  Eigen_tf::array<IndexType, 3> input_dims = {{indim0, indim1, indim2}};
+  Eigen_tf::array<IndexType, 3> kernel_dims = {{4,5,3}};
+  Eigen_tf::array<IndexType, 3> result_dims = {{outdim0, outdim1, outdim2}};
 
   Tensor<DataType, 3, DataLayout, IndexType> input(input_dims);
   Tensor<DataType, 3, DataLayout,IndexType> kernel(kernel_dims);
   Tensor<DataType, 3, DataLayout,IndexType> result(result_dims);
   Tensor<DataType, 3, DataLayout,IndexType> result_host(result_dims);
 
-  Eigen::array<IndexType, 3> dims3{{0,1,2}};
+  Eigen_tf::array<IndexType, 3> dims3{{0,1,2}};
 
   input.setRandom();
   kernel.setRandom();
@@ -187,9 +187,9 @@ static void test_larg_expr3D(const Eigen::SyclDevice& sycl_device)
   DataType * d_kernel  = static_cast<DataType*>(sycl_device.allocate(kernel_bytes));
   DataType * d_result =  static_cast<DataType*>(sycl_device.allocate(result_bytes));
 
-  Eigen::TensorMap<Eigen::Tensor<DataType, 3, DataLayout, IndexType> > gpu_input(d_input, input_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 3, DataLayout, IndexType> > gpu_kernel(d_kernel, kernel_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 3, DataLayout, IndexType> > gpu_result(d_result, result_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType> > gpu_input(d_input, input_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType> > gpu_kernel(d_kernel, kernel_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType> > gpu_result(d_result, result_dims);
   sycl_device.memcpyHostToDevice(d_input, input.data(), input_bytes);
   sycl_device.memcpyHostToDevice(d_kernel, kernel.data(), kernel_bytes);
 
@@ -201,7 +201,7 @@ static void test_larg_expr3D(const Eigen::SyclDevice& sycl_device)
 for(IndexType i=0; i< outdim0; i++ ){
   for(IndexType j=0; j< outdim1; j++ ){
     for(IndexType k=0; k< outdim2; k++ ){
-      if (!(Eigen::internal::isApprox(result(i,j,k), result_host(i,j,k), error_threshold))) {
+      if (!(Eigen_tf::internal::isApprox(result(i,j,k), result_host(i,j,k), error_threshold))) {
         std::cout <<std::setprecision(16)<< "mismatch detected at index  ( "<< i  << " , "  << j  << ", " << k << " ) " << " \t " << result(i,j,k) << " vs "<<  result_host(i,j,k) << std::endl;
         assert(false);
       }
@@ -216,17 +216,17 @@ for(IndexType i=0; i< outdim0; i++ ){
 
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_evals(const Eigen::SyclDevice& sycl_device)
+static void test_evals(const Eigen_tf::SyclDevice& sycl_device)
 {
-  Eigen::array<IndexType, 2> input_dims = {{3, 3}};
-  Eigen::array<IndexType, 1> kernel_dims = {{2}};
-  Eigen::array<IndexType, 2> result_dims = {{2, 3}};
+  Eigen_tf::array<IndexType, 2> input_dims = {{3, 3}};
+  Eigen_tf::array<IndexType, 1> kernel_dims = {{2}};
+  Eigen_tf::array<IndexType, 2> result_dims = {{2, 3}};
 
   Tensor<DataType, 2, DataLayout, IndexType> input(input_dims);
   Tensor<DataType, 1, DataLayout,IndexType> kernel(kernel_dims);
   Tensor<DataType, 2, DataLayout,IndexType> result(result_dims);
 
-  Eigen::array<IndexType, 1> dims3{{0}};
+  Eigen_tf::array<IndexType, 1> dims3{{0}};
 
   input.setRandom();
   kernel.setRandom();
@@ -240,9 +240,9 @@ static void test_evals(const Eigen::SyclDevice& sycl_device)
   DataType * d_kernel  = static_cast<DataType*>(sycl_device.allocate(kernel_bytes));
   DataType * d_result =  static_cast<DataType*>(sycl_device.allocate(result_bytes));
 
-  Eigen::TensorMap<Eigen::Tensor<DataType, 2, DataLayout, IndexType> > gpu_input(d_input, input_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 1, DataLayout, IndexType> > gpu_kernel(d_kernel, kernel_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 2, DataLayout, IndexType> > gpu_result(d_result, result_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType> > gpu_input(d_input, input_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 1, DataLayout, IndexType> > gpu_kernel(d_kernel, kernel_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType> > gpu_result(d_result, result_dims);
   sycl_device.memcpyHostToDevice(d_input, input.data(), input_bytes);
   sycl_device.memcpyHostToDevice(d_kernel, kernel.data(), kernel_bytes);
 
@@ -262,11 +262,11 @@ static void test_evals(const Eigen::SyclDevice& sycl_device)
 }
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_expr(const Eigen::SyclDevice& sycl_device)
+static void test_expr(const Eigen_tf::SyclDevice& sycl_device)
 {
-  Eigen::array<IndexType, 2> input_dims = {{3, 3}};
-  Eigen::array<IndexType, 2> kernel_dims = {{2, 2}};
-  Eigen::array<IndexType, 2> result_dims = {{2, 2}};
+  Eigen_tf::array<IndexType, 2> input_dims = {{3, 3}};
+  Eigen_tf::array<IndexType, 2> kernel_dims = {{2, 2}};
+  Eigen_tf::array<IndexType, 2> result_dims = {{2, 2}};
 
   Tensor<DataType, 2, DataLayout, IndexType> input(input_dims);
   Tensor<DataType, 2, DataLayout, IndexType> kernel(kernel_dims);
@@ -274,7 +274,7 @@ static void test_expr(const Eigen::SyclDevice& sycl_device)
 
   input.setRandom();
   kernel.setRandom();
-  Eigen::array<IndexType, 2> dims;
+  Eigen_tf::array<IndexType, 2> dims;
   dims[0] = 0;
   dims[1] = 1;
 
@@ -286,9 +286,9 @@ static void test_expr(const Eigen::SyclDevice& sycl_device)
   DataType * d_kernel  = static_cast<DataType*>(sycl_device.allocate(kernel_bytes));
   DataType * d_result =  static_cast<DataType*>(sycl_device.allocate(result_bytes));
 
-  Eigen::TensorMap<Eigen::Tensor<DataType, 2, DataLayout,IndexType> > gpu_input(d_input, input_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 2, DataLayout,IndexType> > gpu_kernel(d_kernel, kernel_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 2, DataLayout,IndexType> > gpu_result(d_result, result_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 2, DataLayout,IndexType> > gpu_input(d_input, input_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 2, DataLayout,IndexType> > gpu_kernel(d_kernel, kernel_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 2, DataLayout,IndexType> > gpu_result(d_result, result_dims);
   sycl_device.memcpyHostToDevice(d_input, input.data(), input_bytes);
   sycl_device.memcpyHostToDevice(d_kernel, kernel.data(), kernel_bytes);
 
@@ -311,17 +311,17 @@ static void test_expr(const Eigen::SyclDevice& sycl_device)
 
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_modes(const Eigen::SyclDevice& sycl_device){
+static void test_modes(const Eigen_tf::SyclDevice& sycl_device){
 
-Eigen::array<IndexType, 1> input_dims = {{3}};
-Eigen::array<IndexType, 1> kernel_dims = {{3}};
+Eigen_tf::array<IndexType, 1> input_dims = {{3}};
+Eigen_tf::array<IndexType, 1> kernel_dims = {{3}};
 
 Tensor<DataType, 1, DataLayout, IndexType> input(input_dims);
 Tensor<DataType, 1, DataLayout, IndexType> kernel(kernel_dims);
 
 input.setRandom();
 kernel.setRandom();
-Eigen::array<IndexType, 1> dims;
+Eigen_tf::array<IndexType, 1> dims;
 dims[0] = 0;
 
   input(0) = 1.0f;
@@ -331,7 +331,7 @@ dims[0] = 0;
   kernel(1) = 1.0f;
   kernel(2) = 0.0f;
 
-  Eigen::array<std::pair<IndexType, IndexType>, 1> padding;
+  Eigen_tf::array<std::pair<IndexType, IndexType>, 1> padding;
 
   // Emulate VALID mode (as defined in
   // http://docs.scipy.org/doc/numpy/reference/generated/numpy.convolve.html).
@@ -346,9 +346,9 @@ dims[0] = 0;
   DataType * d_kernel  = static_cast<DataType*>(sycl_device.allocate(kernel_bytes));
   DataType * d_valid =  static_cast<DataType*>(sycl_device.allocate(valid_bytes));
 
-  Eigen::TensorMap<Eigen::Tensor<DataType, 1, DataLayout,IndexType> > gpu_input(d_input, input_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 1, DataLayout,IndexType> > gpu_kernel(d_kernel, kernel_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 1, DataLayout,IndexType> > gpu_valid(d_valid, valid.dimensions());
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 1, DataLayout,IndexType> > gpu_input(d_input, input_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 1, DataLayout,IndexType> > gpu_kernel(d_kernel, kernel_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 1, DataLayout,IndexType> > gpu_valid(d_valid, valid.dimensions());
   sycl_device.memcpyHostToDevice(d_input, input.data(), input_bytes);
   sycl_device.memcpyHostToDevice(d_kernel, kernel.data(), kernel_bytes);
 
@@ -364,7 +364,7 @@ dims[0] = 0;
   Tensor<DataType, 1, DataLayout, IndexType> same(3);
   std::size_t same_bytes = same.size() * sizeof(DataType);
   DataType * d_same =  static_cast<DataType*>(sycl_device.allocate(same_bytes));
-  Eigen::TensorMap<Eigen::Tensor<DataType, 1, DataLayout,IndexType> > gpu_same(d_same, same.dimensions());
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 1, DataLayout,IndexType> > gpu_same(d_same, same.dimensions());
   gpu_same.device(sycl_device)=gpu_input.pad(padding).convolve(gpu_kernel, dims);
   sycl_device.memcpyDeviceToHost(same.data(), d_same, same_bytes);
 
@@ -380,7 +380,7 @@ dims[0] = 0;
   Tensor<DataType, 1, DataLayout, IndexType> full(5);
   std::size_t full_bytes = full.size() * sizeof(DataType);
   DataType * d_full =  static_cast<DataType*>(sycl_device.allocate(full_bytes));
-  Eigen::TensorMap<Eigen::Tensor<DataType, 1, DataLayout,IndexType> > gpu_full(d_full, full.dimensions());
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 1, DataLayout,IndexType> > gpu_full(d_full, full.dimensions());
   gpu_full.device(sycl_device)=gpu_input.pad(padding).convolve(gpu_kernel, dims);
   sycl_device.memcpyDeviceToHost(full.data(), d_full, full_bytes);
 
@@ -400,10 +400,10 @@ dims[0] = 0;
 }
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_strides(const Eigen::SyclDevice& sycl_device){
+static void test_strides(const Eigen_tf::SyclDevice& sycl_device){
 
-  Eigen::array<IndexType, 1> input_dims = {{13}};
-  Eigen::array<IndexType, 1> kernel_dims = {{3}};
+  Eigen_tf::array<IndexType, 1> input_dims = {{13}};
+  Eigen_tf::array<IndexType, 1> kernel_dims = {{3}};
 
   Tensor<DataType, 1, DataLayout, IndexType> input(input_dims);
   Tensor<DataType, 1, DataLayout, IndexType> kernel(kernel_dims);
@@ -411,12 +411,12 @@ static void test_strides(const Eigen::SyclDevice& sycl_device){
 
   input.setRandom();
   kernel.setRandom();
-  Eigen::array<IndexType, 1> dims;
+  Eigen_tf::array<IndexType, 1> dims;
   dims[0] = 0;
 
-  Eigen::array<IndexType, 1> stride_of_3;
+  Eigen_tf::array<IndexType, 1> stride_of_3;
   stride_of_3[0] = 3;
-  Eigen::array<IndexType, 1> stride_of_2;
+  Eigen_tf::array<IndexType, 1> stride_of_2;
   stride_of_2[0] = 2;
 
   std::size_t input_bytes = input.size()  * sizeof(DataType);
@@ -427,9 +427,9 @@ static void test_strides(const Eigen::SyclDevice& sycl_device){
   DataType * d_kernel  = static_cast<DataType*>(sycl_device.allocate(kernel_bytes));
   DataType * d_result =  static_cast<DataType*>(sycl_device.allocate(result_bytes));
 
-  Eigen::TensorMap<Eigen::Tensor<DataType, 1, DataLayout,IndexType> > gpu_input(d_input, input_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 1, DataLayout,IndexType> > gpu_kernel(d_kernel, kernel_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 1, DataLayout,IndexType> > gpu_result(d_result, result.dimensions());
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 1, DataLayout,IndexType> > gpu_input(d_input, input_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 1, DataLayout,IndexType> > gpu_kernel(d_kernel, kernel_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 1, DataLayout,IndexType> > gpu_result(d_result, result.dimensions());
   sycl_device.memcpyHostToDevice(d_input, input.data(), input_bytes);
   sycl_device.memcpyHostToDevice(d_kernel, kernel.data(), kernel_bytes);
 
@@ -445,7 +445,7 @@ static void test_strides(const Eigen::SyclDevice& sycl_device){
 
 template <typename Dev_selector> void tensorConvolutionPerDevice(Dev_selector& s){
   QueueInterface queueInterface(s);
-  auto sycl_device=Eigen::SyclDevice(&queueInterface);
+  auto sycl_device=Eigen_tf::SyclDevice(&queueInterface);
   test_larg_expr1D<float, RowMajor, int64_t>(sycl_device);
   test_larg_expr1D<float, ColMajor, int64_t>(sycl_device);
   test_larg_expr2D<float, RowMajor, int64_t>(sycl_device);
@@ -463,7 +463,7 @@ template <typename Dev_selector> void tensorConvolutionPerDevice(Dev_selector& s
 }
 
 void test_cxx11_tensor_convolution_sycl() {
-  for (const auto& device :Eigen::get_sycl_supported_devices()) {
+  for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
     CALL_SUBTEST(tensorConvolutionPerDevice(device));
   }
 }

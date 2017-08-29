@@ -72,7 +72,7 @@
 #define EIGEN_CG  170
 #define EIGEN_CG_PRECOND  180
 
-using namespace Eigen;
+using namespace Eigen_tf;
 using namespace std; 
 
 

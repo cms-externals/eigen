@@ -10,9 +10,9 @@
 #ifndef EIGEN_SYMBOLIC_INDEX_H
 #define EIGEN_SYMBOLIC_INDEX_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
-/** \namespace Eigen::Symbolic
+/** \namespace Eigen_tf::Symbolic
   * \ingroup Core_Module
   *
   * This namespace defines a set of classes and functions to build and evaluate symbolic expressions of scalar type Index.
@@ -35,7 +35,7 @@ namespace Eigen {
   * std::cout << expr98.eval(x=6) << "\n";
   * \endcode
   *
-  * It is currently only used internally to define and minipulate the placeholders::last and placeholders::end symbols in Eigen::seq and Eigen::seqN.
+  * It is currently only used internally to define and minipulate the placeholders::last and placeholders::end symbols in Eigen_tf::seq and Eigen_tf::seqN.
   *
   */
 namespace Symbolic {
@@ -295,6 +295,6 @@ protected:
 
 } // end namespace Symbolic
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SYMBOLIC_INDEX_H

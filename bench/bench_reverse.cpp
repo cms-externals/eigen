@@ -2,7 +2,7 @@
 #include <iostream>
 #include <Eigen/Core>
 #include <bench/BenchUtil.h>
-using namespace Eigen;
+using namespace Eigen_tf;
 
 #ifndef REPEAT
 #define REPEAT 100000

@@ -20,11 +20,11 @@
 #include "main.h"
 #include <unsupported/Eigen/CXX11/Tensor>
 
-using Eigen::Tensor;
+using Eigen_tf::Tensor;
 static const int DataLayout = ColMajor;
 
 template <typename DataType, typename IndexType>
-static void test_simple_image_patch_sycl(const Eigen::SyclDevice& sycl_device)
+static void test_simple_image_patch_sycl(const Eigen_tf::SyclDevice& sycl_device)
 {
   IndexType sizeDim1 = 2;
   IndexType sizeDim2 = 3;
@@ -256,7 +256,7 @@ static void test_simple_image_patch_sycl(const Eigen::SyclDevice& sycl_device)
 
 // Verifies VALID padding (no padding) with incrementing values.
 template <typename DataType, typename IndexType>
-static void test_patch_padding_valid_sycl(const Eigen::SyclDevice& sycl_device){
+static void test_patch_padding_valid_sycl(const Eigen_tf::SyclDevice& sycl_device){
   IndexType input_depth = 3;
   IndexType input_rows = 3;
   IndexType input_cols = 3;
@@ -362,7 +362,7 @@ static void test_patch_padding_valid_sycl(const Eigen::SyclDevice& sycl_device){
 
 // Verifies VALID padding (no padding) with the same value.
 template <typename DataType, typename IndexType>
-static void test_patch_padding_valid_same_value_sycl(const Eigen::SyclDevice& sycl_device){
+static void test_patch_padding_valid_same_value_sycl(const Eigen_tf::SyclDevice& sycl_device){
   IndexType input_depth = 1;
   IndexType input_rows = 5;
   IndexType input_cols = 5;
@@ -459,7 +459,7 @@ static void test_patch_padding_valid_same_value_sycl(const Eigen::SyclDevice& sy
 
 // Verifies SAME padding.
 template <typename DataType, typename IndexType>
-static void test_patch_padding_same_sycl(const Eigen::SyclDevice& sycl_device){
+static void test_patch_padding_same_sycl(const Eigen_tf::SyclDevice& sycl_device){
   IndexType input_depth = 3;
   IndexType input_rows = 4;
   IndexType input_cols = 2;
@@ -564,7 +564,7 @@ sycl_device.memcpyDeviceToHost(result_col_major.data(), gpu_data_result_col_majo
 
 
 template <typename DataType, typename IndexType>
-static void test_patch_no_extra_dim_sycl(const Eigen::SyclDevice& sycl_device){
+static void test_patch_no_extra_dim_sycl(const Eigen_tf::SyclDevice& sycl_device){
 
   IndexType sizeDim1 = 2;
   IndexType sizeDim2 = 3;
@@ -774,7 +774,7 @@ sycl_device.memcpyDeviceToHost(entire_image_patch_row_major.data(), gpu_data_ent
 }
 
 template <typename DataType, typename IndexType>
-static void test_imagenet_patches_sycl(const Eigen::SyclDevice& sycl_device)
+static void test_imagenet_patches_sycl(const Eigen_tf::SyclDevice& sycl_device)
 {
   // Test the code on typical configurations used by the 'imagenet' benchmarks at
   // https://github.com/soumith/convnet-benchmarks
@@ -1076,7 +1076,7 @@ static void test_imagenet_patches_sycl(const Eigen::SyclDevice& sycl_device)
 
 template<typename DataType, typename dev_Selector> void sycl_tensor_image_patch_test_per_device(dev_Selector s){
 QueueInterface queueInterface(s);
-auto sycl_device = Eigen::SyclDevice(&queueInterface);
+auto sycl_device = Eigen_tf::SyclDevice(&queueInterface);
 test_simple_image_patch_sycl<DataType, int64_t>(sycl_device);
 test_patch_padding_valid_sycl<DataType, int64_t>(sycl_device);
 test_patch_padding_valid_same_value_sycl<DataType, int64_t>(sycl_device);
@@ -1086,7 +1086,7 @@ test_imagenet_patches_sycl<DataType, int64_t>(sycl_device);
 }
 void test_cxx11_tensor_image_patchOP_sycl()
 {
-for (const auto& device :Eigen::get_sycl_supported_devices()) {
+for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
   CALL_SUBTEST(sycl_tensor_image_patch_test_per_device<float>(device));
 }
 }

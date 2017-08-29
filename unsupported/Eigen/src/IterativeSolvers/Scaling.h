@@ -10,7 +10,7 @@
 #ifndef EIGEN_ITERSCALING_H
 #define EIGEN_ITERSCALING_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /**
   * \ingroup IterativeSolvers_Module

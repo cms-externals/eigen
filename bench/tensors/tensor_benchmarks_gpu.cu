@@ -10,9 +10,9 @@
 #define BM_FuncGPU(FUNC)                                                       \
   static void BM_##FUNC(int iters, int N) {                                    \
     StopBenchmarkTiming();                                                     \
-    Eigen::CudaStreamDevice stream;                                            \
-    Eigen::GpuDevice device(&stream);                                          \
-    BenchmarkSuite<Eigen::GpuDevice, float> suite(device, N);                  \
+    Eigen_tf::CudaStreamDevice stream;                                            \
+    Eigen_tf::GpuDevice device(&stream);                                          \
+    BenchmarkSuite<Eigen_tf::GpuDevice, float> suite(device, N);                  \
     cudaDeviceSynchronize();                                                   \
     suite.FUNC(iters);                                                         \
   }                                                                            \
@@ -40,9 +40,9 @@ BM_FuncGPU(fullReduction);
 #define BM_FuncWithInputDimsGPU(FUNC, D1, D2, D3)                              \
   static void BM_##FUNC##_##D1##x##D2##x##D3(int iters, int N) {               \
     StopBenchmarkTiming();                                                     \
-    Eigen::CudaStreamDevice stream;                                            \
-    Eigen::GpuDevice device(&stream);                                          \
-    BenchmarkSuite<Eigen::GpuDevice, float> suite(device, D1, D2, D3);         \
+    Eigen_tf::CudaStreamDevice stream;                                            \
+    Eigen_tf::GpuDevice device(&stream);                                          \
+    BenchmarkSuite<Eigen_tf::GpuDevice, float> suite(device, D1, D2, D3);         \
     cudaDeviceSynchronize();                                                   \
     suite.FUNC(iters);                                                         \
   }                                                                            \
@@ -59,9 +59,9 @@ BM_FuncWithInputDimsGPU(contraction, N, N, 64);
 #define BM_FuncWithKernelDimsGPU(FUNC, DIM1, DIM2)                             \
   static void BM_##FUNC##_##DIM1##x##DIM2(int iters, int N) {                  \
     StopBenchmarkTiming();                                                     \
-    Eigen::CudaStreamDevice stream;                                            \
-    Eigen::GpuDevice device(&stream);                                          \
-    BenchmarkSuite<Eigen::GpuDevice, float> suite(device, N);                  \
+    Eigen_tf::CudaStreamDevice stream;                                            \
+    Eigen_tf::GpuDevice device(&stream);                                          \
+    BenchmarkSuite<Eigen_tf::GpuDevice, float> suite(device, N);                  \
     cudaDeviceSynchronize();                                                   \
     suite.FUNC(iters, DIM1, DIM2);                                             \
   }                                                                            \

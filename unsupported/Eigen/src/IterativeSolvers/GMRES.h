@@ -11,7 +11,7 @@
 #ifndef EIGEN_GMRES_H
 #define EIGEN_GMRES_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -338,6 +338,6 @@ protected:
 
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_GMRES_H

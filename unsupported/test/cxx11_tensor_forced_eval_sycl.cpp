@@ -20,17 +20,17 @@
 #include "main.h"
 #include <unsupported/Eigen/CXX11/Tensor>
 
-using Eigen::Tensor;
+using Eigen_tf::Tensor;
 template <typename DataType, int DataLayout, typename IndexType>
-void test_forced_eval_sycl(const Eigen::SyclDevice &sycl_device) {
+void test_forced_eval_sycl(const Eigen_tf::SyclDevice &sycl_device) {
 
   IndexType sizeDim1 = 100;
   IndexType sizeDim2 = 20;
   IndexType sizeDim3 = 20;
-  Eigen::array<IndexType, 3> tensorRange = {{sizeDim1, sizeDim2, sizeDim3}};
-  Eigen::Tensor<DataType, 3, DataLayout, IndexType> in1(tensorRange);
-  Eigen::Tensor<DataType, 3, DataLayout, IndexType> in2(tensorRange);
-  Eigen::Tensor<DataType, 3, DataLayout, IndexType> out(tensorRange);
+  Eigen_tf::array<IndexType, 3> tensorRange = {{sizeDim1, sizeDim2, sizeDim3}};
+  Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType> in1(tensorRange);
+  Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType> in2(tensorRange);
+  Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType> out(tensorRange);
 
   DataType * gpu_in1_data  = static_cast<DataType*>(sycl_device.allocate(in1.dimensions().TotalSize()*sizeof(DataType)));
   DataType * gpu_in2_data  = static_cast<DataType*>(sycl_device.allocate(in2.dimensions().TotalSize()*sizeof(DataType)));
@@ -40,9 +40,9 @@ void test_forced_eval_sycl(const Eigen::SyclDevice &sycl_device) {
   in2 = in2.random() + in2.constant(10.0f);
 
   // creating TensorMap from tensor
-  Eigen::TensorMap<Eigen::Tensor<DataType, 3, DataLayout, IndexType>> gpu_in1(gpu_in1_data, tensorRange);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 3, DataLayout, IndexType>> gpu_in2(gpu_in2_data, tensorRange);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 3, DataLayout, IndexType>> gpu_out(gpu_out_data, tensorRange);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType>> gpu_in1(gpu_in1_data, tensorRange);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType>> gpu_in2(gpu_in2_data, tensorRange);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType>> gpu_out(gpu_out_data, tensorRange);
   sycl_device.memcpyHostToDevice(gpu_in1_data, in1.data(),(in1.dimensions().TotalSize())*sizeof(DataType));
   sycl_device.memcpyHostToDevice(gpu_in2_data, in2.data(),(in2.dimensions().TotalSize())*sizeof(DataType));
   /// c=(a+b)*b
@@ -65,12 +65,12 @@ void test_forced_eval_sycl(const Eigen::SyclDevice &sycl_device) {
 
 template <typename DataType, typename Dev_selector> void tensorForced_evalperDevice(Dev_selector s){
   QueueInterface queueInterface(s);
-  auto sycl_device = Eigen::SyclDevice(&queueInterface);
+  auto sycl_device = Eigen_tf::SyclDevice(&queueInterface);
   test_forced_eval_sycl<DataType, RowMajor, int64_t>(sycl_device);
   test_forced_eval_sycl<DataType, ColMajor, int64_t>(sycl_device);
 }
 void test_cxx11_tensor_forced_eval_sycl() {
-  for (const auto& device :Eigen::get_sycl_supported_devices()) {
+  for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
     CALL_SUBTEST(tensorForced_evalperDevice<float>(device));
   }
 }

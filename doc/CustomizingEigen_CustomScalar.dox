@@ -1,4 +1,4 @@
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \page TopicCustomizing_CustomScalar Using custom scalar types
 \anchor user_defined_scalars
@@ -8,7 +8,7 @@ On x86-64 systems, \c long \c double permits to locally enforces the use of x87 
 
 In order to add support for a custom type \c T you need:
 -# make sure the common operator (+,-,*,/,etc.) are supported by the type \c T
--# add a specialization of struct Eigen::NumTraits<T> (see \ref NumTraits)
+-# add a specialization of struct Eigen_tf::NumTraits<T> (see \ref NumTraits)
 -# define the math functions that makes sense for your type. This includes standard ones like sqrt, pow, sin, tan, conj, real, imag, etc, as well as abs2 which is Eigen specific.
      (see the file Eigen/src/Core/MathFunctions.h)
 
@@ -24,7 +24,7 @@ Here is a concrete example adding support for the Adolc's \c adouble type. <a hr
 #include <adolc/adouble.h>
 #include <Eigen/Core>
 
-namespace Eigen {
+namespace Eigen_tf {
 
 template<> struct NumTraits<adtl::adouble>
  : NumTraits<double> // permits to get the epsilon, dummy_precision, lowest, highest functions
@@ -66,7 +66,7 @@ This other example adds support for the \c mpq_class type from <a href="https://
 #include <Eigen/Core>
 #include <boost/operators.hpp>
 
-namespace Eigen {
+namespace Eigen_tf {
   template<> struct NumTraits<mpq_class> : GenericNumTraits<mpq_class>
   {
     typedef mpq_class Real;

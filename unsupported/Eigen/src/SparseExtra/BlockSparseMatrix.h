@@ -11,7 +11,7 @@
 #ifndef EIGEN_SPARSEBLOCKMATRIX_H
 #define EIGEN_SPARSEBLOCKMATRIX_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 /** \ingroup SparseCore_Module
   *
   * \class BlockSparseMatrix
@@ -1074,6 +1074,6 @@ class BlockSparseMatrix<_Scalar, _BlockAtCompileTime, _Options, _StorageIndex>::
     Index m_end; // starting inner index of the next block
 
 };
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SPARSEBLOCKMATRIX_H

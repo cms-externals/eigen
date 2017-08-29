@@ -10,7 +10,7 @@
 
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_REVERSE_H
 #define EIGEN_CXX11_TENSOR_TENSOR_REVERSE_H
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorReverse
   * \ingroup CXX11_Tensor_Module
@@ -34,7 +34,7 @@ struct traits<TensorReverseOp<ReverseDimensions,
 };
 
 template<typename ReverseDimensions, typename XprType>
-struct eval<TensorReverseOp<ReverseDimensions, XprType>, Eigen::Dense>
+struct eval<TensorReverseOp<ReverseDimensions, XprType>, Eigen_tf::Dense>
 {
   typedef const TensorReverseOp<ReverseDimensions, XprType>& type;
 };
@@ -53,13 +53,13 @@ class TensorReverseOp : public TensorBase<TensorReverseOp<ReverseDimensions,
                                           XprType>, WriteAccessors>
 {
   public:
-  typedef typename Eigen::internal::traits<TensorReverseOp>::Scalar Scalar;
-  typedef typename Eigen::NumTraits<Scalar>::Real RealScalar;
+  typedef typename Eigen_tf::internal::traits<TensorReverseOp>::Scalar Scalar;
+  typedef typename Eigen_tf::NumTraits<Scalar>::Real RealScalar;
   typedef typename XprType::CoeffReturnType CoeffReturnType;
-  typedef typename Eigen::internal::nested<TensorReverseOp>::type Nested;
-  typedef typename Eigen::internal::traits<TensorReverseOp>::StorageKind
+  typedef typename Eigen_tf::internal::nested<TensorReverseOp>::type Nested;
+  typedef typename Eigen_tf::internal::traits<TensorReverseOp>::StorageKind
                                                                     StorageKind;
-  typedef typename Eigen::internal::traits<TensorReverseOp>::Index Index;
+  typedef typename Eigen_tf::internal::traits<TensorReverseOp>::Index Index;
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorReverseOp(
       const XprType& expr, const ReverseDimensions& reverse_dims)
@@ -288,6 +288,6 @@ struct TensorEvaluator<TensorReverseOp<ReverseDimensions, ArgType>, Device>
 };
 
 
-}  // end namespace Eigen
+}  // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_REVERSE_H

@@ -9,9 +9,9 @@
   static void BM_##FUNC(int iters, int N) {                                    \
     StopBenchmarkTiming();                                                     \
     cl::sycl::gpu_selector selector;                                           \
-    Eigen::QueueInterface queue(selector);                                     \
-    Eigen::SyclDevice device(&queue);                                          \
-    BenchmarkSuite<Eigen::SyclDevice, float> suite(device, N);                 \
+    Eigen_tf::QueueInterface queue(selector);                                     \
+    Eigen_tf::SyclDevice device(&queue);                                          \
+    BenchmarkSuite<Eigen_tf::SyclDevice, float> suite(device, N);                 \
     suite.FUNC(iters);                                                         \
   }                                                                            \
   BENCHMARK_RANGE(BM_##FUNC, 10, 5000);
@@ -38,9 +38,9 @@ BM_FuncGPU(fullReduction);
   static void BM_##FUNC##_##D1##x##D2##x##D3(int iters, int N) {               \
     StopBenchmarkTiming();                                                     \
     cl::sycl::gpu_selector selector;                                           \
-    Eigen::QueueInterface queue(selector);                                     \
-    Eigen::SyclDevice device(&queue);                                          \
-    BenchmarkSuite<Eigen::SyclDevice, float> suite(device, D1, D2, D3);        \
+    Eigen_tf::QueueInterface queue(selector);                                     \
+    Eigen_tf::SyclDevice device(&queue);                                          \
+    BenchmarkSuite<Eigen_tf::SyclDevice, float> suite(device, D1, D2, D3);        \
     suite.FUNC(iters);                                                         \
   }                                                                            \
   BENCHMARK_RANGE(BM_##FUNC##_##D1##x##D2##x##D3, 10, 5000);
@@ -57,9 +57,9 @@ BM_FuncWithInputDimsGPU(contraction, N, N, 64);
   static void BM_##FUNC##_##DIM1##x##DIM2(int iters, int N) {                  \
     StopBenchmarkTiming();                                                     \
     cl::sycl::gpu_selector selector;                                           \
-    Eigen::QueueInterface queue(selector);                                     \
-    Eigen::SyclDevice device(&queue);                                          \
-    BenchmarkSuite<Eigen::SyclDevice, float> suite(device, N);                 \
+    Eigen_tf::QueueInterface queue(selector);                                     \
+    Eigen_tf::SyclDevice device(&queue);                                          \
+    BenchmarkSuite<Eigen_tf::SyclDevice, float> suite(device, N);                 \
     suite.FUNC(iters, DIM1, DIM2);                                             \
   }                                                                            \
   BENCHMARK_RANGE(BM_##FUNC##_##DIM1##x##DIM2, 128, 5000);

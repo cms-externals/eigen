@@ -19,8 +19,8 @@ class Frame
   public:
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     
-    inline Frame(const Eigen::Vector3f& pos = Eigen::Vector3f::Zero(),
-                 const Eigen::Quaternionf& o = Eigen::Quaternionf())
+    inline Frame(const Eigen_tf::Vector3f& pos = Eigen_tf::Vector3f::Zero(),
+                 const Eigen_tf::Quaternionf& o = Eigen_tf::Quaternionf())
       : orientation(o), position(pos)
     {}
     Frame lerp(float alpha, const Frame& other) const
@@ -29,8 +29,8 @@ class Frame
                    orientation.slerp(alpha,other.orientation));
     }
 
-    Eigen::Quaternionf orientation;
-    Eigen::Vector3f position;
+    Eigen_tf::Quaternionf orientation;
+    Eigen_tf::Vector3f position;
 };
 
 class Camera
@@ -57,38 +57,38 @@ class Camera
     inline float fovY(void) const { return mFovY; }
     void setFovY(float value);
     
-    void setPosition(const Eigen::Vector3f& pos);
-    inline const Eigen::Vector3f& position(void) const { return mFrame.position; }
+    void setPosition(const Eigen_tf::Vector3f& pos);
+    inline const Eigen_tf::Vector3f& position(void) const { return mFrame.position; }
 
-    void setOrientation(const Eigen::Quaternionf& q);
-    inline const Eigen::Quaternionf& orientation(void) const { return mFrame.orientation; }
+    void setOrientation(const Eigen_tf::Quaternionf& q);
+    inline const Eigen_tf::Quaternionf& orientation(void) const { return mFrame.orientation; }
 
     void setFrame(const Frame& f);
     const Frame& frame(void) const { return mFrame; }
     
-    void setDirection(const Eigen::Vector3f& newDirection);
-    Eigen::Vector3f direction(void) const;
-    void setUp(const Eigen::Vector3f& vectorUp);
-    Eigen::Vector3f up(void) const;
-    Eigen::Vector3f right(void) const;
+    void setDirection(const Eigen_tf::Vector3f& newDirection);
+    Eigen_tf::Vector3f direction(void) const;
+    void setUp(const Eigen_tf::Vector3f& vectorUp);
+    Eigen_tf::Vector3f up(void) const;
+    Eigen_tf::Vector3f right(void) const;
     
-    void setTarget(const Eigen::Vector3f& target);
-    inline const Eigen::Vector3f& target(void) { return mTarget; }
+    void setTarget(const Eigen_tf::Vector3f& target);
+    inline const Eigen_tf::Vector3f& target(void) { return mTarget; }
     
-    const Eigen::Affine3f& viewMatrix(void) const;
-    const Eigen::Matrix4f& projectionMatrix(void) const;
+    const Eigen_tf::Affine3f& viewMatrix(void) const;
+    const Eigen_tf::Matrix4f& projectionMatrix(void) const;
     
-    void rotateAroundTarget(const Eigen::Quaternionf& q);
-    void localRotate(const Eigen::Quaternionf& q);
+    void rotateAroundTarget(const Eigen_tf::Quaternionf& q);
+    void localRotate(const Eigen_tf::Quaternionf& q);
     void zoom(float d);
     
-    void localTranslate(const Eigen::Vector3f& t);
+    void localTranslate(const Eigen_tf::Vector3f& t);
     
     /** Setup OpenGL matrices and viewport */
     void activateGL(void);
     
-    Eigen::Vector3f unProject(const Eigen::Vector2f& uv, float depth, const Eigen::Matrix4f& invModelview) const;
-    Eigen::Vector3f unProject(const Eigen::Vector2f& uv, float depth) const;
+    Eigen_tf::Vector3f unProject(const Eigen_tf::Vector2f& uv, float depth, const Eigen_tf::Matrix4f& invModelview) const;
+    Eigen_tf::Vector3f unProject(const Eigen_tf::Vector2f& uv, float depth) const;
     
   protected:
     void updateViewMatrix(void) const;
@@ -101,14 +101,14 @@ class Camera
 
     Frame mFrame;
     
-    mutable Eigen::Affine3f mViewMatrix;
-    mutable Eigen::Matrix4f mProjectionMatrix;
+    mutable Eigen_tf::Affine3f mViewMatrix;
+    mutable Eigen_tf::Matrix4f mProjectionMatrix;
 
     mutable bool mViewIsUptodate;
     mutable bool mProjIsUptodate;
 
     // used by rotateAroundTarget
-    Eigen::Vector3f mTarget;
+    Eigen_tf::Vector3f mTarget;
     
     float mFovY;
     float mNearDist;

@@ -45,7 +45,7 @@ LDL License:
 #ifndef EIGEN_SIMPLICIAL_CHOLESKY_IMPL_H
 #define EIGEN_SIMPLICIAL_CHOLESKY_IMPL_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 template<typename Derived>
 void SimplicialCholeskyBase<Derived>::analyzePattern_preordered(const CholMatrixType& ap, bool doLDLT)
@@ -194,6 +194,6 @@ void SimplicialCholeskyBase<Derived>::factorize_preordered(const CholMatrixType&
   m_factorizationIsOk = true;
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SIMPLICIAL_CHOLESKY_IMPL_H

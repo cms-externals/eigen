@@ -11,7 +11,7 @@
 #ifndef EIGEN_BLOCK_H
 #define EIGEN_BLOCK_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 template<typename XprType, int BlockRows, int BlockCols, bool InnerPanel>
@@ -447,6 +447,6 @@ class BlockImpl_dense<XprType,BlockRows,BlockCols, InnerPanel,true>
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_BLOCK_H

@@ -10,7 +10,7 @@
 #ifndef EIGEN_SPARSE_DIAGONAL_PRODUCT_H
 #define EIGEN_SPARSE_DIAGONAL_PRODUCT_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 // The product of a diagonal matrix with a sparse matrix can be easily
 // implemented using expression template.
@@ -133,6 +133,6 @@ protected:
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SPARSE_DIAGONAL_PRODUCT_H

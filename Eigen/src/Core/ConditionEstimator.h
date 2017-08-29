@@ -10,7 +10,7 @@
 #ifndef EIGEN_CONDITIONESTIMATOR_H
 #define EIGEN_CONDITIONESTIMATOR_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -170,6 +170,6 @@ rcond_estimate_helper(typename Decomposition::RealScalar matrix_norm, const Deco
 
 }  // namespace internal
 
-}  // namespace Eigen
+}  // namespace Eigen_tf
 
 #endif

@@ -10,7 +10,7 @@
 #ifndef EIGEN_SPARSE_MAP_H
 #define EIGEN_SPARSE_MAP_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -300,6 +300,6 @@ struct evaluator<Map<const SparseMatrix<MatScalar,MatOptions,MatIndex>, Options,
 
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SPARSE_MAP_H

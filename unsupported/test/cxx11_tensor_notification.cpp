@@ -16,7 +16,7 @@
 
 namespace {
 
-void WaitAndAdd(Eigen::Notification* n, int* counter) {
+void WaitAndAdd(Eigen_tf::Notification* n, int* counter) {
   n->Wait();
   *counter = *counter + 1;
 }
@@ -28,7 +28,7 @@ static void test_notification_single()
   ThreadPool thread_pool(1);
 
   int counter = 0;
-  Eigen::Notification n;
+  Eigen_tf::Notification n;
   std::function<void()> func = std::bind(&WaitAndAdd, &n, &counter);
   thread_pool.Schedule(func);
   EIGEN_SLEEP(1000);
@@ -52,7 +52,7 @@ static void test_notification_multiple()
   ThreadPool thread_pool(1);
 
   int counter = 0;
-  Eigen::Notification n;
+  Eigen_tf::Notification n;
   std::function<void()> func = std::bind(&WaitAndAdd, &n, &counter);
   thread_pool.Schedule(func);
   thread_pool.Schedule(func);

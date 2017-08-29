@@ -14,7 +14,7 @@
 
 #if defined(EIGEN_USE_GPU) && defined(__CUDACC__)
 
-namespace Eigen {
+namespace Eigen_tf {
 
 template<typename Scalar, typename Index, typename LhsMapper,
          typename RhsMapper, typename OutputMapper, bool needs_edge_check>
@@ -1380,7 +1380,7 @@ struct TensorEvaluator<const TensorContractionOp<Indices, LeftArgType, RightArgT
   }
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_USE_GPU and __CUDACC__
 #endif // EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_CUDA_H

@@ -20,7 +20,7 @@
 #include "main.h"
 #include <unsupported/Eigen/CXX11/Tensor>
 
-using Eigen::Tensor;
+using Eigen_tf::Tensor;
 template<typename TensorType>
 struct InsertZeros {
   DSizes<DenseIndex, 2> dimensions(const TensorType& input) const {
@@ -38,27 +38,27 @@ struct InsertZeros {
     strides[1] = 2;
     output.stride(strides).device(device) = input;
 
-    Eigen::DSizes<DenseIndex, 2> offsets(1,1);
-    Eigen::DSizes<DenseIndex, 2> extents(output.dimension(0)-1, output.dimension(1)-1);
+    Eigen_tf::DSizes<DenseIndex, 2> offsets(1,1);
+    Eigen_tf::DSizes<DenseIndex, 2> extents(output.dimension(0)-1, output.dimension(1)-1);
     output.slice(offsets, extents).stride(strides).device(device) = input.constant(0.0f);
   }
 };
 
 template<typename DataType, int DataLayout, typename IndexType>
-static void test_custom_unary_op_sycl(const Eigen::SyclDevice &sycl_device)
+static void test_custom_unary_op_sycl(const Eigen_tf::SyclDevice &sycl_device)
 {
   IndexType sizeDim1 = 3;
   IndexType sizeDim2 = 5;
-  Eigen::array<IndexType, 2> tensorRange = {{sizeDim1, sizeDim2}};
-  Eigen::array<IndexType, 2> tensorResultRange = {{6, 10}};
+  Eigen_tf::array<IndexType, 2> tensorRange = {{sizeDim1, sizeDim2}};
+  Eigen_tf::array<IndexType, 2> tensorResultRange = {{6, 10}};
 
-  Eigen::Tensor<DataType, 2, DataLayout, IndexType> in1(tensorRange);
-  Eigen::Tensor<DataType, 2, DataLayout, IndexType> out(tensorResultRange);
+  Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType> in1(tensorRange);
+  Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType> out(tensorResultRange);
 
   DataType * gpu_in1_data  = static_cast<DataType*>(sycl_device.allocate(in1.dimensions().TotalSize()*sizeof(DataType)));
   DataType * gpu_out_data =  static_cast<DataType*>(sycl_device.allocate(out.dimensions().TotalSize()*sizeof(DataType)));
 
-  typedef Eigen::TensorMap<Eigen::Tensor<DataType, 2, DataLayout, IndexType> > TensorType;
+  typedef Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType> > TensorType;
   TensorType gpu_in1(gpu_in1_data, tensorRange);
   TensorType gpu_out(gpu_out_data, tensorResultRange);
 
@@ -106,22 +106,22 @@ struct BatchMatMul {
 };
 
 template<typename DataType, int DataLayout, typename IndexType>
-static void test_custom_binary_op_sycl(const Eigen::SyclDevice &sycl_device)
+static void test_custom_binary_op_sycl(const Eigen_tf::SyclDevice &sycl_device)
 {
 
-  Eigen::array<IndexType, 3> tensorRange1 = {{2, 3, 5}};
-  Eigen::array<IndexType, 3> tensorRange2 = {{3,7,5}};
-  Eigen::array<IndexType, 3> tensorResultRange  = {{2, 7, 5}};
+  Eigen_tf::array<IndexType, 3> tensorRange1 = {{2, 3, 5}};
+  Eigen_tf::array<IndexType, 3> tensorRange2 = {{3,7,5}};
+  Eigen_tf::array<IndexType, 3> tensorResultRange  = {{2, 7, 5}};
 
-  Eigen::Tensor<DataType, 3, DataLayout, IndexType> in1(tensorRange1);
-  Eigen::Tensor<DataType, 3, DataLayout, IndexType> in2(tensorRange2);
-  Eigen::Tensor<DataType, 3, DataLayout, IndexType> out(tensorResultRange);
+  Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType> in1(tensorRange1);
+  Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType> in2(tensorRange2);
+  Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType> out(tensorResultRange);
 
   DataType * gpu_in1_data  = static_cast<DataType*>(sycl_device.allocate(in1.dimensions().TotalSize()*sizeof(DataType)));
   DataType * gpu_in2_data  = static_cast<DataType*>(sycl_device.allocate(in2.dimensions().TotalSize()*sizeof(DataType)));
   DataType * gpu_out_data =  static_cast<DataType*>(sycl_device.allocate(out.dimensions().TotalSize()*sizeof(DataType)));
 
-  typedef Eigen::TensorMap<Eigen::Tensor<DataType, 3, DataLayout, IndexType> > TensorType;
+  typedef Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType> > TensorType;
   TensorType gpu_in1(gpu_in1_data, tensorRange1);
   TensorType gpu_in2(gpu_in2_data, tensorRange2);
   TensorType gpu_out(gpu_out_data, tensorResultRange);
@@ -136,11 +136,11 @@ static void test_custom_binary_op_sycl(const Eigen::SyclDevice &sycl_device)
   sycl_device.memcpyDeviceToHost(out.data(), gpu_out_data,(out.dimensions().TotalSize())*sizeof(DataType));
 
   for (IndexType i = 0; i < 5; ++i) {
-    typedef typename Eigen::Tensor<DataType, 3, DataLayout, IndexType>::DimensionPair DimPair;
+    typedef typename Eigen_tf::Tensor<DataType, 3, DataLayout, IndexType>::DimensionPair DimPair;
     array<DimPair, 1> dims;
     dims[0] = DimPair(1, 0);
-    Eigen::Tensor<DataType, 2, DataLayout, IndexType> reference = in1.template chip<2>(i).contract(in2.template chip<2>(i), dims);
-    TensorRef<Eigen::Tensor<DataType, 2, DataLayout, IndexType> > val = out.template chip<2>(i);
+    Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType> reference = in1.template chip<2>(i).contract(in2.template chip<2>(i), dims);
+    TensorRef<Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType> > val = out.template chip<2>(i);
     for (IndexType j = 0; j < 2; ++j) {
       for (IndexType k = 0; k < 7; ++k) {
         VERIFY_IS_APPROX(val(j, k), reference(j, k));
@@ -151,7 +151,7 @@ static void test_custom_binary_op_sycl(const Eigen::SyclDevice &sycl_device)
 
 template <typename DataType, typename Dev_selector> void custom_op_perDevice(Dev_selector s){
   QueueInterface queueInterface(s);
-  auto sycl_device = Eigen::SyclDevice(&queueInterface);
+  auto sycl_device = Eigen_tf::SyclDevice(&queueInterface);
   test_custom_unary_op_sycl<DataType, RowMajor, int64_t>(sycl_device);
   test_custom_unary_op_sycl<DataType, ColMajor, int64_t>(sycl_device);
   test_custom_binary_op_sycl<DataType, ColMajor, int64_t>(sycl_device);
@@ -159,7 +159,7 @@ template <typename DataType, typename Dev_selector> void custom_op_perDevice(Dev
 
 }
 void test_cxx11_tensor_custom_op_sycl() {
-  for (const auto& device :Eigen::get_sycl_supported_devices()) {
+  for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
     CALL_SUBTEST(custom_op_perDevice<float>(device));
   }
 }

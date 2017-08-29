@@ -124,14 +124,14 @@ int main(int argc, char *argv[])
     #endif
 
     // eigen sparse matrices
-    doEigen<Eigen::DefaultBackend>("Eigen/Sparse", sm1, Eigen::IncompleteFactorization);
+    doEigen<Eigen_tf::DefaultBackend>("Eigen/Sparse", sm1, Eigen_tf::IncompleteFactorization);
 
     #ifdef EIGEN_CHOLMOD_SUPPORT
-    doEigen<Eigen::Cholmod>("Eigen/Cholmod", sm1, Eigen::IncompleteFactorization);
+    doEigen<Eigen_tf::Cholmod>("Eigen/Cholmod", sm1, Eigen_tf::IncompleteFactorization);
     #endif
 
     #ifdef EIGEN_TAUCS_SUPPORT
-    doEigen<Eigen::Taucs>("Eigen/Taucs", sm1, Eigen::IncompleteFactorization);
+    doEigen<Eigen_tf::Taucs>("Eigen/Taucs", sm1, Eigen_tf::IncompleteFactorization);
     #endif
 
     #if 0

@@ -32,7 +32,7 @@
 #ifndef UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_EXTRACT_ACCESSOR_HPP
 #define UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_EXTRACT_ACCESSOR_HPP
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace TensorSycl {
 namespace internal {
 #define RETURN_CPP11(expr) ->decltype(expr) {return expr;}
@@ -306,5 +306,5 @@ auto createTupleOfAccessors(cl::sycl::handler& cgh, const Evaluator& eval)
 
 } /// namespace TensorSycl
 } /// namespace internal
-} /// namespace Eigen
+} /// namespace Eigen_tf
 #endif  // UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_EXTRACT_ACCESSOR_HPP

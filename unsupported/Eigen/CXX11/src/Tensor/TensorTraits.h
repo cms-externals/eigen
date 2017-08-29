@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_TRAITS_H
 #define EIGEN_CXX11_TENSOR_TENSOR_TRAITS_H
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace internal {
 
 
@@ -125,49 +125,49 @@ struct traits<TensorRef<PlainObjectType> >
 
 
 template<typename _Scalar, int NumIndices_, int Options, typename IndexType_>
-struct eval<Tensor<_Scalar, NumIndices_, Options, IndexType_>, Eigen::Dense>
+struct eval<Tensor<_Scalar, NumIndices_, Options, IndexType_>, Eigen_tf::Dense>
 {
   typedef const Tensor<_Scalar, NumIndices_, Options, IndexType_>& type;
 };
 
 template<typename _Scalar, int NumIndices_, int Options, typename IndexType_>
-struct eval<const Tensor<_Scalar, NumIndices_, Options, IndexType_>, Eigen::Dense>
+struct eval<const Tensor<_Scalar, NumIndices_, Options, IndexType_>, Eigen_tf::Dense>
 {
   typedef const Tensor<_Scalar, NumIndices_, Options, IndexType_>& type;
 };
 
 template<typename Scalar_, typename Dimensions, int Options, typename IndexType_>
-struct eval<TensorFixedSize<Scalar_, Dimensions, Options, IndexType_>, Eigen::Dense>
+struct eval<TensorFixedSize<Scalar_, Dimensions, Options, IndexType_>, Eigen_tf::Dense>
 {
   typedef const TensorFixedSize<Scalar_, Dimensions, Options, IndexType_>& type;
 };
 
 template<typename Scalar_, typename Dimensions, int Options, typename IndexType_>
-struct eval<const TensorFixedSize<Scalar_, Dimensions, Options, IndexType_>, Eigen::Dense>
+struct eval<const TensorFixedSize<Scalar_, Dimensions, Options, IndexType_>, Eigen_tf::Dense>
 {
   typedef const TensorFixedSize<Scalar_, Dimensions, Options, IndexType_>& type;
 };
 
 template<typename PlainObjectType, int Options, template <class> class MakePointer>
-struct eval<TensorMap<PlainObjectType, Options, MakePointer>, Eigen::Dense>
+struct eval<TensorMap<PlainObjectType, Options, MakePointer>, Eigen_tf::Dense>
 {
   typedef const TensorMap<PlainObjectType, Options, MakePointer>& type;
 };
 
 template<typename PlainObjectType, int Options, template <class> class MakePointer>
-struct eval<const TensorMap<PlainObjectType, Options, MakePointer>, Eigen::Dense>
+struct eval<const TensorMap<PlainObjectType, Options, MakePointer>, Eigen_tf::Dense>
 {
   typedef const TensorMap<PlainObjectType, Options, MakePointer>& type;
 };
 
 template<typename PlainObjectType>
-struct eval<TensorRef<PlainObjectType>, Eigen::Dense>
+struct eval<TensorRef<PlainObjectType>, Eigen_tf::Dense>
 {
   typedef const TensorRef<PlainObjectType>& type;
 };
 
 template<typename PlainObjectType>
-struct eval<const TensorRef<PlainObjectType>, Eigen::Dense>
+struct eval<const TensorRef<PlainObjectType>, Eigen_tf::Dense>
 {
   typedef const TensorRef<PlainObjectType>& type;
 };
@@ -273,6 +273,6 @@ typedef enum {
   PADDING_SAME = 2
 } PaddingType;
 
-}  // end namespace Eigen
+}  // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_TRAITS_H

@@ -1,20 +1,20 @@
 #include <Eigen/Core>
 #include <iostream>
-using namespace Eigen;
+using namespace Eigen_tf;
 using namespace std;
 
 template<typename Derived>
-Eigen::Block<Derived>
+Eigen_tf::Block<Derived>
 topLeftCorner(MatrixBase<Derived>& m, int rows, int cols)
 {
-  return Eigen::Block<Derived>(m.derived(), 0, 0, rows, cols);
+  return Eigen_tf::Block<Derived>(m.derived(), 0, 0, rows, cols);
 }
 
 template<typename Derived>
-const Eigen::Block<const Derived>
+const Eigen_tf::Block<const Derived>
 topLeftCorner(const MatrixBase<Derived>& m, int rows, int cols)
 {
-  return Eigen::Block<const Derived>(m.derived(), 0, 0, rows, cols);
+  return Eigen_tf::Block<const Derived>(m.derived(), 0, 0, rows, cols);
 }
 
 int main(int, char**)

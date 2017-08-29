@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_H
 #define EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorContraction
   * \ingroup CXX11_Tensor_Module
@@ -111,7 +111,7 @@ struct traits<TensorContractionOp<Dimensions, LhsXprType, RhsXprType> >
 };
 
 template<typename Dimensions, typename LhsXprType, typename RhsXprType>
-struct eval<TensorContractionOp<Dimensions, LhsXprType, RhsXprType>, Eigen::Dense>
+struct eval<TensorContractionOp<Dimensions, LhsXprType, RhsXprType>, Eigen_tf::Dense>
 {
   typedef const TensorContractionOp<Dimensions, LhsXprType, RhsXprType>& type;
 };
@@ -139,12 +139,12 @@ template<typename Indices, typename LhsXprType, typename RhsXprType>
 class TensorContractionOp : public TensorBase<TensorContractionOp<Indices, LhsXprType, RhsXprType>, ReadOnlyAccessors>
 {
   public:
-  typedef typename Eigen::internal::traits<TensorContractionOp>::Scalar Scalar;
+  typedef typename Eigen_tf::internal::traits<TensorContractionOp>::Scalar Scalar;
   typedef typename internal::gebp_traits<typename LhsXprType::CoeffReturnType,
                                                    typename RhsXprType::CoeffReturnType>::ResScalar CoeffReturnType;
-  typedef typename Eigen::internal::nested<TensorContractionOp>::type Nested;
-  typedef typename Eigen::internal::traits<TensorContractionOp>::StorageKind StorageKind;
-  typedef typename Eigen::internal::traits<TensorContractionOp>::Index Index;
+  typedef typename Eigen_tf::internal::nested<TensorContractionOp>::type Nested;
+  typedef typename Eigen_tf::internal::traits<TensorContractionOp>::StorageKind StorageKind;
+  typedef typename Eigen_tf::internal::traits<TensorContractionOp>::Index Index;
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorContractionOp(
       const LhsXprType& lhs, const RhsXprType& rhs, const Indices& dims)
@@ -904,6 +904,6 @@ struct TensorEvaluator<const TensorContractionOp<Indices, LeftArgType, RightArgT
   }
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_H

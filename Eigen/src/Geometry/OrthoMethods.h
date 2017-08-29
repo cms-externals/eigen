@@ -11,7 +11,7 @@
 #ifndef EIGEN_ORTHOMETHODS_H
 #define EIGEN_ORTHOMETHODS_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 /** \geometry_module \ingroup Geometry_Module
   *
@@ -229,6 +229,6 @@ MatrixBase<Derived>::unitOrthogonal() const
   return internal::unitOrthogonal_selector<Derived>::run(derived());
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_ORTHOMETHODS_H

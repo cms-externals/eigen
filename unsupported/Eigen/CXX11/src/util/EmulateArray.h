@@ -17,7 +17,7 @@
 // Moreover, CUDA doesn't support the STL containers, so we use our own instead.
 #if (__cplusplus <= 199711L && EIGEN_COMP_MSVC < 1900) || defined(__CUDACC__) || defined(EIGEN_AVOID_STL_ARRAY)
 
-namespace Eigen {
+namespace Eigen_tf {
 template <typename T, size_t n> class array {
  public:
   EIGEN_DEVICE_FUNC
@@ -215,13 +215,13 @@ template<class T, std::size_t N> struct array_size<const array<T,N>& > {
 };
 
 }  // end namespace internal
-}  // end namespace Eigen
+}  // end namespace Eigen_tf
 
 #else
 
-// The compiler supports c++11, and we're not targetting cuda: use std::array as Eigen::array
+// The compiler supports c++11, and we're not targetting cuda: use std::array as Eigen_tf::array
 #include <array>
-namespace Eigen {
+namespace Eigen_tf {
 
 template <typename T, std::size_t N> using array = std::array<T, N>;
 
@@ -249,7 +249,7 @@ template<std::size_t I, class T, std::size_t N> constexpr inline T const& array_
 #undef STD_GET_ARR_HACK
 
 }  // end namespace internal
-}  // end namespace Eigen
+}  // end namespace Eigen_tf
 
 #endif
 

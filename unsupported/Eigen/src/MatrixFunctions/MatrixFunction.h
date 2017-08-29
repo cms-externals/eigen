@@ -13,7 +13,7 @@
 #include "StemFunction.h"
 
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -576,6 +576,6 @@ const MatrixFunctionReturnValue<Derived> MatrixBase<Derived>::cosh() const
   return MatrixFunctionReturnValue<Derived>(derived(), internal::stem_function_cosh<ComplexScalar>);
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_MATRIX_FUNCTION

@@ -54,7 +54,7 @@ is_same_type(const T1&, const T2&)
 template<typename T1,typename T2>
 bool is_same_symb(const T1& a, const T2& b, Index size)
 {
-  using Eigen::placeholders::last;
+  using Eigen_tf::placeholders::last;
   return a.eval(last=size-1) == b.eval(last=size-1);
 }
 
@@ -63,8 +63,8 @@ bool is_same_symb(const T1& a, const T2& b, Index size)
 
 void check_symbolic_index()
 {
-  using Eigen::placeholders::last;
-  using Eigen::placeholders::end;
+  using Eigen_tf::placeholders::last;
+  using Eigen_tf::placeholders::end;
 
   Index size=100;
 

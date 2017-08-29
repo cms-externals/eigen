@@ -33,7 +33,7 @@
 
 #include <Eigen/Core>
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -184,6 +184,6 @@ void constrained_cg(const TMatrix& A, const CMatrix& C, VectorX& x,
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CONSTRAINEDCG_H

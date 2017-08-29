@@ -10,7 +10,7 @@
 #if defined(EIGEN_USE_GPU) && !defined(EIGEN_CXX11_TENSOR_TENSOR_DEVICE_CUDA_H)
 #define EIGEN_CXX11_TENSOR_TENSOR_DEVICE_CUDA_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 static const int kCudaScratchSize = 1024;
 
@@ -335,6 +335,6 @@ static EIGEN_DEVICE_FUNC inline void setCudaSharedMemConfig(cudaSharedMemConfig 
 }
 #endif
 
-}  // end namespace Eigen
+}  // end namespace Eigen_tf
 
 #endif  // EIGEN_CXX11_TENSOR_TENSOR_DEVICE_CUDA_H

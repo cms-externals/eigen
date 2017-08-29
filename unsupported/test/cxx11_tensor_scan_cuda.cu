@@ -19,7 +19,7 @@
 #include "main.h"
 #include <unsupported/Eigen/CXX11/Tensor>
 
-using Eigen::Tensor;
+using Eigen_tf::Tensor;
 typedef Tensor<float, 1>::DimensionPair DimPair;
 
 template<int DataLayout>
@@ -43,13 +43,13 @@ void test_cuda_cumsum(int m_size, int k_size, int n_size)
 
   cudaMemcpy(d_t_input, t_input.data(), t_input_bytes, cudaMemcpyHostToDevice);
 
-  Eigen::CudaStreamDevice stream;
-  Eigen::GpuDevice gpu_device(&stream);
+  Eigen_tf::CudaStreamDevice stream;
+  Eigen_tf::GpuDevice gpu_device(&stream);
 
-  Eigen::TensorMap<Eigen::Tensor<float, 3, DataLayout> >
-      gpu_t_input(d_t_input, Eigen::array<int, 3>(m_size, k_size, n_size));
-  Eigen::TensorMap<Eigen::Tensor<float, 3, DataLayout> >
-      gpu_t_result(d_t_result, Eigen::array<int, 3>(m_size, k_size, n_size));
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<float, 3, DataLayout> >
+      gpu_t_input(d_t_input, Eigen_tf::array<int, 3>(m_size, k_size, n_size));
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<float, 3, DataLayout> >
+      gpu_t_result(d_t_result, Eigen_tf::array<int, 3>(m_size, k_size, n_size));
 
   gpu_t_result.device(gpu_device) = gpu_t_input.cumsum(1);
   t_result = t_input.cumsum(1);
@@ -59,7 +59,7 @@ void test_cuda_cumsum(int m_size, int k_size, int n_size)
     if (fabs(t_result(i) - t_result_gpu(i)) < 1e-4f) {
       continue;
     }
-    if (Eigen::internal::isApprox(t_result(i), t_result_gpu(i), 1e-4f)) {
+    if (Eigen_tf::internal::isApprox(t_result(i), t_result_gpu(i), 1e-4f)) {
       continue;
     }
     std::cout << "mismatch detected at index " << i << ": " << t_result(i)

@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_MORPHING_H
 #define EIGEN_CXX11_TENSOR_TENSOR_MORPHING_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorReshaping
   * \ingroup CXX11_Tensor_Module
@@ -34,7 +34,7 @@ struct traits<TensorReshapingOp<NewDimensions, XprType> > : public traits<XprTyp
 };
 
 template<typename NewDimensions, typename XprType>
-struct eval<TensorReshapingOp<NewDimensions, XprType>, Eigen::Dense>
+struct eval<TensorReshapingOp<NewDimensions, XprType>, Eigen_tf::Dense>
 {
   typedef const TensorReshapingOp<NewDimensions, XprType>& type;
 };
@@ -53,11 +53,11 @@ template<typename NewDimensions, typename XprType>
 class TensorReshapingOp : public TensorBase<TensorReshapingOp<NewDimensions, XprType>, WriteAccessors>
 {
   public:
-  typedef typename Eigen::internal::traits<TensorReshapingOp>::Scalar Scalar;
+  typedef typename Eigen_tf::internal::traits<TensorReshapingOp>::Scalar Scalar;
   typedef typename internal::remove_const<typename XprType::CoeffReturnType>::type CoeffReturnType;
-  typedef typename Eigen::internal::nested<TensorReshapingOp>::type Nested;
-  typedef typename Eigen::internal::traits<TensorReshapingOp>::StorageKind StorageKind;
-  typedef typename Eigen::internal::traits<TensorReshapingOp>::Index Index;
+  typedef typename Eigen_tf::internal::nested<TensorReshapingOp>::type Nested;
+  typedef typename Eigen_tf::internal::traits<TensorReshapingOp>::StorageKind StorageKind;
+  typedef typename Eigen_tf::internal::traits<TensorReshapingOp>::Index Index;
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorReshapingOp(const XprType& expr, const NewDimensions& dims)
       : m_xpr(expr), m_dims(dims) {}
@@ -217,7 +217,7 @@ struct traits<TensorSlicingOp<StartIndices, Sizes, XprType> > : public traits<Xp
 };
 
 template<typename StartIndices, typename Sizes, typename XprType>
-struct eval<TensorSlicingOp<StartIndices, Sizes, XprType>, Eigen::Dense>
+struct eval<TensorSlicingOp<StartIndices, Sizes, XprType>, Eigen_tf::Dense>
 {
   typedef const TensorSlicingOp<StartIndices, Sizes, XprType>& type;
 };
@@ -236,11 +236,11 @@ template<typename StartIndices, typename Sizes, typename XprType>
 class TensorSlicingOp : public TensorBase<TensorSlicingOp<StartIndices, Sizes, XprType> >
 {
   public:
-  typedef typename Eigen::internal::traits<TensorSlicingOp>::Scalar Scalar;
+  typedef typename Eigen_tf::internal::traits<TensorSlicingOp>::Scalar Scalar;
   typedef typename XprType::CoeffReturnType CoeffReturnType;
-  typedef typename Eigen::internal::nested<TensorSlicingOp>::type Nested;
-  typedef typename Eigen::internal::traits<TensorSlicingOp>::StorageKind StorageKind;
-  typedef typename Eigen::internal::traits<TensorSlicingOp>::Index Index;
+  typedef typename Eigen_tf::internal::nested<TensorSlicingOp>::type Nested;
+  typedef typename Eigen_tf::internal::traits<TensorSlicingOp>::StorageKind StorageKind;
+  typedef typename Eigen_tf::internal::traits<TensorSlicingOp>::Index Index;
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorSlicingOp(const XprType& expr, const StartIndices& indices, const Sizes& sizes)
       : m_xpr(expr), m_indices(indices), m_sizes(sizes) {}
@@ -303,7 +303,7 @@ template <typename Index> struct MemcpyTriggerForSlicing<Index, GpuDevice>  {
 // It is very expensive to start the memcpy kernel on GPU: we therefore only
 // use it for large copies.
 #ifdef EIGEN_USE_SYCL
-template <typename Index> struct MemcpyTriggerForSlicing<Index, const Eigen::SyclDevice>  {
+template <typename Index> struct MemcpyTriggerForSlicing<Index, const Eigen_tf::SyclDevice>  {
   EIGEN_DEVICE_FUNC MemcpyTriggerForSlicing(const SyclDevice&) { }
   EIGEN_DEVICE_FUNC bool operator ()(Index val) const { return val > 4*1024*1024; }
 };
@@ -636,7 +636,7 @@ struct traits<TensorStridingSlicingOp<StartIndices, StopIndices, Strides, XprTyp
 };
 
 template<typename StartIndices, typename StopIndices, typename Strides, typename XprType>
-struct eval<TensorStridingSlicingOp<StartIndices, StopIndices, Strides, XprType>, Eigen::Dense>
+struct eval<TensorStridingSlicingOp<StartIndices, StopIndices, Strides, XprType>, Eigen_tf::Dense>
 {
   typedef const TensorStridingSlicingOp<StartIndices, StopIndices, Strides, XprType>& type;
 };
@@ -916,6 +916,6 @@ struct TensorEvaluator<TensorStridingSlicingOp<StartIndices, StopIndices, Stride
 };
 
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_MORPHING_H

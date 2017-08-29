@@ -31,7 +31,7 @@ struct MakeLocalPointer {
 };
 
 
-namespace Eigen {
+namespace Eigen_tf {
   template<typename StrideDims, typename XprType> class TensorTupleReducerDeviceOp;
   template<typename StrideDims, typename ArgType> struct TensorEvaluator<const TensorTupleReducerDeviceOp<StrideDims, ArgType>, SyclKernelDevice>;
 namespace TensorSycl {

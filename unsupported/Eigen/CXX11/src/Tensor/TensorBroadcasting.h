@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_BROADCASTING_H
 #define EIGEN_CXX11_TENSOR_TENSOR_BROADCASTING_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorBroadcasting
   * \ingroup CXX11_Tensor_Module
@@ -34,7 +34,7 @@ struct traits<TensorBroadcastingOp<Broadcast, XprType> > : public traits<XprType
 };
 
 template<typename Broadcast, typename XprType>
-struct eval<TensorBroadcastingOp<Broadcast, XprType>, Eigen::Dense>
+struct eval<TensorBroadcastingOp<Broadcast, XprType>, Eigen_tf::Dense>
 {
   typedef const TensorBroadcastingOp<Broadcast, XprType>& type;
 };
@@ -68,12 +68,12 @@ template<typename Broadcast, typename XprType>
 class TensorBroadcastingOp : public TensorBase<TensorBroadcastingOp<Broadcast, XprType>, ReadOnlyAccessors>
 {
   public:
-  typedef typename Eigen::internal::traits<TensorBroadcastingOp>::Scalar Scalar;
-  typedef typename Eigen::NumTraits<Scalar>::Real RealScalar;
+  typedef typename Eigen_tf::internal::traits<TensorBroadcastingOp>::Scalar Scalar;
+  typedef typename Eigen_tf::NumTraits<Scalar>::Real RealScalar;
   typedef typename XprType::CoeffReturnType CoeffReturnType;
-  typedef typename Eigen::internal::nested<TensorBroadcastingOp>::type Nested;
-  typedef typename Eigen::internal::traits<TensorBroadcastingOp>::StorageKind StorageKind;
-  typedef typename Eigen::internal::traits<TensorBroadcastingOp>::Index Index;
+  typedef typename Eigen_tf::internal::nested<TensorBroadcastingOp>::type Nested;
+  typedef typename Eigen_tf::internal::traits<TensorBroadcastingOp>::StorageKind StorageKind;
+  typedef typename Eigen_tf::internal::traits<TensorBroadcastingOp>::Index Index;
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorBroadcastingOp(const XprType& expr, const Broadcast& broadcast)
       : m_xpr(expr), m_broadcast(broadcast) {}
@@ -387,6 +387,6 @@ struct TensorEvaluator<const TensorBroadcastingOp<Broadcast, ArgType>, Device>
 };
 
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_BROADCASTING_H

@@ -11,7 +11,7 @@
 #ifndef EIGEN_GENERAL_PRODUCT_H
 #define EIGEN_GENERAL_PRODUCT_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 enum {
   Large = 2,
@@ -449,6 +449,6 @@ EIGEN_DEVICE_FUNC MatrixBase<Derived>::lazyProduct(const MatrixBase<OtherDerived
   return Product<Derived,OtherDerived,LazyProduct>(derived(), other.derived());
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_PRODUCT_H

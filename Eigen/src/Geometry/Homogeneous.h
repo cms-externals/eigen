@@ -10,7 +10,7 @@
 #ifndef EIGEN_HOMOGENEOUS_H
 #define EIGEN_HOMOGENEOUS_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 /** \geometry_module \ingroup Geometry_Module
   *
@@ -492,6 +492,6 @@ struct permutation_matrix_product<ExpressionType, Side, Transposed, HomogeneousS
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_HOMOGENEOUS_H

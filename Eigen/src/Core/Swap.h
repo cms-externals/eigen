@@ -10,7 +10,7 @@
 #ifndef EIGEN_SWAP_H
 #define EIGEN_SWAP_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -62,6 +62,6 @@ public:
 
 } // namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SWAP_H

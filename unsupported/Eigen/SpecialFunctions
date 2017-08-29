@@ -16,7 +16,7 @@
 
 #include "../../Eigen/src/Core/util/DisableStupidWarnings.h"
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /**
   * \defgroup SpecialFunctions_Module Special math functions module
@@ -53,7 +53,7 @@ namespace Eigen {
   #include "src/SpecialFunctions/arch/CUDA/CudaSpecialFunctions.h"
 #endif
 
-namespace Eigen {
+namespace Eigen_tf {
 //@}
 }
 

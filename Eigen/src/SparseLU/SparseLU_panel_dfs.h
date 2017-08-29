@@ -30,7 +30,7 @@
 #ifndef SPARSELU_PANEL_DFS_H
 #define SPARSELU_PANEL_DFS_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
   
@@ -253,6 +253,6 @@ void SparseLUImpl<Scalar,StorageIndex>::panel_dfs(const Index m, const Index w, 
 }
 
 } // end namespace internal
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // SPARSELU_PANEL_DFS_H

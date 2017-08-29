@@ -22,7 +22,7 @@
 #ifndef UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_EXTRACT_FUNCTORS_HPP
 #define UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_EXTRACT_FUNCTORS_HPP
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace TensorSycl {
 namespace internal {
 /// \struct FunctorExtractor:  This struct is used to extract the functors
@@ -210,7 +210,7 @@ template<typename Dim> struct DimConstr<Dim, 0> {
 template<typename Op, typename Dims, typename ArgType, template <class> class MakePointer_, typename Device>\
 struct FunctorExtractor<TensorEvaluator<CVQual TensorReductionOp<Op, Dims, ArgType, MakePointer_>, Device> >{\
   typedef TensorEvaluator<CVQual TensorReductionOp<Op, Dims, ArgType, MakePointer_>, Device> Evaluator;\
-  typedef typename Eigen::internal::conditional<Evaluator::NumOutputDims==0, DSizes<typename Evaluator::Index, 1>, typename Evaluator::Dimensions >::type Dimensions;\
+  typedef typename Eigen_tf::internal::conditional<Evaluator::NumOutputDims==0, DSizes<typename Evaluator::Index, 1>, typename Evaluator::Dimensions >::type Dimensions;\
   const Dimensions m_dimensions;\
   EIGEN_STRONG_INLINE const Dimensions& dimensions() const { return m_dimensions; }\
   FunctorExtractor(const TensorEvaluator<CVQual TensorReductionOp<Op, Dims, ArgType, MakePointer_>, Device>& expr)\
@@ -225,10 +225,10 @@ SYCLEXTRFUNCREDUCTIONOP()
 template<typename ReduceOp, typename Dims, typename ArgType, typename Device>\
  struct FunctorExtractor<TensorEvaluator<CVQual TensorTupleReducerOp<ReduceOp, Dims, ArgType>, Device> >{\
  typedef TensorEvaluator<CVQual TensorTupleReducerOp<ReduceOp, Dims, ArgType>, Device> Evaluator;\
- static const int  NumOutputDims= Eigen::internal::traits<TensorTupleReducerOp<ReduceOp, Dims, ArgType> >::NumDimensions;\
+ static const int  NumOutputDims= Eigen_tf::internal::traits<TensorTupleReducerOp<ReduceOp, Dims, ArgType> >::NumDimensions;\
  typedef typename Evaluator::StrideDims StrideDims;\
  typedef typename Evaluator::Index Index;\
- typedef typename Eigen::internal::conditional<NumOutputDims==0, DSizes<Index, 1>, typename Evaluator::Dimensions >::type Dimensions;\
+ typedef typename Eigen_tf::internal::conditional<NumOutputDims==0, DSizes<Index, 1>, typename Evaluator::Dimensions >::type Dimensions;\
  const Dimensions m_dimensions;\
  const Index m_return_dim;\
  const StrideDims m_strides;\
@@ -308,11 +308,11 @@ SYCLEXTRFUNCTSLICESTRIDEOP()
 // Had to separate TensorReshapingOp and TensorShufflingOp. Otherwise it will be mistaken by UnaryCategory
 #define SYCLRESHAPEANDSHUFFLEOPFUNCEXT(OPEXPR, FUNCCALL, CVQual)\
 template<typename Param, typename XprType, typename Dev>\
-struct FunctorExtractor<Eigen::TensorEvaluator<CVQual Eigen::OPEXPR<Param, XprType>, Dev> > {\
-  FunctorExtractor<Eigen::TensorEvaluator<XprType, Dev> > xprExpr;\
+struct FunctorExtractor<Eigen_tf::TensorEvaluator<CVQual Eigen_tf::OPEXPR<Param, XprType>, Dev> > {\
+  FunctorExtractor<Eigen_tf::TensorEvaluator<XprType, Dev> > xprExpr;\
   const Param m_param;\
   EIGEN_STRONG_INLINE const Param& param() const { return m_param; }\
-  FunctorExtractor(const Eigen::TensorEvaluator<CVQual Eigen::OPEXPR<Param, XprType>, Dev>& expr)\
+  FunctorExtractor(const Eigen_tf::TensorEvaluator<CVQual Eigen_tf::OPEXPR<Param, XprType>, Dev>& expr)\
   : xprExpr(expr.impl()), m_param(expr.FUNCCALL) {}\
 };
 
@@ -328,14 +328,14 @@ SYCLRESHAPEANDSHUFFLEOPFUNCEXT(TensorShufflingOp, shufflePermutation(), )
 // Had to separate reshapeOP otherwise it will be mistaken by UnaryCategory
 #define PADDINGOPFUNCEXT(OPEXPR, FUNCCALL, SCALARFUNCCALL, CVQual)\
 template<typename Param, typename XprType, typename Dev>\
-struct FunctorExtractor<Eigen::TensorEvaluator<CVQual Eigen::OPEXPR<Param, XprType>, Dev> > {\
-  FunctorExtractor<Eigen::TensorEvaluator<XprType, Dev> > xprExpr;\
+struct FunctorExtractor<Eigen_tf::TensorEvaluator<CVQual Eigen_tf::OPEXPR<Param, XprType>, Dev> > {\
+  FunctorExtractor<Eigen_tf::TensorEvaluator<XprType, Dev> > xprExpr;\
   const Param m_param;\
-  typedef typename Eigen::TensorEvaluator<CVQual Eigen::OPEXPR<Param, XprType>, Dev>::Scalar Scalar;\
+  typedef typename Eigen_tf::TensorEvaluator<CVQual Eigen_tf::OPEXPR<Param, XprType>, Dev>::Scalar Scalar;\
   const Scalar m_scalar_param;\
   EIGEN_STRONG_INLINE const Param& param() const { return m_param; }\
   EIGEN_STRONG_INLINE const Scalar& scalar_param() const { return m_scalar_param; }\
-  FunctorExtractor(const Eigen::TensorEvaluator<CVQual Eigen::OPEXPR<Param, XprType>, Dev>& expr)\
+  FunctorExtractor(const Eigen_tf::TensorEvaluator<CVQual Eigen_tf::OPEXPR<Param, XprType>, Dev>& expr)\
   : xprExpr(expr.impl()), m_param(expr.FUNCCALL), m_scalar_param(expr.SCALARFUNCCALL)  {}\
 };
 
@@ -364,7 +364,7 @@ SYCLEXTRFUNCCONTRACTCONCAT(TensorConcatenationOp, axis(),)
 #define SYCLEXTRFUNCCHIPPINGOP(CVQual)\
 template<DenseIndex DimId, typename XprType, typename Device>\
 struct FunctorExtractor<TensorEvaluator<CVQual TensorChippingOp<DimId, XprType>, Device> >{\
-  FunctorExtractor<Eigen::TensorEvaluator<XprType, Device> > xprExpr;\
+  FunctorExtractor<Eigen_tf::TensorEvaluator<XprType, Device> > xprExpr;\
   const DenseIndex m_dim;\
   const DenseIndex m_offset;\
   EIGEN_STRONG_INLINE const DenseIndex& dimId() const { return m_dim; }\
@@ -382,7 +382,7 @@ SYCLEXTRFUNCCHIPPINGOP()
 template<DenseIndex Rows, DenseIndex Cols, typename XprType, typename Device>\
 struct FunctorExtractor<TensorEvaluator<CVQual TensorImagePatchOp<Rows, Cols, XprType>, Device> >{\
 typedef CVQual TensorImagePatchOp<Rows, Cols, XprType> Self;\
-FunctorExtractor<Eigen::TensorEvaluator<XprType, Device> > xprExpr;\
+FunctorExtractor<Eigen_tf::TensorEvaluator<XprType, Device> > xprExpr;\
 const DenseIndex m_patch_rows;\
 const DenseIndex m_patch_cols;\
 const DenseIndex m_row_strides;\
@@ -418,7 +418,7 @@ SYCLEXTRFUNCIMAGEPATCHOP()
 template<DenseIndex Planes, DenseIndex Rows, DenseIndex Cols, typename XprType, typename Device>\
 struct FunctorExtractor<TensorEvaluator<CVQual TensorVolumePatchOp<Planes, Rows, Cols, XprType>, Device> >{\
 typedef CVQual TensorVolumePatchOp<Planes, Rows, Cols, XprType> Self;\
-FunctorExtractor<Eigen::TensorEvaluator<XprType, Device> > xprExpr;\
+FunctorExtractor<Eigen_tf::TensorEvaluator<XprType, Device> > xprExpr;\
 const DenseIndex m_patch_planes;\
 const DenseIndex m_patch_rows;\
 const DenseIndex m_patch_cols;\
@@ -462,6 +462,6 @@ auto inline extractFunctors(const Evaluator& evaluator)-> FunctorExtractor<Evalu
 }
 }  // namespace internal
 }  // namespace TensorSycl
-}  // namespace Eigen
+}  // namespace Eigen_tf
 
 #endif  // UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_EXTRACT_FUNCTORS_HPP

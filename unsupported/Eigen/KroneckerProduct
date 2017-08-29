@@ -15,7 +15,7 @@
 
 #include "../../Eigen/src/SparseCore/SparseUtil.h"
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /**
   * \defgroup KroneckerProduct_Module KroneckerProduct module
@@ -27,7 +27,7 @@ namespace Eigen {
   * \endcode
   */
 
-} // namespace Eigen
+} // namespace Eigen_tf
 
 #include "src/KroneckerProduct/KroneckerTensorProduct.h"
 

@@ -17,7 +17,7 @@
 #include <unsupported/Eigen/SVD>
 
 
-using namespace Eigen;
+using namespace Eigen_tf;
 using namespace std;
 
 // number of computations of each algorithm before the print of the time

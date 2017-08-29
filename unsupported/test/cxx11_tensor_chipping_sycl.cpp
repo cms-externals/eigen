@@ -23,10 +23,10 @@
 
 #include <Eigen/CXX11/Tensor>
 
-using Eigen::Tensor;
+using Eigen_tf::Tensor;
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_static_chip_sycl(const Eigen::SyclDevice& sycl_device)
+static void test_static_chip_sycl(const Eigen_tf::SyclDevice& sycl_device)
 {
   IndexType sizeDim1 = 2;
   IndexType sizeDim2 = 3;
@@ -175,7 +175,7 @@ static void test_static_chip_sycl(const Eigen::SyclDevice& sycl_device)
 }
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_dynamic_chip_sycl(const Eigen::SyclDevice& sycl_device)
+static void test_dynamic_chip_sycl(const Eigen_tf::SyclDevice& sycl_device)
 {
   IndexType sizeDim1 = 2;
   IndexType sizeDim2 = 3;
@@ -323,7 +323,7 @@ static void test_dynamic_chip_sycl(const Eigen::SyclDevice& sycl_device)
 }
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_chip_in_expr(const Eigen::SyclDevice& sycl_device) {
+static void test_chip_in_expr(const Eigen_tf::SyclDevice& sycl_device) {
 
   IndexType sizeDim1 = 2;
   IndexType sizeDim2 = 3;
@@ -398,7 +398,7 @@ static void test_chip_in_expr(const Eigen::SyclDevice& sycl_device) {
 }
 
 template <typename DataType, int DataLayout, typename IndexType>
-static void test_chip_as_lvalue_sycl(const Eigen::SyclDevice& sycl_device)
+static void test_chip_as_lvalue_sycl(const Eigen_tf::SyclDevice& sycl_device)
 {
 
   IndexType sizeDim1 = 2;
@@ -604,7 +604,7 @@ static void test_chip_as_lvalue_sycl(const Eigen::SyclDevice& sycl_device)
 
 template<typename DataType, typename dev_Selector> void sycl_chipping_test_per_device(dev_Selector s){
   QueueInterface queueInterface(s);
-  auto sycl_device = Eigen::SyclDevice(&queueInterface);
+  auto sycl_device = Eigen_tf::SyclDevice(&queueInterface);
   test_static_chip_sycl<DataType, RowMajor, int64_t>(sycl_device);
   test_static_chip_sycl<DataType, ColMajor, int64_t>(sycl_device);
   test_dynamic_chip_sycl<DataType, RowMajor, int64_t>(sycl_device);
@@ -616,7 +616,7 @@ template<typename DataType, typename dev_Selector> void sycl_chipping_test_per_d
 }
 void test_cxx11_tensor_chipping_sycl()
 {
-  for (const auto& device :Eigen::get_sycl_supported_devices()) {
+  for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
     CALL_SUBTEST(sycl_chipping_test_per_device<float>(device));
   }
 }

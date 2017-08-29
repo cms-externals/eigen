@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_CUSTOM_OP_H
 #define EIGEN_CXX11_TENSOR_TENSOR_CUSTOM_OP_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorCustomUnaryOp
   * \ingroup CXX11_Tensor_Module
@@ -33,7 +33,7 @@ struct traits<TensorCustomUnaryOp<CustomUnaryFunc, XprType> >
 };
 
 template<typename CustomUnaryFunc, typename XprType>
-struct eval<TensorCustomUnaryOp<CustomUnaryFunc, XprType>, Eigen::Dense>
+struct eval<TensorCustomUnaryOp<CustomUnaryFunc, XprType>, Eigen_tf::Dense>
 {
   typedef const TensorCustomUnaryOp<CustomUnaryFunc, XprType>& type;
 };
@@ -53,7 +53,7 @@ class TensorCustomUnaryOp : public TensorBase<TensorCustomUnaryOp<CustomUnaryFun
 {
   public:
   typedef typename internal::traits<TensorCustomUnaryOp>::Scalar Scalar;
-  typedef typename Eigen::NumTraits<Scalar>::Real RealScalar;
+  typedef typename Eigen_tf::NumTraits<Scalar>::Real RealScalar;
   typedef typename XprType::CoeffReturnType CoeffReturnType;
   typedef typename internal::nested<TensorCustomUnaryOp>::type Nested;
   typedef typename internal::traits<TensorCustomUnaryOp>::StorageKind StorageKind;
@@ -187,7 +187,7 @@ struct traits<TensorCustomBinaryOp<CustomBinaryFunc, LhsXprType, RhsXprType> >
 };
 
 template<typename CustomBinaryFunc, typename LhsXprType, typename RhsXprType>
-struct eval<TensorCustomBinaryOp<CustomBinaryFunc, LhsXprType, RhsXprType>, Eigen::Dense>
+struct eval<TensorCustomBinaryOp<CustomBinaryFunc, LhsXprType, RhsXprType>, Eigen_tf::Dense>
 {
   typedef const TensorCustomBinaryOp<CustomBinaryFunc, LhsXprType, RhsXprType>& type;
 };
@@ -207,7 +207,7 @@ class TensorCustomBinaryOp : public TensorBase<TensorCustomBinaryOp<CustomBinary
 {
   public:
   typedef typename internal::traits<TensorCustomBinaryOp>::Scalar Scalar;
-  typedef typename Eigen::NumTraits<Scalar>::Real RealScalar;
+  typedef typename Eigen_tf::NumTraits<Scalar>::Real RealScalar;
   typedef typename internal::traits<TensorCustomBinaryOp>::CoeffReturnType CoeffReturnType;
   typedef typename internal::nested<TensorCustomBinaryOp>::type Nested;
   typedef typename internal::traits<TensorCustomBinaryOp>::StorageKind StorageKind;
@@ -316,6 +316,6 @@ struct TensorEvaluator<const TensorCustomBinaryOp<CustomBinaryFunc, LhsXprType, 
 };
 
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_CUSTOM_OP_H

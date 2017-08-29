@@ -8,7 +8,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-# Pretty printers for Eigen::Matrix
+# Pretty printers for Eigen_tf::Matrix
 # This is still pretty basic as the python extension to gdb is still pretty basic. 
 # It cannot handle complex eigen types and it doesn't support many of the other eigen types
 # This code supports fixed size as well as dynamic size matrices
@@ -137,7 +137,7 @@ class EigenMatrixPrinter:
 		return self._iterator(self.rows, self.cols, self.data, self.rowMajor)
 		
 	def to_string(self):
-		return "Eigen::%s<%s,%d,%d,%s> (data ptr: %s)" % (self.variety, self.innerType, self.rows, self.cols, "RowMajor" if self.rowMajor else  "ColMajor", self.data)
+		return "Eigen_tf::%s<%s,%d,%d,%s> (data ptr: %s)" % (self.variety, self.innerType, self.rows, self.cols, "RowMajor" if self.rowMajor else  "ColMajor", self.data)
 
 class EigenSparseMatrixPrinter:
 	"Print an Eigen SparseMatrix"
@@ -225,7 +225,7 @@ class EigenSparseMatrixPrinter:
 		dimensions  = "%d x %d" % (self.rows(), self.cols())
 		layout      = "row" if self.rowMajor else "column"
 
-		return "Eigen::SparseMatrix<%s>, %s, %s major, %s" % (
+		return "Eigen_tf::SparseMatrix<%s>, %s, %s major, %s" % (
 			self.innerType, dimensions, layout, status )
 
 class EigenQuaternionPrinter:
@@ -274,13 +274,13 @@ class EigenQuaternionPrinter:
 		return self._iterator(self.data)
 	
 	def to_string(self):
-		return "Eigen::Quaternion<%s> (data ptr: %s)" % (self.innerType, self.data)
+		return "Eigen_tf::Quaternion<%s> (data ptr: %s)" % (self.innerType, self.data)
 
 def build_eigen_dictionary ():
-	pretty_printers_dict[re.compile('^Eigen::Quaternion<.*>$')] = lambda val: EigenQuaternionPrinter(val)
-	pretty_printers_dict[re.compile('^Eigen::Matrix<.*>$')] = lambda val: EigenMatrixPrinter("Matrix", val)
-	pretty_printers_dict[re.compile('^Eigen::SparseMatrix<.*>$')] = lambda val: EigenSparseMatrixPrinter(val)
-	pretty_printers_dict[re.compile('^Eigen::Array<.*>$')]  = lambda val: EigenMatrixPrinter("Array",  val)
+	pretty_printers_dict[re.compile('^Eigen_tf::Quaternion<.*>$')] = lambda val: EigenQuaternionPrinter(val)
+	pretty_printers_dict[re.compile('^Eigen_tf::Matrix<.*>$')] = lambda val: EigenMatrixPrinter("Matrix", val)
+	pretty_printers_dict[re.compile('^Eigen_tf::SparseMatrix<.*>$')] = lambda val: EigenSparseMatrixPrinter(val)
+	pretty_printers_dict[re.compile('^Eigen_tf::Array<.*>$')]  = lambda val: EigenMatrixPrinter("Array",  val)
 
 def register_eigen_printers(obj):
 	"Register eigen pretty-printers with objfile Obj"

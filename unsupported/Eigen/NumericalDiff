@@ -12,7 +12,7 @@
 
 #include <Eigen/Core>
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /**
   * \defgroup NumericalDiff_Module Numerical differentiation module

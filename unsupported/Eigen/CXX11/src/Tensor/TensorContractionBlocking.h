@@ -11,7 +11,7 @@
 #define EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_BLOCKING_H
 
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace internal {
 
 enum {
@@ -185,6 +185,6 @@ class TensorXsmmContractionBlocking {
 #endif // EIGEN_USE_LIBXSMM
 
 } // end namespace internal
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_BLOCKING_H

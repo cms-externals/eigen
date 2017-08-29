@@ -10,7 +10,7 @@
 #ifndef EIGEN_MATRIX_POWER
 #define EIGEN_MATRIX_POWER
 
-namespace Eigen {
+namespace Eigen_tf {
 
 template<typename MatrixType> class MatrixPower;
 
@@ -704,6 +704,6 @@ template<typename Derived>
 const MatrixComplexPowerReturnValue<Derived> MatrixBase<Derived>::pow(const std::complex<RealScalar>& p) const
 { return MatrixComplexPowerReturnValue<Derived>(derived(), p); }
 
-} // namespace Eigen
+} // namespace Eigen_tf
 
 #endif // EIGEN_MATRIX_POWER

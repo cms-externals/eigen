@@ -6,7 +6,7 @@ void llt(const Mat &A, const Mat &B, Mat &C)
 {
   C = A;
   C.diagonal().array() += 1000;
-  Eigen::internal::llt_inplace<Mat::Scalar, Lower>::blocked(C);
+  Eigen_tf::internal::llt_inplace<Mat::Scalar, Lower>::blocked(C);
 }
 
 int main(int argc, char **argv)

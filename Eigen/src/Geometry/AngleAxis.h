@@ -10,7 +10,7 @@
 #ifndef EIGEN_ANGLEAXIS_H
 #define EIGEN_ANGLEAXIS_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 /** \geometry_module \ingroup Geometry_Module
   *
@@ -242,6 +242,6 @@ EIGEN_DEVICE_FUNC AngleAxis<Scalar>::toRotationMatrix(void) const
   return res;
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_ANGLEAXIS_H

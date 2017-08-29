@@ -11,7 +11,7 @@
 #ifndef EIGEN_PARTIALLU_H
 #define EIGEN_PARTIALLU_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 template<typename _MatrixType> struct traits<PartialPivLU<_MatrixType> >
@@ -606,6 +606,6 @@ MatrixBase<Derived>::lu() const
   return PartialPivLU<PlainObject>(eval());
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_PARTIALLU_H

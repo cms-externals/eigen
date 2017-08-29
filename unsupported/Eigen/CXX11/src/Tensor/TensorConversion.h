@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_CONVERSION_H
 #define EIGEN_CXX11_TENSOR_TENSOR_CONVERSION_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorConversionOp
   * \ingroup CXX11_Tensor_Module
@@ -35,7 +35,7 @@ struct traits<TensorConversionOp<TargetType, XprType> >
 };
 
 template<typename TargetType, typename XprType>
-struct eval<TensorConversionOp<TargetType, XprType>, Eigen::Dense>
+struct eval<TensorConversionOp<TargetType, XprType>, Eigen_tf::Dense>
 {
   typedef const TensorConversionOp<TargetType, XprType>& type;
 };
@@ -277,6 +277,6 @@ struct TensorEvaluator<const TensorConversionOp<TargetType, ArgType>, Device>
   TensorEvaluator<ArgType, Device> m_impl;
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_CONVERSION_H

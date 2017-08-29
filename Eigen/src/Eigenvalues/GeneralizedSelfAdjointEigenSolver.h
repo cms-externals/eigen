@@ -13,7 +13,7 @@
 
 #include "./Tridiagonalization.h"
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 /** \eigenvalues_module \ingroup Eigenvalues_Module
   *
@@ -221,6 +221,6 @@ compute(const MatrixType& matA, const MatrixType& matB, int options)
   return *this;
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_GENERALIZEDSELFADJOINTEIGENSOLVER_H

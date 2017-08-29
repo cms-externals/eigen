@@ -2,7 +2,7 @@
 
 #include <Eigen/CXX11/Tensor>
 
-using Eigen::Tensor;
+using Eigen_tf::Tensor;
 
 static void test_single_voxel_patch()
 {

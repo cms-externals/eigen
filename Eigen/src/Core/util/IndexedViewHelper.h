@@ -11,9 +11,9 @@
 #ifndef EIGEN_INDEXED_VIEW_HELPER_H
 #define EIGEN_INDEXED_VIEW_HELPER_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
-/** \namespace Eigen::placeholders
+/** \namespace Eigen_tf::placeholders
   * \ingroup Core_Module
   *
   * Namespace containing symbolic placeholder and identifiers
@@ -27,15 +27,15 @@ struct symbolic_last_tag {};
 /** \var last
   * \ingroup Core_Module
   *
-  * Can be used as a parameter to Eigen::seq and Eigen::seqN functions to symbolically reference the last element/row/columns
+  * Can be used as a parameter to Eigen_tf::seq and Eigen_tf::seqN functions to symbolically reference the last element/row/columns
   * of the underlying vector or matrix once passed to DenseBase::operator()(const RowIndices&, const ColIndices&).
   *
   * This symbolic placeholder support standard arithmetic operation.
   *
   * A typical usage example would be:
   * \code
-  * using namespace Eigen;
-  * using Eigen::placeholders::last;
+  * using namespace Eigen_tf;
+  * using Eigen_tf::placeholders::last;
   * VectorXd v(n);
   * v(seq(2,last-2)).setOnes();
   * \endcode
@@ -47,7 +47,7 @@ static const Symbolic::SymbolExpr<internal::symbolic_last_tag> last;
 /** \var end
   * \ingroup Core_Module
   *
-  * Can be used as a parameter to Eigen::seq and Eigen::seqN functions to symbolically reference the last+1 element/row/columns
+  * Can be used as a parameter to Eigen_tf::seq and Eigen_tf::seqN functions to symbolically reference the last+1 element/row/columns
   * of the underlying vector or matrix once passed to DenseBase::operator()(const RowIndices&, const ColIndices&).
   *
   * This symbolic placeholder support standard arithmetic operation.
@@ -60,7 +60,7 @@ static const auto end = last+1;
 #else
 // Using a FixedExpr<1> expression is important here to make sure the compiler
 // can fully optimize the computation starting indices with zero overhead.
-static const Symbolic::AddExpr<Symbolic::SymbolExpr<internal::symbolic_last_tag>,Symbolic::ValueExpr<Eigen::internal::FixedInt<1> > > end(last+fix<1>());
+static const Symbolic::AddExpr<Symbolic::SymbolExpr<internal::symbolic_last_tag>,Symbolic::ValueExpr<Eigen_tf::internal::FixedInt<1> > > end(last+fix<1>());
 #endif
 
 } // end namespace placeholders
@@ -122,7 +122,7 @@ template<typename T, int XprSize>
 struct IndexedViewCompatibleType<T,XprSize,typename internal::enable_if<internal::is_integral<T>::value>::type> {
   // Here we could simply use Array, but maybe it's less work for the compiler to use
   // a simpler wrapper as SingleRange
-  //typedef Eigen::Array<Index,1,1> type;
+  //typedef Eigen_tf::Array<Index,1,1> type;
   typedef SingleRange type;
 };
 
@@ -178,10 +178,10 @@ namespace placeholders {
   * \ingroup Core_Module
   * Can be used as a parameter to DenseBase::operator()(const RowIndices&, const ColIndices&) to index all rows or columns
   */
-static const Eigen::internal::all_t all;
+static const Eigen_tf::internal::all_t all;
 
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_INDEXED_VIEW_HELPER_H

@@ -10,7 +10,7 @@
 #include "main.h"
 #include <Eigen/CXX11/Tensor>
 
-using Eigen::Tensor;
+using Eigen_tf::Tensor;
 
 template <int DataLayout>
 static void test_fft_2D_golden() {
@@ -26,7 +26,7 @@ static void test_fft_2D_golden() {
   fft[0] = 0;
   fft[1] = 1;
 
-  Tensor<std::complex<float>, 2, DataLayout> output = input.template fft<Eigen::BothParts, Eigen::FFT_FORWARD>(fft);
+  Tensor<std::complex<float>, 2, DataLayout> output = input.template fft<Eigen_tf::BothParts, Eigen_tf::FFT_FORWARD>(fft);
 
   std::complex<float> output_golden[6]; // in ColMajor order
   output_golden[0] = std::complex<float>(21, 0);
@@ -178,7 +178,7 @@ static void test_fft_real_input_golden() {
 template <int DataLayout, typename RealScalar, bool isComplexInput, int FFTResultType, int FFTDirection, int TensorRank>
 static void test_fft_real_input_energy() {
 
-  Eigen::DSizes<ptrdiff_t, TensorRank> dimensions;
+  Eigen_tf::DSizes<ptrdiff_t, TensorRank> dimensions;
   ptrdiff_t total_size = 1;
   for (int i = 0; i < TensorRank; ++i) {
     dimensions[i] = rand() % 20 + 1;
@@ -197,7 +197,7 @@ static void test_fft_real_input_energy() {
     fft[i] = i;
   }
 
-  typedef typename internal::conditional<FFTResultType == Eigen::BothParts, std::complex<RealScalar>, RealScalar>::type OutputScalar;
+  typedef typename internal::conditional<FFTResultType == Eigen_tf::BothParts, std::complex<RealScalar>, RealScalar>::type OutputScalar;
   Tensor<OutputScalar, TensorRank, DataLayout> output;
   output = input.template fft<FFTResultType, FFTDirection>(fft);
 
@@ -231,43 +231,43 @@ void test_cxx11_tensor_fft() {
     test_fft_2D_golden<ColMajor>();
     test_fft_2D_golden<RowMajor>();
 
-    test_fft_real_input_energy<ColMajor, float,  true,  Eigen::BothParts, FFT_FORWARD, 1>();
-    test_fft_real_input_energy<ColMajor, double, true,  Eigen::BothParts, FFT_FORWARD, 1>();
-    test_fft_real_input_energy<ColMajor, float,  false,  Eigen::BothParts, FFT_FORWARD, 1>();
-    test_fft_real_input_energy<ColMajor, double, false,  Eigen::BothParts, FFT_FORWARD, 1>();
+    test_fft_real_input_energy<ColMajor, float,  true,  Eigen_tf::BothParts, FFT_FORWARD, 1>();
+    test_fft_real_input_energy<ColMajor, double, true,  Eigen_tf::BothParts, FFT_FORWARD, 1>();
+    test_fft_real_input_energy<ColMajor, float,  false,  Eigen_tf::BothParts, FFT_FORWARD, 1>();
+    test_fft_real_input_energy<ColMajor, double, false,  Eigen_tf::BothParts, FFT_FORWARD, 1>();
 
-    test_fft_real_input_energy<ColMajor, float,  true,  Eigen::BothParts, FFT_FORWARD, 2>();
-    test_fft_real_input_energy<ColMajor, double, true,  Eigen::BothParts, FFT_FORWARD, 2>();
-    test_fft_real_input_energy<ColMajor, float,  false,  Eigen::BothParts, FFT_FORWARD, 2>();
-    test_fft_real_input_energy<ColMajor, double, false,  Eigen::BothParts, FFT_FORWARD, 2>();
+    test_fft_real_input_energy<ColMajor, float,  true,  Eigen_tf::BothParts, FFT_FORWARD, 2>();
+    test_fft_real_input_energy<ColMajor, double, true,  Eigen_tf::BothParts, FFT_FORWARD, 2>();
+    test_fft_real_input_energy<ColMajor, float,  false,  Eigen_tf::BothParts, FFT_FORWARD, 2>();
+    test_fft_real_input_energy<ColMajor, double, false,  Eigen_tf::BothParts, FFT_FORWARD, 2>();
 
-    test_fft_real_input_energy<ColMajor, float,  true,  Eigen::BothParts, FFT_FORWARD, 3>();
-    test_fft_real_input_energy<ColMajor, double, true,  Eigen::BothParts, FFT_FORWARD, 3>();
-    test_fft_real_input_energy<ColMajor, float,  false,  Eigen::BothParts, FFT_FORWARD, 3>();
-    test_fft_real_input_energy<ColMajor, double, false,  Eigen::BothParts, FFT_FORWARD, 3>();
+    test_fft_real_input_energy<ColMajor, float,  true,  Eigen_tf::BothParts, FFT_FORWARD, 3>();
+    test_fft_real_input_energy<ColMajor, double, true,  Eigen_tf::BothParts, FFT_FORWARD, 3>();
+    test_fft_real_input_energy<ColMajor, float,  false,  Eigen_tf::BothParts, FFT_FORWARD, 3>();
+    test_fft_real_input_energy<ColMajor, double, false,  Eigen_tf::BothParts, FFT_FORWARD, 3>();
 
-    test_fft_real_input_energy<ColMajor, float,  true,  Eigen::BothParts, FFT_FORWARD, 4>();
-    test_fft_real_input_energy<ColMajor, double, true,  Eigen::BothParts, FFT_FORWARD, 4>();
-    test_fft_real_input_energy<ColMajor, float,  false,  Eigen::BothParts, FFT_FORWARD, 4>();
-    test_fft_real_input_energy<ColMajor, double, false,  Eigen::BothParts, FFT_FORWARD, 4>();
+    test_fft_real_input_energy<ColMajor, float,  true,  Eigen_tf::BothParts, FFT_FORWARD, 4>();
+    test_fft_real_input_energy<ColMajor, double, true,  Eigen_tf::BothParts, FFT_FORWARD, 4>();
+    test_fft_real_input_energy<ColMajor, float,  false,  Eigen_tf::BothParts, FFT_FORWARD, 4>();
+    test_fft_real_input_energy<ColMajor, double, false,  Eigen_tf::BothParts, FFT_FORWARD, 4>();
 
-    test_fft_real_input_energy<RowMajor, float,  true,  Eigen::BothParts, FFT_FORWARD, 1>();
-    test_fft_real_input_energy<RowMajor, double, true,  Eigen::BothParts, FFT_FORWARD, 1>();
-    test_fft_real_input_energy<RowMajor, float,  false,  Eigen::BothParts, FFT_FORWARD, 1>();
-    test_fft_real_input_energy<RowMajor, double, false,  Eigen::BothParts, FFT_FORWARD, 1>();
+    test_fft_real_input_energy<RowMajor, float,  true,  Eigen_tf::BothParts, FFT_FORWARD, 1>();
+    test_fft_real_input_energy<RowMajor, double, true,  Eigen_tf::BothParts, FFT_FORWARD, 1>();
+    test_fft_real_input_energy<RowMajor, float,  false,  Eigen_tf::BothParts, FFT_FORWARD, 1>();
+    test_fft_real_input_energy<RowMajor, double, false,  Eigen_tf::BothParts, FFT_FORWARD, 1>();
 
-    test_fft_real_input_energy<RowMajor, float,  true,  Eigen::BothParts, FFT_FORWARD, 2>();
-    test_fft_real_input_energy<RowMajor, double, true,  Eigen::BothParts, FFT_FORWARD, 2>();
-    test_fft_real_input_energy<RowMajor, float,  false,  Eigen::BothParts, FFT_FORWARD, 2>();
-    test_fft_real_input_energy<RowMajor, double, false,  Eigen::BothParts, FFT_FORWARD, 2>();
+    test_fft_real_input_energy<RowMajor, float,  true,  Eigen_tf::BothParts, FFT_FORWARD, 2>();
+    test_fft_real_input_energy<RowMajor, double, true,  Eigen_tf::BothParts, FFT_FORWARD, 2>();
+    test_fft_real_input_energy<RowMajor, float,  false,  Eigen_tf::BothParts, FFT_FORWARD, 2>();
+    test_fft_real_input_energy<RowMajor, double, false,  Eigen_tf::BothParts, FFT_FORWARD, 2>();
 
-    test_fft_real_input_energy<RowMajor, float,  true,  Eigen::BothParts, FFT_FORWARD, 3>();
-    test_fft_real_input_energy<RowMajor, double, true,  Eigen::BothParts, FFT_FORWARD, 3>();
-    test_fft_real_input_energy<RowMajor, float,  false,  Eigen::BothParts, FFT_FORWARD, 3>();
-    test_fft_real_input_energy<RowMajor, double, false,  Eigen::BothParts, FFT_FORWARD, 3>();
+    test_fft_real_input_energy<RowMajor, float,  true,  Eigen_tf::BothParts, FFT_FORWARD, 3>();
+    test_fft_real_input_energy<RowMajor, double, true,  Eigen_tf::BothParts, FFT_FORWARD, 3>();
+    test_fft_real_input_energy<RowMajor, float,  false,  Eigen_tf::BothParts, FFT_FORWARD, 3>();
+    test_fft_real_input_energy<RowMajor, double, false,  Eigen_tf::BothParts, FFT_FORWARD, 3>();
 
-    test_fft_real_input_energy<RowMajor, float,  true,  Eigen::BothParts, FFT_FORWARD, 4>();
-    test_fft_real_input_energy<RowMajor, double, true,  Eigen::BothParts, FFT_FORWARD, 4>();
-    test_fft_real_input_energy<RowMajor, float,  false,  Eigen::BothParts, FFT_FORWARD, 4>();
-    test_fft_real_input_energy<RowMajor, double, false,  Eigen::BothParts, FFT_FORWARD, 4>();
+    test_fft_real_input_energy<RowMajor, float,  true,  Eigen_tf::BothParts, FFT_FORWARD, 4>();
+    test_fft_real_input_energy<RowMajor, double, true,  Eigen_tf::BothParts, FFT_FORWARD, 4>();
+    test_fft_real_input_energy<RowMajor, float,  false,  Eigen_tf::BothParts, FFT_FORWARD, 4>();
+    test_fft_real_input_energy<RowMajor, double, false,  Eigen_tf::BothParts, FFT_FORWARD, 4>();
 }

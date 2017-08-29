@@ -10,7 +10,7 @@
 #ifndef EIGEN_LU_H
 #define EIGEN_LU_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 template<typename _MatrixType> struct traits<FullPivLU<_MatrixType> >
@@ -101,7 +101,7 @@ template<typename _MatrixType> class FullPivLU
 
     /** \brief Constructs a LU factorization from a given matrix
       *
-      * This overloaded constructor is provided for \link InplaceDecomposition inplace decomposition \endlink when \c MatrixType is a Eigen::Ref.
+      * This overloaded constructor is provided for \link InplaceDecomposition inplace decomposition \endlink when \c MatrixType is a Eigen_tf::Ref.
       *
       * \sa FullPivLU(const EigenBase&)
       */
@@ -299,8 +299,8 @@ template<typename _MatrixType> class FullPivLU
     /** Allows to come back to the default behavior, letting Eigen use its default formula for
       * determining the threshold.
       *
-      * You should pass the special object Eigen::Default as parameter here.
-      * \code lu.setThreshold(Eigen::Default); \endcode
+      * You should pass the special object Eigen_tf::Default as parameter here.
+      * \code lu.setThreshold(Eigen_tf::Default); \endcode
       *
       * See the documentation of setThreshold(const RealScalar&).
       */
@@ -884,6 +884,6 @@ MatrixBase<Derived>::fullPivLu() const
   return FullPivLU<PlainObject>(eval());
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_LU_H

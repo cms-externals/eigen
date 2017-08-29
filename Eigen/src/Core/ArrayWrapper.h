@@ -10,7 +10,7 @@
 #ifndef EIGEN_ARRAYWRAPPER_H
 #define EIGEN_ARRAYWRAPPER_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 /** \class ArrayWrapper
   * \ingroup Core_Module
@@ -202,6 +202,6 @@ class MatrixWrapper : public MatrixBase<MatrixWrapper<ExpressionType> >
     NestedExpressionType m_expression;
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_ARRAYWRAPPER_H

@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_DIMENSION_LIST_H
 #define EIGEN_CXX11_TENSOR_TENSOR_DIMENSION_LIST_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \internal
   *
@@ -230,7 +230,7 @@ struct index_statically_lt_impl<const DimensionList<Index, Rank> > {
 #endif
 
 }  // end namespace internal
-}  // end namespace Eigen
+}  // end namespace Eigen_tf
 
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_DIMENSION_LIST_H

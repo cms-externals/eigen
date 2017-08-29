@@ -23,7 +23,7 @@
 #ifndef UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_SYCLRUN_HPP
 #define UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_SYCLRUN_HPP
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace TensorSycl {
 template<typename Expr, typename FunctorExpr, typename TupleType > struct ExecExprFunctorKernel{
   typedef  typename internal::createPlaceHolderExpression<Expr>::Type PlaceHolderExpr;
@@ -37,7 +37,7 @@ template<typename Expr, typename FunctorExpr, typename TupleType > struct ExecEx
   void operator()(cl::sycl::nd_item<1> itemID) {
     typedef  typename internal::ConvertToDeviceExpression<Expr>::Type DevExpr;
     auto device_expr =internal::createDeviceExpression<DevExpr, PlaceHolderExpr>(functors, tuple_of_accessors);
-    auto device_evaluator = Eigen::TensorEvaluator<decltype(device_expr.expr), Eigen::SyclKernelDevice>(device_expr.expr, Eigen::SyclKernelDevice());
+    auto device_evaluator = Eigen_tf::TensorEvaluator<decltype(device_expr.expr), Eigen_tf::SyclKernelDevice>(device_expr.expr, Eigen_tf::SyclKernelDevice());
     typename DevExpr::Index gId = static_cast<typename DevExpr::Index>(itemID.get_global_linear_id());
     if (gId < range)
       device_evaluator.evalScalar(gId);
@@ -57,7 +57,7 @@ template<typename , typename Dimensions> struct DimensionSize{
 #define DIMSIZEMACRO(CVQual)\
 template<typename Index, size_t NumDims> struct DimensionSize<Index, CVQual std::array<Index, NumDims>>{\
   static inline Index getDimSize(const std::array<Index, NumDims>& dim){\
-    return (NumDims == 0) ? 1 : ::Eigen::internal::array_prod(dim);\
+    return (NumDims == 0) ? 1 : ::Eigen_tf::internal::array_prod(dim);\
   }\
 };
 
@@ -68,17 +68,17 @@ DIMSIZEMACRO()
 
 template <typename Expr, typename Dev>
 void run(Expr &expr, Dev &dev) {
-  Eigen::TensorEvaluator<Expr, Dev> evaluator(expr, dev);
+  Eigen_tf::TensorEvaluator<Expr, Dev> evaluator(expr, dev);
   const bool needs_assign = evaluator.evalSubExprsIfNeeded(NULL);
   if (needs_assign) {
-    typedef Eigen::TensorSycl::internal::FunctorExtractor<Eigen::TensorEvaluator<Expr, Dev> > FunctorExpr;
+    typedef Eigen_tf::TensorSycl::internal::FunctorExtractor<Eigen_tf::TensorEvaluator<Expr, Dev> > FunctorExpr;
     FunctorExpr functors = internal::extractFunctors(evaluator);
     dev.sycl_queue().submit([&](cl::sycl::handler &cgh) {
       // create a tuple of accessors from Evaluator
-      typedef decltype(internal::createTupleOfAccessors<Eigen::TensorEvaluator<Expr, Dev> >(cgh, evaluator)) TupleType;
-      TupleType tuple_of_accessors = internal::createTupleOfAccessors<Eigen::TensorEvaluator<Expr, Dev> >(cgh, evaluator);
+      typedef decltype(internal::createTupleOfAccessors<Eigen_tf::TensorEvaluator<Expr, Dev> >(cgh, evaluator)) TupleType;
+      TupleType tuple_of_accessors = internal::createTupleOfAccessors<Eigen_tf::TensorEvaluator<Expr, Dev> >(cgh, evaluator);
       typename Expr::Index range, GRange, tileSize;
-      typename Expr::Index total_size = static_cast<typename Expr::Index>(DimensionSize<typename Expr::Index, typename Eigen::TensorEvaluator<Expr, Dev>::Dimensions>::getDimSize(evaluator.dimensions()));
+      typename Expr::Index total_size = static_cast<typename Expr::Index>(DimensionSize<typename Expr::Index, typename Eigen_tf::TensorEvaluator<Expr, Dev>::Dimensions>::getDimSize(evaluator.dimensions()));
       dev.parallel_for_setup(total_size, tileSize, range, GRange);
 
       cgh.parallel_for(cl::sycl::nd_range<1>(cl::sycl::range<1>(GRange), cl::sycl::range<1>(tileSize)),
@@ -91,6 +91,6 @@ void run(Expr &expr, Dev &dev) {
   evaluator.cleanup();
 }
 }  // namespace TensorSycl
-}  // namespace Eigen
+}  // namespace Eigen_tf
 
 #endif  // UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_SYCLRUN_HPP

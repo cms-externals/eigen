@@ -6,7 +6,7 @@
 #define CV_QUALIFIER
 #endif
 
-using namespace Eigen;
+using namespace Eigen_tf;
 
 void foo(CV_QUALIFIER float *ptr, DenseIndex rows, DenseIndex cols){
     Map<MatrixXf, Aligned, InnerStride<2> > m(ptr, rows, cols, InnerStride<2>());

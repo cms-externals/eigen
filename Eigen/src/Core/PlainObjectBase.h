@@ -22,7 +22,7 @@
 # define EIGEN_INITIALIZE_COEFFS_IF_THAT_OPTION_IS_ENABLED
 #endif
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -118,22 +118,22 @@ class PlainObjectBase : public internal::dense_xpr_base<Derived>::type
     using Base::IsVectorAtCompileTime;
     using Base::Flags;
 
-    template<typename PlainObjectType, int MapOptions, typename StrideType> friend class Eigen::Map;
-    friend  class Eigen::Map<Derived, Unaligned>;
-    typedef Eigen::Map<Derived, Unaligned>  MapType;
-    friend  class Eigen::Map<const Derived, Unaligned>;
-    typedef const Eigen::Map<const Derived, Unaligned> ConstMapType;
+    template<typename PlainObjectType, int MapOptions, typename StrideType> friend class Eigen_tf::Map;
+    friend  class Eigen_tf::Map<Derived, Unaligned>;
+    typedef Eigen_tf::Map<Derived, Unaligned>  MapType;
+    friend  class Eigen_tf::Map<const Derived, Unaligned>;
+    typedef const Eigen_tf::Map<const Derived, Unaligned> ConstMapType;
 #if EIGEN_MAX_ALIGN_BYTES>0
     // for EIGEN_MAX_ALIGN_BYTES==0, AlignedMax==Unaligned, and many compilers generate warnings for friend-ing a class twice.
-    friend  class Eigen::Map<Derived, AlignedMax>;
-    friend  class Eigen::Map<const Derived, AlignedMax>;
+    friend  class Eigen_tf::Map<Derived, AlignedMax>;
+    friend  class Eigen_tf::Map<const Derived, AlignedMax>;
 #endif
-    typedef Eigen::Map<Derived, AlignedMax> AlignedMapType;
-    typedef const Eigen::Map<const Derived, AlignedMax> ConstAlignedMapType;
-    template<typename StrideType> struct StridedMapType { typedef Eigen::Map<Derived, Unaligned, StrideType> type; };
-    template<typename StrideType> struct StridedConstMapType { typedef Eigen::Map<const Derived, Unaligned, StrideType> type; };
-    template<typename StrideType> struct StridedAlignedMapType { typedef Eigen::Map<Derived, AlignedMax, StrideType> type; };
-    template<typename StrideType> struct StridedConstAlignedMapType { typedef Eigen::Map<const Derived, AlignedMax, StrideType> type; };
+    typedef Eigen_tf::Map<Derived, AlignedMax> AlignedMapType;
+    typedef const Eigen_tf::Map<const Derived, AlignedMax> ConstAlignedMapType;
+    template<typename StrideType> struct StridedMapType { typedef Eigen_tf::Map<Derived, Unaligned, StrideType> type; };
+    template<typename StrideType> struct StridedConstMapType { typedef Eigen_tf::Map<const Derived, Unaligned, StrideType> type; };
+    template<typename StrideType> struct StridedAlignedMapType { typedef Eigen_tf::Map<Derived, AlignedMax, StrideType> type; };
+    template<typename StrideType> struct StridedConstAlignedMapType { typedef Eigen_tf::Map<const Derived, AlignedMax, StrideType> type; };
 
   protected:
     DenseStorage<Scalar, Base::MaxSizeAtCompileTime, Base::RowsAtCompileTime, Base::ColsAtCompileTime, Options> m_storage;
@@ -1026,6 +1026,6 @@ struct matrix_swap_impl<MatrixTypeA, MatrixTypeB, true>
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_DENSESTORAGEBASE_H

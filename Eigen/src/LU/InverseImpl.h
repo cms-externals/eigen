@@ -11,7 +11,7 @@
 #ifndef EIGEN_INVERSE_IMPL_H
 #define EIGEN_INVERSE_IMPL_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -410,6 +410,6 @@ inline void MatrixBase<Derived>::computeInverseWithCheck(
   computeInverseAndDetWithCheck(inverse,determinant,invertible,absDeterminantThreshold);
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_INVERSE_IMPL_H

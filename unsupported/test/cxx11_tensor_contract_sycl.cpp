@@ -24,10 +24,10 @@
 #include "main.h"
 #include <unsupported/Eigen/CXX11/Tensor>
 
-using Eigen::array;
-using Eigen::SyclDevice;
-using Eigen::Tensor;
-using Eigen::TensorMap;
+using Eigen_tf::array;
+using Eigen_tf::SyclDevice;
+using Eigen_tf::Tensor;
+using Eigen_tf::TensorMap;
 template<int DataLayout, typename DataType, typename IndexType, typename Device>
 void static test_sycl_contraction(const Device& sycl_device, IndexType m_size, IndexType k_size, IndexType n_size)
 {
@@ -41,11 +41,11 @@ void static test_sycl_contraction(const Device& sycl_device, IndexType m_size, I
   Tensor<DataType, 2, DataLayout, IndexType> t_right(k_size, n_size);
   Tensor<DataType, 2, DataLayout, IndexType> t_result(m_size, n_size);
   Tensor<DataType, 2, DataLayout, IndexType> t_result_gpu(m_size, n_size);
-//  Eigen::array<DimPair, 1> dims(DimPair(1, 0));
-  Eigen::array<DimPair, 1> dims = {{DimPair(1, 0)}};
-  Eigen::array<IndexType, 2> left_dims = {{m_size, k_size}};
-  Eigen::array<IndexType, 2> right_dims = {{k_size, n_size}};
-  Eigen::array<IndexType, 2> result_dims = {{m_size, n_size}};
+//  Eigen_tf::array<DimPair, 1> dims(DimPair(1, 0));
+  Eigen_tf::array<DimPair, 1> dims = {{DimPair(1, 0)}};
+  Eigen_tf::array<IndexType, 2> left_dims = {{m_size, k_size}};
+  Eigen_tf::array<IndexType, 2> right_dims = {{k_size, n_size}};
+  Eigen_tf::array<IndexType, 2> result_dims = {{m_size, n_size}};
 
   t_left.setRandom();
   t_right.setRandom();
@@ -58,9 +58,9 @@ void static test_sycl_contraction(const Device& sycl_device, IndexType m_size, I
   DataType * d_t_right  = static_cast<DataType*>(sycl_device.allocate(t_right_bytes));
   DataType * d_t_result =  static_cast<DataType*>(sycl_device.allocate(t_result_bytes));
 
-  Eigen::TensorMap<Eigen::Tensor<DataType, 2, DataLayout, IndexType> > gpu_t_left(d_t_left, left_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 2, DataLayout, IndexType> > gpu_t_right(d_t_right, right_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 2, DataLayout, IndexType> > gpu_t_result(d_t_result, result_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType> > gpu_t_left(d_t_left, left_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType> > gpu_t_right(d_t_right, right_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType> > gpu_t_result(d_t_result, result_dims);
 
   sycl_device.memcpyHostToDevice(d_t_left, t_left.data(),t_left_bytes);
   sycl_device.memcpyHostToDevice(d_t_right, t_right.data(),t_right_bytes);
@@ -74,7 +74,7 @@ void static test_sycl_contraction(const Device& sycl_device, IndexType m_size, I
     if (static_cast<DataType>(fabs(t_result(i) - t_result_gpu(i))) < error_threshold) {
       continue;
     }
-    if (Eigen::internal::isApprox(t_result(i), t_result_gpu(i), error_threshold)) {
+    if (Eigen_tf::internal::isApprox(t_result(i), t_result_gpu(i), error_threshold)) {
       continue;
     }
     std::cout << "mismatch detected at IndexType " << i << ": " << t_result(i)
@@ -91,10 +91,10 @@ void test_TF(const Device& sycl_device)
 {
   typedef typename Tensor<DataType, 1, DataLayout, IndexType>::DimensionPair DimPair;
   static const DataType error_threshold =1e-4f;
-  Eigen::array<IndexType, 2> left_dims = {{2, 3}};
-  Eigen::array<IndexType, 2> right_dims = {{3, 1}};
-  Eigen::array<IndexType, 2> res_dims = {{2, 1}};
-  Eigen::array<DimPair, 1> dims = {{DimPair(1, 0)}};
+  Eigen_tf::array<IndexType, 2> left_dims = {{2, 3}};
+  Eigen_tf::array<IndexType, 2> right_dims = {{3, 1}};
+  Eigen_tf::array<IndexType, 2> res_dims = {{2, 1}};
+  Eigen_tf::array<DimPair, 1> dims = {{DimPair(1, 0)}};
 
 
   Tensor<DataType, 2, DataLayout, IndexType> t_left(left_dims);
@@ -122,9 +122,9 @@ void test_TF(const Device& sycl_device)
   DataType * d_t_right  = static_cast<DataType*>(sycl_device.allocate(t_right_bytes));
   DataType * d_t_result =  static_cast<DataType*>(sycl_device.allocate(t_result_bytes));
 
-  Eigen::TensorMap<Eigen::Tensor<DataType, 2, DataLayout, IndexType> > gpu_t_left(d_t_left, left_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 2, DataLayout, IndexType> > gpu_t_right(d_t_right, right_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 2, DataLayout, IndexType> > gpu_t_result(d_t_result, res_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType> > gpu_t_left(d_t_left, left_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType> > gpu_t_right(d_t_right, right_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType> > gpu_t_result(d_t_result, res_dims);
 
   sycl_device.memcpyHostToDevice(d_t_left, t_left.data(),t_left_bytes);
   sycl_device.memcpyHostToDevice(d_t_right, t_right.data(),t_right_bytes);
@@ -138,7 +138,7 @@ void test_TF(const Device& sycl_device)
     if (static_cast<DataType>(fabs(t_result(i) - t_result_gpu(i))) < error_threshold) {
       continue;
     }
-    if (Eigen::internal::isApprox(t_result(i), t_result_gpu(i), error_threshold)) {
+    if (Eigen_tf::internal::isApprox(t_result(i), t_result_gpu(i), error_threshold)) {
       continue;
     }
     std::cout << "mismatch detected at IndexType " << i << ": " << t_result(i)
@@ -165,9 +165,9 @@ void test_scalar(const Device& sycl_device, IndexType m_size, IndexType k_size, 
   Tensor<DataType, 2, DataLayout, IndexType> t_right(k_size, n_size);
   Tensor<DataType, 0, DataLayout, IndexType> t_result;
   Tensor<DataType, 0, DataLayout, IndexType> t_result_gpu;
-  Eigen::array<DimPair, 2> dims = {{DimPair(0, 0), DimPair(1, 1)}};
-  Eigen::array<IndexType, 2> left_dims = {{m_size, k_size}};
-  Eigen::array<IndexType, 2> right_dims = {{k_size, n_size}};
+  Eigen_tf::array<DimPair, 2> dims = {{DimPair(0, 0), DimPair(1, 1)}};
+  Eigen_tf::array<IndexType, 2> left_dims = {{m_size, k_size}};
+  Eigen_tf::array<IndexType, 2> right_dims = {{k_size, n_size}};
   t_left.setRandom();
   t_right.setRandom();
 
@@ -180,9 +180,9 @@ void test_scalar(const Device& sycl_device, IndexType m_size, IndexType k_size, 
   DataType * d_t_right  = static_cast<DataType*>(sycl_device.allocate(t_right_bytes));
   DataType * d_t_result =  static_cast<DataType*>(sycl_device.allocate(t_result_bytes));
 
-  Eigen::TensorMap<Eigen::Tensor<DataType, 2, DataLayout, IndexType> > gpu_t_left(d_t_left, left_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 2, DataLayout, IndexType> > gpu_t_right(d_t_right, right_dims);
-  Eigen::TensorMap<Eigen::Tensor<DataType, 0, DataLayout, IndexType> > gpu_t_result(d_t_result);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType> > gpu_t_left(d_t_left, left_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 2, DataLayout, IndexType> > gpu_t_right(d_t_right, right_dims);
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<DataType, 0, DataLayout, IndexType> > gpu_t_result(d_t_result);
 
   sycl_device.memcpyHostToDevice(d_t_left, t_left.data(),t_left_bytes);
   sycl_device.memcpyHostToDevice(d_t_right, t_right.data(),t_right_bytes);
@@ -193,7 +193,7 @@ void test_scalar(const Device& sycl_device, IndexType m_size, IndexType k_size, 
   t_result = t_left.contract(t_right, dims);
 
   if (static_cast<DataType>(fabs(t_result() - t_result_gpu())) > error_threshold &&
-      !Eigen::internal::isApprox(t_result(), t_result_gpu(), error_threshold)) {
+      !Eigen_tf::internal::isApprox(t_result(), t_result_gpu(), error_threshold)) {
     std::cout << "mismatch detected: " << t_result()
               << " vs " <<  t_result_gpu() << std::endl;
     assert(false);
@@ -253,7 +253,7 @@ void test_sycl_contraction_sizes(const Device& sycl_device) {
 
 template <typename Dev_selector> void tensorContractionPerDevice(Dev_selector& s){
   QueueInterface queueInterface(s);
-  auto sycl_device=Eigen::SyclDevice(&queueInterface);
+  auto sycl_device=Eigen_tf::SyclDevice(&queueInterface);
   test_sycl_contraction<ColMajor, float,int64_t>(sycl_device, 32, 32, 32);
   test_sycl_contraction<RowMajor,float,int64_t>(sycl_device, 32, 32, 32);
   test_scalar<ColMajor,float,int64_t>(sycl_device, 32, 32, 32);
@@ -284,7 +284,7 @@ template <typename Dev_selector> void tensorContractionPerDevice(Dev_selector& s
 }
 
 void test_cxx11_tensor_contract_sycl() {
-  for (const auto& device :Eigen::get_sycl_supported_devices()) {
+  for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
     CALL_SUBTEST(tensorContractionPerDevice(device));
   }
 }

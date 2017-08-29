@@ -20,10 +20,10 @@
 #include "main.h"
 #include <unsupported/Eigen/CXX11/Tensor>
 
-using Eigen::array;
-using Eigen::SyclDevice;
-using Eigen::Tensor;
-using Eigen::TensorMap;
+using Eigen_tf::array;
+using Eigen_tf::SyclDevice;
+using Eigen_tf::Tensor;
+using Eigen_tf::TensorMap;
 
 namespace std {
 template <typename T> T rsqrt(T x) { return 1 / std::sqrt(x); }
@@ -130,7 +130,7 @@ template <typename T> T inverse(T x) { return 1 / x; }
   TEST_IS_THAT_RETURNS_BOOL(SCALAR, isfinite, Layout)                          \
   TEST_IS_THAT_RETURNS_BOOL(SCALAR, isinf, Layout)
 
-static void test_builtin_unary_sycl(const Eigen::SyclDevice &sycl_device) {
+static void test_builtin_unary_sycl(const Eigen_tf::SyclDevice &sycl_device) {
   int64_t sizeDim1 = 10;
   int64_t sizeDim2 = 10;
   int64_t sizeDim3 = 10;
@@ -246,7 +246,7 @@ template <typename T> T cwiseMin(T x, T y) { return std::min(x, y); }
   TEST_BINARY_BUILTINS_OPERATORS(SCALAR, * , Layout)                           \
   TEST_BINARY_BUILTINS_OPERATORS(SCALAR, / , Layout)
 
-static void test_builtin_binary_sycl(const Eigen::SyclDevice &sycl_device) {
+static void test_builtin_binary_sycl(const Eigen_tf::SyclDevice &sycl_device) {
   int64_t sizeDim1 = 10;
   int64_t sizeDim2 = 10;
   int64_t sizeDim3 = 10;
@@ -258,9 +258,9 @@ static void test_builtin_binary_sycl(const Eigen::SyclDevice &sycl_device) {
 }
 
 void test_cxx11_tensor_builtins_sycl() {
-  for (const auto& device :Eigen::get_sycl_supported_devices()) {
+  for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
     QueueInterface queueInterface(device);
-    Eigen::SyclDevice sycl_device(&queueInterface);
+    Eigen_tf::SyclDevice sycl_device(&queueInterface);
     CALL_SUBTEST(test_builtin_unary_sycl(sycl_device));
     CALL_SUBTEST(test_builtin_binary_sycl(sycl_device));
   }

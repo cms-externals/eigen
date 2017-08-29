@@ -26,7 +26,7 @@ struct SyclAllocator {
   void deallocate(Scalar * p, std::size_t size) { EIGEN_UNUSED_VARIABLE(size); free(p); }
 };
 
-namespace Eigen {
+namespace Eigen_tf {
 
   #define ConvertToActualTypeSycl(Scalar, buf_acc) reinterpret_cast<typename cl::sycl::global_ptr<Scalar>::pointer_t>((&(*buf_acc.get_pointer())))
   #define ConvertToActualSyclOffset(Scalar, offset) offset/sizeof(Scalar)
@@ -531,6 +531,6 @@ struct SyclDevice {
 // inside the kenrel. So we can have two types of eval for host and device. This is required for TensorArgMax operation
 struct SyclKernelDevice:DefaultDevice{};
 
-}  // end namespace Eigen
+}  // end namespace Eigen_tf
 
 #endif  // EIGEN_CXX11_TENSOR_TENSOR_DEVICE_SYCL_H

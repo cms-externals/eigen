@@ -12,7 +12,7 @@
 #ifndef EIGEN_QR_H
 #define EIGEN_QR_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 /** \ingroup QR_Module
   *
@@ -107,7 +107,7 @@ template<typename _MatrixType> class HouseholderQR
     /** \brief Constructs a QR factorization from a given matrix
       *
       * This overloaded constructor is provided for \link InplaceDecomposition inplace decomposition \endlink when
-      * \c MatrixType is a Eigen::Ref.
+      * \c MatrixType is a Eigen_tf::Ref.
       *
       * \sa HouseholderQR(const EigenBase&)
       */
@@ -403,6 +403,6 @@ MatrixBase<Derived>::householderQr() const
   return HouseholderQR<PlainObject>(eval());
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_QR_H

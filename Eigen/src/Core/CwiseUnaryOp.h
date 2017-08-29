@@ -11,7 +11,7 @@
 #ifndef EIGEN_CWISE_UNARY_OP_H
 #define EIGEN_CWISE_UNARY_OP_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 template<typename UnaryOp, typename XprType>
@@ -98,6 +98,6 @@ public:
   typedef typename internal::generic_xpr_base<CwiseUnaryOp<UnaryOp, XprType> >::type Base;
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CWISE_UNARY_OP_H

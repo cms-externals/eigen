@@ -17,7 +17,7 @@
 #include "main.h"
 #include <unsupported/Eigen/CXX11/Tensor>
 
-using Eigen::Tensor;
+using Eigen_tf::Tensor;
 
 template<typename T>
 void test_cuda_complex_cwise_ops() {
@@ -31,14 +31,14 @@ void test_cuda_complex_cwise_ops() {
   cudaMalloc((void**)(&d_in2), complex_bytes);
   cudaMalloc((void**)(&d_out), complex_bytes);
 
-  Eigen::CudaStreamDevice stream;
-  Eigen::GpuDevice gpu_device(&stream);
+  Eigen_tf::CudaStreamDevice stream;
+  Eigen_tf::GpuDevice gpu_device(&stream);
 
-  Eigen::TensorMap<Eigen::Tensor<std::complex<T>, 1, 0, int>, Eigen::Aligned> gpu_in1(
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<std::complex<T>, 1, 0, int>, Eigen_tf::Aligned> gpu_in1(
       d_in1, kNumItems);
-  Eigen::TensorMap<Eigen::Tensor<std::complex<T>, 1, 0, int>, Eigen::Aligned> gpu_in2(
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<std::complex<T>, 1, 0, int>, Eigen_tf::Aligned> gpu_in2(
       d_in2, kNumItems);
-  Eigen::TensorMap<Eigen::Tensor<std::complex<T>, 1, 0, int>, Eigen::Aligned> gpu_out(
+  Eigen_tf::TensorMap<Eigen_tf::Tensor<std::complex<T>, 1, 0, int>, Eigen_tf::Aligned> gpu_out(
       d_out, kNumItems);
 
   const std::complex<T> a(3.14f, 2.7f);

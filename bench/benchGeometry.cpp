@@ -4,7 +4,7 @@
 #include <Eigen/Geometry>
 #include <bench/BenchTimer.h>
 
-using namespace Eigen;
+using namespace Eigen_tf;
 using namespace std;
 
 #ifndef REPEAT

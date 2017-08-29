@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_EVAL_TO_H
 #define EIGEN_CXX11_TENSOR_TENSOR_EVAL_TO_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorForcedEval
   * \ingroup CXX11_Tensor_Module
@@ -48,7 +48,7 @@ struct traits<TensorEvalToOp<XprType, MakePointer_> >
 };
 
 template<typename XprType, template <class> class MakePointer_>
-struct eval<TensorEvalToOp<XprType, MakePointer_>, Eigen::Dense>
+struct eval<TensorEvalToOp<XprType, MakePointer_>, Eigen_tf::Dense>
 {
   typedef const TensorEvalToOp<XprType, MakePointer_>& type;
 };
@@ -68,13 +68,13 @@ template<typename XprType, template <class> class MakePointer_>
 class TensorEvalToOp : public TensorBase<TensorEvalToOp<XprType, MakePointer_>, ReadOnlyAccessors>
 {
   public:
-  typedef typename Eigen::internal::traits<TensorEvalToOp>::Scalar Scalar;
-  typedef typename Eigen::NumTraits<Scalar>::Real RealScalar;
+  typedef typename Eigen_tf::internal::traits<TensorEvalToOp>::Scalar Scalar;
+  typedef typename Eigen_tf::NumTraits<Scalar>::Real RealScalar;
   typedef typename internal::remove_const<typename XprType::CoeffReturnType>::type CoeffReturnType;
   typedef typename MakePointer_<CoeffReturnType>::Type PointerType;
-  typedef typename Eigen::internal::nested<TensorEvalToOp>::type Nested;
-  typedef typename Eigen::internal::traits<TensorEvalToOp>::StorageKind StorageKind;
-  typedef typename Eigen::internal::traits<TensorEvalToOp>::Index Index;
+  typedef typename Eigen_tf::internal::nested<TensorEvalToOp>::type Nested;
+  typedef typename Eigen_tf::internal::traits<TensorEvalToOp>::StorageKind StorageKind;
+  typedef typename Eigen_tf::internal::traits<TensorEvalToOp>::Index Index;
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorEvalToOp(PointerType buffer, const XprType& expr)
       : m_xpr(expr), m_buffer(buffer) {}
@@ -179,6 +179,6 @@ struct TensorEvaluator<const TensorEvalToOp<ArgType, MakePointer_>, Device>
 };
 
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_EVAL_TO_H

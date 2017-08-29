@@ -1,4 +1,4 @@
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -104,4 +104,4 @@ algo_end:
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf

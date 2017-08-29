@@ -11,7 +11,7 @@
 #ifndef EIGEN_SPECIALFUNCTIONS_FUNCTORS_H
 #define EIGEN_SPECIALFUNCTIONS_FUNCTORS_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -231,6 +231,6 @@ struct functor_traits<scalar_erfc_op<Scalar> >
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SPECIALFUNCTIONS_FUNCTORS_H

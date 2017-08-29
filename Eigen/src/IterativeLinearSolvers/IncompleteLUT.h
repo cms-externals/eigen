@@ -12,7 +12,7 @@
 #define EIGEN_INCOMPLETE_LUT_H
 
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
     
@@ -457,6 +457,6 @@ void IncompleteLUT<Scalar,StorageIndex>::factorize(const _MatrixType& amat)
   m_info = Success;
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_INCOMPLETE_LUT_H

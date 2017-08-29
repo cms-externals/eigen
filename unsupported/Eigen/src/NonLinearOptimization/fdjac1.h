@@ -1,4 +1,4 @@
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -76,4 +76,4 @@ DenseIndex fdjac1(
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf

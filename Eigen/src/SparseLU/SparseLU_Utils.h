@@ -11,7 +11,7 @@
 #ifndef EIGEN_SPARSELU_UTILS_H
 #define EIGEN_SPARSELU_UTILS_H
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace internal {
 
 /**
@@ -76,5 +76,5 @@ void SparseLUImpl<Scalar,StorageIndex>::fixupL(const Index n, const IndexVector&
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 #endif // EIGEN_SPARSELU_UTILS_H

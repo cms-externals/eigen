@@ -10,7 +10,7 @@
 #ifndef EIGEN_EULERANGLESCLASS_H// TODO: Fix previous "EIGEN_EULERANGLES_H" definition?
 #define EIGEN_EULERANGLESCLASS_H
 
-namespace Eigen
+namespace Eigen_tf
 {
   /** \class EulerAngles
     *

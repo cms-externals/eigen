@@ -23,7 +23,7 @@
 #include <iostream>
 
 template <typename DataType, int DataLayout, typename IndexType>
-void test_device_memory(const Eigen::SyclDevice &sycl_device) {
+void test_device_memory(const Eigen_tf::SyclDevice &sycl_device) {
   std::cout << "Running on : "
             << sycl_device.sycl_queue().get_device(). template get_info<cl::sycl::info::device::name>()
             <<std::endl;
@@ -42,7 +42,7 @@ void test_device_memory(const Eigen::SyclDevice &sycl_device) {
 }
 
 template <typename DataType, int DataLayout, typename IndexType>
-void test_device_exceptions(const Eigen::SyclDevice &sycl_device) {
+void test_device_exceptions(const Eigen_tf::SyclDevice &sycl_device) {
   VERIFY(sycl_device.ok());
   IndexType sizeDim1 = 100;
   array<IndexType, 1> tensorDims = {{sizeDim1}};
@@ -61,7 +61,7 @@ void test_device_exceptions(const Eigen::SyclDevice &sycl_device) {
 template<typename DataType> void sycl_device_test_per_device(const cl::sycl::device& d){
   std::cout << "Running on " << d.template get_info<cl::sycl::info::device::name>() << std::endl;
   QueueInterface queueInterface(d);
-  auto sycl_device = Eigen::SyclDevice(&queueInterface);
+  auto sycl_device = Eigen_tf::SyclDevice(&queueInterface);
   test_device_memory<DataType, RowMajor, int64_t>(sycl_device);
   test_device_memory<DataType, ColMajor, int64_t>(sycl_device);
   /// this test throw an exception. enable it if you want to see the exception
@@ -71,7 +71,7 @@ template<typename DataType> void sycl_device_test_per_device(const cl::sycl::dev
 }
 
 void test_cxx11_tensor_device_sycl() {
-  for (const auto& device :Eigen::get_sycl_supported_devices()) {
+  for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
     CALL_SUBTEST(sycl_device_test_per_device<float>(device));
   }
 }

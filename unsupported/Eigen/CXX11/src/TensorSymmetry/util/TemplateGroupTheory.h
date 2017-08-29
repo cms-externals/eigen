@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSORSYMMETRY_TEMPLATEGROUPTHEORY_H
 #define EIGEN_CXX11_TENSORSYMMETRY_TEMPLATEGROUPTHEORY_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -657,7 +657,7 @@ struct enumerate_group_elements
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSORSYMMETRY_TEMPLATEGROUPTHEORY_H
 

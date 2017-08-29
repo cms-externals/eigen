@@ -11,7 +11,7 @@
 #ifndef EIGEN_SPARSEVIEW_H
 #define EIGEN_SPARSEVIEW_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -248,6 +248,6 @@ SparseMatrixBase<Derived>::pruned(const Scalar& reference,
   return SparseView<Derived>(derived(), reference, epsilon);
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif

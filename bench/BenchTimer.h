@@ -37,7 +37,7 @@ static void clobber() {
 
 #include <Eigen/Core>
 
-namespace Eigen
+namespace Eigen_tf
 {
 
 enum {

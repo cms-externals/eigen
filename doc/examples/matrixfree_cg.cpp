@@ -5,28 +5,28 @@
 #include <unsupported/Eigen/IterativeSolvers>
 
 class MatrixReplacement;
-using Eigen::SparseMatrix;
+using Eigen_tf::SparseMatrix;
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace internal {
   // MatrixReplacement looks-like a SparseMatrix, so let's inherits its traits:
   template<>
-  struct traits<MatrixReplacement> :  public Eigen::internal::traits<Eigen::SparseMatrix<double> >
+  struct traits<MatrixReplacement> :  public Eigen_tf::internal::traits<Eigen_tf::SparseMatrix<double> >
   {};
 }
 }
 
 // Example of a matrix-free wrapper from a user type to Eigen's compatible type
-// For the sake of simplicity, this example simply wrap a Eigen::SparseMatrix.
-class MatrixReplacement : public Eigen::EigenBase<MatrixReplacement> {
+// For the sake of simplicity, this example simply wrap a Eigen_tf::SparseMatrix.
+class MatrixReplacement : public Eigen_tf::EigenBase<MatrixReplacement> {
 public:
   // Required typedefs, constants, and method:
   typedef double Scalar;
   typedef double RealScalar;
   typedef int StorageIndex;
   enum {
-    ColsAtCompileTime = Eigen::Dynamic,
-    MaxColsAtCompileTime = Eigen::Dynamic,
+    ColsAtCompileTime = Eigen_tf::Dynamic,
+    MaxColsAtCompileTime = Eigen_tf::Dynamic,
     IsRowMajor = false
   };
 
@@ -34,8 +34,8 @@ public:
   Index cols() const { return mp_mat->cols(); }
 
   template<typename Rhs>
-  Eigen::Product<MatrixReplacement,Rhs,Eigen::AliasFreeProduct> operator*(const Eigen::MatrixBase<Rhs>& x) const {
-    return Eigen::Product<MatrixReplacement,Rhs,Eigen::AliasFreeProduct>(*this, x.derived());
+  Eigen_tf::Product<MatrixReplacement,Rhs,Eigen_tf::AliasFreeProduct> operator*(const Eigen_tf::MatrixBase<Rhs>& x) const {
+    return Eigen_tf::Product<MatrixReplacement,Rhs,Eigen_tf::AliasFreeProduct>(*this, x.derived());
   }
 
   // Custom API:
@@ -51,8 +51,8 @@ private:
 };
 
 
-// Implementation of MatrixReplacement * Eigen::DenseVector though a specialization of internal::generic_product_impl:
-namespace Eigen {
+// Implementation of MatrixReplacement * Eigen_tf::DenseVector though a specialization of internal::generic_product_impl:
+namespace Eigen_tf {
 namespace internal {
 
   template<typename Rhs>
@@ -81,46 +81,46 @@ namespace internal {
 int main()
 {
   int n = 10;
-  Eigen::SparseMatrix<double> S = Eigen::MatrixXd::Random(n,n).sparseView(0.5,1);
+  Eigen_tf::SparseMatrix<double> S = Eigen_tf::MatrixXd::Random(n,n).sparseView(0.5,1);
   S = S.transpose()*S;
 
   MatrixReplacement A;
   A.attachMyMatrix(S);
 
-  Eigen::VectorXd b(n), x;
+  Eigen_tf::VectorXd b(n), x;
   b.setRandom();
 
   // Solve Ax = b using various iterative solver with matrix-free version:
   {
-    Eigen::ConjugateGradient<MatrixReplacement, Eigen::Lower|Eigen::Upper, Eigen::IdentityPreconditioner> cg;
+    Eigen_tf::ConjugateGradient<MatrixReplacement, Eigen_tf::Lower|Eigen_tf::Upper, Eigen_tf::IdentityPreconditioner> cg;
     cg.compute(A);
     x = cg.solve(b);
     std::cout << "CG:       #iterations: " << cg.iterations() << ", estimated error: " << cg.error() << std::endl;
   }
 
   {
-    Eigen::BiCGSTAB<MatrixReplacement, Eigen::IdentityPreconditioner> bicg;
+    Eigen_tf::BiCGSTAB<MatrixReplacement, Eigen_tf::IdentityPreconditioner> bicg;
     bicg.compute(A);
     x = bicg.solve(b);
     std::cout << "BiCGSTAB: #iterations: " << bicg.iterations() << ", estimated error: " << bicg.error() << std::endl;
   }
 
   {
-    Eigen::GMRES<MatrixReplacement, Eigen::IdentityPreconditioner> gmres;
+    Eigen_tf::GMRES<MatrixReplacement, Eigen_tf::IdentityPreconditioner> gmres;
     gmres.compute(A);
     x = gmres.solve(b);
     std::cout << "GMRES:    #iterations: " << gmres.iterations() << ", estimated error: " << gmres.error() << std::endl;
   }
 
   {
-    Eigen::DGMRES<MatrixReplacement, Eigen::IdentityPreconditioner> gmres;
+    Eigen_tf::DGMRES<MatrixReplacement, Eigen_tf::IdentityPreconditioner> gmres;
     gmres.compute(A);
     x = gmres.solve(b);
     std::cout << "DGMRES:   #iterations: " << gmres.iterations() << ", estimated error: " << gmres.error() << std::endl;
   }
 
   {
-    Eigen::MINRES<MatrixReplacement, Eigen::Lower|Eigen::Upper, Eigen::IdentityPreconditioner> minres;
+    Eigen_tf::MINRES<MatrixReplacement, Eigen_tf::Lower|Eigen_tf::Upper, Eigen_tf::IdentityPreconditioner> minres;
     minres.compute(A);
     x = minres.solve(b);
     std::cout << "MINRES:   #iterations: " << minres.iterations() << ", estimated error: " << minres.error() << std::endl;

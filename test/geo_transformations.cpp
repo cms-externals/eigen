@@ -283,9 +283,9 @@ template<typename Scalar, int Mode, int Options> void transformations()
   // mat * aligned scaling and mat * translation
   t1 = (Matrix3(q1) * AlignedScaling3(v0)) * Translation3(v0);
   VERIFY_IS_APPROX(t0.matrix(), t1.matrix());
-  t1 = (Matrix3(q1) * Eigen::Scaling(v0)) * Translation3(v0);
+  t1 = (Matrix3(q1) * Eigen_tf::Scaling(v0)) * Translation3(v0);
   VERIFY_IS_APPROX(t0.matrix(), t1.matrix());
-  t1 = (q1 * Eigen::Scaling(v0)) * Translation3(v0);
+  t1 = (q1 * Eigen_tf::Scaling(v0)) * Translation3(v0);
   VERIFY_IS_APPROX(t0.matrix(), t1.matrix());
   // mat * transformation and aligned scaling * translation
   t1 = Matrix3(q1) * (AlignedScaling3(v0) * Translation3(v0));
@@ -294,26 +294,26 @@ template<typename Scalar, int Mode, int Options> void transformations()
 
   t0.setIdentity();
   t0.scale(s0).translate(v0);
-  t1 = Eigen::Scaling(s0) * Translation3(v0);
+  t1 = Eigen_tf::Scaling(s0) * Translation3(v0);
   VERIFY_IS_APPROX(t0.matrix(), t1.matrix());
   t0.prescale(s0);
-  t1 = Eigen::Scaling(s0) * t1;
+  t1 = Eigen_tf::Scaling(s0) * t1;
   VERIFY_IS_APPROX(t0.matrix(), t1.matrix());
   
   t0 = t3;
   t0.scale(s0);
-  t1 = t3 * Eigen::Scaling(s0,s0,s0);
+  t1 = t3 * Eigen_tf::Scaling(s0,s0,s0);
   VERIFY_IS_APPROX(t0.matrix(), t1.matrix());
   t0.prescale(s0);
-  t1 = Eigen::Scaling(s0,s0,s0) * t1;
+  t1 = Eigen_tf::Scaling(s0,s0,s0) * t1;
   VERIFY_IS_APPROX(t0.matrix(), t1.matrix());
 
   t0 = t3;
   t0.scale(s0);
-  t1 = t3 * Eigen::Scaling(s0);
+  t1 = t3 * Eigen_tf::Scaling(s0);
   VERIFY_IS_APPROX(t0.matrix(), t1.matrix());
   t0.prescale(s0);
-  t1 = Eigen::Scaling(s0) * t1;
+  t1 = Eigen_tf::Scaling(s0) * t1;
   VERIFY_IS_APPROX(t0.matrix(), t1.matrix());
 
   t0.setIdentity();
@@ -449,12 +449,12 @@ template<typename Scalar, int Mode, int Options> void transformations()
   s1 = internal::random<Scalar>(-100,100);
   Rotation2D<Scalar> R0(s0), R1(s1);
   
-  t20 = Translation2(v20) * (R0 * Eigen::Scaling(s0));
-  t21 = Translation2(v20) * R0 * Eigen::Scaling(s0);
+  t20 = Translation2(v20) * (R0 * Eigen_tf::Scaling(s0));
+  t21 = Translation2(v20) * R0 * Eigen_tf::Scaling(s0);
   VERIFY_IS_APPROX(t20,t21);
   
-  t20 = Translation2(v20) * (R0 * R0.inverse() * Eigen::Scaling(s0));
-  t21 = Translation2(v20) * Eigen::Scaling(s0);
+  t20 = Translation2(v20) * (R0 * R0.inverse() * Eigen_tf::Scaling(s0));
+  t21 = Translation2(v20) * Eigen_tf::Scaling(s0);
   VERIFY_IS_APPROX(t20,t21);
   
   VERIFY_IS_APPROX(s0, (R0.slerp(0, R1)).angle());

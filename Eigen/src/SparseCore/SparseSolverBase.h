@@ -10,7 +10,7 @@
 #ifndef EIGEN_SPARSESOLVERBASE_H
 #define EIGEN_SPARSESOLVERBASE_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
 
@@ -30,8 +30,8 @@ solve_sparse_through_dense_panels(const Decomposition &dec, const Rhs& rhs, Dest
   Index size = rhs.rows();
   // the temporary matrices do not need more columns than NbColsAtOnce:
   Index tmpCols = (std::min)(rhsCols, NbColsAtOnce); 
-  Eigen::Matrix<DestScalar,Dynamic,Dynamic> tmp(size,tmpCols);
-  Eigen::Matrix<DestScalar,Dynamic,Dynamic> tmpX(size,tmpCols);
+  Eigen_tf::Matrix<DestScalar,Dynamic,Dynamic> tmp(size,tmpCols);
+  Eigen_tf::Matrix<DestScalar,Dynamic,Dynamic> tmpX(size,tmpCols);
   for(Index k=0; k<rhsCols; k+=NbColsAtOnce)
   {
     Index actualCols = std::min<Index>(rhsCols-k, NbColsAtOnce);
@@ -48,8 +48,8 @@ solve_sparse_through_dense_panels(const Decomposition &dec, const Rhs& rhs, Dest
 {
   typedef typename Dest::Scalar DestScalar;
   Index size = rhs.rows();
-  Eigen::Matrix<DestScalar,Dynamic,1> rhs_dense(rhs);
-  Eigen::Matrix<DestScalar,Dynamic,1> dest_dense(size);
+  Eigen_tf::Matrix<DestScalar,Dynamic,1> rhs_dense(rhs);
+  Eigen_tf::Matrix<DestScalar,Dynamic,1> dest_dense(size);
   dest_dense = dec.solve(rhs_dense);
   dest = dest_dense.sparseView();
 }
@@ -119,6 +119,6 @@ class SparseSolverBase : internal::noncopyable
     mutable bool m_isInitialized;
 };
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SPARSESOLVERBASE_H

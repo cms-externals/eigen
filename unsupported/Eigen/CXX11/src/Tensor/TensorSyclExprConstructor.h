@@ -22,7 +22,7 @@
 #ifndef UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_EXPR_CONSTRUCTOR_HPP
 #define UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_EXPR_CONSTRUCTOR_HPP
 
-namespace Eigen {
+namespace Eigen_tf {
 namespace TensorSycl {
 namespace internal {
 
@@ -30,7 +30,7 @@ template <typename Expr, typename Dims>
 struct DeviceFixedSizeTensor;
 
 template <typename Expr, typename std::ptrdiff_t... Indices>
-struct DeviceFixedSizeTensor<Expr, Eigen::Sizes<Indices...>>{
+struct DeviceFixedSizeTensor<Expr, Eigen_tf::Sizes<Indices...>>{
   template<typename Data>
   static EIGEN_ALWAYS_INLINE Expr instantiate(Data& dt) {return Expr(ConvertToActualTypeSycl(typename Expr::Scalar, dt), Indices...);}
 };
@@ -39,7 +39,7 @@ struct DeviceFixedSizeTensor<Expr, Eigen::Sizes<Indices...>>{
 template <typename PtrType, size_t N, typename... Params>
 struct EvalToLHSConstructor {
   PtrType expr;
-  EvalToLHSConstructor(const utility::tuple::Tuple<Params...> &t) : expr(ConvertToActualTypeSycl(typename Eigen::internal::remove_all<PtrType>::type, utility::tuple::get<N>(t))) {}
+  EvalToLHSConstructor(const utility::tuple::Tuple<Params...> &t) : expr(ConvertToActualTypeSycl(typename Eigen_tf::internal::remove_all<PtrType>::type, utility::tuple::get<N>(t))) {}
 };
 
 /// \struct ExprConstructor is used to reconstruct the expression on the device and
@@ -235,8 +235,8 @@ struct ExprConstructor<CVQual TensorForcedEvalOp<OrigExpr>,\
 CVQual PlaceHolder<CVQual TensorForcedEvalOp<DevExpr>, N>, Params...> {\
   typedef  TensorForcedEvalOp<OrigExpr> XprType;\
   typedef CVQual TensorMap<\
-                            Tensor<typename XprType::Scalar,XprType::NumDimensions, Eigen::internal::traits<XprType>::Layout,typename XprType::Index>,\
-                            Eigen::internal::traits<XprType>::Layout, \
+                            Tensor<typename XprType::Scalar,XprType::NumDimensions, Eigen_tf::internal::traits<XprType>::Layout,typename XprType::Index>,\
+                            Eigen_tf::internal::traits<XprType>::Layout, \
                             MakeGlobalPointer\
                           > Type;\
   Type expr;\
@@ -255,8 +255,8 @@ struct ExprConstructor<CVQual TensorCustomUnaryOp<CustomUnaryFunc, OrigExpr>,\
 CVQual PlaceHolder<CVQual TensorCustomUnaryOp<CustomUnaryFunc, DevExpr>, N>, Params...> {\
   typedef TensorCustomUnaryOp<CustomUnaryFunc, OrigExpr> XprType;\
   typedef CVQual TensorMap<\
-                            Tensor<typename XprType::Scalar,XprType::NumDimensions, Eigen::internal::traits<XprType>::Layout,typename XprType::Index>,\
-                            Eigen::internal::traits<XprType>::Layout, \
+                            Tensor<typename XprType::Scalar,XprType::NumDimensions, Eigen_tf::internal::traits<XprType>::Layout,typename XprType::Index>,\
+                            Eigen_tf::internal::traits<XprType>::Layout, \
                             MakeGlobalPointer\
                           > Type;\
   Type expr;\
@@ -276,7 +276,7 @@ struct ExprConstructor<CVQual TensorReductionOp<OP, Dim, OrigExpr, MakeGlobalPoi
 CVQual PlaceHolder<CVQual TensorReductionOp<OP, Dim, DevExpr>, N>, Params...> {\
   static const auto NumIndices= ValueCondition< TensorReductionOp<OP, Dim, DevExpr, MakeGlobalPointer>::NumDimensions==0,  1, TensorReductionOp<OP, Dim, DevExpr, MakeGlobalPointer>::NumDimensions >::Res;\
   typedef CVQual TensorMap<Tensor<typename TensorReductionOp<OP, Dim, DevExpr, MakeGlobalPointer>::Scalar,\
-  NumIndices, Eigen::internal::traits<TensorReductionOp<OP, Dim, DevExpr, MakeGlobalPointer>>::Layout, typename TensorReductionOp<OP, Dim, DevExpr>::Index>, Eigen::internal::traits<TensorReductionOp<OP, Dim, DevExpr, MakeGlobalPointer>>::Layout, MakeGlobalPointer> Type;\
+  NumIndices, Eigen_tf::internal::traits<TensorReductionOp<OP, Dim, DevExpr, MakeGlobalPointer>>::Layout, typename TensorReductionOp<OP, Dim, DevExpr>::Index>, Eigen_tf::internal::traits<TensorReductionOp<OP, Dim, DevExpr, MakeGlobalPointer>>::Layout, MakeGlobalPointer> Type;\
   Type expr;\
   template <typename FuncDetector>\
   ExprConstructor(FuncDetector &fd, const utility::tuple::Tuple<Params...> &t)\
@@ -295,14 +295,14 @@ struct ExprConstructor<CVQual TensorTupleReducerOp<OP, Dim, OrigExpr>,\
 CVQual PlaceHolder<CVQual TensorTupleReducerOp<OP, Dim, DevExpr>, N>, Params...> {\
   static const auto NumRedDims= TensorReductionOp<OP, Dim, const TensorIndexTupleOp<OrigExpr> , MakeGlobalPointer>::NumDimensions;\
   static const auto NumIndices= ValueCondition<NumRedDims==0, 1, NumRedDims>::Res;\
-static const int Layout =static_cast<int>(Eigen::internal::traits<TensorReductionOp<OP, Dim, const TensorIndexTupleOp<OrigExpr>, MakeGlobalPointer>>::Layout);\
+static const int Layout =static_cast<int>(Eigen_tf::internal::traits<TensorReductionOp<OP, Dim, const TensorIndexTupleOp<OrigExpr>, MakeGlobalPointer>>::Layout);\
   typedef CVQual TensorMap<\
                           Tensor<typename TensorIndexTupleOp<OrigExpr>::CoeffReturnType,NumIndices, Layout, typename TensorTupleReducerOp<OP, Dim, OrigExpr>::Index>,\
                           Layout,\
                           MakeGlobalPointer\
                           > XprType;\
   typedef typename TensorEvaluator<const TensorIndexTupleOp<OrigExpr> , SyclKernelDevice>::Dimensions InputDimensions;\
-  static const int NumDims = Eigen::internal::array_size<InputDimensions>::value;\
+  static const int NumDims = Eigen_tf::internal::array_size<InputDimensions>::value;\
   typedef array<Index, NumDims> StrideDims;\
   typedef const TensorTupleReducerDeviceOp<StrideDims, XprType> Type;\
   Type expr;\
@@ -324,10 +324,10 @@ template <typename Indices, typename OrigLhsXprType, typename OrigRhsXprType, ty
 struct ExprConstructor<CVQual ExprNode<Indices, OrigLhsXprType, OrigRhsXprType>,\
 CVQual PlaceHolder<CVQual ExprNode<Indices, LhsXprType,  RhsXprType>, N>, Params...> {\
   typedef ExprNode<Indices, OrigLhsXprType, OrigRhsXprType> XprTyp;\
-  static const auto NumIndices= Eigen::internal::traits<XprTyp>::NumDimensions;\
+  static const auto NumIndices= Eigen_tf::internal::traits<XprTyp>::NumDimensions;\
   typedef CVQual TensorMap<\
-                            Tensor<typename XprTyp::Scalar,NumIndices, Eigen::internal::traits<XprTyp>::Layout, typename XprTyp::Index>,\
-                            Eigen::internal::traits<XprTyp>::Layout, \
+                            Tensor<typename XprTyp::Scalar,NumIndices, Eigen_tf::internal::traits<XprTyp>::Layout, typename XprTyp::Index>,\
+                            Eigen_tf::internal::traits<XprTyp>::Layout, \
                             MakeGlobalPointer\
                           > Type;\
   Type expr;\
@@ -508,7 +508,7 @@ auto createDeviceExpression(FuncD &funcD, const utility::tuple::Tuple<Params...>
 
 } /// namespace TensorSycl
 } /// namespace internal
-} /// namespace Eigen
+} /// namespace Eigen_tf
 
 
 #endif  // UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_EXPR_CONSTRUCTOR_HPP

@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_GLOBAL_FUNCTIONS_H
 #define EIGEN_CXX11_TENSOR_TENSOR_GLOBAL_FUNCTIONS_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \cpp11 \returns an expression of the coefficient-wise betainc(\a x, \a a, \a b) to the given tensors.
  *
@@ -28,6 +28,6 @@ EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE const
       a, b, x, internal::scalar_betainc_op<typename XDerived::Scalar>());
 }
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_GLOBAL_FUNCTIONS_H

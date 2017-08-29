@@ -10,7 +10,7 @@
 #ifndef EIGEN_INDEXED_VIEW_H
 #define EIGEN_INDEXED_VIEW_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 namespace internal {
 
@@ -91,12 +91,12 @@ class IndexedViewImpl;
   *  - std::valarray<int>
   *  - std::array<int>
   *  - Plain C arrays: int[N]
-  *  - Eigen::ArrayXi
+  *  - Eigen_tf::ArrayXi
   *  - decltype(ArrayXi::LinSpaced(...))
   *  - Any view/expressions of the previous types
-  *  - Eigen::ArithmeticSequence
-  *  - Eigen::internal::AllRange      (helper for Eigen::all)
-  *  - Eigen::internal::SingleRange  (helper for single index)
+  *  - Eigen_tf::ArithmeticSequence
+  *  - Eigen_tf::internal::AllRange      (helper for Eigen_tf::all)
+  *  - Eigen_tf::internal::SingleRange  (helper for single index)
   *  - etc.
   *
   * In typical usages of %Eigen, this class should never be used directly. It is the return type of
@@ -202,6 +202,6 @@ protected:
 
 } // end namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_INDEXED_VIEW_H

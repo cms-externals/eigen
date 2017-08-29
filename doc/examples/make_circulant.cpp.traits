@@ -1,14 +1,14 @@
-namespace Eigen {
+namespace Eigen_tf {
   namespace internal {
     template <class ArgType>
     struct traits<Circulant<ArgType> >
     {
-      typedef Eigen::Dense StorageKind;
-      typedef Eigen::MatrixXpr XprKind;
+      typedef Eigen_tf::Dense StorageKind;
+      typedef Eigen_tf::MatrixXpr XprKind;
       typedef typename ArgType::StorageIndex StorageIndex;
       typedef typename ArgType::Scalar Scalar;
       enum { 
-        Flags = Eigen::ColMajor,
+        Flags = Eigen_tf::ColMajor,
         RowsAtCompileTime = ArgType::RowsAtCompileTime,
         ColsAtCompileTime = ArgType::RowsAtCompileTime,
         MaxRowsAtCompileTime = ArgType::MaxRowsAtCompileTime,

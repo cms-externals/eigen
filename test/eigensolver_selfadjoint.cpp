@@ -228,7 +228,7 @@ void bug_1204()
 {
   SparseMatrix<double> A(2,2);
   A.setIdentity();
-  SelfAdjointEigenSolver<Eigen::SparseMatrix<double> > eig(A);
+  SelfAdjointEigenSolver<Eigen_tf::SparseMatrix<double> > eig(A);
 }
 
 void test_eigensolver_selfadjoint()

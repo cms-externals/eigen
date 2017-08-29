@@ -10,7 +10,7 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_FIXED_SIZE_H
 #define EIGEN_CXX11_TENSOR_TENSOR_FIXED_SIZE_H
 
-namespace Eigen {
+namespace Eigen_tf {
 
 /** \class TensorFixedSize
   * \ingroup CXX11_Tensor_Module
@@ -18,9 +18,9 @@ namespace Eigen {
   * \brief The fixed sized version of the tensor class.
   *
   * The fixed sized equivalent of
-  * Eigen::Tensor<float, 3> t(3, 5, 7);
+  * Eigen_tf::Tensor<float, 3> t(3, 5, 7);
   * is
-  * Eigen::TensorFixedSize<float, Sizes<3,5,7>> t;
+  * Eigen_tf::TensorFixedSize<float, Sizes<3,5,7>> t;
   */
 
 template<typename Scalar_, typename Dimensions_, int Options_, typename IndexType>
@@ -29,7 +29,7 @@ class TensorFixedSize : public TensorBase<TensorFixedSize<Scalar_, Dimensions_, 
   public:
     typedef TensorFixedSize<Scalar_, Dimensions_, Options_, IndexType> Self;
     typedef TensorBase<TensorFixedSize<Scalar_, Dimensions_, Options_, IndexType> > Base;
-    typedef typename Eigen::internal::nested<Self>::type Nested;
+    typedef typename Eigen_tf::internal::nested<Self>::type Nested;
     typedef typename internal::traits<Self>::StorageKind StorageKind;
     typedef typename internal::traits<Self>::Index Index;
     typedef Scalar_ Scalar;
@@ -384,6 +384,6 @@ class TensorFixedSize : public TensorBase<TensorFixedSize<Scalar_, Dimensions_, 
 };
 
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_CXX11_TENSOR_TENSOR_FIXED_SIZE_H

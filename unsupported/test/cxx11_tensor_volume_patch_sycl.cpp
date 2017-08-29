@@ -20,11 +20,11 @@
 #include "main.h"
 #include <unsupported/Eigen/CXX11/Tensor>
 
-using Eigen::Tensor;
+using Eigen_tf::Tensor;
 static const int DataLayout = ColMajor;
 
 template <typename DataType, typename IndexType>
-static void test_single_voxel_patch_sycl(const Eigen::SyclDevice& sycl_device)
+static void test_single_voxel_patch_sycl(const Eigen_tf::SyclDevice& sycl_device)
 {
 
 IndexType sizeDim0 = 4;
@@ -95,7 +95,7 @@ tensor_col_major.setRandom();
 }
 
 template <typename DataType, typename IndexType>
-static void test_entire_volume_patch_sycl(const Eigen::SyclDevice& sycl_device)
+static void test_entire_volume_patch_sycl(const Eigen_tf::SyclDevice& sycl_device)
 {
   const int depth = 4;
   const int patch_z = 2;
@@ -209,14 +209,14 @@ static void test_entire_volume_patch_sycl(const Eigen::SyclDevice& sycl_device)
 
 template<typename DataType, typename dev_Selector> void sycl_tensor_volume_patch_test_per_device(dev_Selector s){
 QueueInterface queueInterface(s);
-auto sycl_device = Eigen::SyclDevice(&queueInterface);
+auto sycl_device = Eigen_tf::SyclDevice(&queueInterface);
 std::cout << "Running on " << s.template get_info<cl::sycl::info::device::name>() << std::endl;
 test_single_voxel_patch_sycl<DataType, int64_t>(sycl_device);
 test_entire_volume_patch_sycl<DataType, int64_t>(sycl_device);
 }
 void test_cxx11_tensor_volume_patchOP_sycl()
 {
-for (const auto& device :Eigen::get_sycl_supported_devices()) {
+for (const auto& device :Eigen_tf::get_sycl_supported_devices()) {
   CALL_SUBTEST(sycl_tensor_volume_patch_test_per_device<float>(device));
 }
 }

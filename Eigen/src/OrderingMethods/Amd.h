@@ -31,7 +31,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef EIGEN_SPARSE_AMD_H
 #define EIGEN_SPARSE_AMD_H
 
-namespace Eigen { 
+namespace Eigen_tf { 
 
 namespace internal {
   
@@ -440,6 +440,6 @@ void minimum_degree_ordering(SparseMatrix<Scalar,ColMajor,StorageIndex>& C, Perm
 
 } // namespace internal
 
-} // end namespace Eigen
+} // end namespace Eigen_tf
 
 #endif // EIGEN_SPARSE_AMD_H
